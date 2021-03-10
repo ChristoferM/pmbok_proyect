@@ -27,6 +27,8 @@ public class roles {
 	public void setIdrol(Integer idrol) {
 		this.idrol = idrol;
 	}
+	
+	@Column(name = "nombrerol", nullable = false)
 	public String getNombrerol() {
 		return nombrerol;
 	}

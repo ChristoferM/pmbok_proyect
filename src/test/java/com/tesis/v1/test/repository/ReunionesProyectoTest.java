@@ -50,7 +50,7 @@ class ReunionesProyectoTest {
 		log.info("idreuniones : " + reuniones.getIdreuniones().toString());
 		log.info("nombrereunion : " + reuniones.getNombrereunion());
 		log.info("descripcionreunion : " + reuniones.getDescripcionreunion());
-		log.info(" idproyecto : " + reuniones.getProyecto().getIdproyecto().toString());
+		log.info(" idproyecto : " + reuniones.getProyectos().getIdproyecto().toString());
 		//log.info("idfase : " + reuniones.getFaseProyecto().getIdfase().toString());
 
 	}
@@ -81,7 +81,7 @@ class ReunionesProyectoTest {
 			log.info("idreuniones : " + reuniones.getIdreuniones().toString());
 			log.info("nombrereunion : " + reuniones.getNombrereunion());
 			log.info("descripcionreunion : " + reuniones.getDescripcionreunion());
-			log.info(" idproyecto : " + reuniones.getProyecto().getIdproyecto().toString());
+			log.info(" idproyecto : " + reuniones.getProyectos().getIdproyecto().toString());
 			//log.info("idfase : " + reuniones.getFaseProyecto().getIdfase().toString());
 
 		}

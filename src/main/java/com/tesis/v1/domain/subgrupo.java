@@ -17,12 +17,11 @@ public class subgrupo {
 	private Integer id_sub_grupo ;
 	
 	private grupo grupo;
+	// idgrupo int4 NOT NULL  ,
 	
-	// 	private faseproyecto faseProyecto;
-	
-	
+	private faseproyecto faseproyecto; 
 	// idfase int4 NOT NULL,
-	// idgrupo int4 NOT NULL  , 
+	 
 	
 	@Id
 	@Column(name = "id_sub_grupo", unique = true, nullable = false)
@@ -49,21 +48,16 @@ public class subgrupo {
 		this.grupo = grupo;
 	}
 	/// ------------------------------- fases del proyecto
-
-	
-	/*
-	 * 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idfase")
-	public faseproyecto getFaseProyecto() {
-		return faseProyecto;
+	@JoinColumn( name = "idfase")
+	public faseproyecto getFaseproyecto() {
+		return faseproyecto;
 	}
 
-	public void setFaseProyecto(faseproyecto faseProyecto) {
-		this.faseProyecto = faseProyecto;
+	public void setFaseproyecto(faseproyecto faseproyecto) {
+		this.faseproyecto = faseproyecto;
 	}
-	*/
-
+	
 	
 	
 	

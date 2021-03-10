@@ -20,9 +20,9 @@ public class faseproyecto {
 	private String nombrefase ;
 	private String descripcionfase ;
 	
-	/*private List<reuniones> reuniones = new ArrayList<reuniones>(0);
+	private List<reuniones> reuniones = new ArrayList<reuniones>(0);
 	
-	private  List<subgrupo> subGrupos = new ArrayList<subgrupo>(0);*/ 
+	private  List<subgrupo> subgrupo = new ArrayList<subgrupo>(0); 
 	
 	@Id
 	@Column(name = "idfase", unique = true, nullable = false)
@@ -52,7 +52,7 @@ public class faseproyecto {
 
 	
 	//-- ---------------------------  CLASES CON LAS QUE SE CONECTA
-	/*
+	
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "faseproyecto")
 	public List<reuniones> getReuniones() {
@@ -61,16 +61,15 @@ public class faseproyecto {
 	public void setReuniones(List<reuniones> reuniones) {
 		this.reuniones = reuniones;
 	}
-	
 	// ------------------
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "faseproyecto")
-	public List<subgrupo> getSubGrupos() {
-		return subGrupos;
+	public List<subgrupo> getSubgrupo() {
+		return subgrupo;
 	}
-	public void setSubGrupos(List<subgrupo> subGrupos) {
-		this.subGrupos = subGrupos;
-	}*/
+	public void setSubgrupo(List<subgrupo> subgrupo) {
+		this.subgrupo = subgrupo;
+	}
 	
 	
 }

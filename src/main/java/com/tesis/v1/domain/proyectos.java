@@ -18,7 +18,9 @@ public class proyectos {
 	private String descripcion ;
 	
 	private List<grupo> grupo = new ArrayList<	grupo>(0);
-	// private List<reuniones> reuniones = new ArrayList<reuniones>(0);
+	
+	
+	private List<reuniones> reuniones = new ArrayList<reuniones>(0);
 	
 	
 	@Id
@@ -29,12 +31,16 @@ public class proyectos {
 	public void setIdproyecto(Integer idproyecto) {
 		this.idproyecto = idproyecto;
 	}
+	
+	@Column(name = "nombre", nullable = false)
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	@Column(name = "descripcion", nullable = false)
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -55,14 +61,14 @@ public class proyectos {
 	
 	//---------------------------
 	
-	/*
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proyectos")
 	public List<reuniones> getReuniones() {
 		return reuniones;
 	}
 	public void setReuniones(List<reuniones> reuniones) {
 		this.reuniones = reuniones;
-	}*/
+	}
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.tesis.v1.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,15 +20,16 @@ public class reuniones {
 	private String nombrereunion ;
 	private String descripcionreunion ;
 	
-	private proyectos proyecto;
+	private proyectos proyectos;
   	// idproyecto int4 NOT NULL,
 	
-	// private faseproyecto faseProyecto; 
+	private faseproyecto faseproyecto; 
 	// idfase int4 NOT NULL,
+	
+	private actas actas;// HIJA
 	
 	@Id
 	@Column(name = "idreuniones", unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getIdreuniones() {
 		return idreuniones;
 	}
@@ -60,30 +63,40 @@ public class reuniones {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn( name = "idproyecto")
-	public proyectos getProyecto() {
-		return proyecto;
+	public proyectos getProyectos() {
+		return proyectos;
 	}
 	
-	public void setProyecto(proyectos proyecto) {
-		this.proyecto = proyecto;
+	public void setProyectos(proyectos proyecto) {
+		this.proyectos = proyecto;
 	}
-
-
-	
-	
 	// ---------------------------------- FASE PROYECTO
-	/*
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idfase")
-	public faseproyecto getFaseProyecto() {
-		return faseProyecto;
+	@JoinColumn( name = "idfase")
+	public faseproyecto getFaseproyecto() {
+		return faseproyecto;
 	}
 
 
-	public void setFaseProyecto(faseproyecto faseProyecto) {
-		this.faseProyecto = faseProyecto;
+	public void setFaseproyecto(faseproyecto faseproyecto) {
+		this.faseproyecto = faseproyecto;
 	}
-	*/
+	// -- Relacion Con hijo ACTAS UNO A UNO
+
+	@OneToOne(mappedBy = "reuniones", cascade = CascadeType.ALL)
+	public actas getActas() {
+		return actas;
+	}
+
+
+	public void setActas(actas actas) {
+		this.actas = actas;
+	}
+	
+	
+	
+	
 	
 
 	
