@@ -80,7 +80,7 @@ class usuarioGrupoTest {
 		log.info("----  -> findAllUsuarios");
 		List<usuarios> usuarioss = usuariosRepository.findAll();
 		for(usuarios usuarios: usuarioss) {
-			log.info("idusuario: " +usuarios.getIdusuario().toString() );
+			//log.info("idusuario: " +usuarios.getIdusuario().toString() );
 			log.info("email: " +usuarios.getEmail() );
 			log.info("nombre: " +usuarios.getNombre() );
 			log.info("password: " +usuarios.getPassword() );

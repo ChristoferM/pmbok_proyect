@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "usuarios", schema = "public")
 public class usuarios {
 	
-	private Integer  idusuario;
+	//private Integer  idusuario;
 	// ID ES EMAIL
 	private String  email  ;
 	private String  nombre   ;
@@ -30,7 +32,7 @@ public class usuarios {
 	public usuarios() {
 		super();
 	}
-	public usuarios(Integer idusuario, 
+	public usuarios(//Integer idusuario, 
 			String email, 
 			String nombre, 
 			String password,
@@ -38,7 +40,7 @@ public class usuarios {
 			String activo,
 			List<grupo> grupos) {
 		super();
-		this.idusuario = idusuario;
+		//this.idusuario = idusuario;
 		this.email = email;
 		this.nombre = nombre;
 		this.password = password;
@@ -58,13 +60,14 @@ public class usuarios {
 	
 	//----------------
 	
-	@Column(name = "idusuario", unique = true, nullable = false)
+	/*@Column(name = "idusuario", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getIdusuario() {
 		return idusuario;
 	}
 	public void setIdusuario(Integer idusuario) {
 		this.idusuario = idusuario;
-	}
+	}*/
 	
 	@Id
 	@Column(name = "email", nullable = false)

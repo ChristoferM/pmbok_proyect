@@ -30,6 +30,7 @@ public class reuniones {
 	
 	@Id
 	@Column(name = "idreuniones", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getIdreuniones() {
 		return idreuniones;
 	}

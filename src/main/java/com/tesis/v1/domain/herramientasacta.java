@@ -2,6 +2,8 @@ package com.tesis.v1.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -23,6 +25,7 @@ public class herramientasacta {
 
 	@Id
 	@Column(name = "idherramienta", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getIdherramienta() {
 		return idherramienta;
 	}

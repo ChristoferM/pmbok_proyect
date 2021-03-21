@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 
 public class usuariosDTO {
 	
-	private Integer  idusuario;
+	//private Integer  idusuario;
 	
 	@Email
 	private String  email  ;
@@ -18,13 +18,13 @@ public class usuariosDTO {
 	private String  activo ;
 	
 	
-	
+	/*
 	public Integer getIdusuario() {
 		return idusuario;
 	}
 	public void setIdusuario(Integer idusuario) {
 		this.idusuario = idusuario;
-	}
+	}*/
 	public String getEmail() {
 		return email;
 	}

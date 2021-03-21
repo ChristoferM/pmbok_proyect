@@ -13,7 +13,7 @@ public interface usuariosMapper{
 	
 	public usuarios  toUsuarios(usuariosDTO usuariosDTO );
 	
-	public List<usuariosDTO> toUsuariosDTOs(List<usuariosDTO> usuariosDTOs );
+	public List<usuariosDTO> toUsuariosDTOs(List<usuarios> usuarioss );
 	
 	public List<usuarios> toUsuarioss(List<usuariosDTO> usuariosDTOs);
 
