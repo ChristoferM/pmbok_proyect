@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tesis.v1.domain.proyectos;
 import com.tesis.v1.repository.proyectosRepository;
+import com.tesis.v1.repository.usuariosRepository;
 
 @Service
 @Scope("singleton")
@@ -18,7 +19,10 @@ public class ProyectoServiceImpl implements ProyectoService {
 
 	@Autowired
 	proyectosRepository proyectosRepository;
-
+	
+	@Autowired
+	usuariosRepository usuariosRepository;
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<proyectos> findAll() {
@@ -49,7 +53,12 @@ public class ProyectoServiceImpl implements ProyectoService {
 			throw new Exception("Error en los datos");
 
 		}
-		return proyectosRepository.save(entity);
+		if(usuariosRepository.existsById(entity.getAdmin())) {
+			return proyectosRepository.save(entity);	
+		}else {
+			throw new Exception("Error: Usuario No Valido");
+		}
+		
 	}
 
 	@Override

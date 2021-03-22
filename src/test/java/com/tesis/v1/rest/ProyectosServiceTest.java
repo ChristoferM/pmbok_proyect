@@ -29,9 +29,14 @@ class ProyectosServiceTest {
 	@Test
 	@Order(1)
 	void save() throws Exception {
+		/*
+		 * email@test.com.co
+		 * springTst@test.com.co
+		 * */
 		proyectos proyecto = new proyectos();
-		proyecto.setNombre("Test Proyecto Srping");
-		proyecto.setDescripcion("DESCRIPCION TEST SPIRNG");
+		proyecto.setNombre("Test new  Proyecto Srping");
+		proyecto.setDescripcion("DESCRIPCION newTEST SPIRNG");
+		proyecto.setAdmin("fallo@test.com.co");
 		proyectoService.save(proyecto);
 
 	}
@@ -56,7 +61,8 @@ class ProyectosServiceTest {
 	@Order(3)
 	void update() throws Exception {
 		proyectos proyecto = new proyectos();
-		proyecto.setIdproyecto(2);
+		proyecto.setIdproyecto(1);
+		proyecto.setAdmin("email@test.com.co");
 		proyecto.setNombre("Test update Proyecto Srping");
 		proyecto.setDescripcion("DESCRIPCION update TEST SPIRNG");
 		//proyectoService.save(proyecto);

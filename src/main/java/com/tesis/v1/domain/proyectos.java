@@ -18,6 +18,7 @@ public class proyectos {
 	private Integer idproyecto ;
 	private String nombre ;
 	private String descripcion ;
+	private String  admin;
 	
 	private List<grupo> grupo = new ArrayList<	grupo>(0);
 	
@@ -51,8 +52,18 @@ public class proyectos {
 		this.descripcion = descripcion;
 	}
 
+	@Column(name = "admin", nullable = false)
+	public String getAdmin() {
+		return admin;
+	}
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
+	
+	
 	// ---------------------
 	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proyectos")
 	public List<grupo> getGrupo() {
 		return grupo;
