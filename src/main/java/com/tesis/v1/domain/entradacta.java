@@ -1,5 +1,8 @@
 package com.tesis.v1.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -24,13 +28,16 @@ public class entradacta {
 
 	// Entidades hijas
 
-	private casonegocio casonegocio;
+	
+	private List<casonegocio> casonegocio = new ArrayList<casonegocio>(0);
 
-	private planesgestionbeneficios planesgestionbeneficios;
+	
+	private List<planesgestionbeneficios> planesgestionbeneficios = new ArrayList<planesgestionbeneficios>(0);
 
 	private actas actas ; // PADRE
 	// idactas int4 NOT NULL,
 
+	
 	@Id
 	@Column(name = "identrada", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,8 +77,8 @@ public class entradacta {
 	}
 
 	// ------------------------- ENTIDAD PADRE
-	@OneToOne
-	@JoinColumn(name = "idactas", updatable = false, nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn( name = "idactas")
 	public actas getActas() {
 		return actas;
 	}
@@ -83,21 +90,22 @@ public class entradacta {
 
 	// ------------------------- Entidades hijas
 
-	@OneToOne(mappedBy = "entradacta", cascade = CascadeType.ALL)
-	public casonegocio getCasonegocio() {
+	//@OneToOne(mappedBy = "entradacta", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entradacta")
+	public List<casonegocio>  getCasonegocio() {
 		return casonegocio;
 	}
 
-	public void setCasonegocio(casonegocio casonegocio) {
+	public void setCasonegocio(List<casonegocio>  casonegocio) {
 		this.casonegocio = casonegocio;
 	}
 
-	@OneToOne(mappedBy = "entradacta", cascade = CascadeType.ALL)
-	public planesgestionbeneficios getPlanesgestionbeneficios() {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entradacta")
+	public List<planesgestionbeneficios> getPlanesgestionbeneficios() {
 		return planesgestionbeneficios;
 	}
 
-	public void setPlanesgestionbeneficios(planesgestionbeneficios planesgestionbeneficios) {
+	public void setPlanesgestionbeneficios(List<planesgestionbeneficios> planesgestionbeneficios) {
 		this.planesgestionbeneficios = planesgestionbeneficios;
 	}
 

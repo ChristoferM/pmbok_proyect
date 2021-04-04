@@ -2,6 +2,8 @@ package com.tesis.v1.rest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -51,7 +53,18 @@ class ActaServiceTest {
 	@Test
 	@Order(2)
 	void findById() throws Exception {
-		actaService.findById(1);
+		Optional<actas> actaOPC = actaService.findById(2);
+		if (actaOPC.isEmpty()) {
+			fail("No hay registros asi que paila");
+
+		} else {
+			actas acta = actaOPC.get();
+			log.info("ID  de las actas: " + acta.getIdactas().toString());
+			log.info("Id reuniones : " + acta.getReuniones().getIdreuniones().toString());
+
+		}
+		
+		
 	}
 
 	@Test
@@ -69,8 +82,12 @@ class ActaServiceTest {
 	@Test
 	@Order(4)
 	void findAll() throws Exception {
+		for (actas acta : actaService.findAll()) {
+			log.info("ID  de las actas: " + acta.getIdactas().toString());
+			log.info("Id reuniones : " + acta.getReuniones().getIdreuniones().toString());
+			
+		}
 		
-		actaService.findAll();
 	}
 	@Test
 	@Order(5)

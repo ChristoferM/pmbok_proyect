@@ -31,7 +31,7 @@ import com.tesis.v1.repository.subgrupoRepository;
 class reunionesFaseProyectoSubGrupoTest {
 
 
-	private final static Logger log = LoggerFactory.getLogger(ReunionesProyectoTest.class);
+	private final static Logger log = LoggerFactory.getLogger(reunionesFaseProyectoSubGrupoTest.class);
 
 	private final static Integer idreuniones = 1;
 

@@ -45,7 +45,8 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
     public herramientasacta update(herramientasacta entity) throws Exception {
-        if(herramientasActaRepository.existsById(entity.getIdherramienta()) == false ){
+        if(herramientasActaRepository.existsById(entity.getIdherramienta()) == false
+        		|| entity.getIdherramienta() == null ){
             throw new Exception("La herramienta con id +" + entity.getIdherramienta() + "no existe");
         }
         return herramientasActaRepository.save(entity);

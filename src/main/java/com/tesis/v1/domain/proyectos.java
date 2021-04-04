@@ -23,6 +23,7 @@ public class proyectos {
 	private List<grupo> grupo = new ArrayList<	grupo>(0);
 	
 	
+	
 	private List<reuniones> reuniones = new ArrayList<reuniones>(0);
 	
 	
@@ -61,13 +62,14 @@ public class proyectos {
 	}
 	
 	
-	// ---------------------
+	// ---------------------  GRUPOS HIJOS
 	
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proyectos")
 	public List<grupo> getGrupo() {
 		return grupo;
 	}
+	
 	public void setGrupo(List<grupo> grupo) {
 		this.grupo = grupo;
 	}

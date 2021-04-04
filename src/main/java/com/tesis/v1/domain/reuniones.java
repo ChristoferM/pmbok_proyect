@@ -1,6 +1,8 @@
 package com.tesis.v1.domain;
 
-import javax.persistence.CascadeType;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +28,8 @@ public class reuniones {
 	
 	private faseproyecto faseproyecto; 
 	// idfase int4 NOT NULL,
-	
-	private actas actas;// HIJA
+
+	private List<actas> actas = new ArrayList<actas>(0); //HIJA
 	
 	@Id
 	@Column(name = "idreuniones", unique = true, nullable = false)
@@ -60,7 +63,7 @@ public class reuniones {
 		this.descripcionreunion = descripcionreunion;
 	}
 	
-	//--------------------------- PROYECTOS
+	//--------------------------- PROYECTOS PADRE
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn( name = "idproyecto")
@@ -71,7 +74,7 @@ public class reuniones {
 	public void setProyectos(proyectos proyecto) {
 		this.proyectos = proyecto;
 	}
-	// ---------------------------------- FASE PROYECTO
+	// ---------------------------------- FASE PROYECTO PADRE
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn( name = "idfase")
@@ -83,15 +86,17 @@ public class reuniones {
 	public void setFaseproyecto(faseproyecto faseproyecto) {
 		this.faseproyecto = faseproyecto;
 	}
-	// -- Relacion Con hijo ACTAS UNO A UNO
+	// ----------------------------------  ACTAS HIJO
+	
 
-	@OneToOne(mappedBy = "reuniones", cascade = CascadeType.ALL)
-	public actas getActas() {
+	//@OneToOne(mappedBy = "reuniones", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reuniones")
+	public List<actas> getActas() {
 		return actas;
 	}
 
 
-	public void setActas(actas actas) {
+	public void setActas(List<actas> actas) {
 		this.actas = actas;
 	}
 	

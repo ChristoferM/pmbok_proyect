@@ -2,6 +2,8 @@ package com.tesis.v1.rest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -12,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.tesis.v1.domain.entradacta;
 import com.tesis.v1.domain.planesgestionbeneficios;
+import com.tesis.v1.service.EntradaActaService;
 import com.tesis.v1.service.PlanGestionBeneficiosService;
 
 @SpringBootTest
@@ -20,15 +24,17 @@ import com.tesis.v1.service.PlanGestionBeneficiosService;
 @TestMethodOrder(OrderAnnotation.class)
 class PlanGestionBeneficioServiceTest {
 
-	private final static Logger log=LoggerFactory.getLogger(PlanGestionBeneficioServiceTest.class);
-	
+	private final static Logger log = LoggerFactory.getLogger(PlanGestionBeneficioServiceTest.class);
+
 	@Autowired
 	PlanGestionBeneficiosService planGestionBeneficiosService;
-	
+	@Autowired
+	EntradaActaService entradaActaService;
+
 	@Test
- 	@Order(1)
+	@Order(1)
 	void save() throws Exception {
-		planesgestionbeneficios planesgestionbeneficio = new planesgestionbeneficios ();
+		planesgestionbeneficios planesgestionbeneficio = new planesgestionbeneficios();
 		planesgestionbeneficio.setAcciones("test spring");
 		planesgestionbeneficio.setComponentes("test spring");
 		planesgestionbeneficio.setProdcutos("test spring");
@@ -36,34 +42,41 @@ class PlanGestionBeneficioServiceTest {
 		planesgestionbeneficio.setResultado("test spring");
 		planGestionBeneficiosService.save(planesgestionbeneficio);
 	}
-	
+
 	@Test
 	@Order(2)
 	void findById() throws Exception {
 		planGestionBeneficiosService.findById(1);
 	}
-	
-	
-	@Test 
+
+	@Test
 	@Order(3)
 	void update() throws Exception {
-		planesgestionbeneficios planesgestionbeneficio = new planesgestionbeneficios ();
-		planesgestionbeneficio.setAcciones("UPDATE test spring");
-		planesgestionbeneficio.setComponentes("UPDATE test spring");
-		planesgestionbeneficio.setProdcutos("UPDATE test spring");
-		planesgestionbeneficio.setServicios("UPDATE test spring");
-		planesgestionbeneficio.setResultado("UPDATE test spring");
-		
-		planGestionBeneficiosService.update(planesgestionbeneficio);
+		Optional<entradacta> actaOPC = entradaActaService.findById(2);
+		if (actaOPC.isEmpty()) {
+			fail("No hay registros asi que paila");
+
+		} else {
+			entradacta entradacta = actaOPC.get();
+			planesgestionbeneficios planesgestionbeneficio = new planesgestionbeneficios();
+			planesgestionbeneficio.setAcciones("UPDATE setAcciones test spring");
+			planesgestionbeneficio.setComponentes("UPDATE setProdcutos setComponentes test spring");
+			planesgestionbeneficio.setProdcutos("UPDATE  setServicios test spring");
+			planesgestionbeneficio.setServicios("UPDATE setServicios test spring");
+			planesgestionbeneficio.setResultado("UPDATE setResultado test spring");
+			planesgestionbeneficio.setId_plan_gb(1);
+			planesgestionbeneficio.setEntradacta(entradacta);
+
+			planGestionBeneficiosService.update(planesgestionbeneficio);
+		}
 	}
-	
-	
+
 	@Test
 	@Order(4)
 	void findAll() throws Exception {
 		planGestionBeneficiosService.findAll();
 	}
-	
+
 	@Test
 	@Order(5)
 	void delete() throws Exception {

@@ -2,8 +2,12 @@ package com.tesis.v1.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,6 +27,7 @@ public class planesgestionbeneficios {
 
 	@Id
 	@Column(name = "id_plan_gb", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId_plan_gb() {
 		return id_plan_gb;
 	}
@@ -76,9 +81,10 @@ public class planesgestionbeneficios {
 		this.resultado = resultado;
 	}
 
-	// --------------- ENTIDAD PADRE
-	@OneToOne
-	@JoinColumn(name = "identrada", updatable = false, nullable = false)
+	// ----------------------------------------------------- Entidad padre
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "identrada")
 	public entradacta getEntradacta() {
 		return entradacta;
 	}

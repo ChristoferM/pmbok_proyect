@@ -37,13 +37,15 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 	public Long count() {
 		return casoNegocioRepository.count();
 	}
+	
+	
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public casonegocio save(casonegocio entity, Integer idEntrada) throws Exception {
-		Optional<entradacta> entradacta = EntradaActaService.findById(idEntrada);
+	public casonegocio save(casonegocio entity) throws Exception {
+		Optional<entradacta> entradacta = EntradaActaService.findById(entity.getEntradacta().getIdentrada());
 		// entity.setEntradacta(entradacta.get());
-		log.info("********************");
+		log.info("********************"+entity.getEntradacta().getIdentrada().toString());
 
 		if (entradacta.isEmpty()) {
 			throw new Exception("No se reconoce el identificador del ACTA");
@@ -112,9 +114,10 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 	}
 
 	@Override
-	public casonegocio save(casonegocio entity) throws Exception {
+	public casonegocio save(casonegocio entity, Integer idEntrada) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 }

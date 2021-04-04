@@ -3,6 +3,8 @@ package com.tesis.v1.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
     @Autowired
     planesgestionbeneficiosRepository planGestionBeneficiosRepository;
 
+    private final static Logger log = LoggerFactory.getLogger(PlanGestionBeneficioServiceImpl.class);
     @Override
     @Transactional(readOnly = true)
     public List<planesgestionbeneficios> findAll() {
@@ -36,9 +39,15 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
     public planesgestionbeneficios save(planesgestionbeneficios entity) throws Exception {
-        if(planGestionBeneficiosRepository.existsById(entity.getId_plan_gb())){
+        /*if(planGestionBeneficiosRepository.existsById(entity.getId_plan_gb())){
             throw new Exception("El plan gestion beneficio " + entity.getId_plan_gb() + " ya existe");
-        }
+        }*/
+    	log.info("---"+entity.getAcciones());
+    	log.info("---"+entity.getComponentes());
+    	log.info("---"+entity.getResultado());
+    	log.info("---"+entity.getServicios());
+    	log.info("---"+entity.getProdcutos());
+    	log.info("--- entrada: "+entity.getEntradacta().getIdentrada().toString());
         return planGestionBeneficiosRepository.save(entity);
     }
 

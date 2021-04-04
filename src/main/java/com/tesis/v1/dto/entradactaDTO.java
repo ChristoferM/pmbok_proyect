@@ -2,6 +2,7 @@ package com.tesis.v1.dto;
 
 
 public class entradactaDTO {
+	private Integer idActa;
 	private Integer identrada ;
 	private String acuerdos ;
 	private String factores;
@@ -9,11 +10,17 @@ public class entradactaDTO {
 	
 	//idactas int4 NOT NULL,
 	
-	
+	public Integer getIdActa() {
+		return idActa;
+	}
+	public void setIdActa(Integer idActa) {
+		this.idActa = idActa;
+	}
 	
 	public Integer getIdentrada() {
 		return identrada;
 	}
+	
 	public void setIdentrada(Integer identrada) {
 		this.identrada = identrada;
 	}

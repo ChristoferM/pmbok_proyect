@@ -1,0 +1,78 @@
+package com.tesis.v1.mapper;
+
+import com.tesis.v1.domain.herramientasacta;
+import com.tesis.v1.dto.herramientasactaDTO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 3.22.0.v20200530-2032, environment: Java 15 (Oracle Corporation)"
+)
+@Component
+public class herramientasactaMapperImpl implements herramientasactaMapper {
+
+    @Override
+    public herramientasactaDTO toherramientasActaDTO(herramientasacta herramientasActa) {
+        if ( herramientasActa == null ) {
+            return null;
+        }
+
+        herramientasactaDTO herramientasactaDTO = new herramientasactaDTO();
+
+        herramientasactaDTO.setHabilidades( herramientasActa.getHabilidades() );
+        herramientasactaDTO.setHerramientareuniones( herramientasActa.getHerramientareuniones() );
+        herramientasactaDTO.setIdherramienta( herramientasActa.getIdherramienta() );
+        herramientasactaDTO.setJuicioexpertos( herramientasActa.getJuicioexpertos() );
+        herramientasactaDTO.setRecopilaciondatos( herramientasActa.getRecopilaciondatos() );
+
+        return herramientasactaDTO;
+    }
+
+    @Override
+    public herramientasacta toherramientasActa(herramientasactaDTO herramientasActaDTO) {
+        if ( herramientasActaDTO == null ) {
+            return null;
+        }
+
+        herramientasacta herramientasacta = new herramientasacta();
+
+        herramientasacta.setHabilidades( herramientasActaDTO.getHabilidades() );
+        herramientasacta.setHerramientareuniones( herramientasActaDTO.getHerramientareuniones() );
+        herramientasacta.setIdherramienta( herramientasActaDTO.getIdherramienta() );
+        herramientasacta.setJuicioexpertos( herramientasActaDTO.getJuicioexpertos() );
+        herramientasacta.setRecopilaciondatos( herramientasActaDTO.getRecopilaciondatos() );
+
+        return herramientasacta;
+    }
+
+    @Override
+    public List<herramientasactaDTO> toherramientasActa(List<herramientasacta> herramientasActas) {
+        if ( herramientasActas == null ) {
+            return null;
+        }
+
+        List<herramientasactaDTO> list = new ArrayList<herramientasactaDTO>( herramientasActas.size() );
+        for ( herramientasacta herramientasacta : herramientasActas ) {
+            list.add( toherramientasActaDTO( herramientasacta ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<herramientasacta> toherramientasActaDTO(List<herramientasactaDTO> herramientasActaDTOs) {
+        if ( herramientasActaDTOs == null ) {
+            return null;
+        }
+
+        List<herramientasacta> list = new ArrayList<herramientasacta>( herramientasActaDTOs.size() );
+        for ( herramientasactaDTO herramientasactaDTO : herramientasActaDTOs ) {
+            list.add( toherramientasActa( herramientasactaDTO ) );
+        }
+
+        return list;
+    }
+}

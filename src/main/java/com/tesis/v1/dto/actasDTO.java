@@ -6,6 +6,9 @@ public class actasDTO {
 	private  Integer idreuniones ;
 	
 	
+	public actasDTO() {
+	
+	}
 	public Integer getIdactas() {
 		return idactas;
 	}

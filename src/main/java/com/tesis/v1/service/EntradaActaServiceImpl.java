@@ -36,9 +36,9 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
     public entradacta save(entradacta entity) throws Exception {
-        if(entradActaRepository.existsById(entity.getIdentrada())){
+        /*if(entradActaRepository.existsById(entity.getIdentrada())){
             throw new Exception("La Entrada acta con Id +" + entity.getIdentrada() + "ya existe");
-        }
+        }*/
         return entradActaRepository.save(entity);
     }
 

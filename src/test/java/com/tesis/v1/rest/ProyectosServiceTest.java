@@ -84,7 +84,7 @@ class ProyectosServiceTest {
 	@Test
 	@Order(5)
 	void delete() throws Exception {
-		proyectoService.deleteById(2);
+		proyectoService.deleteById(7);
 
 	}
 }

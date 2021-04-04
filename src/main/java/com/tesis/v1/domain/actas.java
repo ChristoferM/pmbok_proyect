@@ -1,5 +1,8 @@
 package com.tesis.v1.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.websocket.OnOpen;
@@ -20,10 +25,13 @@ public class actas {
 
 	private reuniones reuniones;// PADRE
 
-	private herramientasacta herramientasacta;
+	
+	private List<herramientasacta>  herramientasacta= new ArrayList<herramientasacta	>(0);
 
-	private entradacta entradacta;
-
+	private List<entradacta>  entradacta= new ArrayList<entradacta>(0);
+	
+	
+	
 	@Id
 	@Column(name = "idactas", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +43,10 @@ public class actas {
 		this.idactas = idactas;
 	}
 
-	// -- ENTIDAD PADRE -> REUNION
+	// ----------------------------------------------------- ENTIDAD PADRE -> REUNION
 
-	@OneToOne
-	@JoinColumn(name = "idreuniones", updatable = false, nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn( name = "idreuniones")
 	public reuniones getReuniones() {
 		return reuniones;
 	}
@@ -49,22 +57,25 @@ public class actas {
 
 	// ----------------------------------------------------- ENTIDADES HIJAS
 
-	@OneToOne(mappedBy = "actas", cascade = CascadeType.ALL)
-	public entradacta getEntradacta() {
+	//@OneToOne(mappedBy = "actas", cascade = CascadeType.ALL)
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actas")
+	public  List<entradacta> getEntradacta() {
 		return entradacta;
 	}
 	
-	public void setEntradacta(entradacta entradacta) {
+	public void setEntradacta( List<entradacta> entradacta) {
 		this.entradacta = entradacta;
 	}
 
 
-	@OneToOne(mappedBy = "actas", cascade = CascadeType.ALL)
-	public herramientasacta getHerramientasacta() {
+	//@OneToOne(mappedBy = "actas", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actas")
+	public List<herramientasacta> getHerramientasacta() {
 		return herramientasacta;
 	}
 
-	public void setHerramientasacta(herramientasacta herramientasacta) {
+	public void setHerramientasacta(List<herramientasacta> herramientasacta) {
 		this.herramientasacta = herramientasacta;
 	}
 
