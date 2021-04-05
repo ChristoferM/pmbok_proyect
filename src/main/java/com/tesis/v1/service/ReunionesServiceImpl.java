@@ -51,7 +51,9 @@ public class ReunionesServiceImpl implements ReunionesService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public reuniones save(reuniones entity) throws Exception {
 		// las reuniones deben cargarse con el numero ID del proyecto
-		return null;
+		
+		
+		return reunionesRepository.save(entity);
 	}
 
 	@Override

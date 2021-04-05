@@ -6,12 +6,25 @@ public class reunionesDTO {
 	private Integer idreuniones ;
 	private String nombrereunion ;
 	private String descripcionreunion ;
-	
+	private Integer idproyecto ;
+	private Integer idfase ;
   	// idproyecto int4 NOT NULL,
   	// idfase int4 NOT NULL,
 	 
 	public Integer getIdreuniones() {
 		return idreuniones;
+	}
+	public Integer getIdproyecto() {
+		return idproyecto;
+	}
+	public void setIdproyecto(Integer idproyecto) {
+		this.idproyecto = idproyecto;
+	}
+	public Integer getIdfase() {
+		return idfase;
+	}
+	public void setIdfase(Integer idfase) {
+		this.idfase = idfase;
 	}
 	public void setIdreuniones(Integer idreuniones) {
 		this.idreuniones = idreuniones;
