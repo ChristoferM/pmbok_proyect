@@ -1,6 +1,6 @@
 package com.tesis.v1.dto;
 
-public class casonegocioCreateDTO {
+public class casonegocioVistaDTO {
 
 	private Integer id_caso_negocio ;
 	private String  metas ;

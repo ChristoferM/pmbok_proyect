@@ -1,8 +1,11 @@
 package com.tesis.v1.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -19,10 +22,26 @@ public class ProyectoServiceImpl implements ProyectoService {
 
 	@Autowired
 	proyectosRepository proyectosRepository;
-	
+
 	@Autowired
 	usuariosRepository usuariosRepository;
-	
+
+	private final static Logger log = LoggerFactory.getLogger(ProyectoServiceImpl.class);
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<proyectos> findByEmail(String email) throws Exception {
+		log.info("EL CORREO ES -> " + email);
+
+		// Optional<proyectos> proyectoOpt = proyectosRepository.finByEmail(email);
+		List<proyectos> poryectosList = proyectosRepository.finByEmail(email);
+		if (poryectosList == null || poryectosList.size() == 0) {
+			return null;
+
+		} else
+			return poryectosList;
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<proyectos> findAll() {
@@ -53,12 +72,12 @@ public class ProyectoServiceImpl implements ProyectoService {
 			throw new Exception("Error en los datos");
 
 		}
-		if(usuariosRepository.existsById(entity.getAdmin())) {
-			return proyectosRepository.save(entity);	
-		}else {
+		if (usuariosRepository.existsById(entity.getAdmin())) {
+			return proyectosRepository.save(entity);
+		} else {
 			throw new Exception("Error: Usuario No Valido");
 		}
-		
+
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package com.tesis.v1.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.tesis.v1.domain.proyectos;
+
 
 public interface GenericService<T,ID> {
 	public List<T> findAll();
@@ -25,4 +27,6 @@ public interface GenericService<T,ID> {
 	public void deleteById(ID id) throws Exception;
 
 	public void validate(T entity) throws Exception;
+
+	
 }

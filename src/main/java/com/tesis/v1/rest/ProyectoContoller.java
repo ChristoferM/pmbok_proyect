@@ -25,47 +25,55 @@ import com.tesis.v1.service.ProyectoService;
 @CrossOrigin
 public class ProyectoContoller {
 	private final static Logger log = LoggerFactory.getLogger(ProyectoContoller.class);
-	
+
 	@Autowired
 	ProyectoService proyectoService;
-	
+
 	@Autowired
-	proyectosMapper proyectosMapper ;
-	
+	proyectosMapper proyectosMapper;
+
 	@RequestMapping("/finById/{proyectoId}")
-	public ResponseEntity<?> finById(@PathVariable("proyectoId") Integer poryectoId)throws Exception{
+	public ResponseEntity<?> finById(@PathVariable("proyectoId") Integer poryectoId) throws Exception {
 		Optional<proyectos> usuarioOpt = proyectoService.findById(poryectoId);
 		log.info("Cargando ...");
-		if( usuarioOpt.isEmpty()) {
+		if (usuarioOpt.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se encontro Usuario");
-			
+
 		}
 		proyectos proyectos = usuarioOpt.get();
 		proyectosDTO usuarioDTO = proyectosMapper.toproyectosDTO(proyectos);
 		log.info("*");
 		return ResponseEntity.ok().body(usuarioDTO);
-		
+
 	}
-	@RequestMapping("/findByAll")
-	public ResponseEntity<?> finByAll() throws Exception{
-		List<proyectos> proyectosLIST= proyectoService.findAll();
+
+	@RequestMapping("/finByEmail/{email}")
+	public ResponseEntity<?> finByEmail(@PathVariable("email") String email) throws Exception {
+		List<proyectos> proyectosLIST = proyectoService.findByEmail(email);
 		List<proyectosDTO> usuarioListDto = proyectosMapper.toproyectosDTOs(proyectosLIST);
-		
+
+		return ResponseEntity.ok().body(usuarioListDto);
+
+	}
+
+	@RequestMapping("/findByAll")
+	public ResponseEntity<?> finByAll() throws Exception {
+		List<proyectos> proyectosLIST = proyectoService.findAll();
+		List<proyectosDTO> usuarioListDto = proyectosMapper.toproyectosDTOs(proyectosLIST);
+
 		return ResponseEntity.ok().body(usuarioListDto);
 	}
-	
-	
+
 	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody proyectosDTO proyectosDto)  throws Exception{
-	
+	public ResponseEntity<?> save(@Valid @RequestBody proyectosDTO proyectosDto) throws Exception {
+
 		proyectos proyecto = proyectosMapper.toproyectos(proyectosDto);
-		
+
 		proyecto = proyectoService.save(proyecto);
-		
+
 		proyectosDto = proyectosMapper.toproyectosDTO(proyecto);
-		
+
 		return ResponseEntity.ok().body(proyectosDto);
 	}
-	
-		
+
 }

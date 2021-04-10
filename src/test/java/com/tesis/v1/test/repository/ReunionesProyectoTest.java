@@ -102,5 +102,35 @@ class ReunionesProyectoTest {
 		}
 
 	}
+	
+	@Test
+	@Transactional
+	@Order(5)
+	void findbyEmail() {
+		log.info("-> buscar ID de proyectos");
+		String email= "prueba@Prueba22.com.co";
+		/*Optional<proyectos> proyectosOptional = proyectosRepository.finByEmail(email);
+		log.info("aca ->"+proyectosOptional.isPresent());
+		if(proyectosOptional.isPresent()) {
+			proyectos proyectos = proyectosOptional.get();
+			log.info("idproyecto : " + proyectos.getIdproyecto().toString());
+			log.info("nombre : " + proyectos.getNombre());
+			log.info("descripcion : " + proyectos.getDescripcion());
+		}else {
+			log.info("aca ->"+proyectosOptional.isPresent());
+			log.info(" NO se encontro nada");
+		}*/
+		log.info("-> buscar todos los proyectos");
+		List<proyectos> proyectoss = proyectosRepository.finByEmail(email);
+		for (proyectos proyectos : proyectoss) {
+			log.info("idproyecto : " + proyectos.getIdproyecto().toString());
+			log.info("nombre : " + proyectos.getNombre());
+			log.info("descripcion : " + proyectos.getDescripcion());
+
+		}
+
+		
+
+	}
 
 }
