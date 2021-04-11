@@ -62,11 +62,22 @@ public class PlanGestionBeneficiosController {
 		return ResponseEntity.ok().body(planesgestionbeneficiosDTO);
 
 	}
-
+	
 	@RequestMapping("/findByAll")
 	public ResponseEntity<?> finByAll() throws Exception {
 		// actas acta
 		List<planesgestionbeneficios> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.findAll();
+
+		List<planesgestionbeneficiosDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
+				.toplanesGestionBeneficiosDTO(planesgestionbeneficiosLIST);
+
+		return ResponseEntity.ok().body(planesgestionbeneficiosListDto);
+	}
+
+	@RequestMapping("/planGestionDelActa/{idProyecto}")
+	public ResponseEntity<?> planGestionDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+		// actas acta
+		List<planesgestionbeneficios> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.planGestionDelActa(idProyecto);
 
 		List<planesgestionbeneficiosDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
 				.toplanesGestionBeneficiosDTO(planesgestionbeneficiosLIST);

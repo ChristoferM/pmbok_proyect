@@ -63,6 +63,15 @@ public class EntradActaController {
 		
 		return ResponseEntity.ok().body(entradactaListDto);
 	}
+	@RequestMapping("/entradaDelActa/{idProyecto}")
+	public ResponseEntity<?> entradaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
+		//actas acta
+		List<entradacta> entradactaLIST= entradaActaService.entradaDelActa(idProyecto);
+		
+		List<entradactaDTO> entradactaListDto = entradactaMapper.toEntradActaDTO(entradactaLIST);
+		
+		return ResponseEntity.ok().body(entradactaListDto);
+	}
 	
 	
 	@RequestMapping("/save")

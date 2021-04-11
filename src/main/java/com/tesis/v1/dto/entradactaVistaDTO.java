@@ -1,22 +1,14 @@
 package com.tesis.v1.dto;
 
 
-public class entradactaCreateDTO {
-	private Integer identrada ;
+public class entradactaVistaDTO {
+	
 	private String acuerdos ;
 	private String factores;
 	private String activosprocesos ;
 	
 	//idactas int4 NOT NULL,
 	
-	
-	
-	public Integer getIdentrada() {
-		return identrada;
-	}
-	public void setIdentrada(Integer identrada) {
-		this.identrada = identrada;
-	}
 	public String getAcuerdos() {
 		return acuerdos;
 	}

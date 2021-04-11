@@ -2,7 +2,6 @@ package com.tesis.v1.dto;
 
 public class casonegocioVistaDTO {
 
-	private Integer id_caso_negocio ;
 	private String  metas ;
 	private String  objetivos ;
 	private String  incidentes ;
@@ -10,15 +9,6 @@ public class casonegocioVistaDTO {
 	//identrada int4 NOT NULL,
 	 
 	 
-	 
-	
-	 
-	public Integer getId_caso_negocio() {
-		return id_caso_negocio;
-	}
-	public void setId_caso_negocio(Integer id_caso_negocio) {
-		this.id_caso_negocio = id_caso_negocio;
-	}
 	public String getMetas() {
 		return metas;
 	}

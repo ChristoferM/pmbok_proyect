@@ -119,5 +119,11 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 		return null;
 	}
 
+	@Override
+    @Transactional(readOnly = true)
+	public List<casonegocio> casoNegocioDelActa(Integer idProyecto) {
+		return casoNegocioRepository.casoNegocioDelActa(idProyecto);
+	}
+
 	
 }

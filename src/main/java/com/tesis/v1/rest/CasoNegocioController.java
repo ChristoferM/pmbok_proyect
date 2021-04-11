@@ -58,6 +58,17 @@ public class CasoNegocioController {
 		return ResponseEntity.ok().body(casonegocioDTO);
 		
 	}
+	
+	@RequestMapping("/casoNegocioDelActa/{idProyecto}")
+	public ResponseEntity<?> casoNegocioDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
+		
+		List<casonegocio> casonegocioLIST= CasoNegocioService.casoNegocioDelActa(idProyecto);
+		
+		List<casonegocioDTO> casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocioLIST);
+		
+		return ResponseEntity.ok().body(casonegocioDTO);
+	}
+	
 	@RequestMapping("/findByAll")
 	public ResponseEntity<?> finByAll() throws Exception{
 		

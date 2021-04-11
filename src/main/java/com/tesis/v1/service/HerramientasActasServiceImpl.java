@@ -95,5 +95,11 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+    @Transactional(readOnly = true)
+	public List<herramientasacta> herramientaDelActa(Integer idProyecto) {
+		return herramientasActaRepository.herramientaDelActa(idProyecto);
+	}
     
 }

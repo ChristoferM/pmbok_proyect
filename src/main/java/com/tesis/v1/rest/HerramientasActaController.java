@@ -59,7 +59,13 @@ public class HerramientasActaController {
 		
 		return ResponseEntity.ok().body(herramientaListDto);
 	}
-	
+	@RequestMapping("/herramientaDelActa/{idProyecto}")
+	public ResponseEntity<?> herramientaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
+		List<herramientasacta> herramientaLIST= herramientasActasService.herramientaDelActa(idProyecto);
+		List<herramientasactaDTO> herramientaListDto = herramientasactaMapper.toherramientasActa(herramientaLIST);
+		
+		return ResponseEntity.ok().body(herramientaListDto);
+	}
 	
 	@RequestMapping("/save")
 	public ResponseEntity<?> save(@Valid @RequestBody herramientasactaDTO herramientasactaDTO)  throws Exception{

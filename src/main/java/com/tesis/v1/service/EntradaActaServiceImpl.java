@@ -26,6 +26,14 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
     public List<entradacta> findAll() {
         return entradActaRepository.findAll();
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+	public List<entradacta> entradaDelActa(Integer idProyecto) {
+		return entradActaRepository.entradaDelActa(idProyecto);
+		
+	}
+    
 
     @Override
     @Transactional(readOnly = true)
@@ -95,5 +103,5 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
 		// TODO Auto-generated method stub
 		
 	}
-    
+
 }

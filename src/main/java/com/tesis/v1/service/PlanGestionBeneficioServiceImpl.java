@@ -105,5 +105,11 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+    @Transactional(readOnly = true)
+	public List<planesgestionbeneficios> planGestionDelActa(Integer idProyecto) {
+		 return planGestionBeneficiosRepository.planGestionDelActa(idProyecto);
+	}
     
 }

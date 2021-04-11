@@ -1,8 +1,8 @@
 package com.tesis.v1.dto;
 
-public class herramientasactaCreateDTO {
+public class herramientasactaVistaDTO {
 	
-	private Integer idherramienta ;
+	
 	private String juicioexpertos;
 	private String recopilaciondatos ;
 	private String habilidades ;
@@ -10,14 +10,7 @@ public class herramientasactaCreateDTO {
 	
 	   //idactas int4 NOT NULL,
 	
-	
-	
-	public Integer getIdherramienta() {
-		return idherramienta;
-	}
-	public void setIdherramienta(Integer idherramienta) {
-		this.idherramienta = idherramienta;
-	}
+
 	public String getJuicioexpertos() {
 		return juicioexpertos;
 	}
