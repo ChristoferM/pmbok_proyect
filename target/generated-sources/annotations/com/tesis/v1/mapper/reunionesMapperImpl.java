@@ -22,9 +22,9 @@ public class reunionesMapperImpl implements reunionesMapper {
 
         reunionesDTO reunionesDTO = new reunionesDTO();
 
-        reunionesDTO.setDescripcionreunion( reuniones.getDescripcionreunion() );
         reunionesDTO.setIdreuniones( reuniones.getIdreuniones() );
         reunionesDTO.setNombrereunion( reuniones.getNombrereunion() );
+        reunionesDTO.setDescripcionreunion( reuniones.getDescripcionreunion() );
 
         return reunionesDTO;
     }
@@ -37,9 +37,9 @@ public class reunionesMapperImpl implements reunionesMapper {
 
         reuniones reuniones = new reuniones();
 
-        reuniones.setDescripcionreunion( reunionesDTO.getDescripcionreunion() );
         reuniones.setIdreuniones( reunionesDTO.getIdreuniones() );
         reuniones.setNombrereunion( reunionesDTO.getNombrereunion() );
+        reuniones.setDescripcionreunion( reunionesDTO.getDescripcionreunion() );
 
         return reuniones;
     }

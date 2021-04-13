@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tesis.v1.domain.actas;
 import com.tesis.v1.domain.herramientasacta;
 import com.tesis.v1.dto.herramientasactaDTO;
 import com.tesis.v1.mapper.herramientasactaMapper;
@@ -69,8 +70,17 @@ public class HerramientasActaController {
 	
 	@RequestMapping("/save")
 	public ResponseEntity<?> save(@Valid @RequestBody herramientasactaDTO herramientasactaDTO)  throws Exception{
+		actas acta =new actas();
+		acta.setIdactas(herramientasactaDTO.getIdactas());
+		herramientasacta herramienta = new herramientasacta();
+		herramienta.setIdherramienta(0);
+		herramienta.setActas(acta);
+		herramienta.setJuicioexpertos(herramientasactaDTO.getJuicioexpertos());
+		herramienta.setRecopilaciondatos(herramientasactaDTO.getRecopilaciondatos());
+		herramienta.setHabilidades(herramientasactaDTO.getHabilidades());
+		herramienta.setHerramientareuniones(herramientasactaDTO.getHabilidades());
 		
-		herramientasacta herramienta = herramientasactaMapper.toherramientasActa(herramientasactaDTO);
+		
 		
 		herramientasacta herramientasactaNew = herramientasActasService.save(herramienta);
 		

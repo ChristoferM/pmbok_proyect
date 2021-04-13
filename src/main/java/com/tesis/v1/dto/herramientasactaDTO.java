@@ -3,10 +3,14 @@ package com.tesis.v1.dto;
 public class herramientasactaDTO {
 	
 	private Integer idherramienta ;
+	private Integer idactas;
 	private String juicioexpertos;
 	private String recopilaciondatos ;
 	private String habilidades ;
 	private String herramientareuniones ;
+	
+	
+	
 	
 	   //idactas int4 NOT NULL,
 	
@@ -15,6 +19,15 @@ public class herramientasactaDTO {
 	public Integer getIdherramienta() {
 		return idherramienta;
 	}
+	
+	public Integer getIdactas() {
+		return idactas;
+	}
+
+	public void setIdactas(Integer idactas) {
+		this.idactas = idactas;
+	}
+
 	public void setIdherramienta(Integer idherramienta) {
 		this.idherramienta = idherramienta;
 	}

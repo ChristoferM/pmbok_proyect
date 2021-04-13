@@ -22,12 +22,12 @@ public class planesgestionbeneficiosMapperImpl implements planesgestionbeneficio
 
         planesgestionbeneficiosDTO planesgestionbeneficiosDTO = new planesgestionbeneficiosDTO();
 
+        planesgestionbeneficiosDTO.setId_plan_gb( planesGestionBeneficios.getId_plan_gb() );
         planesgestionbeneficiosDTO.setAcciones( planesGestionBeneficios.getAcciones() );
         planesgestionbeneficiosDTO.setComponentes( planesGestionBeneficios.getComponentes() );
-        planesgestionbeneficiosDTO.setId_plan_gb( planesGestionBeneficios.getId_plan_gb() );
         planesgestionbeneficiosDTO.setProdcutos( planesGestionBeneficios.getProdcutos() );
-        planesgestionbeneficiosDTO.setResultado( planesGestionBeneficios.getResultado() );
         planesgestionbeneficiosDTO.setServicios( planesGestionBeneficios.getServicios() );
+        planesgestionbeneficiosDTO.setResultado( planesGestionBeneficios.getResultado() );
 
         return planesgestionbeneficiosDTO;
     }
@@ -40,12 +40,12 @@ public class planesgestionbeneficiosMapperImpl implements planesgestionbeneficio
 
         planesgestionbeneficios planesgestionbeneficios = new planesgestionbeneficios();
 
+        planesgestionbeneficios.setId_plan_gb( planesGestionBeneficiosDTO.getId_plan_gb() );
         planesgestionbeneficios.setAcciones( planesGestionBeneficiosDTO.getAcciones() );
         planesgestionbeneficios.setComponentes( planesGestionBeneficiosDTO.getComponentes() );
-        planesgestionbeneficios.setId_plan_gb( planesGestionBeneficiosDTO.getId_plan_gb() );
         planesgestionbeneficios.setProdcutos( planesGestionBeneficiosDTO.getProdcutos() );
-        planesgestionbeneficios.setResultado( planesGestionBeneficiosDTO.getResultado() );
         planesgestionbeneficios.setServicios( planesGestionBeneficiosDTO.getServicios() );
+        planesgestionbeneficios.setResultado( planesGestionBeneficiosDTO.getResultado() );
 
         return planesgestionbeneficios;
     }

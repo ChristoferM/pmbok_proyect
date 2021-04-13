@@ -23,9 +23,9 @@ public class casonegocioMapperImpl implements casonegocioMapper {
         casonegocioDTO casonegocioDTO = new casonegocioDTO();
 
         casonegocioDTO.setId_caso_negocio( casoNegocio.getId_caso_negocio() );
-        casonegocioDTO.setIncidentes( casoNegocio.getIncidentes() );
         casonegocioDTO.setMetas( casoNegocio.getMetas() );
         casonegocioDTO.setObjetivos( casoNegocio.getObjetivos() );
+        casonegocioDTO.setIncidentes( casoNegocio.getIncidentes() );
         casonegocioDTO.setOportunidades( casoNegocio.getOportunidades() );
 
         return casonegocioDTO;
@@ -40,9 +40,9 @@ public class casonegocioMapperImpl implements casonegocioMapper {
         casonegocio casonegocio = new casonegocio();
 
         casonegocio.setId_caso_negocio( casoNegocioDTO.getId_caso_negocio() );
-        casonegocio.setIncidentes( casoNegocioDTO.getIncidentes() );
         casonegocio.setMetas( casoNegocioDTO.getMetas() );
         casonegocio.setObjetivos( casoNegocioDTO.getObjetivos() );
+        casonegocio.setIncidentes( casoNegocioDTO.getIncidentes() );
         casonegocio.setOportunidades( casoNegocioDTO.getOportunidades() );
 
         return casonegocio;
