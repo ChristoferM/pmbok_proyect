@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tesis.v1.domain.entradacta;
+import com.tesis.v1.dto.validarActa;
 import com.tesis.v1.repository.entradactaRepository;
-
 
 
 @Service
@@ -20,6 +20,7 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
 
     @Autowired
     entradactaRepository entradActaRepository;
+    
 
     @Override
     @Transactional(readOnly = true)
@@ -102,6 +103,39 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
 	public void validate(entradacta entity) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public validarActa encontrarData(Integer idProyecto) {
+		validarActa validaciones = new validarActa();
+		validaciones.setActa(entradActaRepository.validarActa(idProyecto));
+		
+		validaciones.setEntradactaValidate(entradActaRepository.validarEntrada(idProyecto));
+		validaciones.setHerramientasValidate(entradActaRepository.validarHerramienta(idProyecto));
+		validaciones.setCasoNegocioValidate(entradActaRepository.validarCasoNegocio(idProyecto));
+		validaciones.setPlanValidate(entradActaRepository.validarHPlanGestion(idProyecto));
+		
+		return validaciones;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Integer valorIdActa(Integer idProyecto) {
+		if(idProyecto > 0 ) {
+			return entradActaRepository.valorIdActa(idProyecto);	
+		}else {
+			 return 0;
+		}
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Integer valorIdEntraActa(Integer idProyecto) {
+		if(idProyecto > 0 ) {
+			return entradActaRepository.valorIdEntraActa(idProyecto);	
+		}else {
+			 return 0;
+		}
 	}
 
 }

@@ -17,6 +17,7 @@ import org.springframework.test.annotation.Rollback;
 import com.tesis.v1.domain.actas;
 import com.tesis.v1.domain.entradacta;
 import com.tesis.v1.domain.usuarios;
+import com.tesis.v1.dto.validarActa;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.EntradaActaService;
 
@@ -32,6 +33,25 @@ class EntradaActaServiceTest {
 
 	@Autowired
 	ActaService actaService;
+
+	@Test
+	void buscarData() throws Exception {
+		Integer idProyecto = 1;
+		log.info("Validando Acta");
+
+		validarActa validaciones = new validarActa();
+		log.info("validaciones realizadas");
+
+		validaciones = entradaActaService.encontrarData(idProyecto);
+		log.info("Resquest de validaciones");
+
+		log.info(validaciones.getActa().toString());
+		log.info(validaciones.getHerramientasValidate().toString());
+		log.info(validaciones.getEntradactaValidate().toString());
+		log.info(validaciones.getPlanValidate().toString());
+		log.info(validaciones.getCasoNegocioValidate().toString());
+
+	}
 
 	@Test
 	@Order(1)
