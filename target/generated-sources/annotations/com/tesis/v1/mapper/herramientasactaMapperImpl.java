@@ -4,12 +4,12 @@ import com.tesis.v1.domain.herramientasacta;
 import com.tesis.v1.dto.herramientasactaDTO;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 3.22.0.v20200530-2032, environment: Java 15 (Oracle Corporation)"
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.3.1200.v20200916-0645, environment: Java 14.0.2 (Private Build)"
 )
 @Component
 public class herramientasactaMapperImpl implements herramientasactaMapper {
@@ -22,11 +22,11 @@ public class herramientasactaMapperImpl implements herramientasactaMapper {
 
         herramientasactaDTO herramientasactaDTO = new herramientasactaDTO();
 
-        herramientasactaDTO.setHabilidades( herramientasActa.getHabilidades() );
-        herramientasactaDTO.setHerramientareuniones( herramientasActa.getHerramientareuniones() );
         herramientasactaDTO.setIdherramienta( herramientasActa.getIdherramienta() );
         herramientasactaDTO.setJuicioexpertos( herramientasActa.getJuicioexpertos() );
         herramientasactaDTO.setRecopilaciondatos( herramientasActa.getRecopilaciondatos() );
+        herramientasactaDTO.setHabilidades( herramientasActa.getHabilidades() );
+        herramientasactaDTO.setHerramientareuniones( herramientasActa.getHerramientareuniones() );
 
         return herramientasactaDTO;
     }
@@ -39,11 +39,11 @@ public class herramientasactaMapperImpl implements herramientasactaMapper {
 
         herramientasacta herramientasacta = new herramientasacta();
 
-        herramientasacta.setHabilidades( herramientasActaDTO.getHabilidades() );
-        herramientasacta.setHerramientareuniones( herramientasActaDTO.getHerramientareuniones() );
         herramientasacta.setIdherramienta( herramientasActaDTO.getIdherramienta() );
         herramientasacta.setJuicioexpertos( herramientasActaDTO.getJuicioexpertos() );
         herramientasacta.setRecopilaciondatos( herramientasActaDTO.getRecopilaciondatos() );
+        herramientasacta.setHabilidades( herramientasActaDTO.getHabilidades() );
+        herramientasacta.setHerramientareuniones( herramientasActaDTO.getHerramientareuniones() );
 
         return herramientasacta;
     }
