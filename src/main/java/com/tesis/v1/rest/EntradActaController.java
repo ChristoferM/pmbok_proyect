@@ -20,6 +20,7 @@ import com.tesis.v1.domain.entradacta;
 import com.tesis.v1.domain.reuniones;
 import com.tesis.v1.dto.actasDTO;
 import com.tesis.v1.dto.entradactaDTO;
+import com.tesis.v1.dto.validarActa;
 import com.tesis.v1.mapper.entradactaMapper;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.EntradaActaService;
@@ -38,6 +39,20 @@ public class EntradActaController {
 	
 	@Autowired
 	entradactaMapper entradactaMapper;
+	
+	@RequestMapping("/validarActa/{idProyecto}")
+	public ResponseEntity<?> finByAll(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+		
+		log.info("Validando Acta");
+		
+		validarActa validaciones = new validarActa();
+		log.info("validaciones realizadas");
+		
+		validaciones = entradaActaService.encontrarData(idProyecto);
+		log.info("Resquest de validaciones");
+		
+		return ResponseEntity.ok().body(validaciones);
+	}
 	
 	@RequestMapping("/finById/{entradaId}")
 	public ResponseEntity<?> finById(@PathVariable("entradaId") Integer entradaId)throws Exception{
@@ -72,6 +87,23 @@ public class EntradActaController {
 		
 		return ResponseEntity.ok().body(entradactaListDto);
 	}
+	
+	@RequestMapping("/getIdActa/{idProyecto}")
+	public ResponseEntity<?> valorIdActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
+		//actas acta
+		Integer idActa = entradaActaService.valorIdActa(idProyecto);
+		
+		return ResponseEntity.ok().body(idActa);
+	}
+	
+	@RequestMapping("/getEntradaIdActa/{idProyecto}")
+	public ResponseEntity<?> valorIdEntraActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
+		//actas acta
+		Integer idActa = entradaActaService.valorIdEntraActa(idProyecto);
+		
+		return ResponseEntity.ok().body(idActa);
+	}
+	
 	
 	
 	@RequestMapping("/save")
