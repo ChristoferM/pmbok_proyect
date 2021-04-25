@@ -57,7 +57,7 @@ public class pdp {
 	
 	//----------------- hijos
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "herramientaspdp")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pdp")
 	public List<herramientas> getHerramientaPdp() {
 		return herramientaPdp;
 	}
@@ -66,7 +66,7 @@ public class pdp {
 		this.herramientaPdp = herramientaPdp;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entradapdp")	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pdp")	
 	public List<entradas> getEntradas() {
 		return entradas;
 	}
