@@ -22,11 +22,11 @@ public class herramientasactaMapperImpl implements herramientasactaMapper {
 
         herramientasactaDTO herramientasactaDTO = new herramientasactaDTO();
 
-        herramientasactaDTO.setHabilidades( herramientasActa.getHabilidades() );
-        herramientasactaDTO.setHerramientareuniones( herramientasActa.getHerramientareuniones() );
         herramientasactaDTO.setIdherramienta( herramientasActa.getIdherramienta() );
         herramientasactaDTO.setJuicioexpertos( herramientasActa.getJuicioexpertos() );
         herramientasactaDTO.setRecopilaciondatos( herramientasActa.getRecopilaciondatos() );
+        herramientasactaDTO.setHabilidades( herramientasActa.getHabilidades() );
+        herramientasactaDTO.setHerramientareuniones( herramientasActa.getHerramientareuniones() );
 
         return herramientasactaDTO;
     }
@@ -39,11 +39,11 @@ public class herramientasactaMapperImpl implements herramientasactaMapper {
 
         herramientasacta herramientasacta = new herramientasacta();
 
-        herramientasacta.setHabilidades( herramientasActaDTO.getHabilidades() );
-        herramientasacta.setHerramientareuniones( herramientasActaDTO.getHerramientareuniones() );
         herramientasacta.setIdherramienta( herramientasActaDTO.getIdherramienta() );
         herramientasacta.setJuicioexpertos( herramientasActaDTO.getJuicioexpertos() );
         herramientasacta.setRecopilaciondatos( herramientasActaDTO.getRecopilaciondatos() );
+        herramientasacta.setHabilidades( herramientasActaDTO.getHabilidades() );
+        herramientasacta.setHerramientareuniones( herramientasActaDTO.getHerramientareuniones() );
 
         return herramientasacta;
     }
