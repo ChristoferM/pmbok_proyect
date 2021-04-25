@@ -28,10 +28,6 @@ public class pdp {
 	private List<entradas> entradas = new ArrayList<entradas>(0);
 	
 	
-	public pdp(Integer idpdp, com.tesis.v1.domain.reuniones reuniones) {
-		this.idpdp = idpdp;
-		this.reuniones = reuniones;
-	}
 
 	@Id
 	@Column(name = "idpdp", unique = true, nullable = false)
