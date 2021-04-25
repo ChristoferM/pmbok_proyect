@@ -28,10 +28,6 @@ public class pdp {
 	private List<entradas> entradas = new ArrayList<entradas>(0);
 	
 	
-	public pdp(Integer idpdp, com.tesis.v1.domain.reuniones reuniones) {
-		this.idpdp = idpdp;
-		this.reuniones = reuniones;
-	}
 
 	@Id
 	@Column(name = "idpdp", unique = true, nullable = false)
@@ -57,7 +53,7 @@ public class pdp {
 	
 	//----------------- hijos
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "herramientaspdp")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pdp")
 	public List<herramientas> getHerramientaPdp() {
 		return herramientaPdp;
 	}
@@ -66,7 +62,7 @@ public class pdp {
 		this.herramientaPdp = herramientaPdp;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entradapdp")	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pdp")	
 	public List<entradas> getEntradas() {
 		return entradas;
 	}

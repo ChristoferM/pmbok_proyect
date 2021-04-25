@@ -6,11 +6,14 @@ public class pdpDTO{
 	private Integer idpdp;
 	private  Integer idreuniones;
 	
+<<<<<<< HEAD
 	
 	public pdpDTO(Integer idpdp, Integer idreuniones) {
 		this.idpdp = idpdp;
 		this.idreuniones = idreuniones;
 	}
+=======
+>>>>>>> security
 	public Integer getIdpdp() {
 		return idpdp;
 	}

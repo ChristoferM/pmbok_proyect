@@ -20,15 +20,9 @@ public class entradas {
 	
 	private pdp pdp;
 	
-	public entradas(Integer identradapdp, String otrosprocesos, String factoresambientales, String activosprocesos) {
-		this.identradapdp = identradapdp;
-		this.otrosprocesos = otrosprocesos;
-		this.factoresambientales = factoresambientales;
-		this.activosprocesos = activosprocesos;
-	}
-
+	
 	@Id
-	@Column(name = "identradapdp", unique = true, nullable = false)
+	@Column(name = "identrada", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getIdentradapdp() {
 		return identradapdp;

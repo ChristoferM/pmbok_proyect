@@ -7,6 +7,7 @@ public class entradasDTO {
 	private String otrosprocesos ;
 	private String factoresambientales ;
 	private String  activosprocesos;
+<<<<<<< HEAD
 	
 	public entradasDTO(Integer idpdp, Integer identradapdp, String otrosprocesos, String factoresambientales,
 			String activosprocesos) {
@@ -16,6 +17,8 @@ public class entradasDTO {
 		this.factoresambientales = factoresambientales;
 		this.activosprocesos = activosprocesos;
 	}
+=======
+>>>>>>> security
 
 	public Integer getIdpdp() {
 		return idpdp;
