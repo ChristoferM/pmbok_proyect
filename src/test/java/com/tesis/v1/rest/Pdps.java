@@ -97,7 +97,6 @@ class Pdps {
 		for (pdp pdps : pdpService.findAll()) {
 			log.info("ID  del PDP: " + pdps.getIdpdp().toString());
 			log.info("Id reuniones : " + pdps.getReuniones().getIdreuniones().toString());
-			
 		}
 		
 		

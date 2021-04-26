@@ -38,6 +38,8 @@ public class ActaController {
 	
 	@Autowired
 	actasMapper actaMapper ;
+	
+	
 	@RequestMapping("/finById/{actaId}")
 	public ResponseEntity<?> finById(@PathVariable("actaId") Integer actaId)throws Exception{
 		//actas acta =new actas();
