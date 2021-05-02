@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuarios", schema = "public")
@@ -18,11 +19,16 @@ public class usuarios {
 	
 	//private Integer  idusuario;
 	// ID ES EMAIL
-	private String  email  ;
-	private String  nombre   ;
-	private String  password ;
-	private String  token   ;
-	private String  activo ;
+ 
+	private String email;
+ 
+	private String nombre;
+ 
+	private String password;
+	 
+	private String token;
+ 
+	private String activo;
 	
 	// lista de grupos donde puede estar el usuario
 	private List<grupo> grupos = new ArrayList<grupo>(0);

@@ -19,6 +19,4 @@ public interface proyectosRepository extends JpaRepository<proyectos,Integer>{
 	@Query("SELECT pro FROM public.proyectos  pro WHERE  pro.admin= :id") 
 	public Optional<proyectos>finByEmail(@Param("id") String email);*/
 	
-	@Query(value= "SELECT * FROM public.proyectos WHERE public.proyectos.admin =?1", nativeQuery =false)
-	public Integer countProyects(Integer id);
 }

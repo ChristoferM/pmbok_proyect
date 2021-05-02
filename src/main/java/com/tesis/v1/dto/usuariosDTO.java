@@ -6,7 +6,7 @@ public class usuariosDTO {
 	
 	//private Integer  idusuario;
 	
-	@Email
+	
 	private String  email  ;
 	
 	private String  nombre   ;
