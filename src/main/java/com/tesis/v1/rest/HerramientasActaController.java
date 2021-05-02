@@ -26,7 +26,12 @@ import com.tesis.v1.service.HerramientasActasService;
 @RequestMapping("/api/herramientasActa") // Forma de llamar datos
 @CrossOrigin
 public class HerramientasActaController {
+	
+	
 	private final static Logger log = LoggerFactory.getLogger(HerramientasActaController.class);
+	
+	@Autowired
+	herramientasactaMapper herramientasactaMapper;
 	
 	@Autowired
 	HerramientasActasService herramientasActasService;
@@ -34,8 +39,14 @@ public class HerramientasActaController {
 	@Autowired
 	ActaService actaService;
 	
-	@Autowired
-	herramientasactaMapper herramientasactaMapper;
+	@RequestMapping("/herramientaDelActa/{idProyecto}")
+	public ResponseEntity<?> herramientaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
+		List<herramientasacta> herramientaLIST= herramientasActasService.herramientaDelActa(idProyecto);
+		List<herramientasactaDTO> herramientaListDto = herramientasactaMapper.toherramientasActa(herramientaLIST);
+		
+		return ResponseEntity.ok().body(herramientaListDto);
+	}
+	
 	
 	@RequestMapping("/finById/{herramientaId}")
 	public ResponseEntity<?> finById(@PathVariable("herramientaId") Integer herramientaID)throws Exception{
@@ -60,14 +71,7 @@ public class HerramientasActaController {
 		
 		return ResponseEntity.ok().body(herramientaListDto);
 	}
-	@RequestMapping("/herramientaDelActa/{idProyecto}")
-	public ResponseEntity<?> herramientaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
-		List<herramientasacta> herramientaLIST= herramientasActasService.herramientaDelActa(idProyecto);
-		List<herramientasactaDTO> herramientaListDto = herramientasactaMapper.toherramientasActa(herramientaLIST);
-		
-		return ResponseEntity.ok().body(herramientaListDto);
-	}
-	
+
 	@RequestMapping("/save")
 	public ResponseEntity<?> save(@Valid @RequestBody herramientasactaDTO herramientasactaDTO)  throws Exception{
 		actas acta =new actas();
@@ -79,8 +83,6 @@ public class HerramientasActaController {
 		herramienta.setRecopilaciondatos(herramientasactaDTO.getRecopilaciondatos());
 		herramienta.setHabilidades(herramientasactaDTO.getHabilidades());
 		herramienta.setHerramientareuniones(herramientasactaDTO.getHabilidades());
-		
-		
 		
 		herramientasacta herramientasactaNew = herramientasActasService.save(herramienta);
 		

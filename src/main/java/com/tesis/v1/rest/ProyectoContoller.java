@@ -24,29 +24,18 @@ import com.tesis.v1.service.ProyectoService;
 @RequestMapping("/api/proyecto") // Forma de llamar datos
 @CrossOrigin
 public class ProyectoContoller {
+	
+	
 	private final static Logger log = LoggerFactory.getLogger(ProyectoContoller.class);
+	
+	@Autowired
+	proyectosMapper proyectosMapper;
 
 	@Autowired
 	ProyectoService proyectoService;
 
-	@Autowired
-	proyectosMapper proyectosMapper;
-
-	@RequestMapping("/finById/{proyectoId}")
-	public ResponseEntity<?> finById(@PathVariable("proyectoId") Integer poryectoId) throws Exception {
-		Optional<proyectos> usuarioOpt = proyectoService.findById(poryectoId);
-		log.info("Cargando ...");
-		if (usuarioOpt.isEmpty()) {
-			return ResponseEntity.ok().body("Error: No se encontro Usuario");
-
-		}
-		proyectos proyectos = usuarioOpt.get();
-		proyectosDTO usuarioDTO = proyectosMapper.toproyectosDTO(proyectos);
-		log.info("*");
-		return ResponseEntity.ok().body(usuarioDTO);
-
-	}
-
+	
+	
 	@RequestMapping("/finByEmail/{email}")
 	public ResponseEntity<?> finByEmail(@PathVariable("email") String email) throws Exception {
 		List<proyectos> proyectosLIST = proyectoService.findByEmail(email);
@@ -64,6 +53,8 @@ public class ProyectoContoller {
 		return ResponseEntity.ok().body(usuarioListDto);
 	}
 
+
+
 	@RequestMapping("/save")
 	public ResponseEntity<?> save(@Valid @RequestBody proyectosDTO proyectosDto) throws Exception {
 
@@ -75,5 +66,21 @@ public class ProyectoContoller {
 
 		return ResponseEntity.ok().body(proyectosDto);
 	}
+	@RequestMapping("/finById/{proyectoId}")
+	public ResponseEntity<?> finById(@PathVariable("proyectoId") Integer poryectoId) throws Exception {
+		Optional<proyectos> usuarioOpt = proyectoService.findById(poryectoId);
+		log.info("Cargando ...");
+		if (usuarioOpt.isEmpty()) {
+			return ResponseEntity.ok().body("Error: No se encontro Usuario");
+
+		}
+		proyectos proyectos = usuarioOpt.get();
+		proyectosDTO usuarioDTO = proyectosMapper.toproyectosDTO(proyectos);
+		log.info("*");
+		return ResponseEntity.ok().body(usuarioDTO);
+
+	}
+
+
 
 }

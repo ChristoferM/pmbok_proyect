@@ -33,6 +33,14 @@ public class UsuarioController {
 	@Autowired
 	usuariosMapper usuarioMapper;
 	
+	@RequestMapping("/finByAll")
+	public ResponseEntity<?> finByAll() throws Exception{
+		List<usuarios> usuariosLIST= usuarioService.findAll();
+		List<usuariosDTO> usuarioListDto = usuarioMapper.toUsuariosDTOs(usuariosLIST);
+		
+		return ResponseEntity.ok().body(usuarioListDto);
+	}
+	
 	@RequestMapping("/finById/{usuarioId}")
 	public ResponseEntity<?> finById(@PathVariable("usuarioId") String userId)throws Exception{
 		log.info("Reconociendo usuario :  "+userId);
@@ -48,14 +56,7 @@ public class UsuarioController {
 		return ResponseEntity.ok().body(usuarioDTO);
 		
 	}
-	@RequestMapping("/finByAll")
-	public ResponseEntity<?> finByAll() throws Exception{
-		List<usuarios> usuariosLIST= usuarioService.findAll();
-		List<usuariosDTO> usuarioListDto = usuarioMapper.toUsuariosDTOs(usuariosLIST);
-		
-		return ResponseEntity.ok().body(usuarioListDto);
-	}
-	
+
 	
 	@RequestMapping("/save")
 	public ResponseEntity<?> save(@Valid @RequestBody usuariosDTO usuariosDto)  throws Exception{

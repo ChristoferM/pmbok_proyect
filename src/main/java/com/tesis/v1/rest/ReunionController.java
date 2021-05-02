@@ -36,7 +36,7 @@ public class ReunionController {
 	
 	@RequestMapping("/save")
 	public ResponseEntity<?> save(@Valid @RequestBody reunionesDTO reunionesDTO)  throws Exception{
-		log.info("************************************ 1");
+		log.info("************************************ Reuniones save ");
 		faseproyecto faseproyecto = new faseproyecto ();
 		proyectos proyectos = new proyectos();
 		
@@ -62,7 +62,7 @@ public class ReunionController {
 		reunionesDTOnew = reunionesMapper.toReunionDTO(reunionnew);
 		
 		
-		log.info("************************************ 4");
+		log.info("************************************ Fin Reuniones Save");
 		return ResponseEntity.ok().body(reunionesDTOnew);
 		
 	}
