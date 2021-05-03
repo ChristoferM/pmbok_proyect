@@ -27,7 +27,6 @@ public class pdp {
 	private List<herramientas> herramientaPdp = new ArrayList<herramientas>(0);
 	private List<entradas> entradas = new ArrayList<entradas>(0);
 	
-	
 
 	@Id
 	@Column(name = "idpdp", unique = true, nullable = false)

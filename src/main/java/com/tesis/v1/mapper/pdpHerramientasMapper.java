@@ -10,7 +10,7 @@ import com.tesis.v1.dto.pdp.herramientasDTO;
 @Mapper
 public interface pdpHerramientasMapper {
 
-	public  herramientasDTO toherramientaDTO(herramientas herramientasDTO );
+	public  herramientasDTO toherramienta(herramientas herramientas );
 	
 	public herramientas  toHerramientaDTO( herramientasDTO herramientasPdpDTO);
 	

@@ -15,20 +15,20 @@ import org.springframework.stereotype.Component;
 public class pdpHerramientasMapperImpl implements pdpHerramientasMapper {
 
     @Override
-    public herramientasDTO toherramientaDTO(herramientas herramientasDTO) {
-        if ( herramientasDTO == null ) {
+    public herramientasDTO toherramienta(herramientas herramientas) {
+        if ( herramientas == null ) {
             return null;
         }
 
-        herramientasDTO herramientasDTO1 = new herramientasDTO();
+        herramientasDTO herramientasDTO = new herramientasDTO();
 
-        herramientasDTO1.setHabilidades( herramientasDTO.getHabilidades() );
-        herramientasDTO1.setHerramientareuniones( herramientasDTO.getHerramientareuniones() );
-        herramientasDTO1.setIdherramienta( herramientasDTO.getIdherramienta() );
-        herramientasDTO1.setJuicioexpertos( herramientasDTO.getJuicioexpertos() );
-        herramientasDTO1.setRecopilaciondatos( herramientasDTO.getRecopilaciondatos() );
+        herramientasDTO.setHabilidades( herramientas.getHabilidades() );
+        herramientasDTO.setHerramientareuniones( herramientas.getHerramientareuniones() );
+        herramientasDTO.setIdherramienta( herramientas.getIdherramienta() );
+        herramientasDTO.setJuicioexpertos( herramientas.getJuicioexpertos() );
+        herramientasDTO.setRecopilaciondatos( herramientas.getRecopilaciondatos() );
 
-        return herramientasDTO1;
+        return herramientasDTO;
     }
 
     @Override

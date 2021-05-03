@@ -97,7 +97,7 @@ public class PdpController {
 		//herramientasacta herramientasactaNew = herramientasActasService.save(herramienta);
 		
 		herramientasPdp = herramientasServicePdps.save(herramientasPdp);
-		herramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
+		herramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramienta(herramientasPdp);
 		
 		return ResponseEntity.ok().body(herramientasDTOs);
 	}
@@ -109,6 +109,7 @@ public class PdpController {
 		//entradasPdpServices
 		log.info("GUARDANDADO ");
 		pdp pdp = new pdp();
+		
 		pdp.setIdpdp(entradasDTO.getIdpdp());
 		entradas entradasPdp =new entradas();
 		
@@ -158,7 +159,7 @@ public class PdpController {
 			
 		}
 		herramientas herramientasPdp = herramientaspdpOpt.get();
-		herramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
+		herramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramienta(herramientasPdp);
 		//log.info(herramientasPdp.getPdp().getIdpdp().toString());
 		herramientasDTOs.setIdpdp(herramientasPdp.getPdp().getIdpdp());
 		return ResponseEntity.ok().body(herramientasDTOs);
