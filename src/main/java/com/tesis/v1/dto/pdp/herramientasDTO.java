@@ -10,8 +10,12 @@ public class herramientasDTO {
 	private String recopilaciondatos;
 	private String habilidades;
 	private String herramientareuniones;
+
+
+	public herramientasDTO(){
+
+	}
 	
-<<<<<<< HEAD
 	public herramientasDTO(Integer idpdp, Integer idherramienta, String juicioexpertos, String recopilaciondatos,
 			String habilidades, String herramientareuniones) {
 		this.idpdp = idpdp;
@@ -21,8 +25,7 @@ public class herramientasDTO {
 		this.habilidades = habilidades;
 		this.herramientareuniones = herramientareuniones;
 	}
-=======
->>>>>>> security
+
 
 	public Integer getIdpdp() {
 		return idpdp;
