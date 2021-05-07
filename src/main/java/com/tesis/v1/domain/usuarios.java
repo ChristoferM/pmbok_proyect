@@ -33,11 +33,10 @@ public class usuarios {
 	// lista de grupos donde puede estar el usuario
 	private List<grupo> grupos = new ArrayList<grupo>(0);
 	
-	
-	
 	public usuarios() {
 		super();
 	}
+	
 	public usuarios(//Integer idusuario, 
 			String email, 
 			String nombre, 

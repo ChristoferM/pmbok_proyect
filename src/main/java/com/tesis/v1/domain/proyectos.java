@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,11 +23,17 @@ public class proyectos {
 	private String  admin;
 	
 	private List<grupo> grupo = new ArrayList<	grupo>(0);
-	
-	
-	
+
 	private List<reuniones> reuniones = new ArrayList<reuniones>(0);
 	
+	private tipo_proyecto tipo_id;
+	
+	
+	
+	
+	public proyectos() {
+		super();
+	}
 	
 	@Id
 	@Column(name = "idproyecto", unique = true, nullable = false)
@@ -85,6 +93,18 @@ public class proyectos {
 	public void setReuniones(List<reuniones> reuniones) {
 		this.reuniones = reuniones;
 	}
+	
+	
+    @ManyToOne
+    @JoinColumn(name = "tipo_id", referencedColumnName = "tipo_id")
+	public tipo_proyecto getTipoProyecto() {
+		return tipo_id;
+	}
+	public void setTipoProyecto(tipo_proyecto tipoProyecto) {
+		this.tipo_id = tipoProyecto;
+	}
+	
+	
 	
 	
 	
