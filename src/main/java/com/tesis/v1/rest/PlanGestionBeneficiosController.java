@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.actas;
 import com.tesis.v1.domain.entradacta;
 import com.tesis.v1.domain.planesgestionbeneficios;
-import com.tesis.v1.dto.entradactaDTO;
 import com.tesis.v1.dto.planesgestionbeneficiosDTO;
 import com.tesis.v1.mapper.planesgestionbeneficiosMapper;
 import com.tesis.v1.service.EntradaActaService;

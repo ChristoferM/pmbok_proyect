@@ -16,8 +16,6 @@ import org.springframework.test.annotation.Rollback;
 
 import com.tesis.v1.domain.casonegocio;
 import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.domain.usuarios;
-import com.tesis.v1.repository.casonegocioRepository;
 import com.tesis.v1.service.CasoNegocioService;
 import com.tesis.v1.service.EntradaActaService;
 

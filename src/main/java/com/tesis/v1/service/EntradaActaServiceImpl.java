@@ -101,7 +101,6 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
 
 	@Override
 	public void validate(entradacta entity) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 

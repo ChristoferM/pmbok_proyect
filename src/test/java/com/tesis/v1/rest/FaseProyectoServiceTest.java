@@ -1,7 +1,5 @@
 package com.tesis.v1.rest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -26,7 +24,7 @@ class FaseProyectoServiceTest {
 	@Test
  	@Order(1)
 	void save() throws Exception {
-		
+		log.info("info");
 	}
 	
 	@Test

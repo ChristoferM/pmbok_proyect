@@ -36,6 +36,7 @@ class HerramientasActaServicesTest {
 	@Order(1)
 	void save() throws Exception {
 		herramientasacta herramientas = new herramientasacta();
+		log.info(herramientas.getIdherramienta().toString());
 	}
 
 	@Test

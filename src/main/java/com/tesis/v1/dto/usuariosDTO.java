@@ -1,6 +1,5 @@
 package com.tesis.v1.dto;
 
-import javax.validation.constraints.Email;
 
 public class usuariosDTO {
 	

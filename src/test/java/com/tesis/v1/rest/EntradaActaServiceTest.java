@@ -16,7 +16,6 @@ import org.springframework.test.annotation.Rollback;
 
 import com.tesis.v1.domain.actas;
 import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.domain.usuarios;
 import com.tesis.v1.dto.validarActa;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.EntradaActaService;

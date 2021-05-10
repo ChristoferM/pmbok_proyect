@@ -36,7 +36,7 @@ public class pdpServiceImpl  implements pdpService {
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<pdp> findById(Integer id) throws Exception {
-		//  Auto-generated method stub pdpRepository
+
 		if (id < 0 || id == null) {
 			throw new Exception("error en el identificador");
 		}
@@ -45,14 +45,13 @@ public class pdpServiceImpl  implements pdpService {
 
 	@Override
 	public Long count() {
-		//  Auto-generated method stub pdpRepository
+		log.info("count");
 		return null;
 	}
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public pdp save(pdp entity) throws Exception {
-		//  Auto-generated method stub pdpRepository
 		if (entity == null) {
 			throw new Exception("error en peticion");
 		}
@@ -62,7 +61,6 @@ public class pdpServiceImpl  implements pdpService {
 	@Override
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public pdp update(pdp entity) throws Exception {
-		//  Auto-generated method stub pdpRepository 
 		if (entity == null) {
 			throw new Exception("error en peticion");
 		}
@@ -71,7 +69,6 @@ public class pdpServiceImpl  implements pdpService {
 
 	@Override
 	public void delete(pdp entity) throws Exception {
-		//  Auto-generated method stub pdpRepository
 		if (entity == null) {
 			throw new Exception("Error Con el Plan...");
 		}
@@ -85,13 +82,11 @@ public class pdpServiceImpl  implements pdpService {
 
 	@Override
 	public void deleteById(Integer id) throws Exception {
-		//  Auto-generated method stub
 		
 	}
 
 	@Override
 	public void validate(pdp entity) throws Exception {
-		//  Auto-generated method stub
 		
 	}
 

@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.domain.pdp.*;
+ 
 
 @Entity
 @Table(name = "pdp", schema = "public")

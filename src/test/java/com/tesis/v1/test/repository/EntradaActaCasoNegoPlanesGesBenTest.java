@@ -30,7 +30,7 @@ class EntradaActaCasoNegoPlanesGesBenTest {
 
 	private final static Logger log = LoggerFactory.getLogger(EntradaActaCasoNegoPlanesGesBenTest.class);
 
-	private final static String email = "email@test.com.co";
+//  private final static String email = "email@test.com.co";
 
 	private final static Integer idusuario = 1;
 

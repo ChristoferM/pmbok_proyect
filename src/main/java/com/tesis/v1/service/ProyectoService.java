@@ -1,7 +1,6 @@
 package com.tesis.v1.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.tesis.v1.domain.proyectos;
 

@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.actas;
 import com.tesis.v1.domain.faseproyecto;
 import com.tesis.v1.domain.proyectos;
 import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.dto.actasDTO;
 import com.tesis.v1.dto.reunionesDTO;
 import com.tesis.v1.mapper.reunionesMapper;
 import com.tesis.v1.service.ReunionesService;

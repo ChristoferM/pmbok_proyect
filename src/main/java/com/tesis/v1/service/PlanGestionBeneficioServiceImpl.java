@@ -102,7 +102,6 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
 
 	@Override
 	public void validate(planesgestionbeneficios entity) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
