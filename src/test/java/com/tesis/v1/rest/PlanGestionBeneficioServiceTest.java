@@ -34,6 +34,7 @@ class PlanGestionBeneficioServiceTest {
 	@Test
 	@Order(1)
 	void save() throws Exception {
+		log.info("save");
 		planesgestionbeneficios planesgestionbeneficio = new planesgestionbeneficios();
 		planesgestionbeneficio.setAcciones("test spring");
 		planesgestionbeneficio.setComponentes("test spring");

@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import com.tesis.v1.domain.pdp.pdp;
 
 @Entity
 @Table(name = "herramientaspdp", schema = "public")

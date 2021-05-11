@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tesis.v1.domain.actas;
 import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.dto.actasDTO;
 import com.tesis.v1.dto.entradactaDTO;
 import com.tesis.v1.dto.validarActa;
 import com.tesis.v1.mapper.entradactaMapper;

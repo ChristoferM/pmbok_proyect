@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,20 +16,24 @@ public class usuarios {
 	
 	//private Integer  idusuario;
 	// ID ES EMAIL
-	private String  email  ;
-	private String  nombre   ;
-	private String  password ;
-	private String  token   ;
-	private String  activo ;
+ 
+	private String email;
+ 
+	private String nombre;
+ 
+	private String password;
+	 
+	private String token;
+ 
+	private String activo;
 	
 	// lista de grupos donde puede estar el usuario
 	private List<grupo> grupos = new ArrayList<grupo>(0);
 	
-	
-	
 	public usuarios() {
 		super();
 	}
+	
 	public usuarios(//Integer idusuario, 
 			String email, 
 			String nombre, 

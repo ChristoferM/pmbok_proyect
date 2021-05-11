@@ -1,12 +1,11 @@
 package com.tesis.v1.dto;
 
-import javax.validation.constraints.Email;
 
 public class usuariosDTO {
 	
 	//private Integer  idusuario;
 	
-	@Email
+	
 	private String  email  ;
 	
 	private String  nombre   ;

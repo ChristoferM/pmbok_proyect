@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.actas;
-import com.tesis.v1.domain.herramientasacta;
+
 import com.tesis.v1.domain.reuniones;
 import com.tesis.v1.domain.pdp.entradas;
 import com.tesis.v1.domain.pdp.herramientas;
 import com.tesis.v1.domain.pdp.pdp;
-import com.tesis.v1.dto.actasDTO;
 import com.tesis.v1.dto.pdp.entradasDTO;
 import com.tesis.v1.dto.pdp.herramientasDTO;
 import com.tesis.v1.dto.pdp.pdpDTO;

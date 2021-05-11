@@ -109,13 +109,11 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 
 	@Override
 	public void validate(casonegocio entity) throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public casonegocio save(casonegocio entity, Integer idEntrada) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

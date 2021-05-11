@@ -1,7 +1,5 @@
 package com.tesis.v1.rest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -15,7 +13,6 @@ import com.tesis.v1.domain.reuniones;
 import com.tesis.v1.domain.pdp.entradas;
 import com.tesis.v1.domain.pdp.herramientas;
 import com.tesis.v1.domain.pdp.pdp;
-import com.tesis.v1.repository.pdp.herramientasPdpRepository;
 import com.tesis.v1.service.entradasPdpService;
 import com.tesis.v1.service.herramientasServicePdp;
 import com.tesis.v1.service.pdpService;

@@ -23,9 +23,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	}
 
-	@Override
+	@Override  // warning Null pointer access ==> || id.isBlank() == false || id.isEmpty() != true
 	public Optional<usuarios> findById(String id) throws Exception {
-		if (id != null || id.isBlank() == false || id.isEmpty() != true) {
+		if (id != null ) {
 			return usuariosRepository.findById(id);
 		}
 		throw new Exception("Error con el identificador");

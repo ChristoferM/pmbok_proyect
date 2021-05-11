@@ -92,7 +92,6 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
 
 	@Override
 	public void validate(herramientasacta entity) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 

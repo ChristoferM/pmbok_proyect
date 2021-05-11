@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.domain.reuniones;
 import com.tesis.v1.repository.reunionesRepository;
 import com.tesis.v1.repository.usuariosRepository;
 

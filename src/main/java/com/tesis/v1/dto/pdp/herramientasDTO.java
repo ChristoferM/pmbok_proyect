@@ -10,7 +10,24 @@ public class herramientasDTO {
 	private String recopilaciondatos;
 	private String habilidades;
 	private String herramientareuniones;
+
+
+	public herramientasDTO(){
+
+	}
 	
+<<<<<<< HEAD
+=======
+	public herramientasDTO(Integer idpdp, Integer idherramienta, String juicioexpertos, String recopilaciondatos,
+			String habilidades, String herramientareuniones) {
+		this.idpdp = idpdp;
+		this.idherramienta = idherramienta;
+		this.juicioexpertos = juicioexpertos;
+		this.recopilaciondatos = recopilaciondatos;
+		this.habilidades = habilidades;
+		this.herramientareuniones = herramientareuniones;
+	}
+>>>>>>> 8355755ed4d8c95213239d015f4ed2fbb090e292
 
 
 	public Integer getIdpdp() {

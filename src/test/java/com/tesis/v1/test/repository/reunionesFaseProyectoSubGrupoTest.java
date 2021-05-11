@@ -17,7 +17,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tesis.v1.domain.faseproyecto;
-import com.tesis.v1.domain.proyectos;
 import com.tesis.v1.domain.reuniones;
 import com.tesis.v1.domain.subgrupo;
 import com.tesis.v1.repository.faseproyectoRepository;

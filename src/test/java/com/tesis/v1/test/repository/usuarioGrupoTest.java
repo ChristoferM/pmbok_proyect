@@ -30,7 +30,6 @@ class usuarioGrupoTest {
 
 	private final static String email = "email@test.com.co";
 
-	private final static Integer idusuario = 1;
 
 	private final static Integer idgrupo = 2;
 

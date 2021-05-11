@@ -1,6 +1,5 @@
 package com.tesis.v1.service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 

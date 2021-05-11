@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.actas;
 import com.tesis.v1.domain.casonegocio;
 import com.tesis.v1.domain.entradacta;
 import com.tesis.v1.dto.casonegocioDTO;
-import com.tesis.v1.dto.entradactaDTO;
 import com.tesis.v1.mapper.casonegocioMapper;
 import com.tesis.v1.service.CasoNegocioService;
 import com.tesis.v1.service.EntradaActaService;

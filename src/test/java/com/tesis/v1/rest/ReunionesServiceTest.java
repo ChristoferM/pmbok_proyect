@@ -14,9 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.proyectos;
 import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.repository.reunionesRepository;
 import com.tesis.v1.service.FaseProyectoService;
 import com.tesis.v1.service.ProyectoService;
 import com.tesis.v1.service.ReunionesService;

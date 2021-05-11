@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tesis.v1.domain.pdp.herramientas;
-import com.tesis.v1.repository.herramientasactaRepository;
 import com.tesis.v1.repository.pdp.herramientasPdpRepository;
 
 @Service

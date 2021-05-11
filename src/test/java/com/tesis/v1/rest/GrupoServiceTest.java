@@ -1,8 +1,5 @@
 package com.tesis.v1.rest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Order;
@@ -16,11 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.tesis.v1.domain.grupo;
-import com.tesis.v1.domain.proyectos;
-import com.tesis.v1.domain.rolproyecto;
-import com.tesis.v1.domain.subgrupo;
-import com.tesis.v1.domain.usuarios;
-import com.tesis.v1.repository.grupoRepository;
 import com.tesis.v1.service.GrupoService;
 
 @SpringBootTest

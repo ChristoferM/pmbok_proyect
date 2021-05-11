@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 3.22.0.v20200530-2032, environment: Java 15 (Oracle Corporation)"
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.3.1300.v20210331-0708, environment: Java 15.0.2 (Oracle Corporation)"
 )
 @Component
 public class pdpHerramientasMapperImpl implements pdpHerramientasMapper {
@@ -23,18 +23,24 @@ public class pdpHerramientasMapperImpl implements pdpHerramientasMapper {
         herramientasDTO herramientasDTO = new herramientasDTO();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         herramientasDTO.setHabilidades( herramientas.getHabilidades() );
         herramientasDTO.setHerramientareuniones( herramientas.getHerramientareuniones() );
         herramientasDTO.setIdherramienta( herramientas.getIdherramienta() );
         herramientasDTO.setJuicioexpertos( herramientas.getJuicioexpertos() );
         herramientasDTO.setRecopilaciondatos( herramientas.getRecopilaciondatos() );
 =======
+=======
+>>>>>>> 8355755ed4d8c95213239d015f4ed2fbb090e292
         herramientasDTO1.setIdherramienta( herramientasDTO.getIdherramienta() );
         herramientasDTO1.setJuicioexpertos( herramientasDTO.getJuicioexpertos() );
         herramientasDTO1.setRecopilaciondatos( herramientasDTO.getRecopilaciondatos() );
         herramientasDTO1.setHabilidades( herramientasDTO.getHabilidades() );
         herramientasDTO1.setHerramientareuniones( herramientasDTO.getHerramientareuniones() );
+<<<<<<< HEAD
 >>>>>>> security
+=======
+>>>>>>> 8355755ed4d8c95213239d015f4ed2fbb090e292
 
         return herramientasDTO;
     }

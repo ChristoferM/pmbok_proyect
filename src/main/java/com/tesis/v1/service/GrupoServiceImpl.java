@@ -42,6 +42,7 @@ public class GrupoServiceImpl implements GrupoService {
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public grupo save(grupo entity) throws Exception {
+		log.info("save");
 		if (entity == null) {
 			throw new Exception("error en peticion");
 		} else {
