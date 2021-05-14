@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class PdpHerramientasMapperImpl implements PdpHerramientasMapper {
 
     @Override
+<<<<<<< HEAD:target/generated-sources/annotations/com/tesis/v1/mapper/PdpHerramientasMapperImpl.java
     public HerramientasDTO toherramientaDTO(Herramientas herramientasDTO) {
         if ( herramientasDTO == null ) {
             return null;
@@ -22,13 +23,36 @@ public class PdpHerramientasMapperImpl implements PdpHerramientasMapper {
 
         HerramientasDTO herramientasDTO1 = new HerramientasDTO();
 
+=======
+    public herramientasDTO toherramienta(herramientas herramientas) {
+        if ( herramientas == null ) {
+            return null;
+        }
+
+        herramientasDTO herramientasDTO = new herramientasDTO();
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+        herramientasDTO.setHabilidades( herramientas.getHabilidades() );
+        herramientasDTO.setHerramientareuniones( herramientas.getHerramientareuniones() );
+        herramientasDTO.setIdherramienta( herramientas.getIdherramienta() );
+        herramientasDTO.setJuicioexpertos( herramientas.getJuicioexpertos() );
+        herramientasDTO.setRecopilaciondatos( herramientas.getRecopilaciondatos() );
+=======
+=======
+>>>>>>> 8355755ed4d8c95213239d015f4ed2fbb090e292
+>>>>>>> 5e3e6b0e3444878d6173d307f9e7a5793ef6614b:target/generated-sources/annotations/com/tesis/v1/mapper/pdpHerramientasMapperImpl.java
         herramientasDTO1.setIdherramienta( herramientasDTO.getIdherramienta() );
         herramientasDTO1.setJuicioexpertos( herramientasDTO.getJuicioexpertos() );
         herramientasDTO1.setRecopilaciondatos( herramientasDTO.getRecopilaciondatos() );
         herramientasDTO1.setHabilidades( herramientasDTO.getHabilidades() );
         herramientasDTO1.setHerramientareuniones( herramientasDTO.getHerramientareuniones() );
+<<<<<<< HEAD
+>>>>>>> security
+=======
+>>>>>>> 8355755ed4d8c95213239d015f4ed2fbb090e292
 
-        return herramientasDTO1;
+        return herramientasDTO;
     }
 
     @Override

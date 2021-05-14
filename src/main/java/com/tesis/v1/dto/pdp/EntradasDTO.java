@@ -7,6 +7,9 @@ public class 	EntradasDTO {
 	private String otrosprocesos ;
 	private String factoresambientales ;
 	private String  activosprocesos;
+<<<<<<< HEAD
+	
+=======
 
 	public EntradasDTO(){}
 		
@@ -18,6 +21,7 @@ public class 	EntradasDTO {
 		this.factoresambientales = factoresambientales;
 		this.activosprocesos = activosprocesos;
 	}
+>>>>>>> 8355755ed4d8c95213239d015f4ed2fbb090e292
 
 
 	public Integer getIdpdp() {

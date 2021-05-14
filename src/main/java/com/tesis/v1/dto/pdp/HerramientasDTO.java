@@ -16,7 +16,13 @@ public class HerramientasDTO {
 
 	}
 	
+<<<<<<< HEAD:src/main/java/com/tesis/v1/dto/pdp/HerramientasDTO.java
 	public HerramientasDTO(Integer idpdp, Integer idherramienta, String juicioexpertos, String recopilaciondatos,
+=======
+<<<<<<< HEAD
+=======
+	public herramientasDTO(Integer idpdp, Integer idherramienta, String juicioexpertos, String recopilaciondatos,
+>>>>>>> 5e3e6b0e3444878d6173d307f9e7a5793ef6614b:src/main/java/com/tesis/v1/dto/pdp/herramientasDTO.java
 			String habilidades, String herramientareuniones) {
 		this.idpdp = idpdp;
 		this.idherramienta = idherramienta;
@@ -25,6 +31,7 @@ public class HerramientasDTO {
 		this.habilidades = habilidades;
 		this.herramientareuniones = herramientareuniones;
 	}
+>>>>>>> 8355755ed4d8c95213239d015f4ed2fbb090e292
 
 
 	public Integer getIdpdp() {
