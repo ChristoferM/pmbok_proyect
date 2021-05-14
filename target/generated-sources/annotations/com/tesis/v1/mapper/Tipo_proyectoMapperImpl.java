@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 15.0.2 (Oracle Corporation)"
 )
 @Component
-public class tipo_proyectoMapperImpl implements tipo_proyectoMapper {
+public class Tipo_proyectoMapperImpl implements Tipo_proyectoMapper {
 
     @Override
     public tipo_proyectoDTO toTipo_proyectoDTO(Tipo_proyecto tipo_proyecto) {

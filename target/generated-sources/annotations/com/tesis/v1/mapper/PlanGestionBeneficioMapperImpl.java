@@ -1,7 +1,7 @@
 package com.tesis.v1.mapper;
 
 import com.tesis.v1.domain.PlanGestionbeneficio;
-import com.tesis.v1.dto.planesgestionbeneficiosDTO;
+import com.tesis.v1.dto.PlanGestionBeneficioDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,25 +15,25 @@ import org.springframework.stereotype.Component;
 public class PlanGestionBeneficioMapperImpl implements PlanGestionBeneficioMapper {
 
     @Override
-    public planesgestionbeneficiosDTO toplanesGestionBeneficiosDTO(PlanGestionbeneficio planesGestionBeneficios) {
+    public PlanGestionBeneficioDTO toplanesGestionBeneficiosDTO(PlanGestionbeneficio planesGestionBeneficios) {
         if ( planesGestionBeneficios == null ) {
             return null;
         }
 
-        planesgestionbeneficiosDTO planesgestionbeneficiosDTO = new planesgestionbeneficiosDTO();
+        PlanGestionBeneficioDTO planGestionBeneficioDTO = new PlanGestionBeneficioDTO();
 
-        planesgestionbeneficiosDTO.setId_plan_gb( planesGestionBeneficios.getId_plan_gb() );
-        planesgestionbeneficiosDTO.setAcciones( planesGestionBeneficios.getAcciones() );
-        planesgestionbeneficiosDTO.setComponentes( planesGestionBeneficios.getComponentes() );
-        planesgestionbeneficiosDTO.setProdcutos( planesGestionBeneficios.getProdcutos() );
-        planesgestionbeneficiosDTO.setServicios( planesGestionBeneficios.getServicios() );
-        planesgestionbeneficiosDTO.setResultado( planesGestionBeneficios.getResultado() );
+        planGestionBeneficioDTO.setId_plan_gb( planesGestionBeneficios.getId_plan_gb() );
+        planGestionBeneficioDTO.setAcciones( planesGestionBeneficios.getAcciones() );
+        planGestionBeneficioDTO.setComponentes( planesGestionBeneficios.getComponentes() );
+        planGestionBeneficioDTO.setProdcutos( planesGestionBeneficios.getProdcutos() );
+        planGestionBeneficioDTO.setServicios( planesGestionBeneficios.getServicios() );
+        planGestionBeneficioDTO.setResultado( planesGestionBeneficios.getResultado() );
 
-        return planesgestionbeneficiosDTO;
+        return planGestionBeneficioDTO;
     }
 
     @Override
-    public PlanGestionbeneficio toplanesGestionBeneficios(planesgestionbeneficiosDTO planesGestionBeneficiosDTO) {
+    public PlanGestionbeneficio toplanesGestionBeneficios(PlanGestionBeneficioDTO planesGestionBeneficiosDTO) {
         if ( planesGestionBeneficiosDTO == null ) {
             return null;
         }
@@ -51,12 +51,12 @@ public class PlanGestionBeneficioMapperImpl implements PlanGestionBeneficioMappe
     }
 
     @Override
-    public List<planesgestionbeneficiosDTO> toplanesGestionBeneficiosDTO(List<PlanGestionbeneficio> planesGestionBeneficios) {
+    public List<PlanGestionBeneficioDTO> toplanesGestionBeneficiosDTO(List<PlanGestionbeneficio> planesGestionBeneficios) {
         if ( planesGestionBeneficios == null ) {
             return null;
         }
 
-        List<planesgestionbeneficiosDTO> list = new ArrayList<planesgestionbeneficiosDTO>( planesGestionBeneficios.size() );
+        List<PlanGestionBeneficioDTO> list = new ArrayList<PlanGestionBeneficioDTO>( planesGestionBeneficios.size() );
         for ( PlanGestionbeneficio planGestionbeneficio : planesGestionBeneficios ) {
             list.add( toplanesGestionBeneficiosDTO( planGestionbeneficio ) );
         }
@@ -65,14 +65,14 @@ public class PlanGestionBeneficioMapperImpl implements PlanGestionBeneficioMappe
     }
 
     @Override
-    public List<PlanGestionbeneficio> toplanesGestionBeneficios(List<planesgestionbeneficiosDTO> planesGestionBeneficiosDTOs) {
+    public List<PlanGestionbeneficio> toplanesGestionBeneficios(List<PlanGestionBeneficioDTO> planesGestionBeneficiosDTOs) {
         if ( planesGestionBeneficiosDTOs == null ) {
             return null;
         }
 
         List<PlanGestionbeneficio> list = new ArrayList<PlanGestionbeneficio>( planesGestionBeneficiosDTOs.size() );
-        for ( planesgestionbeneficiosDTO planesgestionbeneficiosDTO : planesGestionBeneficiosDTOs ) {
-            list.add( toplanesGestionBeneficios( planesgestionbeneficiosDTO ) );
+        for ( PlanGestionBeneficioDTO planGestionBeneficioDTO : planesGestionBeneficiosDTOs ) {
+            list.add( toplanesGestionBeneficios( planGestionBeneficioDTO ) );
         }
 
         return list;

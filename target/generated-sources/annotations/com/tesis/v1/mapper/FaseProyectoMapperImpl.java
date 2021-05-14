@@ -1,7 +1,7 @@
 package com.tesis.v1.mapper;
 
 import com.tesis.v1.domain.FaseProyecto;
-import com.tesis.v1.dto.faseproyectoDTO;
+import com.tesis.v1.dto.FaseProyectoDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,22 +15,22 @@ import org.springframework.stereotype.Component;
 public class FaseProyectoMapperImpl implements FaseProyectoMapper {
 
     @Override
-    public faseproyectoDTO tofaseProyectoDTO(FaseProyecto faseProyecto) {
+    public FaseProyectoDTO tofaseProyectoDTO(FaseProyecto faseProyecto) {
         if ( faseProyecto == null ) {
             return null;
         }
 
-        faseproyectoDTO faseproyectoDTO = new faseproyectoDTO();
+        FaseProyectoDTO faseProyectoDTO = new FaseProyectoDTO();
 
-        faseproyectoDTO.setIdfase( faseProyecto.getIdfase() );
-        faseproyectoDTO.setNombrefase( faseProyecto.getNombrefase() );
-        faseproyectoDTO.setDescripcionfase( faseProyecto.getDescripcionfase() );
+        faseProyectoDTO.setIdfase( faseProyecto.getIdfase() );
+        faseProyectoDTO.setNombrefase( faseProyecto.getNombrefase() );
+        faseProyectoDTO.setDescripcionfase( faseProyecto.getDescripcionfase() );
 
-        return faseproyectoDTO;
+        return faseProyectoDTO;
     }
 
     @Override
-    public FaseProyecto tofaseProyecto(faseproyectoDTO faseproyectoDTO) {
+    public FaseProyecto tofaseProyecto(FaseProyectoDTO faseproyectoDTO) {
         if ( faseproyectoDTO == null ) {
             return null;
         }
@@ -45,12 +45,12 @@ public class FaseProyectoMapperImpl implements FaseProyectoMapper {
     }
 
     @Override
-    public List<faseproyectoDTO> tofaseProyectoDTO(List<FaseProyecto> faseProyectos) {
+    public List<FaseProyectoDTO> tofaseProyectoDTO(List<FaseProyecto> faseProyectos) {
         if ( faseProyectos == null ) {
             return null;
         }
 
-        List<faseproyectoDTO> list = new ArrayList<faseproyectoDTO>( faseProyectos.size() );
+        List<FaseProyectoDTO> list = new ArrayList<FaseProyectoDTO>( faseProyectos.size() );
         for ( FaseProyecto faseProyecto : faseProyectos ) {
             list.add( tofaseProyectoDTO( faseProyecto ) );
         }
@@ -59,14 +59,14 @@ public class FaseProyectoMapperImpl implements FaseProyectoMapper {
     }
 
     @Override
-    public List<FaseProyecto> tofaseProyecto(List<faseproyectoDTO> faseProyectoDTOs) {
+    public List<FaseProyecto> tofaseProyecto(List<FaseProyectoDTO> faseProyectoDTOs) {
         if ( faseProyectoDTOs == null ) {
             return null;
         }
 
         List<FaseProyecto> list = new ArrayList<FaseProyecto>( faseProyectoDTOs.size() );
-        for ( faseproyectoDTO faseproyectoDTO : faseProyectoDTOs ) {
-            list.add( tofaseProyecto( faseproyectoDTO ) );
+        for ( FaseProyectoDTO faseProyectoDTO : faseProyectoDTOs ) {
+            list.add( tofaseProyecto( faseProyectoDTO ) );
         }
 
         return list;

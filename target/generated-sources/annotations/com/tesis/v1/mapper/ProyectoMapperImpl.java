@@ -2,7 +2,7 @@ package com.tesis.v1.mapper;
 
 import com.tesis.v1.domain.Proyecto;
 import com.tesis.v1.domain.Tipo_proyecto;
-import com.tesis.v1.dto.proyectosDTO;
+import com.tesis.v1.dto.ProyectoDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,31 +16,31 @@ import org.springframework.stereotype.Component;
 public class ProyectoMapperImpl implements ProyectoMapper {
 
     @Override
-    public proyectosDTO toproyectosDTO(Proyecto proyectos) {
+    public ProyectoDTO toproyectosDTO(Proyecto proyectos) {
         if ( proyectos == null ) {
             return null;
         }
 
-        proyectosDTO proyectosDTO = new proyectosDTO();
+        ProyectoDTO proyectoDTO = new ProyectoDTO();
 
-        proyectosDTO.setTipo_id( proyectosTipoProyectoTipo_id( proyectos ) );
-        proyectosDTO.setAdmin( proyectos.getAdmin() );
-        proyectosDTO.setIdproyecto( proyectos.getIdproyecto() );
-        proyectosDTO.setNombre( proyectos.getNombre() );
-        proyectosDTO.setDescripcion( proyectos.getDescripcion() );
+        proyectoDTO.setTipo_id( proyectosTipoProyectoTipo_id( proyectos ) );
+        proyectoDTO.setAdmin( proyectos.getAdmin() );
+        proyectoDTO.setIdproyecto( proyectos.getIdproyecto() );
+        proyectoDTO.setNombre( proyectos.getNombre() );
+        proyectoDTO.setDescripcion( proyectos.getDescripcion() );
 
-        return proyectosDTO;
+        return proyectoDTO;
     }
 
     @Override
-    public Proyecto toproyectos(proyectosDTO proyectosDTO) {
+    public Proyecto toproyectos(ProyectoDTO proyectosDTO) {
         if ( proyectosDTO == null ) {
             return null;
         }
 
         Proyecto proyecto = new Proyecto();
 
-        proyecto.setTipoProyecto( proyectosDTOToTipo_proyecto( proyectosDTO ) );
+        proyecto.setTipoProyecto( proyectoDTOToTipo_proyecto( proyectosDTO ) );
         proyecto.setIdproyecto( proyectosDTO.getIdproyecto() );
         proyecto.setNombre( proyectosDTO.getNombre() );
         proyecto.setDescripcion( proyectosDTO.getDescripcion() );
@@ -50,12 +50,12 @@ public class ProyectoMapperImpl implements ProyectoMapper {
     }
 
     @Override
-    public List<proyectosDTO> toproyectosDTOs(List<Proyecto> proyectoss) {
+    public List<ProyectoDTO> toproyectosDTOs(List<Proyecto> proyectoss) {
         if ( proyectoss == null ) {
             return null;
         }
 
-        List<proyectosDTO> list = new ArrayList<proyectosDTO>( proyectoss.size() );
+        List<ProyectoDTO> list = new ArrayList<ProyectoDTO>( proyectoss.size() );
         for ( Proyecto proyecto : proyectoss ) {
             list.add( toproyectosDTO( proyecto ) );
         }
@@ -64,14 +64,14 @@ public class ProyectoMapperImpl implements ProyectoMapper {
     }
 
     @Override
-    public List<Proyecto> toproyectos(List<proyectosDTO> proyectosDTOs) {
+    public List<Proyecto> toproyectos(List<ProyectoDTO> proyectosDTOs) {
         if ( proyectosDTOs == null ) {
             return null;
         }
 
         List<Proyecto> list = new ArrayList<Proyecto>( proyectosDTOs.size() );
-        for ( proyectosDTO proyectosDTO : proyectosDTOs ) {
-            list.add( toproyectos( proyectosDTO ) );
+        for ( ProyectoDTO proyectoDTO : proyectosDTOs ) {
+            list.add( toproyectos( proyectoDTO ) );
         }
 
         return list;
@@ -92,14 +92,14 @@ public class ProyectoMapperImpl implements ProyectoMapper {
         return tipo_id;
     }
 
-    protected Tipo_proyecto proyectosDTOToTipo_proyecto(proyectosDTO proyectosDTO) {
-        if ( proyectosDTO == null ) {
+    protected Tipo_proyecto proyectoDTOToTipo_proyecto(ProyectoDTO proyectoDTO) {
+        if ( proyectoDTO == null ) {
             return null;
         }
 
         Tipo_proyecto tipo_proyecto = new Tipo_proyecto();
 
-        tipo_proyecto.setTipo_id( proyectosDTO.getTipo_id() );
+        tipo_proyecto.setTipo_id( proyectoDTO.getTipo_id() );
 
         return tipo_proyecto;
     }

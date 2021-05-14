@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 15.0.2 (Oracle Corporation)"
 )
 @Component
-public class PdpHerramientasMapperImpl implements PdpHerramientasMapper {
+public class pdpHerramientasMapperImpl implements pdpHerramientasMapper {
 
     @Override
-    public HerramientasDTO toherramientaDTO(Herramientas herramientas) {
+    public HerramientasDTO toherramienta(Herramientas herramientas) {
         if ( herramientas == null ) {
             return null;
         }

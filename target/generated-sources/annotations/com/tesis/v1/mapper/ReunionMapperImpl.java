@@ -1,7 +1,7 @@
 package com.tesis.v1.mapper;
 
 import com.tesis.v1.domain.Reunion;
-import com.tesis.v1.dto.reunionesDTO;
+import com.tesis.v1.dto.ReunionesDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
 public class ReunionMapperImpl implements ReunionMapper {
 
     @Override
-    public reunionesDTO toReunionDTO(Reunion reuniones) {
+    public ReunionesDTO toReunionDTO(Reunion reuniones) {
         if ( reuniones == null ) {
             return null;
         }
 
-        reunionesDTO reunionesDTO = new reunionesDTO();
+        ReunionesDTO reunionesDTO = new ReunionesDTO();
 
         reunionesDTO.setIdreuniones( reuniones.getIdreuniones() );
         reunionesDTO.setNombrereunion( reuniones.getNombrereunion() );
@@ -30,7 +30,7 @@ public class ReunionMapperImpl implements ReunionMapper {
     }
 
     @Override
-    public Reunion toReunionDTO(reunionesDTO reunionesDTO) {
+    public Reunion toReunionDTO(ReunionesDTO reunionesDTO) {
         if ( reunionesDTO == null ) {
             return null;
         }
@@ -45,12 +45,12 @@ public class ReunionMapperImpl implements ReunionMapper {
     }
 
     @Override
-    public List<reunionesDTO> toReunionDTOs(List<Reunion> reunioness) {
+    public List<ReunionesDTO> toReunionDTOs(List<Reunion> reunioness) {
         if ( reunioness == null ) {
             return null;
         }
 
-        List<reunionesDTO> list = new ArrayList<reunionesDTO>( reunioness.size() );
+        List<ReunionesDTO> list = new ArrayList<ReunionesDTO>( reunioness.size() );
         for ( Reunion reunion : reunioness ) {
             list.add( toReunionDTO( reunion ) );
         }
@@ -59,13 +59,13 @@ public class ReunionMapperImpl implements ReunionMapper {
     }
 
     @Override
-    public List<Reunion> toReunions(List<reunionesDTO> reunionesDTOs) {
+    public List<Reunion> toReunions(List<ReunionesDTO> reunionesDTOs) {
         if ( reunionesDTOs == null ) {
             return null;
         }
 
         List<Reunion> list = new ArrayList<Reunion>( reunionesDTOs.size() );
-        for ( reunionesDTO reunionesDTO : reunionesDTOs ) {
+        for ( ReunionesDTO reunionesDTO : reunionesDTOs ) {
             list.add( toReunionDTO( reunionesDTO ) );
         }
 

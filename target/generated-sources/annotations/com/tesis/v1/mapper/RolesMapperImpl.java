@@ -1,7 +1,7 @@
 package com.tesis.v1.mapper;
 
 import com.tesis.v1.domain.Roles;
-import com.tesis.v1.dto.rolesDTO;
+import com.tesis.v1.dto.RolesDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
 public class RolesMapperImpl implements RolesMapper {
 
     @Override
-    public rolesDTO toRolesDTO(Roles roles) {
+    public RolesDTO toRolesDTO(Roles roles) {
         if ( roles == null ) {
             return null;
         }
 
-        rolesDTO rolesDTO = new rolesDTO();
+        RolesDTO rolesDTO = new RolesDTO();
 
         rolesDTO.setIdrol( roles.getIdrol() );
         rolesDTO.setNombrerol( roles.getNombrerol() );
@@ -29,7 +29,7 @@ public class RolesMapperImpl implements RolesMapper {
     }
 
     @Override
-    public Roles toRoles(rolesDTO rolesDTO) {
+    public Roles toRoles(RolesDTO rolesDTO) {
         if ( rolesDTO == null ) {
             return null;
         }
@@ -43,12 +43,12 @@ public class RolesMapperImpl implements RolesMapper {
     }
 
     @Override
-    public List<rolesDTO> toRolesDTO(List<Roles> roless) {
+    public List<RolesDTO> toRolesDTO(List<Roles> roless) {
         if ( roless == null ) {
             return null;
         }
 
-        List<rolesDTO> list = new ArrayList<rolesDTO>( roless.size() );
+        List<RolesDTO> list = new ArrayList<RolesDTO>( roless.size() );
         for ( Roles roles : roless ) {
             list.add( toRolesDTO( roles ) );
         }
@@ -57,13 +57,13 @@ public class RolesMapperImpl implements RolesMapper {
     }
 
     @Override
-    public List<Roles> toRoles(List<rolesDTO> rolesDTOs) {
+    public List<Roles> toRoles(List<RolesDTO> rolesDTOs) {
         if ( rolesDTOs == null ) {
             return null;
         }
 
         List<Roles> list = new ArrayList<Roles>( rolesDTOs.size() );
-        for ( rolesDTO rolesDTO : rolesDTOs ) {
+        for ( RolesDTO rolesDTO : rolesDTOs ) {
             list.add( toRoles( rolesDTO ) );
         }
 

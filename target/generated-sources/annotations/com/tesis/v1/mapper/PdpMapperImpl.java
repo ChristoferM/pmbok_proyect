@@ -1,6 +1,6 @@
 package com.tesis.v1.mapper;
 
-import com.tesis.v1.domain.pdp.pdp;
+import com.tesis.v1.domain.pdp.Pdp;
 import com.tesis.v1.dto.pdp.PdpDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class PdpMapperImpl implements PdpMapper {
 
     @Override
-    public PdpDTO toPdpDTO(pdp pdps) {
+    public PdpDTO toPdpDTO(Pdp pdps) {
         if ( pdps == null ) {
             return null;
         }
@@ -28,12 +28,12 @@ public class PdpMapperImpl implements PdpMapper {
     }
 
     @Override
-    public pdp toPdp(PdpDTO pdpDTO) {
+    public Pdp toPdp(PdpDTO pdpDTO) {
         if ( pdpDTO == null ) {
             return null;
         }
 
-        pdp pdp = new pdp();
+        Pdp pdp = new Pdp();
 
         pdp.setIdpdp( pdpDTO.getIdpdp() );
 
@@ -41,13 +41,13 @@ public class PdpMapperImpl implements PdpMapper {
     }
 
     @Override
-    public List<PdpDTO> toPdpDTOs(List<pdp> pdps) {
+    public List<PdpDTO> toPdpDTOs(List<Pdp> pdps) {
         if ( pdps == null ) {
             return null;
         }
 
         List<PdpDTO> list = new ArrayList<PdpDTO>( pdps.size() );
-        for ( pdp pdp : pdps ) {
+        for ( Pdp pdp : pdps ) {
             list.add( toPdpDTO( pdp ) );
         }
 
@@ -55,12 +55,12 @@ public class PdpMapperImpl implements PdpMapper {
     }
 
     @Override
-    public List<pdp> toPdps(List<PdpDTO> pdpDTOs) {
+    public List<Pdp> toPdps(List<PdpDTO> pdpDTOs) {
         if ( pdpDTOs == null ) {
             return null;
         }
 
-        List<pdp> list = new ArrayList<pdp>( pdpDTOs.size() );
+        List<Pdp> list = new ArrayList<Pdp>( pdpDTOs.size() );
         for ( PdpDTO pdpDTO : pdpDTOs ) {
             list.add( toPdp( pdpDTO ) );
         }

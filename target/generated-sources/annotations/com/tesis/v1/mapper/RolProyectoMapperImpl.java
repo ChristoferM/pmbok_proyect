@@ -1,7 +1,7 @@
 package com.tesis.v1.mapper;
 
 import com.tesis.v1.domain.RolProyecto;
-import com.tesis.v1.dto.rolproyectoDTO;
+import com.tesis.v1.dto.RolproyectoDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
 public class RolProyectoMapperImpl implements RolProyectoMapper {
 
     @Override
-    public rolproyectoDTO torolProyectoDTO(RolProyecto rolProyecto) {
+    public RolproyectoDTO torolProyectoDTO(RolProyecto rolProyecto) {
         if ( rolProyecto == null ) {
             return null;
         }
 
-        rolproyectoDTO rolproyectoDTO = new rolproyectoDTO();
+        RolproyectoDTO rolproyectoDTO = new RolproyectoDTO();
 
         rolproyectoDTO.setId_rol_proyecto( rolProyecto.getId_rol_proyecto() );
 
@@ -28,7 +28,7 @@ public class RolProyectoMapperImpl implements RolProyectoMapper {
     }
 
     @Override
-    public RolProyecto torolProyecto(rolproyectoDTO rolProyectoDTO) {
+    public RolProyecto torolProyecto(RolproyectoDTO rolProyectoDTO) {
         if ( rolProyectoDTO == null ) {
             return null;
         }
@@ -41,12 +41,12 @@ public class RolProyectoMapperImpl implements RolProyectoMapper {
     }
 
     @Override
-    public List<rolproyectoDTO> torolProyectoDTOs(List<RolProyecto> rolProyectos) {
+    public List<RolproyectoDTO> torolProyectoDTOs(List<RolProyecto> rolProyectos) {
         if ( rolProyectos == null ) {
             return null;
         }
 
-        List<rolproyectoDTO> list = new ArrayList<rolproyectoDTO>( rolProyectos.size() );
+        List<RolproyectoDTO> list = new ArrayList<RolproyectoDTO>( rolProyectos.size() );
         for ( RolProyecto rolProyecto : rolProyectos ) {
             list.add( torolProyectoDTO( rolProyecto ) );
         }
@@ -55,13 +55,13 @@ public class RolProyectoMapperImpl implements RolProyectoMapper {
     }
 
     @Override
-    public List<rolproyectoDTO> torolProyectos(List<rolproyectoDTO> rolProyectoDTOs) {
+    public List<RolproyectoDTO> torolProyectos(List<RolproyectoDTO> rolProyectoDTOs) {
         if ( rolProyectoDTOs == null ) {
             return null;
         }
 
-        List<rolproyectoDTO> list = new ArrayList<rolproyectoDTO>( rolProyectoDTOs.size() );
-        for ( rolproyectoDTO rolproyectoDTO : rolProyectoDTOs ) {
+        List<RolproyectoDTO> list = new ArrayList<RolproyectoDTO>( rolProyectoDTOs.size() );
+        for ( RolproyectoDTO rolproyectoDTO : rolProyectoDTOs ) {
             list.add( rolproyectoDTO );
         }
 

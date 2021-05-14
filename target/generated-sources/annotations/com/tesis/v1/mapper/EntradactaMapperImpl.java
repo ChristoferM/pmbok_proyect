@@ -1,7 +1,7 @@
 package com.tesis.v1.mapper;
 
 import com.tesis.v1.domain.Entradacta;
-import com.tesis.v1.dto.entradactaDTO;
+import com.tesis.v1.dto.EntradactaDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
 public class EntradactaMapperImpl implements EntradactaMapper {
 
     @Override
-    public entradactaDTO toEntradActaDTO(Entradacta entradActa) {
+    public EntradactaDTO toEntradActaDTO(Entradacta entradActa) {
         if ( entradActa == null ) {
             return null;
         }
 
-        entradactaDTO entradactaDTO = new entradactaDTO();
+        EntradactaDTO entradactaDTO = new EntradactaDTO();
 
         entradactaDTO.setIdentrada( entradActa.getIdentrada() );
         entradactaDTO.setAcuerdos( entradActa.getAcuerdos() );
@@ -31,7 +31,7 @@ public class EntradactaMapperImpl implements EntradactaMapper {
     }
 
     @Override
-    public Entradacta toEntradActa(entradactaDTO entradActaDTO) {
+    public Entradacta toEntradActa(EntradactaDTO entradActaDTO) {
         if ( entradActaDTO == null ) {
             return null;
         }
@@ -47,12 +47,12 @@ public class EntradactaMapperImpl implements EntradactaMapper {
     }
 
     @Override
-    public List<entradactaDTO> toEntradActaDTO(List<Entradacta> entradActa) {
+    public List<EntradactaDTO> toEntradActaDTO(List<Entradacta> entradActa) {
         if ( entradActa == null ) {
             return null;
         }
 
-        List<entradactaDTO> list = new ArrayList<entradactaDTO>( entradActa.size() );
+        List<EntradactaDTO> list = new ArrayList<EntradactaDTO>( entradActa.size() );
         for ( Entradacta entradacta : entradActa ) {
             list.add( toEntradActaDTO( entradacta ) );
         }
@@ -61,13 +61,13 @@ public class EntradactaMapperImpl implements EntradactaMapper {
     }
 
     @Override
-    public List<Entradacta> toEntradActa(List<entradactaDTO> entradActaDTOs) {
+    public List<Entradacta> toEntradActa(List<EntradactaDTO> entradActaDTOs) {
         if ( entradActaDTOs == null ) {
             return null;
         }
 
         List<Entradacta> list = new ArrayList<Entradacta>( entradActaDTOs.size() );
-        for ( entradactaDTO entradactaDTO : entradActaDTOs ) {
+        for ( EntradactaDTO entradactaDTO : entradActaDTOs ) {
             list.add( toEntradActa( entradactaDTO ) );
         }
 
