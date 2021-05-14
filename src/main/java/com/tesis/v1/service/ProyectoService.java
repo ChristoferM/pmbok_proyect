@@ -2,10 +2,10 @@ package com.tesis.v1.service;
 
 import java.util.List;
 
-import com.tesis.v1.domain.proyectos;
+import com.tesis.v1.domain.Proyecto;
 
-public interface ProyectoService  extends GenericService<proyectos, Integer> {
+public interface ProyectoService  extends GenericService<Proyecto, Integer> {
 
-	public List<proyectos> findByEmail(String email) throws Exception;
+	public List<Proyecto> findByEmail(String email) throws Exception;
 
 }

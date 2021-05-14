@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.actas;
-import com.tesis.v1.repository.actasRepository;
-import com.tesis.v1.repository.reunionesRepository;
+import com.tesis.v1.domain.Acta;
+import com.tesis.v1.repository.ActaRepository;
+import com.tesis.v1.repository.ReunionRepository;
 
 @Service
 @Scope("singleton")
@@ -22,20 +22,20 @@ public class ActaServiceImpl implements ActaService {
 	private final static Logger log = LoggerFactory.getLogger(ActaServiceImpl.class);
 
 	@Autowired
-	actasRepository actasRepository;
+	ActaRepository actasRepository;
 	@Autowired
-	reunionesRepository reunionesRepository;
+	ReunionRepository reunionesRepository;
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<actas> findAll() {
+	public List<Acta> findAll() {
 
 		return actasRepository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<actas> findById(Integer id) throws Exception {
+	public Optional<Acta> findById(Integer id) throws Exception {
 		if (id < 0 || id == null) {
 			throw new Exception("error en el identificador");
 		}
@@ -44,7 +44,7 @@ public class ActaServiceImpl implements ActaService {
 
 	@Override
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public void delete(actas entity) throws Exception {
+	public void delete(Acta entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("El shoppingCart es nulo");
 		}
@@ -59,7 +59,7 @@ public class ActaServiceImpl implements ActaService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public actas save(actas entity) throws Exception {
+	public Acta save(Acta entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("error en peticion");
 		}
@@ -70,7 +70,7 @@ public class ActaServiceImpl implements ActaService {
 
 	@Override
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public actas update(actas entity) throws Exception {
+	public Acta update(Acta entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("error en peticion");
 		}
@@ -84,7 +84,7 @@ public class ActaServiceImpl implements ActaService {
 	}
 
 	@Override
-	public void validate(actas entity) throws Exception {
+	public void validate(Acta entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("error en peticion");
 		}

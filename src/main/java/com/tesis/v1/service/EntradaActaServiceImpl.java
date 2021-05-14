@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.dto.validarActa;
-import com.tesis.v1.repository.entradactaRepository;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.dto.ValidarActaDTO;
+import com.tesis.v1.repository.EntradactaRepository;
 
 
 @Service
@@ -19,18 +19,18 @@ import com.tesis.v1.repository.entradactaRepository;
 public  class EntradaActaServiceImpl implements EntradaActaService {
 
     @Autowired
-    entradactaRepository entradActaRepository;
+    EntradactaRepository entradActaRepository;
     
 
     @Override
     @Transactional(readOnly = true)
-    public List<entradacta> findAll() {
+    public List<Entradacta> findAll() {
         return entradActaRepository.findAll();
     }
     
     @Override
     @Transactional(readOnly = true)
-	public List<entradacta> entradaDelActa(Integer idProyecto) {
+	public List<Entradacta> entradaDelActa(Integer idProyecto) {
 		return entradActaRepository.entradaDelActa(idProyecto);
 		
 	}
@@ -44,7 +44,7 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-    public entradacta save(entradacta entity) throws Exception {
+    public Entradacta save(Entradacta entity) throws Exception {
         /*if(entradActaRepository.existsById(entity.getIdentrada())){
             throw new Exception("La Entrada acta con Id +" + entity.getIdentrada() + "ya existe");
         }*/
@@ -53,7 +53,7 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-    public entradacta update(entradacta entity) throws Exception {
+    public Entradacta update(Entradacta entity) throws Exception {
         if(entradActaRepository.existsById(entity.getIdentrada()) == false ){            
             throw new Exception("La entrada acta  con Id +" + entity.getIdentrada() + "ya existe");
         }
@@ -62,14 +62,14 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<entradacta> findById(Integer id) throws Exception {
+    public Optional<Entradacta> findById(Integer id) throws Exception {
         return entradActaRepository.findById(id);
 
     }
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-    public void delete(entradacta entity) throws Exception {
+    public void delete(Entradacta entity) throws Exception {
         if (entity==null) {
             throw new Exception("La entrada acta es nulo");
         }
@@ -100,13 +100,13 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
     }
 
 	@Override
-	public void validate(entradacta entity) throws Exception {
+	public void validate(Entradacta entity) throws Exception {
 		
 	}
 
 	@Override
-	public validarActa encontrarData(Integer idProyecto) {
-		validarActa validaciones = new validarActa();
+	public ValidarActaDTO encontrarData(Integer idProyecto) {
+		ValidarActaDTO validaciones = new ValidarActaDTO();
 		validaciones.setActa(entradActaRepository.validarActa(idProyecto));
 		
 		validaciones.setEntradactaValidate(entradActaRepository.validarEntrada(idProyecto));

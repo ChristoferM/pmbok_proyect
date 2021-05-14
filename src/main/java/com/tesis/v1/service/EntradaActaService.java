@@ -2,13 +2,13 @@ package com.tesis.v1.service;
 
 import java.util.List;
 
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.dto.validarActa;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.dto.ValidarActaDTO;
 
-public interface EntradaActaService extends GenericService<entradacta,Integer> {
-	public List<entradacta> entradaDelActa(Integer idProyecto);
+public interface EntradaActaService extends GenericService<Entradacta,Integer> {
+	public List<Entradacta> entradaDelActa(Integer idProyecto);
 	
-	public validarActa encontrarData(Integer idProyecto);
+	public ValidarActaDTO encontrarData(Integer idProyecto);
 	
 	public Integer valorIdActa(Integer idProyecto) ;
 	

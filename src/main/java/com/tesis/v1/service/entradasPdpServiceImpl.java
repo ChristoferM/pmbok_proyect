@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.pdp.entradas;
+import com.tesis.v1.domain.pdp.Entradas;
 import com.tesis.v1.repository.pdp.entradaPdpRepository;
 
 @Service
@@ -23,14 +23,14 @@ public class entradasPdpServiceImpl implements entradasPdpService {
     
 	@Override
 	@Transactional(readOnly = true)
-	public List<entradas> findAll() {
+	public List<Entradas> findAll() {
 		//  Auto-generated method stub
 		return entradaPdpRepository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<entradas> findById(Integer id) throws Exception {
+	public Optional<Entradas> findById(Integer id) throws Exception {
 		if (id < 0 || id == null) {
 			throw new Exception("error en el identificador");
 		}
@@ -45,20 +45,20 @@ public class entradasPdpServiceImpl implements entradasPdpService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-	public entradas save(entradas entity) throws Exception {
+	public Entradas save(Entradas entity) throws Exception {
 		
 		return entradaPdpRepository.save(entity);
 	}
 
 	@Override
-	public entradas update(entradas entity) throws Exception {
+	public Entradas update(Entradas entity) throws Exception {
 		//  Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-	public void delete(entradas entity) throws Exception {
+	public void delete(Entradas entity) throws Exception {
 		//  Auto-generated method stub
 		 if (entity==null) {
 	            throw new Exception("La entrada acta es nulo");
@@ -80,7 +80,7 @@ public class entradasPdpServiceImpl implements entradasPdpService {
 	}
 
 	@Override
-	public void validate(entradas entity) throws Exception {
+	public void validate(Entradas entity) throws Exception {
 		//  Auto-generated method stub
 		
 	}

@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.actas;
-import com.tesis.v1.domain.reuniones;
+import com.tesis.v1.domain.Acta;
+import com.tesis.v1.domain.Reunion;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.EntradaActaService;
 import com.tesis.v1.service.HerramientasActasService;
@@ -40,9 +40,9 @@ class ActaServiceTest {
 	@Order(1)
 	void save() throws Exception {
 		log.info("GUARDANDADO ACTA");
-		actas acta = new actas();
+		Acta acta = new Acta();
 		//acta.setIdactas(2);
-		reuniones  reuniones0= new reuniones();
+		Reunion  reuniones0= new Reunion();
 		reuniones0.setIdreuniones(1);
 		acta.setReuniones(reuniones0);
 		actaService.save(acta);
@@ -53,12 +53,12 @@ class ActaServiceTest {
 	@Test
 	@Order(2)
 	void findById() throws Exception {
-		Optional<actas> actaOPC = actaService.findById(2);
+		Optional<Acta> actaOPC = actaService.findById(2);
 		if (actaOPC.isEmpty()) {
 			fail("No hay registros asi que paila");
 
 		} else {
-			actas acta = actaOPC.get();
+			Acta acta = actaOPC.get();
 			log.info("ID  de las actas: " + acta.getIdactas().toString());
 			log.info("Id reuniones : " + acta.getReuniones().getIdreuniones().toString());
 
@@ -70,9 +70,9 @@ class ActaServiceTest {
 	@Test
 	@Order(3)
 	void update() throws Exception {
-		actas acta = new actas();
+		Acta acta = new Acta();
 		acta.setIdactas(2);
-		reuniones  reuniones0= new reuniones();
+		Reunion  reuniones0= new Reunion();
 		reuniones0.setIdreuniones(1);
 		acta.setReuniones(reuniones0);
 		
@@ -82,7 +82,7 @@ class ActaServiceTest {
 	@Test
 	@Order(4)
 	void findAll() throws Exception {
-		for (actas acta : actaService.findAll()) {
+		for (Acta acta : actaService.findAll()) {
 			log.info("ID  de las actas: " + acta.getIdactas().toString());
 			log.info("Id reuniones : " + acta.getReuniones().getIdreuniones().toString());
 			
@@ -92,9 +92,9 @@ class ActaServiceTest {
 	@Test
 	@Order(5)
 	void delete() throws Exception {
-		actas acta = new actas();
+		Acta acta = new Acta();
 		acta.setIdactas(2);
-		reuniones  reuniones0= new reuniones();
+		Reunion  reuniones0= new Reunion();
 		reuniones0.setIdreuniones(1);
 		acta.setReuniones(reuniones0);
 		

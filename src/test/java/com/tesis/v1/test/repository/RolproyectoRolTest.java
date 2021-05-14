@@ -16,10 +16,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.roles;
-import com.tesis.v1.domain.rolproyecto;
-import com.tesis.v1.repository.rolesRepository;
-import com.tesis.v1.repository.rolproyectoRepository;
+import com.tesis.v1.domain.Roles;
+import com.tesis.v1.domain.RolProyecto;
+import com.tesis.v1.repository.RolProyectoRepository;
+import com.tesis.v1.repository.RolesRepository;
 
 @SpringBootTest
 @Rollback(false)
@@ -33,21 +33,21 @@ class RolproyectoRolTest {
 	private final static Integer idRolProyecto = 1;
 
 	@Autowired
-	rolesRepository rolesRepository;
+	RolesRepository rolesRepository;
 
 	@Autowired
-	rolproyectoRepository rolProyectoRepository;
+	RolProyectoRepository rolProyectoRepository;
 
 	@Test
 	@Transactional
 	@Order(1)
 	void findByIdRol() {
 		log.info("----  -> findByIdRol ");
-		Optional<roles> rolesOptional = rolesRepository.findById(idRol);
+		Optional<Roles> rolesOptional = rolesRepository.findById(idRol);
 
 		assertTrue(rolesOptional.isPresent(), "-> NO HAY ROL CON ESE ID");
 
-		roles roles = rolesOptional.get();
+		Roles roles = rolesOptional.get();
 
 		log.info("Nombre ID" + roles.getIdrol().toString());
 		log.info("Nombre rol" + roles.getNombrerol());
@@ -59,11 +59,11 @@ class RolproyectoRolTest {
 	@Order(2)
 	void findByIdRolProyecto() {
 		log.info("----  -> findByIdRolProyecto ");
-		Optional<rolproyecto> rolProyectoOptional = rolProyectoRepository.findById(idRolProyecto);
+		Optional<RolProyecto> rolProyectoOptional = rolProyectoRepository.findById(idRolProyecto);
 
 		assertTrue(rolProyectoOptional.isPresent(), "-> NO HAY ROLES EN PROYECTO CON ESE ID");
 
-		rolproyecto rolproyecto = rolProyectoOptional.get();
+		RolProyecto rolproyecto = rolProyectoOptional.get();
 
 		log.info("id_rol_proyecto : " + rolproyecto.getId_rol_proyecto().toString());
 		log.info("idrol : " + rolproyecto.getRoles().getIdrol().toString());
@@ -77,9 +77,9 @@ class RolproyectoRolTest {
 	void findAllRol() {
 		
 		log.info("----  -> findAllRol");
-		List<roles> roles = rolesRepository.findAll();
+		List<Roles> roles = rolesRepository.findAll();
 		
-		for (roles rols: roles) {
+		for (Roles rols: roles) {
 			log.info("idRol : "+ rols.getIdrol().toString());
 			log.info("NombreRol : "+ rols.getNombrerol());
 			
@@ -93,9 +93,9 @@ class RolproyectoRolTest {
 	@Order(4)
 	void findAllRolProyecto() {
 		log.info("----  -> indAll Rol Proyecto");
-		List<rolproyecto> rolesProyectos = rolProyectoRepository.findAll();
+		List<RolProyecto> rolesProyectos = rolProyectoRepository.findAll();
 		
-		for (rolproyecto rolproyectos: rolesProyectos) {
+		for (RolProyecto rolproyectos: rolesProyectos) {
 			log.info("id_rol_proyecto : "+ rolproyectos.getId_rol_proyecto().toString() );
 			log.info("idgrupo : "+ rolproyectos.getGrupo().getIdgrupo().toString() );
 			log.info("idrol : "+ rolproyectos.getId_rol_proyecto().toString() );

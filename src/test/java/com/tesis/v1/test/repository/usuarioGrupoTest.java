@@ -16,10 +16,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.grupo;
-import com.tesis.v1.domain.usuarios;
-import com.tesis.v1.repository.grupoRepository;
-import com.tesis.v1.repository.usuariosRepository;
+import com.tesis.v1.domain.Grupo;
+import com.tesis.v1.domain.Usuario;
+import com.tesis.v1.repository.GrupoRepository;
+import com.tesis.v1.repository.UsuarioRepository;
 
 @SpringBootTest
 @Rollback(false)
@@ -34,21 +34,21 @@ class usuarioGrupoTest {
 	private final static Integer idgrupo = 2;
 
 	@Autowired
-	usuariosRepository usuariosRepository;
+	UsuarioRepository usuariosRepository;
 
 	@Autowired
-	grupoRepository grupoRepository;
+	GrupoRepository grupoRepository;
 
 	@Test
 	@Transactional
 	@Order(1)
 	void findByIdUsuario() {
 		log.info("----  -> findAll");
-		Optional<usuarios> usuariOptinal = usuariosRepository.findById(email);
+		Optional<Usuario> usuariOptinal = usuariosRepository.findById(email);
 
 		assertTrue(usuariOptinal.isPresent(), "-> Id no encontrado");
 
-		usuarios usuarios = usuariOptinal.get();
+		Usuario usuarios = usuariOptinal.get();
 
 		log.info(usuarios.getEmail());
 
@@ -59,16 +59,16 @@ class usuarioGrupoTest {
 	@Order(2)
 	void findByIdGrupo() {
 		log.info("----  -> findAll GRUPO");
-		Optional<grupo> grupoOptinal = grupoRepository.findById(idgrupo);
+		Optional<Grupo> grupoOptinal = grupoRepository.findById(idgrupo);
 
 		assertTrue(grupoOptinal.isPresent(), "-> Id no encontrado");
 
-		grupo grupo = grupoOptinal.get();
+		Grupo grupo = grupoOptinal.get();
 
 		log.info("ID GRUPO " + grupo.getIdgrupo().toString());
-		// log.info("ID id_sub_grupo "+grupo.getId_sub_grupo().toString());
-		// log.info("ID idproyecto "+grupo.getIdproyecto().toString());
-		// log.info("ID email "+grupo.getEmail().toString());
+		// log.info("ID id_sub_grupo "+Grupo.getId_sub_grupo().toString());
+		// log.info("ID idproyecto "+Grupo.getIdproyecto().toString());
+		// log.info("ID email "+Grupo.getEmail().toString());
 
 	}
 
@@ -77,9 +77,9 @@ class usuarioGrupoTest {
 	@Order(3)
 	void findAllUsuarios() {
 		log.info("----  -> findAllUsuarios");
-		List<usuarios> usuarioss = usuariosRepository.findAll();
-		for(usuarios usuarios: usuarioss) {
-			//log.info("idusuario: " +usuarios.getIdusuario().toString() );
+		List<Usuario> usuarioss = usuariosRepository.findAll();
+		for(Usuario usuarios: usuarioss) {
+			//log.info("idusuario: " +Usuario.getIdusuario().toString() );
 			log.info("email: " +usuarios.getEmail() );
 			log.info("nombre: " +usuarios.getNombre() );
 			log.info("password: " +usuarios.getPassword() );
@@ -95,8 +95,8 @@ class usuarioGrupoTest {
 	@Order(4)
 	void findAllGrupo() {
 		log.info("----  -> findAllGrupo");
-		List<grupo> grupos = grupoRepository.findAll();
-		for (grupo grupo : grupos) {
+		List<Grupo> grupos = grupoRepository.findAll();
+		for (Grupo grupo : grupos) {
 			log.info("idGRUPO: " + grupo.getIdgrupo().toString());
 			log.info("id_sub_grupo: " + grupo.getSubGrupos().toString());
 			log.info("idproyecto: " + grupo.getProyectos().getIdproyecto().toString());

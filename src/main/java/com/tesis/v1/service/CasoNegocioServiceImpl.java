@@ -11,16 +11,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.casonegocio;
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.repository.casonegocioRepository;
+import com.tesis.v1.domain.CasoNegocio;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.repository.CasoNegocioRepository;
 
 @Service
 @Scope("singleton")
 public class CasoNegocioServiceImpl implements CasoNegocioService {
 
 	@Autowired
-	casonegocioRepository casoNegocioRepository;
+	CasoNegocioRepository casoNegocioRepository;
 	@Autowired
 	EntradaActaService EntradaActaService;
 
@@ -28,7 +28,7 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<casonegocio> findAll() {
+	public List<CasoNegocio> findAll() {
 		return casoNegocioRepository.findAll();
 	}
 
@@ -42,9 +42,9 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public casonegocio save(casonegocio entity) throws Exception {
-		Optional<entradacta> entradacta = EntradaActaService.findById(entity.getEntradacta().getIdentrada());
-		// entity.setEntradacta(entradacta.get());
+	public CasoNegocio save(CasoNegocio entity) throws Exception {
+		Optional<Entradacta> entradacta = EntradaActaService.findById(entity.getEntradacta().getIdentrada());
+		// entity.setEntradacta(Entradacta.get());
 		log.info("********************"+entity.getEntradacta().getIdentrada().toString());
 
 		if (entradacta.isEmpty()) {
@@ -56,7 +56,7 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public casonegocio update(casonegocio entity) throws Exception {
+	public CasoNegocio update(CasoNegocio entity) throws Exception {
 		if (casoNegocioRepository.existsById(entity.getId_caso_negocio()) == false) {
 			throw new Exception("El caso negocio  con Id +" + entity.getId_caso_negocio() + "ya existe");
 		}
@@ -65,7 +65,7 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<casonegocio> findById(Integer id) throws Exception {
+	public Optional<CasoNegocio> findById(Integer id) throws Exception {
 		return casoNegocioRepository.findById(id);
 	}
 
@@ -76,7 +76,7 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 
 		if (casoNegocioRepository.existsById(id)) {
 			try {
-				Optional<casonegocio> caso = casoNegocioRepository.findById(id);
+				Optional<CasoNegocio> caso = casoNegocioRepository.findById(id);
 				casoNegocioRepository.delete(caso.get());
 
 			} catch (Exception e) {
@@ -90,7 +90,7 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void delete(casonegocio entity) throws Exception {
+	public void delete(CasoNegocio entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("La entrada acta es nulo");
 		}
@@ -108,18 +108,18 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 	}
 
 	@Override
-	public void validate(casonegocio entity) throws Exception {
+	public void validate(CasoNegocio entity) throws Exception {
 
 	}
 
 	@Override
-	public casonegocio save(casonegocio entity, Integer idEntrada) throws Exception {
+	public CasoNegocio save(CasoNegocio entity, Integer idEntrada) throws Exception {
 		return null;
 	}
 
 	@Override
     @Transactional(readOnly = true)
-	public List<casonegocio> casoNegocioDelActa(Integer idProyecto) {
+	public List<CasoNegocio> casoNegocioDelActa(Integer idProyecto) {
 		return casoNegocioRepository.casoNegocioDelActa(idProyecto);
 	}
 

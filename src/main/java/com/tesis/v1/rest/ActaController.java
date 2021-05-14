@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.actas;
-import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.dto.actasDTO;
-import com.tesis.v1.mapper.actasMapper;
+import com.tesis.v1.domain.Acta;
+import com.tesis.v1.domain.Reunion;
+import com.tesis.v1.dto.ActasDTO;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.HerramientasActasService;
+import com.tesis.v1.mapper.ActasMapper;
 
 @RestController // Servicio
 @RequestMapping("/api/acta") // Forma de llamar datos
@@ -35,20 +35,20 @@ public class ActaController {
 	HerramientasActasService herramientasActasService;
 	
 	@Autowired
-	actasMapper actaMapper ;
+	ActasMapper actaMapper ;
 	
 	
 	@RequestMapping("/finById/{actaId}")
 	public ResponseEntity<?> finById(@PathVariable("actaId") Integer actaId)throws Exception{
-		//actas acta =new actas();
-		Optional<actas> actaopc = actaService.findById(actaId);
+		//actas acta =new Acta();
+		Optional<Acta> actaopc = actaService.findById(actaId);
 		log.info("Cargando ...");
 		if( actaopc.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se encontro Usuario");
 			
 		}
-		actas acta = actaopc.get();
-		actasDTO actaDTO = actaMapper.toActasDTO(acta);
+		Acta acta = actaopc.get();
+		ActasDTO actaDTO = actaMapper.toActasDTO(acta);
 		log.info("*");
 		return ResponseEntity.ok().body(actaDTO);
 		
@@ -56,25 +56,25 @@ public class ActaController {
 	@RequestMapping("/findByAll")
 	public ResponseEntity<?> finByAll() throws Exception{
 		//actas acta
-		List<actas> actaLIST= actaService.findAll();
-		List<actasDTO> actasListDto = actaMapper.toActasDTO(actaLIST);
+		List<Acta> actaLIST= actaService.findAll();
+		List<ActasDTO> actasListDto = actaMapper.toActasDTO(actaLIST);
 		
 		return ResponseEntity.ok().body(actasListDto);
 	}
 	
 	
 	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody actasDTO actasDTO)  throws Exception{
+	public ResponseEntity<?> save(@Valid @RequestBody ActasDTO actasDTO)  throws Exception{
 		log.info("************************************ 1");
-		actas acta =new actas();
-		reuniones reunion = new reuniones();
+		Acta acta =new Acta();
+		Reunion reunion = new Reunion();
 		reunion.setIdreuniones(actasDTO.getIdreuniones());
 		acta.setReuniones(reunion);
 		log.info("************************************ 2");
 		
-		actas actanew = actaService.save(acta);
+		Acta actanew = actaService.save(acta);
 		log.info("************************************ 3");
-		actasDTO actaDTO = new actasDTO();
+		ActasDTO actaDTO = new ActasDTO();
 		actaDTO.setIdactas(actanew.getIdactas());
 		actaDTO.setIdreuniones(actanew.getReuniones().getIdreuniones());
 		log.info("************************************ 4");

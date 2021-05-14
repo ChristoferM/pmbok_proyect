@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.pdp.herramientas;
+import com.tesis.v1.domain.pdp.Herramientas;
 import com.tesis.v1.repository.pdp.herramientasPdpRepository;
 
 @Service
@@ -22,14 +22,14 @@ public class herramientasServicePdpImpl implements herramientasServicePdp{
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<herramientas> findAll() {
+	public List<Herramientas> findAll() {
 		//  Auto-generated method stub
 		return herramientasPdpRepository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<herramientas> findById(Integer id) throws Exception {
+	public Optional<Herramientas> findById(Integer id) throws Exception {
 		//  Auto-generated method stub
 		if (id < 0 || id == null) {
 			throw new Exception("error en el identificador");
@@ -45,20 +45,20 @@ public class herramientasServicePdpImpl implements herramientasServicePdp{
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-	public herramientas save(herramientas entity) throws Exception {
+	public Herramientas save(Herramientas entity) throws Exception {
 		//  Auto-generated method stub
 		return herramientasPdpRepository.save(entity);
 	}
 
 	@Override
-	public herramientas update(herramientas entity) throws Exception {
+	public Herramientas update(Herramientas entity) throws Exception {
 		//  Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-	public void delete(herramientas entity) throws Exception {
+	public void delete(Herramientas entity) throws Exception {
 		//  Auto-generated method stub
 		 if (entity==null) {
 	            throw new Exception("La entrada acta es nulo");
@@ -80,7 +80,7 @@ public class herramientasServicePdpImpl implements herramientasServicePdp{
 	}
 
 	@Override
-	public void validate(herramientas entity) throws Exception {
+	public void validate(Herramientas entity) throws Exception {
 		//  Auto-generated method stub
 		
 	}

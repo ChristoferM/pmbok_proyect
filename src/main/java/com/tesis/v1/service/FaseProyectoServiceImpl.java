@@ -3,18 +3,18 @@ package com.tesis.v1.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.tesis.v1.domain.faseproyecto;
+import com.tesis.v1.domain.FaseProyecto;
 
 public class FaseProyectoServiceImpl implements FaseProyectoService{
 
 	@Override
-	public List<faseproyecto> findAll() {
+	public List<FaseProyecto> findAll() {
 		
 		return null;
 	}
 
 	@Override
-	public Optional<faseproyecto> findById(Integer id) throws Exception {
+	public Optional<FaseProyecto> findById(Integer id) throws Exception {
 		return null;
 	}
 
@@ -24,17 +24,17 @@ public class FaseProyectoServiceImpl implements FaseProyectoService{
 	}
 
 	@Override
-	public faseproyecto save(faseproyecto entity) throws Exception {
+	public FaseProyecto save(FaseProyecto entity) throws Exception {
 		return null;
 	}
 
 	@Override
-	public faseproyecto update(faseproyecto entity) throws Exception {
+	public FaseProyecto update(FaseProyecto entity) throws Exception {
 		return null;
 	}
 
 	@Override
-	public void delete(faseproyecto entity) throws Exception {
+	public void delete(FaseProyecto entity) throws Exception {
 		
 	}
 
@@ -44,7 +44,7 @@ public class FaseProyectoServiceImpl implements FaseProyectoService{
 	}
 
 	@Override
-	public void validate(faseproyecto entity) throws Exception {
+	public void validate(FaseProyecto entity) throws Exception {
 		
 	}
 

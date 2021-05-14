@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.faseproyecto;
-import com.tesis.v1.domain.proyectos;
-import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.dto.reunionesDTO;
-import com.tesis.v1.mapper.reunionesMapper;
+import com.tesis.v1.domain.FaseProyecto;
+import com.tesis.v1.domain.Proyecto;
+import com.tesis.v1.domain.Reunion;
+import com.tesis.v1.dto.ReunionesDTO;
 import com.tesis.v1.service.ReunionesService;
+import com.tesis.v1.mapper.ReunionMapper;
 
 @RestController // Servicio
 @RequestMapping("/api/Reunion") // Forma de llamar datos
@@ -29,16 +29,16 @@ public class ReunionController {
 	ReunionesService reunionesService;
 	
 	@Autowired
-	reunionesMapper reunionesMapper;
+	ReunionMapper reunionesMapper;
 	
 	
 	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody reunionesDTO reunionesDTO)  throws Exception{
+	public ResponseEntity<?> save(@Valid @RequestBody ReunionesDTO reunionesDTO)  throws Exception{
 		log.info("************************************ Reuniones save ");
-		faseproyecto faseproyecto = new faseproyecto ();
-		proyectos proyectos = new proyectos();
+		FaseProyecto faseproyecto = new FaseProyecto ();
+		Proyecto proyectos = new Proyecto();
 		
-		reuniones reunion = new reuniones();
+		Reunion reunion = new Reunion();
 		reunion.setDescripcionreunion(reunionesDTO.getDescripcionreunion());
 		reunion.setNombrereunion(reunionesDTO.getNombrereunion());
 		
@@ -52,9 +52,9 @@ public class ReunionController {
 		
 		log.info("************************************ 2");
 		
-		reuniones reunionnew = reunionesService.save(reunion);
+		Reunion reunionnew = reunionesService.save(reunion);
 		log.info("************************************ 3");
-		reunionesDTO reunionesDTOnew = new reunionesDTO();
+		ReunionesDTO reunionesDTOnew = new ReunionesDTO();
 		
 		
 		reunionesDTOnew = reunionesMapper.toReunionDTO(reunionnew);

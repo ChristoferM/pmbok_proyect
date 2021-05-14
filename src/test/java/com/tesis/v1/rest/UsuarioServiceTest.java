@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.usuarios;
+import com.tesis.v1.domain.Usuario;
 import com.tesis.v1.service.UsuarioService;
 
 @SpringBootTest
@@ -28,7 +28,7 @@ class UsuarioServiceTest {
 	@Test
 	@Order(1)
 	void save() throws Exception {
-		usuarios usuario = new usuarios();
+		Usuario usuario = new Usuario();
 		usuario.setEmail("springTst1@test.com.co");
 		usuario.setNombre("2 nombreTest UPDATE");
 		usuario.setToken("2 token UPTDATE SDFNKSAND");
@@ -36,7 +36,7 @@ class UsuarioServiceTest {
 		usuario.setActivo("N");
 
 		usuario = UsuarioService.save(usuario);
-		usuario = new usuarios();
+		usuario = new Usuario();
 		log.info(usuario.getEmail());
 		log.info(usuario.getNombre());
 		log.info(usuario.getPassword());
@@ -48,7 +48,7 @@ class UsuarioServiceTest {
 	@Test
 	@Order(2)
 	void findAll() throws Exception {
-		for (usuarios usuario : UsuarioService.findAll()) {
+		for (Usuario usuario : UsuarioService.findAll()) {
 			log.info("--------------------");
 			log.info(usuario.getEmail());
 			log.info(usuario.getNombre());
@@ -63,8 +63,8 @@ class UsuarioServiceTest {
 	@Test
 	@Order(3)
 	void finById() throws Exception {
-		Optional<usuarios> usuarios = UsuarioService.findById("email@test.com.co");
-		usuarios usuario = usuarios.get();
+		Optional<Usuario> usuarios = UsuarioService.findById("email@test.com.co");
+		Usuario usuario = usuarios.get();
 		log.info("--------------------");
 		log.info(usuario.getEmail());
 		log.info(usuario.getNombre());
@@ -85,7 +85,7 @@ class UsuarioServiceTest {
 	@Test
 	@Order(5)
 	void update() throws Exception {
-		usuarios usuario = new usuarios();
+		Usuario usuario = new Usuario();
 		usuario.setEmail("springTst1@test.com.co");
 		usuario.setNombre("UPDATE nombreTest UPDATE");
 		usuario.setToken("UPDATE token UPTDATE SDFNKSAND");

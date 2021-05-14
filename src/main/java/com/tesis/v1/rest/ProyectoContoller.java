@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.proyectos;
-import com.tesis.v1.dto.proyectosDTO;
-import com.tesis.v1.mapper.proyectosMapper;
+import com.tesis.v1.domain.Proyecto;
+import com.tesis.v1.dto.ProyectoDTO;
 import com.tesis.v1.service.ProyectoService;
+import com.tesis.v1.mapper.ProyectoMapper;
 
 @RestController // Servicio
 @RequestMapping("/api/proyecto") // Forma de llamar datos
@@ -29,7 +29,7 @@ public class ProyectoContoller {
 	private final static Logger log = LoggerFactory.getLogger(ProyectoContoller.class);
 	
 	@Autowired
-	proyectosMapper proyectosMapper;
+	ProyectoMapper proyectosMapper;
 
 	@Autowired
 	ProyectoService proyectoService;
@@ -38,8 +38,8 @@ public class ProyectoContoller {
 	
 	@RequestMapping("/finByEmail/{email}")
 	public ResponseEntity<?> finByEmail(@PathVariable("email") String email) throws Exception {
-		List<proyectos> proyectosLIST = proyectoService.findByEmail(email);
-		List<proyectosDTO> usuarioListDto = proyectosMapper.toproyectosDTOs(proyectosLIST);
+		List<Proyecto> proyectosLIST = proyectoService.findByEmail(email);
+		List<ProyectoDTO> usuarioListDto = proyectosMapper.toproyectosDTOs(proyectosLIST);
 
 		return ResponseEntity.ok().body(usuarioListDto);
 
@@ -47,8 +47,8 @@ public class ProyectoContoller {
 
 	@RequestMapping("/findByAll")
 	public ResponseEntity<?> finByAll() throws Exception {
-		List<proyectos> proyectosLIST = proyectoService.findAll();
-		List<proyectosDTO> usuarioListDto = proyectosMapper.toproyectosDTOs(proyectosLIST);
+		List<Proyecto> proyectosLIST = proyectoService.findAll();
+		List<ProyectoDTO> usuarioListDto = proyectosMapper.toproyectosDTOs(proyectosLIST);
 
 		return ResponseEntity.ok().body(usuarioListDto);
 	}
@@ -56,9 +56,9 @@ public class ProyectoContoller {
 
 
 	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody proyectosDTO proyectosDto) throws Exception {
+	public ResponseEntity<?> save(@Valid @RequestBody ProyectoDTO proyectosDto) throws Exception {
 
-		proyectos proyecto = proyectosMapper.toproyectos(proyectosDto);
+		Proyecto proyecto = proyectosMapper.toproyectos(proyectosDto);
 
 		proyecto = proyectoService.save(proyecto);
 
@@ -68,14 +68,14 @@ public class ProyectoContoller {
 	}
 	@RequestMapping("/finById/{proyectoId}")
 	public ResponseEntity<?> finById(@PathVariable("proyectoId") Integer poryectoId) throws Exception {
-		Optional<proyectos> usuarioOpt = proyectoService.findById(poryectoId);
+		Optional<Proyecto> usuarioOpt = proyectoService.findById(poryectoId);
 		log.info("Cargando ...");
 		if (usuarioOpt.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se encontro Usuario");
 
 		}
-		proyectos proyectos = usuarioOpt.get();
-		proyectosDTO usuarioDTO = proyectosMapper.toproyectosDTO(proyectos);
+		Proyecto proyectos = usuarioOpt.get();
+		ProyectoDTO usuarioDTO = proyectosMapper.toproyectosDTO(proyectos);
 		log.info("*");
 		return ResponseEntity.ok().body(usuarioDTO);
 

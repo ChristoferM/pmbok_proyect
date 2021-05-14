@@ -9,24 +9,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.repository.reunionesRepository;
-import com.tesis.v1.repository.usuariosRepository;
+import com.tesis.v1.domain.Reunion;
+import com.tesis.v1.repository.UsuarioRepository;
+import com.tesis.v1.repository.ReunionRepository;
 
 @Service
 @Scope("singleton")
 public class ReunionesServiceImpl implements ReunionesService {
 
 	@Autowired
-	reunionesRepository reunionesRepository;
+	ReunionRepository reunionesRepository;
 
 	@Autowired
-	usuariosRepository usuariosRepository;
+	UsuarioRepository usuariosRepository;
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<reuniones> findAll() {
-		List<reuniones> poryectosList = reunionesRepository.findAll();
+	public List<Reunion> findAll() {
+		List<Reunion> poryectosList = reunionesRepository.findAll();
 		if (poryectosList == null || poryectosList.size() == 0) {
 			return null;
 
@@ -36,8 +36,8 @@ public class ReunionesServiceImpl implements ReunionesService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<reuniones> findById(Integer id) throws Exception {
-		Optional<reuniones> proyectoOpt = reunionesRepository.findById(id);
+	public Optional<Reunion> findById(Integer id) throws Exception {
+		Optional<Reunion> proyectoOpt = reunionesRepository.findById(id);
 		if (proyectoOpt.isPresent()) {
 			return proyectoOpt;
 
@@ -48,8 +48,8 @@ public class ReunionesServiceImpl implements ReunionesService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public reuniones save(reuniones entity) throws Exception {
-		// las reuniones deben cargarse con el numero ID del proyecto
+	public Reunion save(Reunion entity) throws Exception {
+		// las Reunion deben cargarse con el numero ID del proyecto
 		
 		
 		return reunionesRepository.save(entity);
@@ -57,7 +57,7 @@ public class ReunionesServiceImpl implements ReunionesService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public reuniones update(reuniones entity) throws Exception {
+	public Reunion update(Reunion entity) throws Exception {
 		if (reunionesRepository.existsById(entity.getIdreuniones()) == false) {
 			throw new Exception("el proyecto No se encontro");
 		}
@@ -66,7 +66,7 @@ public class ReunionesServiceImpl implements ReunionesService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void delete(reuniones entity) throws Exception {
+	public void delete(Reunion entity) throws Exception {
 
 	}
 
@@ -85,7 +85,7 @@ public class ReunionesServiceImpl implements ReunionesService {
 	}
 
 	@Override
-	public void validate(reuniones entity) throws Exception {
+	public void validate(Reunion entity) throws Exception {
 
 	}
 

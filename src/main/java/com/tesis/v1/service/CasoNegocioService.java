@@ -2,13 +2,13 @@ package com.tesis.v1.service;
 
 import java.util.List;
 
-import com.tesis.v1.domain.casonegocio;
+import com.tesis.v1.domain.CasoNegocio;
 
-public interface CasoNegocioService  extends GenericService<casonegocio,Integer>{
+public interface CasoNegocioService  extends GenericService<CasoNegocio,Integer>{
 
-	casonegocio save(casonegocio entity, Integer idEntrada) throws Exception;
+	CasoNegocio save(CasoNegocio entity, Integer idEntrada) throws Exception;
 	
 	
-	public List<casonegocio> casoNegocioDelActa(Integer idProyecto);
+	public List<CasoNegocio> casoNegocioDelActa(Integer idProyecto);
     
 }

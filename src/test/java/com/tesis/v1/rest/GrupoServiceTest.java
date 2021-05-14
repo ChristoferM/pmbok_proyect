@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.grupo;
+import com.tesis.v1.domain.Grupo;
 import com.tesis.v1.service.GrupoService;
 
 @SpringBootTest
@@ -50,8 +50,8 @@ class GrupoServiceTest {
 	@Test
 	@Order(4)
 	void findAll() throws Exception {
-		List<grupo> gruposs = grupoService.findAll();
-		for (grupo grupos : gruposs) {
+		List<Grupo> gruposs = grupoService.findAll();
+		for (Grupo grupos : gruposs) {
 			log.info("\n id proyecto " + grupos.getIdgrupo().toString());
 			log.info("\n PROYECTOS " + grupos.getProyectos().getIdproyecto());
 

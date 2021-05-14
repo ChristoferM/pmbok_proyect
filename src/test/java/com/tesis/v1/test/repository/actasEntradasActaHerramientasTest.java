@@ -16,12 +16,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.actas;
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.domain.herramientasacta;
-import com.tesis.v1.repository.actasRepository;
-import com.tesis.v1.repository.entradactaRepository;
-import com.tesis.v1.repository.herramientasactaRepository;
+import com.tesis.v1.domain.Acta;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.domain.Herramientasacta;
+import com.tesis.v1.repository.ActaRepository;
+import com.tesis.v1.repository.HerramientasactaRepository;
+import com.tesis.v1.repository.EntradactaRepository;
 
 @SpringBootTest
 @Rollback(false)
@@ -35,13 +35,13 @@ class actasEntradasActaHerramientasTest {
 	private final static Integer idgrupo = 2;
 
 	@Autowired
-	entradactaRepository entradactaRepository;
+	EntradactaRepository entradactaRepository;
 
 	@Autowired
-	herramientasactaRepository herramientasactaRepository;
+	HerramientasactaRepository herramientasactaRepository;
 
 	@Autowired
-	actasRepository actasRepository;
+	ActaRepository actasRepository;
 
 	// ------------------------ ENTRADA ACTA
 	@Test
@@ -49,11 +49,11 @@ class actasEntradasActaHerramientasTest {
 	@Order(1)
 	void findByIdEntrada() {
 		log.info("-> buscar ID de Reuniones");
-		Optional<entradacta> entradaactaOpcioan = entradactaRepository.findById(idgrupo);
+		Optional<Entradacta> entradaactaOpcioan = entradactaRepository.findById(idgrupo);
 
 		assertTrue(entradaactaOpcioan.isPresent(), "No existe una entreada de acta con ese ID");
 
-		entradacta entradacta = entradaactaOpcioan.get();
+		Entradacta entradacta = entradaactaOpcioan.get();
 
 		log.info("ID DE ENTRADA : " + entradacta.getIdentrada().toString());
 		log.info(" acuerdos DE ENTRADA : " + entradacta.getAcuerdos());
@@ -67,9 +67,9 @@ class actasEntradasActaHerramientasTest {
 	@Order(2)
 	void findAllEntrada() {
 		log.info("-> buscar ID de Reuniones");
-		List<entradacta> entradactas = entradactaRepository.findAll();
+		List<Entradacta> entradactas = entradactaRepository.findAll();
 
-		for (entradacta entradacta : entradactas) {
+		for (Entradacta entradacta : entradactas) {
 			log.info("ID DE ENTRADA : " + entradacta.getIdentrada().toString());
 			log.info(" acuerdos DE ENTRADA : " + entradacta.getAcuerdos());
 			log.info(" factores DE ENTRADA : " + entradacta.getFactores());
@@ -85,13 +85,13 @@ class actasEntradasActaHerramientasTest {
 	@Order(3)
 	void findByIdACTAS() {
 		log.info("-> buscar ID de Reuniones");
-		Optional<actas> actasOpcional = actasRepository.findById(idgrupo);
+		Optional<Acta> actasOpcional = actasRepository.findById(idgrupo);
 
 		assertTrue(actasOpcional.isPresent(), "No existe una entreada de acta con ese ID");
 
-		actas actas = actasOpcional.get();
+		Acta actas = actasOpcional.get();
 		log.info("ID DE ACTA:  " + actas.getIdactas().toString());
-		// log.info("idreuniones DE ACTA" + actas.);
+		// log.info("idreuniones DE ACTA" + Acta.);
 
 	}
 
@@ -100,9 +100,9 @@ class actasEntradasActaHerramientasTest {
 	@Order(4)
 	void findAllCasoACTA() {
 		log.info("-> buscar ID de Reuniones");
-		List<actas> actasOpcioan = actasRepository.findAll();
+		List<Acta> actasOpcioan = actasRepository.findAll();
 
-		for (actas actas : actasOpcioan) {
+		for (Acta actas : actasOpcioan) {
 			log.info("ID DE ACTA: " + actas.getIdactas().toString());
 			log.info("idreuniones DE ACTA" + actas.getEntradacta());
 		}
@@ -118,11 +118,11 @@ class actasEntradasActaHerramientasTest {
 	void findByIdHerramientasDeActas() {
 		log.info("-> buscar ID de Reuniones");
 
-		Optional<herramientasacta> herramientasactaOpcioan = herramientasactaRepository.findById(idusuario);
+		Optional<Herramientasacta> herramientasactaOpcioan = herramientasactaRepository.findById(idusuario);
 
 		assertTrue(herramientasactaOpcioan.isPresent(), "No existe una entreada de acta con ese ID");
 
-		herramientasacta herramientasacta = herramientasactaOpcioan.get();
+		Herramientasacta herramientasacta = herramientasactaOpcioan.get();
 
 		log.info("ID DE HERRAMIENTAS DE ACTAS" + herramientasacta.getIdherramienta().toString());
 		log.info("juicioexpertos DE HERRAMIENTAS DE ACTAS" + herramientasacta.getJuicioexpertos());
@@ -139,9 +139,9 @@ class actasEntradasActaHerramientasTest {
 	@Order(6)
 	void findAllHerramientasDeActas() {
 		log.info("-> buscar ID de Reuniones");
-		List<herramientasacta> herramientasactaOptinal = herramientasactaRepository.findAll();
+		List<Herramientasacta> herramientasactaOptinal = herramientasactaRepository.findAll();
 
-		for (herramientasacta herramientasacta : herramientasactaOptinal) {
+		for (Herramientasacta herramientasacta : herramientasactaOptinal) {
 
 			log.info("ID DE HERRAMIENTAS DE ACTAS" + herramientasacta.getIdherramienta().toString());
 			log.info("juicioexpertos DE HERRAMIENTAS DE ACTAS" + herramientasacta.getJuicioexpertos());

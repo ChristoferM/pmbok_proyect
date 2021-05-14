@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.herramientasacta;
-import com.tesis.v1.repository.herramientasactaRepository;
+import com.tesis.v1.domain.Herramientasacta;
+import com.tesis.v1.repository.HerramientasactaRepository;
 
 
 
@@ -19,11 +19,11 @@ import com.tesis.v1.repository.herramientasactaRepository;
 public class HerramientasActasServiceImpl implements HerramientasActasService {
 
     @Autowired
-    herramientasactaRepository herramientasActaRepository;
+    HerramientasactaRepository herramientasActaRepository;
 
     @Override
     @Transactional(readOnly = true)
-    public List<herramientasacta> findAll() {
+    public List<Herramientasacta> findAll() {
          return herramientasActaRepository.findAll();
     }
 
@@ -35,7 +35,7 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-    public herramientasacta save(herramientasacta entity) throws Exception {
+    public Herramientasacta save(Herramientasacta entity) throws Exception {
         if(herramientasActaRepository.existsById(entity.getIdherramienta())){
             throw new Exception("La herramienta con Id +" + entity.getIdherramienta() + "ya existe");
         }
@@ -44,7 +44,7 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-    public herramientasacta update(herramientasacta entity) throws Exception {
+    public Herramientasacta update(Herramientasacta entity) throws Exception {
         if(herramientasActaRepository.existsById(entity.getIdherramienta()) == false
         		|| entity.getIdherramienta() == null ){
             throw new Exception("La herramienta con id +" + entity.getIdherramienta() + "no existe");
@@ -54,13 +54,13 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<herramientasacta> findById(Integer id) throws Exception {
+    public Optional<Herramientasacta> findById(Integer id) throws Exception {
         return herramientasActaRepository.findById(id);
     }
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-    public void delete(herramientasacta entity) throws Exception {
+    public void delete(Herramientasacta entity) throws Exception {
         if (entity==null) {
             throw new Exception("El idHerramienta es nulo");
         }
@@ -91,13 +91,13 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
     }
 
 	@Override
-	public void validate(herramientasacta entity) throws Exception {
+	public void validate(Herramientasacta entity) throws Exception {
 		
 	}
 
 	@Override
     @Transactional(readOnly = true)
-	public List<herramientasacta> herramientaDelActa(Integer idProyecto) {
+	public List<Herramientasacta> herramientaDelActa(Integer idProyecto) {
 		return herramientasActaRepository.herramientaDelActa(idProyecto);
 	}
     

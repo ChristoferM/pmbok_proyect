@@ -16,12 +16,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.casonegocio;
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.domain.planesgestionbeneficios;
-import com.tesis.v1.repository.casonegocioRepository;
-import com.tesis.v1.repository.entradactaRepository;
-import com.tesis.v1.repository.planesgestionbeneficiosRepository;
+import com.tesis.v1.domain.CasoNegocio;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.domain.PlanGestionbeneficio;
+import com.tesis.v1.repository.CasoNegocioRepository;
+import com.tesis.v1.repository.PlanGestionBeneficioRepository;
+import com.tesis.v1.repository.EntradactaRepository;
 
 @SpringBootTest
 @Rollback(false)
@@ -37,13 +37,13 @@ class EntradaActaCasoNegoPlanesGesBenTest {
 	private final static Integer idgrupo = 2;
 
 	@Autowired
-	entradactaRepository entradactaRepository;
+	EntradactaRepository entradactaRepository;
 
 	@Autowired
-	casonegocioRepository casonegocioRepository;
+	CasoNegocioRepository casonegocioRepository;
 
 	@Autowired
-	planesgestionbeneficiosRepository planesgestionbeneficiosRepository;
+	PlanGestionBeneficioRepository planesgestionbeneficiosRepository;
 
 	// ------------------------ ENTRADA ACTA
 	@Test
@@ -51,11 +51,11 @@ class EntradaActaCasoNegoPlanesGesBenTest {
 	@Order(1)
 	void findByIdEntrada() {
 		log.info("-> buscar ID de Reuniones");
-		Optional<entradacta> entradaactaOpcioan = entradactaRepository.findById(idgrupo);
+		Optional<Entradacta> entradaactaOpcioan = entradactaRepository.findById(idgrupo);
 
 		assertTrue(entradaactaOpcioan.isPresent(), "No existe una entreada de acta con ese ID");
 
-		entradacta entradacta = entradaactaOpcioan.get();
+		Entradacta entradacta = entradaactaOpcioan.get();
 
 		log.info("ID DE ENTRADA : " + entradacta.getIdentrada().toString());
 		log.info(" acuerdos DE ENTRADA : " + entradacta.getAcuerdos());
@@ -69,9 +69,9 @@ class EntradaActaCasoNegoPlanesGesBenTest {
 	@Order(2)
 	void findAllEntrada() {
 		log.info("-> buscar ID de Reuniones");
-		List<entradacta> entradactas = entradactaRepository.findAll();
+		List<Entradacta> entradactas = entradactaRepository.findAll();
 
-		for (entradacta entradacta : entradactas) {
+		for (Entradacta entradacta : entradactas) {
 			log.info("ID DE ENTRADA : " + entradacta.getIdentrada().toString());
 			log.info(" acuerdos DE ENTRADA : " + entradacta.getAcuerdos());
 			log.info(" factores DE ENTRADA : " + entradacta.getFactores());
@@ -86,11 +86,11 @@ class EntradaActaCasoNegoPlanesGesBenTest {
 	@Order(3)
 	void findByIdCasoNegocio() {
 		log.info("-> buscar ID de Reuniones");
-		Optional<casonegocio> casonegocioOpcional = casonegocioRepository.findById(idgrupo);
+		Optional<CasoNegocio> casonegocioOpcional = casonegocioRepository.findById(idgrupo);
 
 		assertTrue(casonegocioOpcional.isPresent(), "No existe una entreada de acta con ese ID");
 
-		casonegocio casonegocio = casonegocioOpcional.get();
+		CasoNegocio casonegocio = casonegocioOpcional.get();
 		log.info("ID DE CASO DE NEGOCIOS"+ casonegocio.getId_caso_negocio().toString());
 		log.info("metas DE CASO DE NEGOCIOS"+ casonegocio.getMetas());
 		log.info("objetivos DE CASO DE NEGOCIOS"+ casonegocio.getObjetivos());
@@ -105,9 +105,9 @@ class EntradaActaCasoNegoPlanesGesBenTest {
 	@Order(4)
 	void findAllCasoNegocio() {
 		log.info("-> buscar ID de Reuniones");
-		List<casonegocio> CasoNegocioaOpcioan = casonegocioRepository.findAll();
+		List<CasoNegocio> CasoNegocioaOpcioan = casonegocioRepository.findAll();
 
-		for (casonegocio casonegocio : CasoNegocioaOpcioan) {
+		for (CasoNegocio casonegocio : CasoNegocioaOpcioan) {
 			log.info("ID DE CASO DE NEGOCIOS"+ casonegocio.getId_caso_negocio().toString());
 			log.info("metas DE CASO DE NEGOCIOS"+ casonegocio.getMetas());
 			log.info("objetivos DE CASO DE NEGOCIOS"+ casonegocio.getObjetivos());
@@ -126,12 +126,12 @@ class EntradaActaCasoNegoPlanesGesBenTest {
 	@Order(5)
 	void findByIdPlanesGestionBene() {
 		log.info("-> buscar ID de Reuniones");
-		Optional<planesgestionbeneficios> planesgestionbeneficiosOpcioan = planesgestionbeneficiosRepository
+		Optional<PlanGestionbeneficio> planesgestionbeneficiosOpcioan = planesgestionbeneficiosRepository
 				.findById(idusuario);
 
 		assertTrue(planesgestionbeneficiosOpcioan.isPresent(), "No existe una entreada de acta con ese ID");
 
-		planesgestionbeneficios planesgestionbeneficios = planesgestionbeneficiosOpcioan.get();
+		PlanGestionbeneficio planesgestionbeneficios = planesgestionbeneficiosOpcioan.get();
 
 		log.info("ID DE PLAN DE BEFENEFICIOS"+ planesgestionbeneficios.getId_plan_gb().toString());
 		log.info("acciones DE PLAN DE BEFENEFICIO"+ planesgestionbeneficios.getAcciones());
@@ -149,9 +149,9 @@ class EntradaActaCasoNegoPlanesGesBenTest {
 	@Order(6)
 	void findAllPlanesGestionBene() {
 		log.info("-> buscar ID de Reuniones");
-		List<planesgestionbeneficios> planesgestionbeneficiosOptinal = planesgestionbeneficiosRepository.findAll();
+		List<PlanGestionbeneficio> planesgestionbeneficiosOptinal = planesgestionbeneficiosRepository.findAll();
 
-		for (planesgestionbeneficios planesgestionbeneficios : planesgestionbeneficiosOptinal) {
+		for (PlanGestionbeneficio planesgestionbeneficios : planesgestionbeneficiosOptinal) {
 			log.info("ID DE PLAN DE BEFENEFICIOS"+ planesgestionbeneficios.getId_plan_gb().toString());
 			log.info("acciones DE PLAN DE BEFENEFICIO"+ planesgestionbeneficios.getAcciones().toString());
 			log.info("componentes DE PLAN DE BEFENEFICIO"+ planesgestionbeneficios.getComponentes());

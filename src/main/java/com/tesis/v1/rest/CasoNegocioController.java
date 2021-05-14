@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.casonegocio;
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.dto.casonegocioDTO;
-import com.tesis.v1.mapper.casonegocioMapper;
+import com.tesis.v1.domain.CasoNegocio;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.dto.CasoNegocioDTO;
 import com.tesis.v1.service.CasoNegocioService;
 import com.tesis.v1.service.EntradaActaService;
+import com.tesis.v1.mapper.CasoNegocioMapper;
 
 @RestController // Servicio
 @RequestMapping("/api/CasoNegocio") // Forma de llamar datos
@@ -36,21 +36,21 @@ public class CasoNegocioController {
 	CasoNegocioService CasoNegocioService;
 	
 	@Autowired
-	casonegocioMapper casonegocioMapper;
+	CasoNegocioMapper casonegocioMapper;
 	
 	@RequestMapping("/finById/{casoId}")
 	public ResponseEntity<?> finById(@PathVariable("casoId") Integer casoId)throws Exception{
-		//casonegocio casonegocio0 = new casonegocio (); 
-		Optional<casonegocio> casonegocioopc = CasoNegocioService.findById(casoId);
+		//casonegocio casonegocio0 = new CasoNegocio (); 
+		Optional<CasoNegocio> casonegocioopc = CasoNegocioService.findById(casoId);
 		
 		log.info("Cargando ...");
 		if( casonegocioopc.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se enco	ntro La referencia");
 			
 		}
-		casonegocio casonegocio = casonegocioopc.get();
+		CasoNegocio casonegocio = casonegocioopc.get();
 		
-		casonegocioDTO casonegocioDTO  = casonegocioMapper.tocasoNegocioDTO(casonegocio);
+		CasoNegocioDTO casonegocioDTO  = casonegocioMapper.tocasoNegocioDTO(casonegocio);
 		casonegocioDTO.setIdEntradaActa(casonegocio.getEntradacta().getIdentrada()); 
 		log.info("*");
 		return ResponseEntity.ok().body(casonegocioDTO);
@@ -60,9 +60,9 @@ public class CasoNegocioController {
 	@RequestMapping("/casoNegocioDelActa/{idProyecto}")
 	public ResponseEntity<?> casoNegocioDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
 		
-		List<casonegocio> casonegocioLIST= CasoNegocioService.casoNegocioDelActa(idProyecto);
+		List<CasoNegocio> casonegocioLIST= CasoNegocioService.casoNegocioDelActa(idProyecto);
 		
-		List<casonegocioDTO> casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocioLIST);
+		List<CasoNegocioDTO> casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocioLIST);
 		
 		return ResponseEntity.ok().body(casonegocioDTO);
 	}
@@ -70,16 +70,16 @@ public class CasoNegocioController {
 	@RequestMapping("/findByAll")
 	public ResponseEntity<?> finByAll() throws Exception{
 		
-		List<casonegocio> casonegocioLIST= CasoNegocioService.findAll();
+		List<CasoNegocio> casonegocioLIST= CasoNegocioService.findAll();
 		
-		List<casonegocioDTO> casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocioLIST);
+		List<CasoNegocioDTO> casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocioLIST);
 		
 		return ResponseEntity.ok().body(casonegocioDTO);
 	}
 	
 	
 	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody casonegocioDTO casonegocioDTO)  throws Exception{
+	public ResponseEntity<?> save(@Valid @RequestBody CasoNegocioDTO casonegocioDTO)  throws Exception{
 		log.info("************************************ 1");
 		/*
 		private Integer idEntradaActa;
@@ -89,8 +89,8 @@ public class CasoNegocioController {
 		private String incidentes;
 		private String oportunidades;
 		*/
-		casonegocio casonegocio = new casonegocio ();
-		entradacta entradas = new entradacta();
+		CasoNegocio casonegocio = new CasoNegocio ();
+		Entradacta entradas = new Entradacta();
 		casonegocio.setMetas(casonegocioDTO.getMetas());
 		casonegocio.setObjetivos(casonegocioDTO.getObjetivos());
 		casonegocio.setIncidentes(casonegocioDTO.getIncidentes());
@@ -100,11 +100,11 @@ public class CasoNegocioController {
 			
 		log.info("************************************ 2");
 		
-		casonegocio casonegocionew  = CasoNegocioService.save(casonegocio);
+		CasoNegocio casonegocionew  = CasoNegocioService.save(casonegocio);
 		
 		
 		log.info("************************************ 3");
-		casonegocioDTO casonegocioDTOnew = casonegocioMapper.tocasoNegocioDTO(casonegocionew);
+		CasoNegocioDTO casonegocioDTOnew = casonegocioMapper.tocasoNegocioDTO(casonegocionew);
 		
 		log.info("************************************ 4");
 		return ResponseEntity.ok().body(casonegocioDTOnew);

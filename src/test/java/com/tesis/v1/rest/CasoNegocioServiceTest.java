@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.casonegocio;
-import com.tesis.v1.domain.entradacta;
+import com.tesis.v1.domain.CasoNegocio;
+import com.tesis.v1.domain.Entradacta;
 import com.tesis.v1.service.CasoNegocioService;
 import com.tesis.v1.service.EntradaActaService;
 
@@ -34,13 +34,13 @@ class CasoNegocioServiceTest {
 	@Test
 	@Order(1)
 	void save() throws Exception {
-		casonegocio casonegocio = new casonegocio();
+		CasoNegocio casonegocio = new CasoNegocio();
 		casonegocio.setMetas("metas test spring");
-		// casonegocio.set("metas test spring");
+		// CasoNegocio.set("metas test spring");
 		casonegocio.setObjetivos("objetivos test spring");
 		casonegocio.setIncidentes("incidentes test Spring");
 		casonegocio.setOportunidades("oportunidades TEst Spring");
-		//Optional<entradacta> entradacta = EntradaActaService.findById(1);
+		//Optional<entradacta> Entradacta = EntradaActaService.findById(1);
 		casoNegocioService.save(casonegocio,1);
 	}
 
@@ -48,8 +48,8 @@ class CasoNegocioServiceTest {
 	@Order(2)
 	void findById() throws Exception {
 		
-		Optional<casonegocio> casonegocioOPC = casoNegocioService.findById(2);
-		casonegocio casonegocio = casonegocioOPC.get();
+		Optional<CasoNegocio> casonegocioOPC = casoNegocioService.findById(2);
+		CasoNegocio casonegocio = casonegocioOPC.get();
 		log.info("--------------------");
 		log.info("IDE DEL CASO DE NEGOCIO: "+casonegocio.getId_caso_negocio().toString());
 		log.info("METAS DEL CASO: "+casonegocio.getMetas());
@@ -64,12 +64,12 @@ class CasoNegocioServiceTest {
 	@Test
 	@Order(3)
 	void update() throws Exception {
-		Optional<entradacta> actaOPC = entradaActaService.findById(2);
+		Optional<Entradacta> actaOPC = entradaActaService.findById(2);
 		if(actaOPC.isEmpty()) {
 			fail("\n \nError acta no encontrada \n \n");
 		}else {
-		casonegocio casonegocio = new casonegocio();
-		entradacta entradacta= actaOPC.get();
+		CasoNegocio casonegocio = new CasoNegocio();
+		Entradacta entradacta= actaOPC.get();
 		casonegocio.setEntradacta(entradacta);
 		casonegocio.setId_caso_negocio(2);
 		casonegocio.setMetas("UPDATE metas test spring");
@@ -83,7 +83,7 @@ class CasoNegocioServiceTest {
 	@Test
 	@Order(4)
 	void findAll() throws Exception {
-		for (casonegocio casonegocio : casoNegocioService.findAll()) {
+		for (CasoNegocio casonegocio : casoNegocioService.findAll()) {
 			log.info("--------------------");
 			log.info("IDE DEL CASO DE NEGOCIO: "+casonegocio.getId_caso_negocio().toString());
 			log.info("METAS DEL CASO: "+casonegocio.getMetas());

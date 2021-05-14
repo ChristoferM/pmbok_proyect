@@ -1,7 +1,7 @@
 package com.tesis.v1.service;
 
-import com.tesis.v1.domain.grupo;
+import com.tesis.v1.domain.Grupo;
 
-public interface GrupoService  extends GenericService<grupo,Integer>{
+public interface GrupoService  extends GenericService<Grupo,Integer>{
 
 }

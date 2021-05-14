@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.actas;
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.dto.validarActa;
+import com.tesis.v1.domain.Acta;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.dto.ValidarActaDTO;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.EntradaActaService;
 
@@ -38,7 +38,7 @@ class EntradaActaServiceTest {
 		Integer idProyecto = 1;
 		log.info("Validando Acta");
 
-		validarActa validaciones = new validarActa();
+		ValidarActaDTO validaciones = new ValidarActaDTO();
 		log.info("validaciones realizadas");
 
 		validaciones = entradaActaService.encontrarData(idProyecto);
@@ -55,7 +55,7 @@ class EntradaActaServiceTest {
 	@Test
 	@Order(1)
 	void save() throws Exception {
-		entradacta entradacta = new entradacta();
+		Entradacta entradacta = new Entradacta();
 		entradacta.setAcuerdos(" TESTE SPRING");
 		entradacta.setFactores(" TEST SPRING");
 		entradacta.setActivosprocesos(" TEST SPRING");
@@ -66,8 +66,8 @@ class EntradaActaServiceTest {
 	@Test
 	@Order(2)
 	void findById() throws Exception {
-		Optional<entradacta> actaOPC = entradaActaService.findById(2);
-		entradacta acta = actaOPC.get();
+		Optional<Entradacta> actaOPC = entradaActaService.findById(2);
+		Entradacta acta = actaOPC.get();
 		log.info("--------------------");
 		log.info("--------------------");
 		log.info("ID DE LA ENTRADA" + acta.getIdentrada().toString());
@@ -81,13 +81,13 @@ class EntradaActaServiceTest {
 	@Test
 	@Order(3)
 	void update() throws Exception {
-		entradacta entradacta = new entradacta();
-		Optional<actas> actaOPC = actaService.findById(1);
+		Entradacta entradacta = new Entradacta();
+		Optional<Acta> actaOPC = actaService.findById(1);
 		if (actaOPC.isEmpty()) {
 			fail("No hay registros asi que paila");
 
 		} else {
-			actas acta = actaOPC.get();
+			Acta acta = actaOPC.get();
 			log.info("ID  de las actas: " + acta.getIdactas().toString());
 			log.info("Id reuniones : " + acta.getReuniones().getIdreuniones().toString());
 			entradacta.setAcuerdos("UPDATE setAcuerdos TESTE SPRING");
@@ -104,7 +104,7 @@ class EntradaActaServiceTest {
 	@Order(4)
 	void findAll() throws Exception {
 
-		for (entradacta acta : entradaActaService.findAll()) {
+		for (Entradacta acta : entradaActaService.findAll()) {
 			log.info("--------------------");
 			log.info("ID DE LA ENTRADA" + acta.getIdentrada().toString());
 			log.info("ACUERDOS DE LA ENTRADA" + acta.getAcuerdos());

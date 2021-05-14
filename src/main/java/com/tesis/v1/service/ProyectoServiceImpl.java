@@ -11,29 +11,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.proyectos;
-import com.tesis.v1.repository.proyectosRepository;
-import com.tesis.v1.repository.usuariosRepository;
+import com.tesis.v1.domain.Proyecto;
+import com.tesis.v1.repository.ProyectoRepository;
+import com.tesis.v1.repository.UsuarioRepository;
 
 @Service
 @Scope("singleton")
 public class ProyectoServiceImpl implements ProyectoService {
 
 	@Autowired
-	proyectosRepository proyectosRepository;
+	ProyectoRepository proyectosRepository;
 
 	@Autowired
-	usuariosRepository usuariosRepository;
+	UsuarioRepository usuariosRepository;
 
 	private final static Logger log = LoggerFactory.getLogger(ProyectoServiceImpl.class);
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<proyectos> findByEmail(String email) throws Exception {
+	public List<Proyecto> findByEmail(String email) throws Exception {
 		log.info("EL CORREO ES -> " + email);
 
-		// Optional<proyectos> proyectoOpt = proyectosRepository.finByEmail(email);
-		List<proyectos> poryectosList = proyectosRepository.finByEmail(email);
+		// Optional<proyectos> proyectoOpt = ProyectoRepository.finByEmail(email);
+		List<Proyecto> poryectosList = proyectosRepository.finByEmail(email);
 		if (poryectosList == null || poryectosList.size() == 0) {
 			return null;
 
@@ -43,8 +43,8 @@ public class ProyectoServiceImpl implements ProyectoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<proyectos> findAll() {
-		List<proyectos> poryectosList = proyectosRepository.findAll();
+	public List<Proyecto> findAll() {
+		List<Proyecto> poryectosList = proyectosRepository.findAll();
 		if (poryectosList == null || poryectosList.size() == 0) {
 			return null;
 
@@ -54,8 +54,8 @@ public class ProyectoServiceImpl implements ProyectoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<proyectos> findById(Integer id) throws Exception {
-		Optional<proyectos> proyectoOpt = proyectosRepository.findById(id);
+	public Optional<Proyecto> findById(Integer id) throws Exception {
+		Optional<Proyecto> proyectoOpt = proyectosRepository.findById(id);
 		if (proyectoOpt.isPresent()) {
 			return proyectoOpt;
 
@@ -66,7 +66,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public proyectos save(proyectos entity) throws Exception {
+	public Proyecto save(Proyecto entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("Error en los datos");
 
@@ -81,7 +81,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public proyectos update(proyectos entity) throws Exception {
+	public Proyecto update(Proyecto entity) throws Exception {
 		if (proyectosRepository.existsById(entity.getIdproyecto()) == false) {
 			throw new Exception("el proyecto No se encontro");
 		}
@@ -90,7 +90,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void delete(proyectos entity) throws Exception {
+	public void delete(Proyecto entity) throws Exception {
 
 	}
 
@@ -108,7 +108,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 	}
 
 	@Override
-	public void validate(proyectos entity) throws Exception {
+	public void validate(Proyecto entity) throws Exception {
 
 	}
 

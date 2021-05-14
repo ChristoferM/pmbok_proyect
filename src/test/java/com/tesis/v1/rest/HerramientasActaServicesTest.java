@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.actas;
-import com.tesis.v1.domain.herramientasacta;
+import com.tesis.v1.domain.Acta;
+import com.tesis.v1.domain.Herramientasacta;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.HerramientasActasService;
 
@@ -35,7 +35,7 @@ class HerramientasActaServicesTest {
 	@Test
 	@Order(1)
 	void save() throws Exception {
-		herramientasacta herramientas = new herramientasacta();
+		Herramientasacta herramientas = new Herramientasacta();
 		log.info(herramientas.getIdherramienta().toString());
 	}
 
@@ -43,12 +43,12 @@ class HerramientasActaServicesTest {
 	@Order(2)
 	void findById() throws Exception {
 
-		Optional<herramientasacta> herramientasOp = herramientasActasService.findById(1);
+		Optional<Herramientasacta> herramientasOp = herramientasActasService.findById(1);
 		if (herramientasOp.isEmpty()) {
 			fail("No hay registros asi que paila");
 
 		} else {
-			herramientasacta herramientass = herramientasOp.get();
+			Herramientasacta herramientass = herramientasOp.get();
 			log.info("Id HERRAMIENTAS DEL ACTA : " + herramientass.getIdherramienta().toString());
 			log.info("JUICIO DE EXPERTOS : " + herramientass.getJuicioexpertos());
 			log.info("RECOMILACIONES DEL ACTA: " + herramientass.getRecopilaciondatos());
@@ -65,17 +65,17 @@ class HerramientasActaServicesTest {
 	@Test
 	@Order(3)
 	void update() throws Exception {
-		herramientasacta herramientas = new herramientasacta();
-		Optional<actas> actaOPC = actaService.findById(1);
+		Herramientasacta herramientas = new Herramientasacta();
+		Optional<Acta> actaOPC = actaService.findById(1);
 		if (actaOPC.isEmpty()) {
 			fail("No hay registros asi que paila");
 
 		} else {
-			actas acta = actaOPC.get();
+			Acta acta = actaOPC.get();
 			log.info("ID  de las actas: " + acta.getIdactas().toString());
 			log.info("Id reuniones : " + acta.getReuniones().getIdreuniones().toString());
 
-			// actas acta = new a
+			// Acta acta = new a
 			// herramientas.setActas();
 			herramientas.setJuicioexpertos("JUICIOI DE EXPERTOS MODIFICADO TEST");
 			herramientas.setRecopilaciondatos("RECOPIALCIONES UPDAE TEST");
@@ -92,7 +92,7 @@ class HerramientasActaServicesTest {
 	@Test
 	@Order(4)
 	void findAll() throws Exception {
-		for (herramientasacta herramientass : herramientasActasService.findAll()) {
+		for (Herramientasacta herramientass : herramientasActasService.findAll()) {
 			log.info("Id HERRAMIENTAS DEL ACTA : " + herramientass.getIdherramienta().toString());
 			log.info("JUICIO DE EXPERTOS : " + herramientass.getJuicioexpertos());
 			log.info("RECOMILACIONES DEL ACTA: " + herramientass.getRecopilaciondatos());

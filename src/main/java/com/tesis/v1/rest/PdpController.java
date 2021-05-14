@@ -15,19 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.domain.pdp.entradas;
-import com.tesis.v1.domain.pdp.herramientas;
-import com.tesis.v1.domain.pdp.pdp;
-import com.tesis.v1.dto.pdp.entradasDTO;
-import com.tesis.v1.dto.pdp.herramientasDTO;
-import com.tesis.v1.dto.pdp.pdpDTO;
-import com.tesis.v1.mapper.pdpEntradasMapper;
-import com.tesis.v1.mapper.pdpHerramientasMapper;
-import com.tesis.v1.mapper.pdpMapper;
+import com.tesis.v1.domain.Reunion;
+import com.tesis.v1.domain.pdp.Entradas;
+import com.tesis.v1.domain.pdp.Herramientas;
+import com.tesis.v1.domain.pdp.Pdp;
+import com.tesis.v1.dto.pdp.EntradasDTO;
+import com.tesis.v1.dto.pdp.HerramientasDTO;
+import com.tesis.v1.dto.pdp.PdpDTO;
 import com.tesis.v1.service.entradasPdpService;
 import com.tesis.v1.service.herramientasServicePdp;
 import com.tesis.v1.service.pdpService;
+import com.tesis.v1.mapper.PdpEntradasMapper;
+import com.tesis.v1.mapper.PdpHerramientasMapper;
+import com.tesis.v1.mapper.PdpMapper;
 
 @RestController // Servicio
 @RequestMapping("/api/pdp") // Forma de llamar datos
@@ -47,23 +47,23 @@ public class PdpController {
 	herramientasServicePdp herramientasServicePdps;
 	
 	@Autowired
-	pdpMapper pdpMapper;
+	PdpMapper pdpMapper;
 	
 	@Autowired
-	pdpHerramientasMapper pdpHerramientasMapper;
+	PdpHerramientasMapper pdpHerramientasMapper;
 	
 	@Autowired
-	pdpEntradasMapper pdpEntradasMapper;
+	PdpEntradasMapper pdpEntradasMapper;
 	
 	@RequestMapping("/savePdp")
-	public ResponseEntity<?> savePdp(@Valid @RequestBody pdpDTO pdpDTO)  throws Exception{
+	public ResponseEntity<?> savePdp(@Valid @RequestBody PdpDTO pdpDTO)  throws Exception{
 		log.info("GUARDANDADO ");
-		pdp pdp = new pdp();
-		reuniones  reuniones0= new reuniones();
+		Pdp pdp = new Pdp();
+		Reunion  reuniones0= new Reunion();
 		reuniones0.setIdreuniones(pdpDTO.getIdreuniones());
 		
 		pdp.setReuniones(reuniones0);
-		pdpDTO pdp0 = new pdpDTO();
+		PdpDTO pdp0 = new PdpDTO();
 		pdp =pdpServices.save(pdp);
 		
 		pdp0.setIdpdp(pdp.getIdpdp());
@@ -73,10 +73,10 @@ public class PdpController {
 	
 	
 	@RequestMapping("/saveHerramientasPdp")
-	public ResponseEntity<?> saveHerramientasPdp(@Valid @RequestBody herramientasDTO herramientasDTO)  throws Exception{
+	public ResponseEntity<?> saveHerramientasPdp(@Valid @RequestBody HerramientasDTO herramientasDTO)  throws Exception{
 		log.info("GUARDANDADO ");
-		pdp pdp = new pdp();
-		herramientas herramientasPdp= new herramientas();
+		Pdp pdp = new Pdp();
+		Herramientas herramientasPdp= new Herramientas();
 		pdp.setIdpdp(
 				herramientasDTO.getIdpdp());
 		herramientasPdp.setPdp(pdp);
@@ -95,20 +95,20 @@ public class PdpController {
 		//herramientasacta herramientasactaNew = herramientasActasService.save(herramienta);
 		
 		herramientasPdp = herramientasServicePdps.save(herramientasPdp);
-		herramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
+		HerramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
 		
 		return ResponseEntity.ok().body(herramientasDTOs);
 	}
 	
 	@RequestMapping("/saveEntradasPdp")
-	public ResponseEntity<?> saveEntradasPdp(@Valid @RequestBody entradasDTO entradasDTO)  throws Exception{
+	public ResponseEntity<?> saveEntradasPdp(@Valid @RequestBody EntradasDTO entradasDTO)  throws Exception{
 		
-		// pdpEntradasMapper
+		// PdpEntradasMapper
 		//entradasPdpServices
 		log.info("GUARDANDADO ");
-		pdp pdp = new pdp();
+		Pdp pdp = new Pdp();
 		pdp.setIdpdp(entradasDTO.getIdpdp());
-		entradas entradasPdp =new entradas();
+		Entradas entradasPdp =new Entradas();
 		
 		entradasPdp.setPdp(pdp);
 		entradasPdp.setOtrosprocesos(entradasDTO.getOtrosprocesos());
@@ -130,14 +130,14 @@ public class PdpController {
 	@RequestMapping("/BuscarPdp/{id}")//pdpServices
 	public ResponseEntity<?> findByIdPdp(@PathVariable("id") Integer id)throws Exception{
 		//
-		Optional<pdp> pdpOpt = pdpServices.findById(id);
+		Optional<Pdp> pdpOpt = pdpServices.findById(id);
 		log.info("Cargando ...");
 		if( pdpOpt.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se encontro Usuario");
 			
 		}
-		pdp pdps = pdpOpt.get();
-		pdpDTO pdpDTOs = pdpMapper.toPdpDTO(pdps);
+		Pdp pdps = pdpOpt.get();
+		PdpDTO pdpDTOs = pdpMapper.toPdpDTO(pdps);
 		log.info(pdps.getIdpdp().toString());
 		pdpDTOs.setIdpdp(pdps.getIdpdp());
 		pdpDTOs.setIdreuniones(pdps.getReuniones().getIdreuniones());
@@ -149,14 +149,14 @@ public class PdpController {
 	public ResponseEntity<?> findByIdHerramientasPdp(@PathVariable("id") Integer id)throws Exception{
 		//herramientasDTO
 		//herramientas
-		Optional<herramientas> herramientaspdpOpt = herramientasServicePdps.findById(id);
+		Optional<Herramientas> herramientaspdpOpt = herramientasServicePdps.findById(id);
 		log.info("Cargando ...");
 		if( herramientaspdpOpt.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se encontro El Dato");
 			
 		}
-		herramientas herramientasPdp = herramientaspdpOpt.get();
-		herramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
+		Herramientas herramientasPdp = herramientaspdpOpt.get();
+		HerramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
 		//log.info(herramientasPdp.getPdp().getIdpdp().toString());
 		herramientasDTOs.setIdpdp(herramientasPdp.getPdp().getIdpdp());
 		return ResponseEntity.ok().body(herramientasDTOs);
@@ -169,14 +169,14 @@ public class PdpController {
 		//entradasDTO
 		//entradas
 
-		Optional<entradas> entradaspdpOpt = entradasPdpServices.findById(id);
+		Optional<Entradas> entradaspdpOpt = entradasPdpServices.findById(id);
 		log.info("Cargando ...");
 		if( entradaspdpOpt.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se encontro El Dato");
 			
 		}
-		entradas entradasPdp = entradaspdpOpt.get();
-		entradasDTO entradasDTOs = pdpEntradasMapper.toEntradasPdpDTO(entradasPdp);
+		Entradas entradasPdp = entradaspdpOpt.get();
+		EntradasDTO entradasDTOs = pdpEntradasMapper.toEntradasPdpDTO(entradasPdp);
 		//log.info(herramientasPdp.getPdp().getIdpdp().toString());
 		entradasDTOs.setIdpdp(entradasPdp.getPdp().getIdpdp());
 		return ResponseEntity.ok().body(entradasDTOs);

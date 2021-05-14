@@ -16,12 +16,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.faseproyecto;
-import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.domain.subgrupo;
-import com.tesis.v1.repository.faseproyectoRepository;
-import com.tesis.v1.repository.reunionesRepository;
-import com.tesis.v1.repository.subgrupoRepository;
+import com.tesis.v1.domain.FaseProyecto;
+import com.tesis.v1.domain.Reunion;
+import com.tesis.v1.domain.SubGrupo;
+import com.tesis.v1.repository.FaseProyectoRepository;
+import com.tesis.v1.repository.SubGrupoRepository;
+import com.tesis.v1.repository.ReunionRepository;
 
 
 @SpringBootTest
@@ -37,31 +37,31 @@ class reunionesFaseProyectoSubGrupoTest {
 	private final static Integer idproyectos = 1;
 
 	@Autowired
-	reunionesRepository reunionesRepository;
+	ReunionRepository reunionesRepository;
 
 	@Autowired
-	faseproyectoRepository faseproyectoRepository;
+	FaseProyectoRepository faseproyectoRepository;
 	
 	
 	@Autowired
-	subgrupoRepository subgrupoRepository;
+	SubGrupoRepository subgrupoRepository;
 
 	
-	//  PRUEBAS DE REUNIONES como hijo de fase proyectos
+	//  PRUEBAS DE REUNIONES como hijo de fase Proyecto
 	@Test
 	@Transactional
 	@Order(1)
 	void findByIdReuniones() {
 		log.info("-> buscar ID de Reuniones");
-		Optional<reuniones> reunionesOptional = reunionesRepository.findById(idreuniones);
+		Optional<Reunion> reunionesOptional = reunionesRepository.findById(idreuniones);
 		assertTrue(reunionesOptional.isPresent(), "No hay reuniones ocn ese ID");
 
-		reuniones reuniones = reunionesOptional.get();
+		Reunion reuniones = reunionesOptional.get();
 		log.info("idreuniones : " + reuniones.getIdreuniones().toString());
 		log.info("nombrereunion : " + reuniones.getNombrereunion());
 		log.info("descripcionreunion : " + reuniones.getDescripcionreunion());
 		log.info(" idproyecto : " + reuniones.getProyectos().getIdproyecto().toString());
-		//log.info("idfase : " + reuniones.getFaseProyecto().getIdfase().toString());
+		//log.info("idfase : " + Reunion.getFaseProyecto().getIdfase().toString());
 
 	}
 	
@@ -70,14 +70,14 @@ class reunionesFaseProyectoSubGrupoTest {
 	@Order(3)
 	void findAllReuniones() {
 		log.info("-> buscar tdas las Reuniones");
-		List<reuniones> reunioness = reunionesRepository.findAll();
+		List<Reunion> reunioness = reunionesRepository.findAll();
 
-		for (reuniones reuniones : reunioness) {
+		for (Reunion reuniones : reunioness) {
 			log.info("idreuniones : " + reuniones.getIdreuniones().toString());
 			log.info("nombrereunion : " + reuniones.getNombrereunion());
 			log.info("descripcionreunion : " + reuniones.getDescripcionreunion());
 			log.info(" idproyecto : " + reuniones.getProyectos().getIdproyecto().toString());
-			//log.info("idfase : " + reuniones.getFaseProyecto().getIdfase().toString());
+			//log.info("idfase : " + Reunion.getFaseProyecto().getIdfase().toString());
 
 		}
 	}
@@ -85,7 +85,7 @@ class reunionesFaseProyectoSubGrupoTest {
 
 	
 	
-	//    PRUEBAS DE FASE PROYECTO como padre de reuniones
+	//    PRUEBAS DE FASE PROYECTO como padre de Reunion
 	
 	
 	@Test
@@ -93,10 +93,10 @@ class reunionesFaseProyectoSubGrupoTest {
 	@Order(2)
 	void findByIdFaseProyectos() {
 		log.info("-> buscar ID de proyectos");
-		Optional<faseproyecto> faseproyectoOptional = faseproyectoRepository.findById(idproyectos);
+		Optional<FaseProyecto> faseproyectoOptional = faseproyectoRepository.findById(idproyectos);
 		assertTrue(faseproyectoOptional.isPresent(), "No hay proyectos con ese ID");
 
-		faseproyecto faseproyecto = faseproyectoOptional.get();
+		FaseProyecto faseproyecto = faseproyectoOptional.get();
 		log.info("id Fase proyecto : " + faseproyecto.getIdfase().toString());
 		log.info("nombre : " + faseproyecto.getNombrefase());
 		log.info("descripcion : " + faseproyecto.getDescripcionfase());
@@ -109,9 +109,9 @@ class reunionesFaseProyectoSubGrupoTest {
 	@Order(4)
 	void findAllFaseProyectos() {
 		log.info("-> buscar todos los proyectos");
-		List<faseproyecto> faseproyectos = faseproyectoRepository.findAll();
+		List<FaseProyecto> faseproyectos = faseproyectoRepository.findAll();
 
-		for (faseproyecto faseproyecto : faseproyectos) {
+		for (FaseProyecto faseproyecto : faseproyectos) {
 			log.info("id Fase proyecto : " + faseproyecto.getIdfase().toString());
 			log.info("nombre : " + faseproyecto.getNombrefase());
 			log.info("descripcion : " + faseproyecto.getDescripcionfase());
@@ -129,15 +129,15 @@ class reunionesFaseProyectoSubGrupoTest {
 	@Order(5)
 	void findByIdSubGrupo() {
 		log.info("-> buscar ID de Reuniones");
-		Optional<subgrupo> subgrupoOptional = subgrupoRepository.findById(2);
+		Optional<SubGrupo> subgrupoOptional = subgrupoRepository.findById(2);
 		assertTrue(subgrupoOptional.isPresent(), "No hay reuniones ocn ese ID");
 
-		subgrupo subgrupo = subgrupoOptional.get();
+		SubGrupo subgrupo = subgrupoOptional.get();
 		log.info("Id SubGrupo : " + subgrupo.getId_sub_grupo());
 		log.info("Id de la grupo a la que pertenece: "+ subgrupo.getGrupo().getIdgrupo() ); // relacion 
 		log.info("Id de la grupo a la que pertenece: "+ subgrupo.getFaseproyecto().getIdfase().toString() ); // relacion
 		
-		//log.info("idfase : " + reuniones.getFaseProyecto().getIdfase().toString());
+		//log.info("idfase : " + Reunion.getFaseProyecto().getIdfase().toString());
 
 	}
 
@@ -146,10 +146,10 @@ class reunionesFaseProyectoSubGrupoTest {
 	@Order(6)
 	void findAlldSubGrupo() {
 		log.info("-> buscar ID de proyectos");
-		Optional<subgrupo> subgrupoOptional = subgrupoRepository.findById(2);
+		Optional<SubGrupo> subgrupoOptional = subgrupoRepository.findById(2);
 		assertTrue(subgrupoOptional.isPresent(), "No hay SUB GRUPOS con ese ID");
 
-		subgrupo subgrupo = subgrupoOptional.get();
+		SubGrupo subgrupo = subgrupoOptional.get();
 		log.info("Id SubGrupo : " + subgrupo.getId_sub_grupo());
 		log.info("Id de la grupo a la que pertenece: "+ subgrupo.getGrupo().getIdgrupo() ); // RELACION
 		log.info("Id de la grupo a la que pertenece: "+ subgrupo.getFaseproyecto().getIdfase().toString() ); // relacion

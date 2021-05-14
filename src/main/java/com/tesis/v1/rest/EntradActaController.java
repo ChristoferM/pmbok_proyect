@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.actas;
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.dto.entradactaDTO;
-import com.tesis.v1.dto.validarActa;
-import com.tesis.v1.mapper.entradactaMapper;
+import com.tesis.v1.domain.Acta;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.dto.EntradactaDTO;
+import com.tesis.v1.dto.ValidarActaDTO;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.EntradaActaService;
+import com.tesis.v1.mapper.EntradactaMapper;
 
 @RestController // Servicio
 @RequestMapping("/api/EntradasActa") // Forma de llamar datos
@@ -36,14 +36,14 @@ public class EntradActaController {
 	ActaService actaService;
 	
 	@Autowired
-	entradactaMapper entradactaMapper;
+	EntradactaMapper entradactaMapper;
 	
 	@RequestMapping("/validarActa/{idProyecto}")
 	public ResponseEntity<?> finByAll(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
 		
 		log.info("Validando Acta");
 		
-		validarActa validaciones = new validarActa();
+		ValidarActaDTO validaciones = new ValidarActaDTO();
 		log.info("validaciones realizadas");
 		
 		validaciones = entradaActaService.encontrarData(idProyecto);
@@ -55,14 +55,14 @@ public class EntradActaController {
 	@RequestMapping("/finById/{entradaId}")
 	public ResponseEntity<?> finById(@PathVariable("entradaId") Integer entradaId)throws Exception{
 		
-		Optional<entradacta> entradactaopc = entradaActaService.findById(entradaId);
+		Optional<Entradacta> entradactaopc = entradaActaService.findById(entradaId);
 		log.info("Cargando ...");
 		if( entradactaopc.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se encontro La referencia");
 			
 		}
-		entradacta entradActa = entradactaopc.get();
-		entradactaDTO entradactaDTO  = entradactaMapper.toEntradActaDTO(entradActa);
+		Entradacta entradActa = entradactaopc.get();
+		EntradactaDTO entradactaDTO  = entradactaMapper.toEntradActaDTO(entradActa);
 		log.info("*");
 		return ResponseEntity.ok().body(entradactaDTO);
 		
@@ -70,18 +70,18 @@ public class EntradActaController {
 	@RequestMapping("/findByAll")
 	public ResponseEntity<?> finByAll() throws Exception{
 		//actas acta
-		List<entradacta> entradactaLIST= entradaActaService.findAll();
+		List<Entradacta> entradactaLIST= entradaActaService.findAll();
 		
-		List<entradactaDTO> entradactaListDto = entradactaMapper.toEntradActaDTO(entradactaLIST);
+		List<EntradactaDTO> entradactaListDto = entradactaMapper.toEntradActaDTO(entradactaLIST);
 		
 		return ResponseEntity.ok().body(entradactaListDto);
 	}
 	@RequestMapping("/entradaDelActa/{idProyecto}")
 	public ResponseEntity<?> entradaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
 		//actas acta
-		List<entradacta> entradactaLIST= entradaActaService.entradaDelActa(idProyecto);
+		List<Entradacta> entradactaLIST= entradaActaService.entradaDelActa(idProyecto);
 		
-		List<entradactaDTO> entradactaListDto = entradactaMapper.toEntradActaDTO(entradactaLIST);
+		List<EntradactaDTO> entradactaListDto = entradactaMapper.toEntradActaDTO(entradactaLIST);
 		
 		return ResponseEntity.ok().body(entradactaListDto);
 	}
@@ -105,7 +105,7 @@ public class EntradActaController {
 	
 	
 	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody entradactaDTO entradactaDTO)  throws Exception{
+	public ResponseEntity<?> save(@Valid @RequestBody EntradactaDTO entradactaDTO)  throws Exception{
 		log.info("************************************ 1");
 		/*
 		 * private Integer idActa;
@@ -114,9 +114,9 @@ public class EntradActaController {
 		private String factores;
 		private String activosprocesos ;
 		*/
-		actas acta =new actas();
+		Acta acta =new Acta();
 		acta.setIdactas(entradactaDTO.getIdActa());
-		entradacta entradas = new entradacta();
+		Entradacta entradas = new Entradacta();
 		entradas.setActas(acta);
 		entradas.setAcuerdos(entradactaDTO.getAcuerdos());
 		entradas.setFactores(entradactaDTO.getFactores());
@@ -124,9 +124,9 @@ public class EntradActaController {
 			
 		log.info("************************************ 2");
 		
-		entradacta entradasnew  = entradaActaService.save(entradas);
+		Entradacta entradasnew  = entradaActaService.save(entradas);
 		log.info("************************************ 3");
-		entradactaDTO entradactaDTOnew = entradactaMapper.toEntradActaDTO(entradasnew);
+		EntradactaDTO entradactaDTOnew = entradactaMapper.toEntradActaDTO(entradasnew);
 		
 		log.info("************************************ 4");
 		return ResponseEntity.ok().body(entradactaDTOnew);

@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.domain.planesgestionbeneficios;
-import com.tesis.v1.dto.planesgestionbeneficiosDTO;
-import com.tesis.v1.mapper.planesgestionbeneficiosMapper;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.domain.PlanGestionbeneficio;
+import com.tesis.v1.dto.PlanGestionBeneficioDTO;
 import com.tesis.v1.service.EntradaActaService;
 import com.tesis.v1.service.PlanGestionBeneficiosService;
+import com.tesis.v1.mapper.PlanGestionBeneficioMapper;
 
 @RestController // Servicio
 @RequestMapping("/api/PlanGestionBeneficios") // Forma de llamar datos
@@ -36,24 +36,24 @@ public class PlanGestionBeneficiosController {
 	PlanGestionBeneficiosService PlanGestionBeneficiosService;
 
 	@Autowired
-	planesgestionbeneficiosMapper planesgestionbeneficiosMapper;
+	PlanGestionBeneficioMapper planesgestionbeneficiosMapper;
 
 	@RequestMapping("/finById/{planId}")
 	public ResponseEntity<?> finById(@PathVariable("planId") Integer planId) throws Exception {
 		/*
-		 * planesgestionbeneficios planesgestionbeneficios0 = new
-		 * planesgestionbeneficios();
+		 * PlanGestionbeneficio planesgestionbeneficios0 = new
+		 * PlanGestionbeneficio();
 		 */
 
-		Optional<planesgestionbeneficios> planesgestionbeneficiosopc = PlanGestionBeneficiosService.findById(planId);
+		Optional<PlanGestionbeneficio> planesgestionbeneficiosopc = PlanGestionBeneficiosService.findById(planId);
 		log.info("Cargando ...");
 		if (planesgestionbeneficiosopc.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se encontro La referencia");
 
 		}
-		planesgestionbeneficios planesgestionbeneficios = planesgestionbeneficiosopc.get();
+		PlanGestionbeneficio planesgestionbeneficios = planesgestionbeneficiosopc.get();
 
-		planesgestionbeneficiosDTO planesgestionbeneficiosDTO = planesgestionbeneficiosMapper
+		PlanGestionBeneficioDTO planesgestionbeneficiosDTO = planesgestionbeneficiosMapper
 				.toplanesGestionBeneficiosDTO(planesgestionbeneficios);
 
 		log.info("*");
@@ -64,9 +64,9 @@ public class PlanGestionBeneficiosController {
 	@RequestMapping("/findByAll")
 	public ResponseEntity<?> finByAll() throws Exception {
 		// actas acta
-		List<planesgestionbeneficios> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.findAll();
+		List<PlanGestionbeneficio> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.findAll();
 
-		List<planesgestionbeneficiosDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
+		List<PlanGestionBeneficioDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
 				.toplanesGestionBeneficiosDTO(planesgestionbeneficiosLIST);
 
 		return ResponseEntity.ok().body(planesgestionbeneficiosListDto);
@@ -75,16 +75,16 @@ public class PlanGestionBeneficiosController {
 	@RequestMapping("/planGestionDelActa/{idProyecto}")
 	public ResponseEntity<?> planGestionDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
 		// actas acta
-		List<planesgestionbeneficios> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.planGestionDelActa(idProyecto);
+		List<PlanGestionbeneficio> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.planGestionDelActa(idProyecto);
 
-		List<planesgestionbeneficiosDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
+		List<PlanGestionBeneficioDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
 				.toplanesGestionBeneficiosDTO(planesgestionbeneficiosLIST);
 
 		return ResponseEntity.ok().body(planesgestionbeneficiosListDto);
 	}
 
 	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody planesgestionbeneficiosDTO planesgestionbeneficiosDTO)
+	public ResponseEntity<?> save(@Valid @RequestBody PlanGestionBeneficioDTO planesgestionbeneficiosDTO)
 			throws Exception {
 		log.info("************************************ 1");
 		/*
@@ -96,10 +96,10 @@ public class PlanGestionBeneficiosController {
 		private String servicios;
 		private String resultado;
 		 */
-		planesgestionbeneficios planesgestionbeneficios = new planesgestionbeneficios();
-		entradacta entradas = new entradacta();
-		// planesgestionbeneficiosDTO planesgestionbeneficiosDTO = new
-		// planesgestionbeneficiosDTO ();
+		PlanGestionbeneficio planesgestionbeneficios = new PlanGestionbeneficio();
+		Entradacta entradas = new Entradacta();
+		// PlanGestionBeneficioDTO PlanGestionBeneficioDTO = new
+		// PlanGestionBeneficioDTO ();
 		planesgestionbeneficios.setAcciones(planesgestionbeneficiosDTO.getAcciones());
 		planesgestionbeneficios.setComponentes(planesgestionbeneficiosDTO.getComponentes());
 		planesgestionbeneficios.setProdcutos(planesgestionbeneficiosDTO.getProdcutos());
@@ -114,9 +114,9 @@ public class PlanGestionBeneficiosController {
 
 		log.info("************************************ 2");
 
-		planesgestionbeneficios planesgestionbeneficiosnew = PlanGestionBeneficiosService.save(planesgestionbeneficios);
+		PlanGestionbeneficio planesgestionbeneficiosnew = PlanGestionBeneficiosService.save(planesgestionbeneficios);
 		log.info("************************************ 3");
-		planesgestionbeneficiosDTO planesgestionbeneficiosDTOnew = planesgestionbeneficiosMapper
+		PlanGestionBeneficioDTO planesgestionbeneficiosDTOnew = planesgestionbeneficiosMapper
 				.toplanesGestionBeneficiosDTO(planesgestionbeneficiosnew);
 
 		log.info("************************************ 4");

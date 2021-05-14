@@ -1,7 +1,7 @@
 package com.tesis.v1.service;
 
-import com.tesis.v1.domain.usuarios;
+import com.tesis.v1.domain.Usuario;
 
-public interface UsuarioService extends GenericService<usuarios,String>{
+public interface UsuarioService extends GenericService<Usuario,String>{
 
 }

@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.entradacta;
-import com.tesis.v1.domain.planesgestionbeneficios;
+import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.domain.PlanGestionbeneficio;
 import com.tesis.v1.service.EntradaActaService;
 import com.tesis.v1.service.PlanGestionBeneficiosService;
 
@@ -35,7 +35,7 @@ class PlanGestionBeneficioServiceTest {
 	@Order(1)
 	void save() throws Exception {
 		log.info("save");
-		planesgestionbeneficios planesgestionbeneficio = new planesgestionbeneficios();
+		PlanGestionbeneficio planesgestionbeneficio = new PlanGestionbeneficio();
 		planesgestionbeneficio.setAcciones("test spring");
 		planesgestionbeneficio.setComponentes("test spring");
 		planesgestionbeneficio.setProdcutos("test spring");
@@ -53,13 +53,13 @@ class PlanGestionBeneficioServiceTest {
 	@Test
 	@Order(3)
 	void update() throws Exception {
-		Optional<entradacta> actaOPC = entradaActaService.findById(2);
+		Optional<Entradacta> actaOPC = entradaActaService.findById(2);
 		if (actaOPC.isEmpty()) {
 			fail("No hay registros asi que paila");
 
 		} else {
-			entradacta entradacta = actaOPC.get();
-			planesgestionbeneficios planesgestionbeneficio = new planesgestionbeneficios();
+			Entradacta entradacta = actaOPC.get();
+			PlanGestionbeneficio planesgestionbeneficio = new PlanGestionbeneficio();
 			planesgestionbeneficio.setAcciones("UPDATE setAcciones test spring");
 			planesgestionbeneficio.setComponentes("UPDATE setProdcutos setComponentes test spring");
 			planesgestionbeneficio.setProdcutos("UPDATE  setServicios test spring");

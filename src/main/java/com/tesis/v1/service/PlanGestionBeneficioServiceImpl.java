@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.planesgestionbeneficios;
-import com.tesis.v1.repository.planesgestionbeneficiosRepository;
+import com.tesis.v1.domain.PlanGestionbeneficio;
+import com.tesis.v1.repository.PlanGestionBeneficioRepository;
 
 
 
@@ -21,12 +21,12 @@ import com.tesis.v1.repository.planesgestionbeneficiosRepository;
 public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosService{
 
     @Autowired
-    planesgestionbeneficiosRepository planGestionBeneficiosRepository;
+    PlanGestionBeneficioRepository planGestionBeneficiosRepository;
 
     private final static Logger log = LoggerFactory.getLogger(PlanGestionBeneficioServiceImpl.class);
     @Override
     @Transactional(readOnly = true)
-    public List<planesgestionbeneficios> findAll() {
+    public List<PlanGestionbeneficio> findAll() {
         return planGestionBeneficiosRepository.findAll();
     }
 
@@ -38,7 +38,7 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-    public planesgestionbeneficios save(planesgestionbeneficios entity) throws Exception {
+    public PlanGestionbeneficio save(PlanGestionbeneficio entity) throws Exception {
         /*if(planGestionBeneficiosRepository.existsById(entity.getId_plan_gb())){
             throw new Exception("El plan gestion beneficio " + entity.getId_plan_gb() + " ya existe");
         }*/
@@ -53,7 +53,7 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
-    public planesgestionbeneficios update(planesgestionbeneficios entity) throws Exception {
+    public PlanGestionbeneficio update(PlanGestionbeneficio entity) throws Exception {
         if(planGestionBeneficiosRepository.existsById(entity.getId_plan_gb())== false){
             throw new Exception("El plan gestion beneficio " + entity.getId_plan_gb() + " No existe");
         }
@@ -62,13 +62,13 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<planesgestionbeneficios> findById(Integer id) throws Exception {
+    public Optional<PlanGestionbeneficio> findById(Integer id) throws Exception {
         return planGestionBeneficiosRepository.findById(id);
     }
 
     @Override
     @Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-    public void delete(planesgestionbeneficios entity) throws Exception {
+    public void delete(PlanGestionbeneficio entity) throws Exception {
         if(entity == null){
             throw new Exception("La reunion es nulo");
         }
@@ -101,13 +101,13 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
 	
 
 	@Override
-	public void validate(planesgestionbeneficios entity) throws Exception {
+	public void validate(PlanGestionbeneficio entity) throws Exception {
 		
 	}
 
 	@Override
     @Transactional(readOnly = true)
-	public List<planesgestionbeneficios> planGestionDelActa(Integer idProyecto) {
+	public List<PlanGestionbeneficio> planGestionDelActa(Integer idProyecto) {
 		 return planGestionBeneficiosRepository.planGestionDelActa(idProyecto);
 	}
     

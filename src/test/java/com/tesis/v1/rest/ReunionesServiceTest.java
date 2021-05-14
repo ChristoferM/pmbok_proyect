@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.reuniones;
+import com.tesis.v1.domain.Reunion;
 import com.tesis.v1.service.FaseProyectoService;
 import com.tesis.v1.service.ProyectoService;
 import com.tesis.v1.service.ReunionesService;
@@ -36,30 +36,30 @@ class ReunionesServiceTest {
 	@Test
  	@Order(1)
 	void save() throws Exception {
-		reuniones reunion = new reuniones();
+		Reunion reunion = new Reunion();
 		reunion.setNombrereunion("Test Reunion Spring");
 		reunion.setDescripcionreunion("Test Descripcion Spring");
 		//reunion.setProyectos(proyecto);  // proyecto "Test update Proyecto Srping2
-		//reunion.setFaseproyecto(faseproyecto);
+		//reunion.setFaseproyecto(FaseProyecto);
 		
 	}
 	
 	@Test
 	@Order(2)
 	void findById() throws Exception {
-		Optional<reuniones> proyectosOp = ReunionesService.findById(2);
+		Optional<Reunion> proyectosOp = ReunionesService.findById(2);
 		if (proyectosOp.isEmpty()) {
 			fail("No hay registros asi que paila");
 
 		} else {
-			reuniones reuniones = proyectosOp.get();
+			Reunion reuniones = proyectosOp.get();
 			log.info("Id FASE PROYECTO : " + reuniones.getIdreuniones().toString());
 			log.info("Nombre del proyecto : " + reuniones.getNombrereunion());
 			log.info("Descripcion del proyecto: " + reuniones.getDescripcionreunion());
 			log.info("ID DEL PROYECTO AL QUE PERETENECE: " + reuniones.getProyectos().getIdproyecto().toString());
-			//log.info("nOMBRE DEL PROYECTO AL QUE PERETENECE: " + reuniones.getProyectos().getNombre());
+			//log.info("nOMBRE DEL PROYECTO AL QUE PERETENECE: " + Reunion.getProyectos().getNombre());
 			log.info("ID DEL FASE AL QUE PERETENECE: " + reuniones.getFaseproyecto().getIdfase().toString());
-			//log.info("nOMBRE DEL FASE AL QUE PERETENECE: " + reuniones.getFaseproyecto().getNombrefase());
+			//log.info("nOMBRE DEL FASE AL QUE PERETENECE: " + Reunion.getFaseproyecto().getNombrefase());
 
 
 		}
@@ -73,14 +73,14 @@ class ReunionesServiceTest {
 	@Test
 	@Order(4)
 	void findAll() throws Exception {
-		for (reuniones reuniones : ReunionesService.findAll()) {
+		for (Reunion reuniones : ReunionesService.findAll()) {
 			log.info("Id FASE PROYECTO : " + reuniones.getIdreuniones().toString());
 			log.info("Nombre del proyecto : " + reuniones.getNombrereunion());
 			log.info("Descripcion del proyecto: " + reuniones.getDescripcionreunion());
 			log.info("ID DEL PROYECTO AL QUE PERETENECE: " + reuniones.getProyectos().getIdproyecto().toString());
-			//log.info("nOMBRE DEL PROYECTO AL QUE PERETENECE: " + reuniones.getProyectos().getNombre());
+			//log.info("nOMBRE DEL PROYECTO AL QUE PERETENECE: " + Reunion.getProyectos().getNombre());
 			log.info("ID DEL FASE AL QUE PERETENECE: " + reuniones.getFaseproyecto().getIdfase().toString());
-			//log.info("nOMBRE DEL FASE AL QUE PERETENECE: " + reuniones.getFaseproyecto().getNombrefase());
+			//log.info("nOMBRE DEL FASE AL QUE PERETENECE: " + Reunion.getFaseproyecto().getNombrefase());
 
 		}
 	}

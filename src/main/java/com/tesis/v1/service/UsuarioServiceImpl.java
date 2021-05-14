@@ -7,24 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import com.tesis.v1.domain.usuarios;
-import com.tesis.v1.repository.usuariosRepository;
+import com.tesis.v1.domain.Usuario;
+import com.tesis.v1.repository.UsuarioRepository;
 
 @Service
 @Scope("singleton")
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
-	usuariosRepository usuariosRepository;
+	UsuarioRepository usuariosRepository;
 
 	@Override
-	public List<usuarios> findAll() {
+	public List<Usuario> findAll() {
 		return usuariosRepository.findAll();
 
 	}
 
 	@Override  // warning Null pointer access ==> || id.isBlank() == false || id.isEmpty() != true
-	public Optional<usuarios> findById(String id) throws Exception {
+	public Optional<Usuario> findById(String id) throws Exception {
 		if (id != null ) {
 			return usuariosRepository.findById(id);
 		}
@@ -38,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public usuarios save(usuarios entity) throws Exception {
+	public Usuario save(Usuario entity) throws Exception {
 		if (entity == null) {
 
 			throw new Exception("Error con los datos");
@@ -51,15 +51,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public usuarios update(usuarios entity) throws Exception {
+	public Usuario update(Usuario entity) throws Exception {
 		if (entity == null) {
 
 			throw new Exception("Error con los datos");
 
 		}
-		Optional<usuarios> usuarios = usuariosRepository.findById(entity.getEmail());
+		Optional<Usuario> usuarios = usuariosRepository.findById(entity.getEmail());
 		if (usuarios.isPresent()) {
-			// entity.setIdusuario(usuarios.get().getIdusuario());
+			// entity.setIdusuario(Usuario.get().getIdusuario());
 			
 			return usuariosRepository.save(entity);
 		}
@@ -68,7 +68,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public void delete(usuarios entity) throws Exception {
+	public void delete(Usuario entity) throws Exception {
 
 	}
 
@@ -86,7 +86,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public void validate(usuarios entity) throws Exception {
+	public void validate(Usuario entity) throws Exception {
 
 	}
 

@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.proyectos;
+import com.tesis.v1.domain.Proyecto;
 import com.tesis.v1.service.ProyectoService;
 
 @SpringBootTest
@@ -33,7 +33,7 @@ class ProyectosServiceTest {
 		 * email@test.com.co
 		 * springTst@test.com.co
 		 * */
-		proyectos proyecto = new proyectos();
+		Proyecto proyecto = new Proyecto();
 		proyecto.setNombre("Test new  Proyecto Srping");
 		proyecto.setDescripcion("DESCRIPCION newTEST SPIRNG");
 		proyecto.setAdmin("fallo@test.com.co");
@@ -44,12 +44,12 @@ class ProyectosServiceTest {
 	@Test
 	@Order(2)
 	void findById() throws Exception {
-		Optional<proyectos> proyectosOp = proyectoService.findById(2);
+		Optional<Proyecto> proyectosOp = proyectoService.findById(2);
 		if (proyectosOp.isEmpty()) {
 			fail("No hay registros asi que paila");
 
 		} else {
-			proyectos proyecto = proyectosOp.get();
+			Proyecto proyecto = proyectosOp.get();
 			log.info("Id FASE PROYECTO : " + proyecto.getIdproyecto().toString());
 			log.info("Nombre del proyecto : " + proyecto.getNombre());
 			log.info("Descripcion del proyecto: " + proyecto.getDescripcion());
@@ -60,7 +60,7 @@ class ProyectosServiceTest {
 	@Test
 	@Order(3)
 	void update() throws Exception {
-		proyectos proyecto = new proyectos();
+		Proyecto proyecto = new Proyecto();
 		proyecto.setIdproyecto(1);
 		proyecto.setAdmin("email@test.com.co");
 		proyecto.setNombre("Test update Proyecto Srping");
@@ -72,7 +72,7 @@ class ProyectosServiceTest {
 	@Test
 	@Order(4)
 	void findAll() throws Exception {
-		for (proyectos proyecto : proyectoService.findAll()) {
+		for (Proyecto proyecto : proyectoService.findAll()) {
 			log.info("Id FASE PROYECTO : " + proyecto.getIdproyecto().toString());
 			log.info("Nombre del proyecto : " + proyecto.getNombre());
 			log.info("Descripcion del proyecto: " + proyecto.getDescripcion());

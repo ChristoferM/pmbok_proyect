@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.pdp.pdp;
-import com.tesis.v1.repository.reunionesRepository;
+import com.tesis.v1.domain.pdp.Pdp;
 import com.tesis.v1.repository.pdp.pdpRepository;
+import com.tesis.v1.repository.ReunionRepository;
 
 @Service
 @Scope("singleton")
@@ -25,17 +25,17 @@ public class pdpServiceImpl  implements pdpService {
 	pdpRepository pdpRepository;
 	
 	@Autowired
-	reunionesRepository reunionesRepository;
+	ReunionRepository reunionesRepository;
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<pdp> findAll() {
+	public List<Pdp> findAll() {
 		return pdpRepository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<pdp> findById(Integer id) throws Exception {
+	public Optional<Pdp> findById(Integer id) throws Exception {
 
 		if (id < 0 || id == null) {
 			throw new Exception("error en el identificador");
@@ -51,7 +51,7 @@ public class pdpServiceImpl  implements pdpService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public pdp save(pdp entity) throws Exception {
+	public Pdp save(Pdp entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("error en peticion");
 		}
@@ -60,7 +60,7 @@ public class pdpServiceImpl  implements pdpService {
 
 	@Override
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public pdp update(pdp entity) throws Exception {
+	public Pdp update(Pdp entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("error en peticion");
 		}
@@ -68,7 +68,7 @@ public class pdpServiceImpl  implements pdpService {
 	}
 
 	@Override
-	public void delete(pdp entity) throws Exception {
+	public void delete(Pdp entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("Error Con el Plan...");
 		}
@@ -86,7 +86,7 @@ public class pdpServiceImpl  implements pdpService {
 	}
 
 	@Override
-	public void validate(pdp entity) throws Exception {
+	public void validate(Pdp entity) throws Exception {
 		
 	}
 

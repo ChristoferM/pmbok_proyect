@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.domain.pdp.entradas;
-import com.tesis.v1.domain.pdp.herramientas;
-import com.tesis.v1.domain.pdp.pdp;
+import com.tesis.v1.domain.Reunion;
+import com.tesis.v1.domain.pdp.Entradas;
+import com.tesis.v1.domain.pdp.Herramientas;
+import com.tesis.v1.domain.pdp.Pdp;
 import com.tesis.v1.service.entradasPdpService;
 import com.tesis.v1.service.herramientasServicePdp;
 import com.tesis.v1.service.pdpService;
@@ -38,8 +38,8 @@ class Pdps {
 	@Test
 	void savePdp() throws Exception {
 		log.info("GUARDANDADO ");
-		pdp pdp = new pdp();
-		reuniones  reuniones0= new reuniones();
+		Pdp pdp = new Pdp();
+		Reunion  reuniones0= new Reunion();
 		reuniones0.setIdreuniones(1);
 		pdp.setReuniones(reuniones0);
 		pdpService.save(pdp);
@@ -52,8 +52,8 @@ class Pdps {
 	@Test
 	void saveHerramientaPdp() throws Exception {
 		log.info("GUARDANDADO ");
-		pdp pdp = new pdp();
-		herramientas herramientasPdp= new herramientas();
+		Pdp pdp = new Pdp();
+		Herramientas herramientasPdp= new Herramientas();
 		pdp.setIdpdp(1);
 		herramientasPdp.setPdp(pdp);
 		
@@ -72,9 +72,9 @@ class Pdps {
 	@Test
 	void saveEntradaPdp() throws Exception {
 		log.info("GUARDANDADO ");
-		pdp pdp = new pdp();
+		Pdp pdp = new Pdp();
 	
-		entradas entradasPdp =new entradas();
+		Entradas entradasPdp =new Entradas();
 		pdp.setIdpdp(1);
 		entradasPdp.setPdp(pdp);
 		
@@ -91,7 +91,7 @@ class Pdps {
 	@Test
 	void buscarPdp() throws Exception {
 		log.info("GUARDANDADO ");
-		for (pdp pdps : pdpService.findAll()) {
+		for (Pdp pdps : pdpService.findAll()) {
 			log.info("ID  del PDP: " + pdps.getIdpdp().toString());
 			log.info("Id reuniones : " + pdps.getReuniones().getIdreuniones().toString());
 		}
@@ -104,7 +104,7 @@ class Pdps {
 	void buscarHerramientaPdp() throws Exception {
 		log.info("GUARDANDADO ");
 		log.info("GUARDANDADO ");
-		for (herramientas herramientasPdp : 		herramientasServicePdp.findAll()) {
+		for (Herramientas herramientasPdp : 		herramientasServicePdp.findAll()) {
 			log.info("ID  del PDP: " + herramientasPdp.getIdherramienta().toString());
 			log.info("Juicioexpertos : " + herramientasPdp.getJuicioexpertos());
 			log.info(" REcopilaciones : " + herramientasPdp.getRecopilaciondatos());
@@ -122,7 +122,7 @@ class Pdps {
 	void buscarEntradaPdp() throws Exception {
 		log.info("GUARDANDADO ");
 		log.info("GUARDANDADO ");
-		for (entradas entradasPdp : entradasPdpService.findAll()) {
+		for (Entradas entradasPdp : entradasPdpService.findAll()) {
 			log.info("ID  del PDP: " + entradasPdp.getIdentradapdp().toString());
 			log.info("OTROS PROCESOS: " + entradasPdp.getOtrosprocesos());
 			log.info("setFactoresambientales: " + entradasPdp.getFactoresambientales());

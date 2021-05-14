@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.grupo;
-import com.tesis.v1.repository.grupoRepository;
+import com.tesis.v1.domain.Grupo;
+import com.tesis.v1.repository.GrupoRepository;
 
 @Service
 @Scope("singleton")
@@ -21,17 +21,17 @@ public class GrupoServiceImpl implements GrupoService {
 	private final static Logger log = LoggerFactory.getLogger(GrupoServiceImpl.class);
 
 	@Autowired
-	grupoRepository grupoRepository;
+	GrupoRepository grupoRepository;
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<grupo> findAll() {
+	public List<Grupo> findAll() {
 		return grupoRepository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<grupo> findById(Integer id) throws Exception {
+	public Optional<Grupo> findById(Integer id) throws Exception {
 		if (id <= 0 || id == null) {
 			throw new Exception("error en peticion");
 		} else
@@ -41,7 +41,7 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public grupo save(grupo entity) throws Exception {
+	public Grupo save(Grupo entity) throws Exception {
 		log.info("save");
 		if (entity == null) {
 			throw new Exception("error en peticion");
@@ -53,7 +53,7 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public grupo update(grupo entity) throws Exception {
+	public Grupo update(Grupo entity) throws Exception {
 		if (entity == null) {
 			throw new Exception("error en peticion");
 		}
@@ -80,12 +80,12 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void delete(grupo entity) throws Exception {
+	public void delete(Grupo entity) throws Exception {
 
 	}
 
 	@Override
-	public void validate(grupo entity) throws Exception {
+	public void validate(Grupo entity) throws Exception {
 
 	}
 

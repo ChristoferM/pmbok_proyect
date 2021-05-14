@@ -16,10 +16,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tesis.v1.domain.proyectos;
-import com.tesis.v1.domain.reuniones;
-import com.tesis.v1.repository.proyectosRepository;
-import com.tesis.v1.repository.reunionesRepository;
+import com.tesis.v1.domain.Proyecto;
+import com.tesis.v1.domain.Reunion;
+import com.tesis.v1.repository.ProyectoRepository;
+import com.tesis.v1.repository.ReunionRepository;
 
 @SpringBootTest
 @Rollback(false)
@@ -33,25 +33,25 @@ class ReunionesProyectoTest {
 	private final static Integer idproyectos = 1;
 
 	@Autowired
-	reunionesRepository reunionesRepository;
+	ReunionRepository reunionesRepository;
 
 	@Autowired
-	proyectosRepository proyectosRepository;
+	ProyectoRepository proyectosRepository;
 
 	@Test
 	@Transactional
 	@Order(1)
 	void findByIdReuniones() {
 		log.info("-> buscar ID de Reuniones");
-		Optional<reuniones> reunionesOptional = reunionesRepository.findById(idreuniones);
+		Optional<Reunion> reunionesOptional = reunionesRepository.findById(idreuniones);
 		assertTrue(reunionesOptional.isPresent(), "No hay reuniones ocn ese ID");
 
-		reuniones reuniones = reunionesOptional.get();
+		Reunion reuniones = reunionesOptional.get();
 		log.info("idreuniones : " + reuniones.getIdreuniones().toString());
 		log.info("nombrereunion : " + reuniones.getNombrereunion());
 		log.info("descripcionreunion : " + reuniones.getDescripcionreunion());
 		log.info(" idproyecto : " + reuniones.getProyectos().getIdproyecto().toString());
-		//log.info("idfase : " + reuniones.getFaseProyecto().getIdfase().toString());
+		//log.info("idfase : " + Reunion.getFaseProyecto().getIdfase().toString());
 
 	}
 
@@ -60,10 +60,10 @@ class ReunionesProyectoTest {
 	@Order(2)
 	void findByIdProyectos() {
 		log.info("-> buscar ID de proyectos");
-		Optional<proyectos> proyectosOptional = proyectosRepository.findById(idproyectos);
+		Optional<Proyecto> proyectosOptional = proyectosRepository.findById(idproyectos);
 		assertTrue(proyectosOptional.isPresent(), "No hay proyectos con ese ID");
 
-		proyectos proyectos = proyectosOptional.get();
+		Proyecto proyectos = proyectosOptional.get();
 		log.info("idproyecto : " + proyectos.getIdproyecto().toString());
 		log.info("nombre : " + proyectos.getNombre());
 		log.info("descripcion : " + proyectos.getDescripcion());
@@ -75,14 +75,14 @@ class ReunionesProyectoTest {
 	@Order(3)
 	void findAllReuniones() {
 		log.info("-> buscar tdas las Reuniones");
-		List<reuniones> reunioness = reunionesRepository.findAll();
+		List<Reunion> reunioness = reunionesRepository.findAll();
 
-		for (reuniones reuniones : reunioness) {
+		for (Reunion reuniones : reunioness) {
 			log.info("idreuniones : " + reuniones.getIdreuniones().toString());
 			log.info("nombrereunion : " + reuniones.getNombrereunion());
 			log.info("descripcionreunion : " + reuniones.getDescripcionreunion());
 			log.info(" idproyecto : " + reuniones.getProyectos().getIdproyecto().toString());
-			//log.info("idfase : " + reuniones.getFaseProyecto().getIdfase().toString());
+			//log.info("idfase : " + Reunion.getFaseProyecto().getIdfase().toString());
 
 		}
 	}
@@ -92,9 +92,9 @@ class ReunionesProyectoTest {
 	@Order(4)
 	void findAllProyectos() {
 		log.info("-> buscar todos los proyectos");
-		List<proyectos> proyectoss = proyectosRepository.findAll();
+		List<Proyecto> proyectoss = proyectosRepository.findAll();
 
-		for (proyectos proyectos : proyectoss) {
+		for (Proyecto proyectos : proyectoss) {
 			log.info("idproyecto : " + proyectos.getIdproyecto().toString());
 			log.info("nombre : " + proyectos.getNombre());
 			log.info("descripcion : " + proyectos.getDescripcion());
@@ -109,20 +109,20 @@ class ReunionesProyectoTest {
 	void findbyEmail() {
 		log.info("-> buscar ID de proyectos");
 		String email= "prueba@Prueba22.com.co";
-		/*Optional<proyectos> proyectosOptional = proyectosRepository.finByEmail(email);
+		/*Optional<proyectos> proyectosOptional = ProyectoRepository.finByEmail(email);
 		log.info("aca ->"+proyectosOptional.isPresent());
 		if(proyectosOptional.isPresent()) {
-			proyectos proyectos = proyectosOptional.get();
-			log.info("idproyecto : " + proyectos.getIdproyecto().toString());
-			log.info("nombre : " + proyectos.getNombre());
-			log.info("descripcion : " + proyectos.getDescripcion());
+			Proyecto Proyecto = proyectosOptional.get();
+			log.info("idproyecto : " + Proyecto.getIdproyecto().toString());
+			log.info("nombre : " + Proyecto.getNombre());
+			log.info("descripcion : " + Proyecto.getDescripcion());
 		}else {
 			log.info("aca ->"+proyectosOptional.isPresent());
 			log.info(" NO se encontro nada");
 		}*/
 		log.info("-> buscar todos los proyectos");
-		List<proyectos> proyectoss = proyectosRepository.finByEmail(email);
-		for (proyectos proyectos : proyectoss) {
+		List<Proyecto> proyectoss = proyectosRepository.finByEmail(email);
+		for (Proyecto proyectos : proyectoss) {
 			log.info("idproyecto : " + proyectos.getIdproyecto().toString());
 			log.info("nombre : " + proyectos.getNombre());
 			log.info("descripcion : " + proyectos.getDescripcion());

@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tesis.v1.domain.usuarios;
-import com.tesis.v1.dto.usuariosDTO;
-import com.tesis.v1.mapper.usuariosMapper;
+import com.tesis.v1.domain.Usuario;
+import com.tesis.v1.dto.UsuariosDTO;
 import com.tesis.v1.service.UsuarioService;
+import com.tesis.v1.mapper.UsuarioMapper;
 
 @RestController // Servicio
 @RequestMapping("/api/usuario") // Forma de llamar datos
@@ -31,12 +31,12 @@ public class UsuarioController {
 	UsuarioService usuarioService;
 	
 	@Autowired
-	usuariosMapper usuarioMapper;
+	UsuarioMapper usuarioMapper;
 	
 	@RequestMapping("/finByAll")
 	public ResponseEntity<?> finByAll() throws Exception{
-		List<usuarios> usuariosLIST= usuarioService.findAll();
-		List<usuariosDTO> usuarioListDto = usuarioMapper.toUsuariosDTOs(usuariosLIST);
+		List<Usuario> usuariosLIST= usuarioService.findAll();
+		List<UsuariosDTO> usuarioListDto = usuarioMapper.toUsuariosDTOs(usuariosLIST);
 		
 		return ResponseEntity.ok().body(usuarioListDto);
 	}
@@ -44,14 +44,14 @@ public class UsuarioController {
 	@RequestMapping("/finById/{usuarioId}")
 	public ResponseEntity<?> finById(@PathVariable("usuarioId") String userId)throws Exception{
 		log.info("Reconociendo usuario :  "+userId);
-		Optional<usuarios> usuarioOpt = usuarioService.findById(userId);
+		Optional<Usuario> usuarioOpt = usuarioService.findById(userId);
 		log.info("Cargando ...");
 		if( usuarioOpt.isEmpty()) {
 			return ResponseEntity.ok().body("Error: No se encontro Usuario");
 			
 		}
-		usuarios usuario = usuarioOpt.get();
-		usuariosDTO usuarioDTO = usuarioMapper.toUsuariosDTO(usuario);
+		Usuario usuario = usuarioOpt.get();
+		UsuariosDTO usuarioDTO = usuarioMapper.toUsuariosDTO(usuario);
 		log.info("*");
 		return ResponseEntity.ok().body(usuarioDTO);
 		
@@ -59,9 +59,9 @@ public class UsuarioController {
 
 	
 	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody usuariosDTO usuariosDto)  throws Exception{
+	public ResponseEntity<?> save(@Valid @RequestBody UsuariosDTO usuariosDto)  throws Exception{
 	
-		usuarios usuario = usuarioMapper.toUsuarios(usuariosDto);
+		Usuario usuario = usuarioMapper.toUsuarios(usuariosDto);
 		
 		usuario = usuarioService.save(usuario);
 		
