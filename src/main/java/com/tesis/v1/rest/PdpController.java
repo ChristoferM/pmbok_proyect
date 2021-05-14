@@ -95,11 +95,10 @@ public class PdpController {
 		//herramientasacta herramientasactaNew = herramientasActasService.save(herramienta);
 		
 		herramientasPdp = herramientasServicePdps.save(herramientasPdp);
-<<<<<<< HEAD
+ 
 		HerramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
-=======
-		herramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramienta(herramientasPdp);
->>>>>>> 5e3e6b0e3444878d6173d307f9e7a5793ef6614b
+ 
+ 
 		
 		return ResponseEntity.ok().body(herramientasDTOs);
 	}
@@ -110,12 +109,10 @@ public class PdpController {
 		// PdpEntradasMapper
 		//entradasPdpServices
 		log.info("GUARDANDADO ");
-<<<<<<< HEAD
+ 
 		Pdp pdp = new Pdp();
-=======
-		pdp pdp = new pdp();
-		
->>>>>>> 5e3e6b0e3444878d6173d307f9e7a5793ef6614b
+  
+ 
 		pdp.setIdpdp(entradasDTO.getIdpdp());
 		Entradas entradasPdp =new Entradas();
 		
@@ -164,13 +161,9 @@ public class PdpController {
 			return ResponseEntity.ok().body("Error: No se encontro El Dato");
 			
 		}
-<<<<<<< HEAD
 		Herramientas herramientasPdp = herramientaspdpOpt.get();
 		HerramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
-=======
-		herramientas herramientasPdp = herramientaspdpOpt.get();
-		herramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramienta(herramientasPdp);
->>>>>>> 5e3e6b0e3444878d6173d307f9e7a5793ef6614b
+	 
 		//log.info(herramientasPdp.getPdp().getIdpdp().toString());
 		herramientasDTOs.setIdpdp(herramientasPdp.getPdp().getIdpdp());
 		return ResponseEntity.ok().body(herramientasDTOs);

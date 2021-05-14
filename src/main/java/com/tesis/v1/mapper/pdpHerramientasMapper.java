@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.tesis.v1.domain.pdp.herramientas;
-import com.tesis.v1.dto.pdp.herramientasDTO;
+import com.tesis.v1.domain.pdp.Herramientas;
+import com.tesis.v1.dto.pdp.HerramientasDTO;
 
 @Mapper
 public interface pdpHerramientasMapper {
 
-	public  herramientasDTO toherramienta(herramientas herramientas );
+	public  HerramientasDTO toherramienta(Herramientas herramientas );
 	
-	public herramientas  toHerramientaDTO( herramientasDTO herramientasPdpDTO);
+	public Herramientas  toHerramientaDTO( HerramientasDTO herramientasPdpDTO);
 	
-	public List<herramientas> toHerramientasDTO(List<herramientas> herramientasPdp );
+	public List<Herramientas> toHerramientasDTO(List<Herramientas> herramientasPdp );
 	
-	public List<herramientas> toHerramientas(List<herramientasDTO>  herramientasDTOs);
+	public List<Herramientas> toHerramientas(List<HerramientasDTO>  herramientasDTOs);
 }
