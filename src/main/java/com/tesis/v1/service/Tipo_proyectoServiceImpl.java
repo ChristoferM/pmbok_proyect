@@ -36,12 +36,16 @@ public class Tipo_proyectoServiceImpl implements Tipo_proyectoService{
 
     @Override
     public Long count() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.tipoRepository.count();
     }
 
     @Override
     public Tipo_proyecto save(Tipo_proyecto entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(entity != null){
+            return this.tipoRepository.save(entity);
+        }
+        
+        throw new Exception("Verificar el tipo proyecto nulo");  
     }
 
     @Override
