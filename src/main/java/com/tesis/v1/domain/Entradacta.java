@@ -18,92 +18,86 @@ import javax.persistence.Table;
 @Table(name = "entradacta", schema = "public")
 public class Entradacta {
 
-	private Integer identrada;
-	private String acuerdos;
-	private String factores;
-	private String activosprocesos;
+    private Integer identrada;
+    private String acuerdos;
+    private String factores;
+    private String activosprocesos;
 
-	// Entidades hijas
+    // Entidades hijas
+    private List<CasoNegocio> casonegocio = new ArrayList<CasoNegocio>(0);
 
-	
-	private List<CasoNegocio> casonegocio = new ArrayList<CasoNegocio>(0);
+    private List<PlanGestionbeneficio> planesgestionbeneficios = new ArrayList<PlanGestionbeneficio>(0);
 
-	
-	private List<PlanGestionbeneficio> planesgestionbeneficios = new ArrayList<PlanGestionbeneficio>(0);
+    private Acta actas; // PADRE
+    // idactas int4 NOT NULL,
 
-	private Acta actas ; // PADRE
-	// idactas int4 NOT NULL,
+    @Id
+    @Column(name = "identrada", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getIdentrada() {
+        return identrada;
+    }
 
-	
-	@Id
-	@Column(name = "identrada", unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getIdentrada() {
-		return identrada;
-	}
+    public void setIdentrada(Integer identrada) {
+        this.identrada = identrada;
+    }
 
-	public void setIdentrada(Integer identrada) {
-		this.identrada = identrada;
-	}
+    @Column(name = "acuerdos", nullable = false)
+    public String getAcuerdos() {
+        return acuerdos;
+    }
 
-	@Column(name = "acuerdos", nullable = false)
-	public String getAcuerdos() {
-		return acuerdos;
-	}
+    public void setAcuerdos(String acuerdos) {
+        this.acuerdos = acuerdos;
+    }
 
-	public void setAcuerdos(String acuerdos) {
-		this.acuerdos = acuerdos;
-	}
+    @Column(name = "factores", nullable = false)
+    public String getFactores() {
+        return factores;
+    }
 
-	@Column(name = "factores", nullable = false)
-	public String getFactores() {
-		return factores;
-	}
+    public void setFactores(String factores) {
+        this.factores = factores;
+    }
 
-	public void setFactores(String factores) {
-		this.factores = factores;
-	}
+    @Column(name = "activosprocesos", nullable = false)
+    public String getActivosprocesos() {
+        return activosprocesos;
+    }
 
-	@Column(name = "activosprocesos", nullable = false)
-	public String getActivosprocesos() {
-		return activosprocesos;
-	}
+    public void setActivosprocesos(String activosprocesos) {
+        this.activosprocesos = activosprocesos;
+    }
 
-	public void setActivosprocesos(String activosprocesos) {
-		this.activosprocesos = activosprocesos;
-	}
+    // ------------------------- ENTIDAD PADRE
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idactas")
+    public Acta getActas() {
+        return actas;
+    }
 
-	// ------------------------- ENTIDAD PADRE
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn( name = "idactas")
-	public Acta getActas() {
-		return actas;
-	}
+    public void setActas(Acta actas) {
+        this.actas = actas;
+    }
 
-	public void setActas(Acta actas) {
-		this.actas = actas;
-	}
-	
+    // ------------------------- Entidades hijas
+    //@OneToOne(mappedBy = "Entradacta", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entradacta")
+    public List<CasoNegocio> getCasonegocio() {
+        return casonegocio;
+    }
 
-	// ------------------------- Entidades hijas
+    public void setCasonegocio(List<CasoNegocio> casonegocio) {
+        this.casonegocio = casonegocio;
+    }
 
-	//@OneToOne(mappedBy = "Entradacta", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entradacta")
-	public List<CasoNegocio>  getCasonegocio() {
-		return casonegocio;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entradacta")
+    public List<PlanGestionbeneficio> getPlanesgestionbeneficios() {
+        return planesgestionbeneficios;
+    }
 
-	public void setCasonegocio(List<CasoNegocio>  casonegocio) {
-		this.casonegocio = casonegocio;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entradacta")
-	public List<PlanGestionbeneficio> getPlanesgestionbeneficios() {
-		return planesgestionbeneficios;
-	}
-
-	public void setPlanesgestionbeneficios(List<PlanGestionbeneficio> planesgestionbeneficios) {
-		this.planesgestionbeneficios = planesgestionbeneficios;
-	}
+    public void setPlanesgestionbeneficios(List<PlanGestionbeneficio> planesgestionbeneficios) {
+        this.planesgestionbeneficios = planesgestionbeneficios;
+    }
 
 }

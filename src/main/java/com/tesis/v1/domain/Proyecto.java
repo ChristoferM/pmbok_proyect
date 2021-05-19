@@ -22,11 +22,11 @@ public class Proyecto {
 	private String descripcion ;
 	private String  admin;
 	
-	private List<Grupo> grupo = new ArrayList<	Grupo>(0);
+	private List<Grupo> grupo = new ArrayList<Grupo>(0);
 
 	private List<Reunion> reuniones = new ArrayList<Reunion>(0);
 	
-	private Tipo_proyecto tipo_id;
+	private Tipo_proyecto tipoProyecto;
 	
 	
 	
@@ -95,13 +95,15 @@ public class Proyecto {
 	}
 	
 	
-    @ManyToOne
-    @JoinColumn(name = "tipo_id", referencedColumnName = "tipo_id")
+        @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "tipo_id", referencedColumnName = "tipo_id")
+        @JoinColumn(name = "tipo_id")
+
 	public Tipo_proyecto getTipoProyecto() {
-		return tipo_id;
+		return tipoProyecto;
 	}
 	public void setTipoProyecto(Tipo_proyecto tipoProyecto) {
-		this.tipo_id = tipoProyecto;
+		this.tipoProyecto = tipoProyecto;
 	}
 	
 	

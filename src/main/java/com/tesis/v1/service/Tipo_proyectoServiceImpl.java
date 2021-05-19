@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -35,11 +36,13 @@ public class Tipo_proyectoServiceImpl implements Tipo_proyectoService{
     
 
     @Override
+    @Transactional(readOnly = true)
     public Long count() {
         return this.tipoRepository.count();
     }
 
     @Override
+    @Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public Tipo_proyecto save(Tipo_proyecto entity) throws Exception {
         if(entity != null){
             return this.tipoRepository.save(entity);

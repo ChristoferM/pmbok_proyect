@@ -1,5 +1,6 @@
 package com.tesis.v1.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +13,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tipo_proyecto", schema = "public")
-public class Tipo_proyecto {
+public class Tipo_proyecto implements Serializable {
 
     private String tipo_id;
     private String clasificacion;
-    private List<Proyecto> proyectos = new ArrayList<Proyecto>(0);
+    private List<Proyecto> proyectos = new ArrayList<>(0);
 
     @Id
-    @Column(name = "tipo_id", nullable = false)
+    @Column(name = "tipo_id", unique = true ,nullable = false)
     public String getTipo_id() {
         return tipo_id;
     }
@@ -28,7 +29,7 @@ public class Tipo_proyecto {
         this.tipo_id = tipo_id;
     }
 
-    @Column(name = "clasificacion")
+    @Column(name = "clasificacion",nullable = false)
     public String getClasificacion() {
         return clasificacion;
     }
@@ -37,7 +38,8 @@ public class Tipo_proyecto {
         this.clasificacion = clasificacion;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Proyecto.class)
+    // targetEntity = Proyecto.class
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoProyecto")
     public List<Proyecto> getProyectos() {
         return proyectos;
     }

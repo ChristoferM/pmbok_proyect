@@ -33,8 +33,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Long count() {
-
-		return null;
+		return usuariosRepository.count();
 	}
 
 	@Override

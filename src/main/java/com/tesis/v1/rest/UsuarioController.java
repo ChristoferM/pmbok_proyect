@@ -25,57 +25,48 @@ import com.tesis.v1.mapper.UsuarioMapper;
 @CrossOrigin
 public class UsuarioController {
 
-	private final static Logger log = LoggerFactory.getLogger(UsuarioController.class);
-	
-	@Autowired
-	UsuarioService usuarioService;
-	
-	@Autowired
-	UsuarioMapper usuarioMapper;
-	
-	@RequestMapping("/finByAll")
-	public ResponseEntity<?> finByAll() throws Exception{
-		List<Usuario> usuariosLIST= usuarioService.findAll();
-		List<UsuariosDTO> usuarioListDto = usuarioMapper.toUsuariosDTOs(usuariosLIST);
-		
-		return ResponseEntity.ok().body(usuarioListDto);
-	}
-	
-	@RequestMapping("/finById/{usuarioId}")
-	public ResponseEntity<?> finById(@PathVariable("usuarioId") String userId)throws Exception{
-		log.info("Reconociendo usuario :  "+userId);
-		Optional<Usuario> usuarioOpt = usuarioService.findById(userId);
-		log.info("Cargando ...");
-		if( usuarioOpt.isEmpty()) {
-			return ResponseEntity.ok().body("Error: No se encontro Usuario");
-			
-		}
-		Usuario usuario = usuarioOpt.get();
-		UsuariosDTO usuarioDTO = usuarioMapper.toUsuariosDTO(usuario);
-		log.info("*");
-		return ResponseEntity.ok().body(usuarioDTO);
-		
-	}
+    private final static Logger log = LoggerFactory.getLogger(UsuarioController.class);
 
-	
-	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody UsuariosDTO usuariosDto)  throws Exception{
-	
-		Usuario usuario = usuarioMapper.toUsuarios(usuariosDto);
-		
-		usuario = usuarioService.save(usuario);
-		
-		usuariosDto = usuarioMapper.toUsuariosDTO(usuario);
-		
-		return ResponseEntity.ok().body(usuariosDto);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    @Autowired
+    UsuarioService usuarioService;
+
+    @Autowired
+    UsuarioMapper usuarioMapper;
+
+    @RequestMapping("/finByAll")
+    public ResponseEntity<?> finByAll() throws Exception {
+        List<Usuario> usuariosLIST = usuarioService.findAll();
+        List<UsuariosDTO> usuarioListDto = usuarioMapper.toUsuariosDTOs(usuariosLIST);
+
+        return ResponseEntity.ok().body(usuarioListDto);
+    }
+
+    @RequestMapping("/finById/{usuarioId}")
+    public ResponseEntity<?> finById(@PathVariable("usuarioId") String userId) throws Exception {
+        log.info("Reconociendo usuario :  " + userId);
+        Optional<Usuario> usuarioOpt = usuarioService.findById(userId);
+        log.info("Cargando ...");
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.ok().body("Error: No se encontro Usuario");
+
+        }
+        Usuario usuario = usuarioOpt.get();
+        UsuariosDTO usuarioDTO = usuarioMapper.toUsuariosDTO(usuario);
+        log.info("*");
+        return ResponseEntity.ok().body(usuarioDTO);
+
+    }
+
+    @RequestMapping("/save")
+    public ResponseEntity<?> save(@Valid @RequestBody UsuariosDTO usuariosDto) throws Exception {
+
+        Usuario usuario = usuarioMapper.toUsuarios(usuariosDto);
+
+        usuario = usuarioService.save(usuario);
+
+        usuariosDto = usuarioMapper.toUsuariosDTO(usuario);
+
+        return ResponseEntity.ok().body(usuariosDto);
+    }
+
 }

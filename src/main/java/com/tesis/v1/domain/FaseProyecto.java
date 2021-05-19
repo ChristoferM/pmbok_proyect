@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "faseproyecto", schema = "public")
+@Table(name = "faseproyecto", schema  = "public")
 public class FaseProyecto {
 
 	private Integer idfase ;
