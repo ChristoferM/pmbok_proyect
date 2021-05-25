@@ -8,12 +8,12 @@ import com.tesis.v1.dto.RolesDTO;
 
 @Mapper
 public interface RolesMapper {
-	
-	public RolesDTO toRolesDTO(Roles  roles);
-	
-	public  Roles toRoles(RolesDTO rolesDTO );
-	
-	public List<RolesDTO> toRolesDTO(List<Roles>  roless);
-	
-	public List<Roles> toRoles(List<RolesDTO> rolesDTOs );
+
+    public RolesDTO toRolesDTO(Roles roles);
+
+    public Roles toRoles(RolesDTO rolesDTO);
+
+    public List<RolesDTO> toRolesDTO(List<Roles> roless);
+
+    public List<Roles> toRoles(List<RolesDTO> rolesDTOs);
 }

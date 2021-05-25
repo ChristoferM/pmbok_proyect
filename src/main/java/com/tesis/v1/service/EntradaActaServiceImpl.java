@@ -13,28 +13,25 @@ import com.tesis.v1.domain.Entradacta;
 import com.tesis.v1.dto.ValidarActaDTO;
 import com.tesis.v1.repository.EntradactaRepository;
 
-
 @Service
 @Scope("singleton")
-public  class EntradaActaServiceImpl implements EntradaActaService {
+public class EntradaActaServiceImpl implements EntradaActaService {
 
     @Autowired
     EntradactaRepository entradActaRepository;
-    
 
     @Override
     @Transactional(readOnly = true)
     public List<Entradacta> findAll() {
         return entradActaRepository.findAll();
     }
-    
+
     @Override
     @Transactional(readOnly = true)
-	public List<Entradacta> entradaDelActa(Integer idProyecto) {
-		return entradActaRepository.entradaDelActa(idProyecto);
-		
-	}
-    
+    public List<Entradacta> entradaDelActa(Integer idProyecto) {
+        return entradActaRepository.entradaDelActa(idProyecto);
+
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -43,7 +40,7 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Entradacta save(Entradacta entity) throws Exception {
         /*if(entradActaRepository.existsById(entity.getIdentrada())){
             throw new Exception("La Entrada acta con Id +" + entity.getIdentrada() + "ya existe");
@@ -52,9 +49,9 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Entradacta update(Entradacta entity) throws Exception {
-        if(entradActaRepository.existsById(entity.getIdentrada()) == false ){            
+        if (entradActaRepository.existsById(entity.getIdentrada()) == false) {
             throw new Exception("La entrada acta  con Id +" + entity.getIdentrada() + "ya existe");
         }
         return entradActaRepository.save(entity);
@@ -68,73 +65,73 @@ public  class EntradaActaServiceImpl implements EntradaActaService {
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Entradacta entity) throws Exception {
-        if (entity==null) {
+        if (entity == null) {
             throw new Exception("La entrada acta es nulo");
         }
-        if(entity.getIdentrada()==null || entity.getIdentrada() <= 0 ) {
+        if (entity.getIdentrada() == null || entity.getIdentrada() <= 0) {
             throw new Exception("La id es obligatoria");
-            
+
         }
-        if(entradActaRepository.existsById(entity.getIdentrada())==false ) {
-            throw new Exception("La entrada acta  con id "+entity.getIdentrada() +" No existe (No se puede eliminar)");
+        if (entradActaRepository.existsById(entity.getIdentrada()) == false) {
+            throw new Exception("La entrada acta  con id " + entity.getIdentrada() + " No existe (No se puede eliminar)");
         }
 
-        entradActaRepository.deleteById(entity.getIdentrada());        
+        entradActaRepository.deleteById(entity.getIdentrada());
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void deleteById(Integer id) throws Exception {
-        if(id == null || id <= 0 ) {
+        if (id == null || id <= 0) {
             throw new Exception("El  id es obligatorio");
         }
-        
-        if(entradActaRepository.existsById(id)){
+
+        if (entradActaRepository.existsById(id)) {
             delete(entradActaRepository.findById(id).get());
-        }else{
+        } else {
             throw new Exception("La entrada acta con id" + id + " No existe");
         }
-        
+
     }
 
-	@Override
-	public void validate(Entradacta entity) throws Exception {
-		
-	}
+    @Override
+    public void validate(Entradacta entity) throws Exception {
 
-	@Override
-	public ValidarActaDTO encontrarData(Integer idProyecto) {
-		ValidarActaDTO validaciones = new ValidarActaDTO();
-		validaciones.setActa(entradActaRepository.validarActa(idProyecto));
-		
-		validaciones.setEntradactaValidate(entradActaRepository.validarEntrada(idProyecto));
-		validaciones.setHerramientasValidate(entradActaRepository.validarHerramienta(idProyecto));
-		validaciones.setCasoNegocioValidate(entradActaRepository.validarCasoNegocio(idProyecto));
-		validaciones.setPlanValidate(entradActaRepository.validarHPlanGestion(idProyecto));
-		
-		return validaciones;
-	}
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public Integer valorIdActa(Integer idProyecto) {
-		if(idProyecto > 0 ) {
-			return entradActaRepository.valorIdActa(idProyecto);	
-		}else {
-			 return 0;
-		}
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public Integer valorIdEntraActa(Integer idProyecto) {
-		if(idProyecto > 0 ) {
-			return entradActaRepository.valorIdEntraActa(idProyecto);	
-		}else {
-			 return 0;
-		}
-	}
+    @Override
+    public ValidarActaDTO encontrarData(Integer idProyecto) {
+        ValidarActaDTO validaciones = new ValidarActaDTO();
+        validaciones.setActa(entradActaRepository.validarActa(idProyecto));
+
+        validaciones.setEntradactaValidate(entradActaRepository.validarEntrada(idProyecto));
+        validaciones.setHerramientasValidate(entradActaRepository.validarHerramienta(idProyecto));
+        validaciones.setCasoNegocioValidate(entradActaRepository.validarCasoNegocio(idProyecto));
+        validaciones.setPlanValidate(entradActaRepository.validarHPlanGestion(idProyecto));
+
+        return validaciones;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Integer valorIdActa(Integer idProyecto) {
+        if (idProyecto > 0) {
+            return entradActaRepository.valorIdActa(idProyecto);
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Integer valorIdEntraActa(Integer idProyecto) {
+        if (idProyecto > 0) {
+            return entradActaRepository.valorIdEntraActa(idProyecto);
+        } else {
+            return 0;
+        }
+    }
 
 }

@@ -8,16 +8,16 @@ import com.tesis.v1.dto.ActasDTO;
 
 @Mapper
 public interface ActasMapper {
-	
-	public ActasDTO toActasDTO(Acta actas);
-	
-	public Acta toActas(ActasDTO actasDto);
-	
-	public List<ActasDTO> toActasDTO(List<Acta> actas);
-	
-	public List<Acta> toActas(List<ActasDTO> actasDTOs);
 
-	/*
+    public ActasDTO toActasDTO(Acta actas);
+
+    public Acta toActas(ActasDTO actasDto);
+
+    public List<ActasDTO> toActasDTO(List<Acta> actas);
+
+    public List<Acta> toActas(List<ActasDTO> actasDTOs);
+
+    /*
 	public  toDTO( );
 	
 	public  to( );
@@ -26,6 +26,5 @@ public interface ActasMapper {
 	
 	public List<> to(List<> );
 	
-	*/
-
+     */
 }

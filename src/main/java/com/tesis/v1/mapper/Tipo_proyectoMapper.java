@@ -9,18 +9,15 @@ import org.mapstruct.Mapper;
  *
  * @author david
  */
-
 @Mapper
 public interface Tipo_proyectoMapper {
-    
-    
+
     public tipo_proyectoDTO toTipo_proyectoDTO(Tipo_proyecto tipo_proyecto);
 
-    public Tipo_proyecto  toTipo_proyecto(tipo_proyectoDTO tipo_proyectoDTO);
+    public Tipo_proyecto toTipo_proyecto(tipo_proyectoDTO tipo_proyectoDTO);
 
-    public List<tipo_proyectoDTO> toTipo_proyectosDTOs(List<Tipo_proyecto> tipo_proyectos );
+    public List<tipo_proyectoDTO> toTipo_proyectosDTOs(List<Tipo_proyecto> tipo_proyectos);
 
     public List<Tipo_proyecto> toTipo_proyectos(List<tipo_proyectoDTO> tipo_proyectoDTOs);
-        
-    
+
 }

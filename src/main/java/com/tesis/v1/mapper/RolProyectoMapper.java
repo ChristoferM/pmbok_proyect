@@ -7,13 +7,13 @@ import com.tesis.v1.dto.RolproyectoDTO;
 
 @Mapper
 public interface RolProyectoMapper {
-	
-	public  RolproyectoDTO torolProyectoDTO(RolProyecto  rolProyecto);
-	
-	public  RolProyecto torolProyecto( RolproyectoDTO rolProyectoDTO);
-	
-	public  List<RolproyectoDTO> torolProyectoDTOs(List<RolProyecto> rolProyectos);
-	
-	public List<RolproyectoDTO> torolProyectos(List<RolproyectoDTO>  rolProyectoDTOs);
-	
+
+    public RolproyectoDTO torolProyectoDTO(RolProyecto rolProyecto);
+
+    public RolProyecto torolProyecto(RolproyectoDTO rolProyectoDTO);
+
+    public List<RolproyectoDTO> torolProyectoDTOs(List<RolProyecto> rolProyectos);
+
+    public List<RolproyectoDTO> torolProyectos(List<RolproyectoDTO> rolProyectoDTOs);
+
 }

@@ -27,67 +27,67 @@ import com.tesis.v1.mapper.PlanGestionBeneficioMapper;
 @CrossOrigin
 public class PlanGestionBeneficiosController {
 
-	private final static Logger log = LoggerFactory.getLogger(PlanGestionBeneficiosController.class);
+    private final static Logger log = LoggerFactory.getLogger(PlanGestionBeneficiosController.class);
 
-	@Autowired
-	EntradaActaService entradaActaService;
+    @Autowired
+    EntradaActaService entradaActaService;
 
-	@Autowired
-	PlanGestionBeneficiosService PlanGestionBeneficiosService;
+    @Autowired
+    PlanGestionBeneficiosService PlanGestionBeneficiosService;
 
-	@Autowired
-	PlanGestionBeneficioMapper planesgestionbeneficiosMapper;
+    @Autowired
+    PlanGestionBeneficioMapper planesgestionbeneficiosMapper;
 
-	@RequestMapping("/finById/{planId}")
-	public ResponseEntity<?> finById(@PathVariable("planId") Integer planId) throws Exception {
-		/*
+    @RequestMapping("/finById/{planId}")
+    public ResponseEntity<?> finById(@PathVariable("planId") Integer planId) throws Exception {
+        /*
 		 * PlanGestionbeneficio planesgestionbeneficios0 = new
 		 * PlanGestionbeneficio();
-		 */
+         */
 
-		Optional<PlanGestionbeneficio> planesgestionbeneficiosopc = PlanGestionBeneficiosService.findById(planId);
-		log.info("Cargando ...");
-		if (planesgestionbeneficiosopc.isEmpty()) {
-			return ResponseEntity.ok().body("Error: No se encontro La referencia");
+        Optional<PlanGestionbeneficio> planesgestionbeneficiosopc = PlanGestionBeneficiosService.findById(planId);
+        log.info("Cargando ...");
+        if (planesgestionbeneficiosopc.isEmpty()) {
+            return ResponseEntity.ok().body("Error: No se encontro La referencia");
 
-		}
-		PlanGestionbeneficio planesgestionbeneficios = planesgestionbeneficiosopc.get();
+        }
+        PlanGestionbeneficio planesgestionbeneficios = planesgestionbeneficiosopc.get();
 
-		PlanGestionBeneficioDTO planesgestionbeneficiosDTO = planesgestionbeneficiosMapper
-				.toplanesGestionBeneficiosDTO(planesgestionbeneficios);
+        PlanGestionBeneficioDTO planesgestionbeneficiosDTO = planesgestionbeneficiosMapper
+                .toplanesGestionBeneficiosDTO(planesgestionbeneficios);
 
-		log.info("*");
-		return ResponseEntity.ok().body(planesgestionbeneficiosDTO);
+        log.info("*");
+        return ResponseEntity.ok().body(planesgestionbeneficiosDTO);
 
-	}
-	
-	@RequestMapping("/findByAll")
-	public ResponseEntity<?> finByAll() throws Exception {
-		// actas acta
-		List<PlanGestionbeneficio> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.findAll();
+    }
 
-		List<PlanGestionBeneficioDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
-				.toplanesGestionBeneficiosDTO(planesgestionbeneficiosLIST);
+    @RequestMapping("/findByAll")
+    public ResponseEntity<?> finByAll() throws Exception {
+        // actas acta
+        List<PlanGestionbeneficio> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.findAll();
 
-		return ResponseEntity.ok().body(planesgestionbeneficiosListDto);
-	}
+        List<PlanGestionBeneficioDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
+                .toplanesGestionBeneficiosDTO(planesgestionbeneficiosLIST);
 
-	@RequestMapping("/planGestionDelActa/{idProyecto}")
-	public ResponseEntity<?> planGestionDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
-		// actas acta
-		List<PlanGestionbeneficio> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.planGestionDelActa(idProyecto);
+        return ResponseEntity.ok().body(planesgestionbeneficiosListDto);
+    }
 
-		List<PlanGestionBeneficioDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
-				.toplanesGestionBeneficiosDTO(planesgestionbeneficiosLIST);
+    @RequestMapping("/planGestionDelActa/{idProyecto}")
+    public ResponseEntity<?> planGestionDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+        // actas acta
+        List<PlanGestionbeneficio> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.planGestionDelActa(idProyecto);
 
-		return ResponseEntity.ok().body(planesgestionbeneficiosListDto);
-	}
+        List<PlanGestionBeneficioDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
+                .toplanesGestionBeneficiosDTO(planesgestionbeneficiosLIST);
 
-	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody PlanGestionBeneficioDTO planesgestionbeneficiosDTO)
-			throws Exception {
-		log.info("************************************ 1");
-		/*
+        return ResponseEntity.ok().body(planesgestionbeneficiosListDto);
+    }
+
+    @RequestMapping("/save")
+    public ResponseEntity<?> save(@Valid @RequestBody PlanGestionBeneficioDTO planesgestionbeneficiosDTO)
+            throws Exception {
+        log.info("************************************ 1");
+        /*
 		private Integer idEntradaActa;
 		--    private Integer id_plan_gb;
 		private String acciones;
@@ -95,32 +95,31 @@ public class PlanGestionBeneficiosController {
 		private String prodcutos;
 		private String servicios;
 		private String resultado;
-		 */
-		PlanGestionbeneficio planesgestionbeneficios = new PlanGestionbeneficio();
-		Entradacta entradas = new Entradacta();
-		// PlanGestionBeneficioDTO PlanGestionBeneficioDTO = new
-		// PlanGestionBeneficioDTO ();
-		planesgestionbeneficios.setAcciones(planesgestionbeneficiosDTO.getAcciones());
-		planesgestionbeneficios.setComponentes(planesgestionbeneficiosDTO.getComponentes());
-		planesgestionbeneficios.setProdcutos(planesgestionbeneficiosDTO.getProdcutos());
-		planesgestionbeneficios.setServicios(planesgestionbeneficiosDTO.getServicios());
-		planesgestionbeneficios.setResultado(planesgestionbeneficiosDTO.getResultado());
-		log.info("ACTA NUEMEOR: "+planesgestionbeneficiosDTO.getIdEntradaActa().toString() );
-		entradas.setIdentrada(planesgestionbeneficiosDTO.getIdEntradaActa());
-		log.info("ACTA NUEMEOR planes: "+entradas.getIdentrada().toString() );
-		
-		planesgestionbeneficios.setEntradacta(entradas);
-		
+         */
+        PlanGestionbeneficio planesgestionbeneficios = new PlanGestionbeneficio();
+        Entradacta entradas = new Entradacta();
+        // PlanGestionBeneficioDTO PlanGestionBeneficioDTO = new
+        // PlanGestionBeneficioDTO ();
+        planesgestionbeneficios.setAcciones(planesgestionbeneficiosDTO.getAcciones());
+        planesgestionbeneficios.setComponentes(planesgestionbeneficiosDTO.getComponentes());
+        planesgestionbeneficios.setProdcutos(planesgestionbeneficiosDTO.getProdcutos());
+        planesgestionbeneficios.setServicios(planesgestionbeneficiosDTO.getServicios());
+        planesgestionbeneficios.setResultado(planesgestionbeneficiosDTO.getResultado());
+        log.info("ACTA NUEMEOR: " + planesgestionbeneficiosDTO.getIdEntradaActa().toString());
+        entradas.setIdentrada(planesgestionbeneficiosDTO.getIdEntradaActa());
+        log.info("ACTA NUEMEOR planes: " + entradas.getIdentrada().toString());
 
-		log.info("************************************ 2");
+        planesgestionbeneficios.setEntradacta(entradas);
 
-		PlanGestionbeneficio planesgestionbeneficiosnew = PlanGestionBeneficiosService.save(planesgestionbeneficios);
-		log.info("************************************ 3");
-		PlanGestionBeneficioDTO planesgestionbeneficiosDTOnew = planesgestionbeneficiosMapper
-				.toplanesGestionBeneficiosDTO(planesgestionbeneficiosnew);
+        log.info("************************************ 2");
 
-		log.info("************************************ 4");
-		return ResponseEntity.ok().body(planesgestionbeneficiosDTOnew);
-	}
+        PlanGestionbeneficio planesgestionbeneficiosnew = PlanGestionBeneficiosService.save(planesgestionbeneficios);
+        log.info("************************************ 3");
+        PlanGestionBeneficioDTO planesgestionbeneficiosDTOnew = planesgestionbeneficiosMapper
+                .toplanesGestionBeneficiosDTO(planesgestionbeneficiosnew);
+
+        log.info("************************************ 4");
+        return ResponseEntity.ok().body(planesgestionbeneficiosDTOnew);
+    }
 
 }

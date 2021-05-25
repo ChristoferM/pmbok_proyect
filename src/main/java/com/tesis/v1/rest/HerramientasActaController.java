@@ -26,69 +26,68 @@ import com.tesis.v1.mapper.HerramientasactaMapper;
 @RequestMapping("/api/herramientasActa") // Forma de llamar datos
 @CrossOrigin
 public class HerramientasActaController {
-	
-	
-	private final static Logger log = LoggerFactory.getLogger(HerramientasActaController.class);
-	
-	@Autowired
-	HerramientasactaMapper herramientasactaMapper;
-	
-	@Autowired
-	HerramientasActasService herramientasActasService;
 
-	@Autowired
-	ActaService actaService;
-	
-	@RequestMapping("/herramientaDelActa/{idProyecto}")
-	public ResponseEntity<?> herramientaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception{
-		List<Herramientasacta> herramientaLIST= herramientasActasService.herramientaDelActa(idProyecto);
-		List<HerramientasActaDTO> herramientaListDto = herramientasactaMapper.toherramientasActa(herramientaLIST);
-		
-		return ResponseEntity.ok().body(herramientaListDto);
-	}
-	
-	
-	@RequestMapping("/finById/{herramientaId}")
-	public ResponseEntity<?> finById(@PathVariable("herramientaId") Integer herramientaID)throws Exception{
-		//herramientasacta herramienta= new Herramientasacta();
-		
-		Optional<Herramientasacta> herramientaoOpt = herramientasActasService.findById(herramientaID);
-		log.info("Cargando ...");
-		if( herramientaoOpt.isEmpty()) {
-			return ResponseEntity.ok().body("Error: No se encontro Usuario");
-			
-		}
-		Herramientasacta herramienta = herramientaoOpt.get();
-		HerramientasActaDTO herramientasactaDTO = herramientasactaMapper.toherramientasActaDTO(herramienta);
-		log.info("*");
-		return ResponseEntity.ok().body(herramientasactaDTO);
-		
-	}
-	@RequestMapping("/findByAll")
-	public ResponseEntity<?> finByAll() throws Exception{
-		List<Herramientasacta> herramientaLIST= herramientasActasService.findAll();
-		List<HerramientasActaDTO> herramientaListDto = herramientasactaMapper.toherramientasActa(herramientaLIST);
-		
-		return ResponseEntity.ok().body(herramientaListDto);
-	}
+    private final static Logger log = LoggerFactory.getLogger(HerramientasActaController.class);
 
-	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody HerramientasActaDTO herramientasactaDTO)  throws Exception{
-		Acta acta =new Acta();
-		acta.setIdactas(herramientasactaDTO.getIdactas());
-		Herramientasacta herramienta = new Herramientasacta();
-		herramienta.setIdherramienta(0);
-		herramienta.setActas(acta);
-		herramienta.setJuicioexpertos(herramientasactaDTO.getJuicioexpertos());
-		herramienta.setRecopilaciondatos(herramientasactaDTO.getRecopilaciondatos());
-		herramienta.setHabilidades(herramientasactaDTO.getHabilidades());
-		herramienta.setHerramientareuniones(herramientasactaDTO.getHabilidades());
-		
-		Herramientasacta herramientasactaNew = herramientasActasService.save(herramienta);
-		
-		HerramientasActaDTO herramientaDto = herramientasactaMapper.toherramientasActaDTO(herramientasactaNew);
-		
-		return ResponseEntity.ok().body(herramientaDto);
-	}
-	
+    @Autowired
+    HerramientasactaMapper herramientasactaMapper;
+
+    @Autowired
+    HerramientasActasService herramientasActasService;
+
+    @Autowired
+    ActaService actaService;
+
+    @RequestMapping("/herramientaDelActa/{idProyecto}")
+    public ResponseEntity<?> herramientaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+        List<Herramientasacta> herramientaLIST = herramientasActasService.herramientaDelActa(idProyecto);
+        List<HerramientasActaDTO> herramientaListDto = herramientasactaMapper.toherramientasActa(herramientaLIST);
+
+        return ResponseEntity.ok().body(herramientaListDto);
+    }
+
+    @RequestMapping("/finById/{herramientaId}")
+    public ResponseEntity<?> finById(@PathVariable("herramientaId") Integer herramientaID) throws Exception {
+        //herramientasacta herramienta= new Herramientasacta();
+
+        Optional<Herramientasacta> herramientaoOpt = herramientasActasService.findById(herramientaID);
+        log.info("Cargando ...");
+        if (herramientaoOpt.isEmpty()) {
+            return ResponseEntity.ok().body("Error: No se encontro Usuario");
+
+        }
+        Herramientasacta herramienta = herramientaoOpt.get();
+        HerramientasActaDTO herramientasactaDTO = herramientasactaMapper.toherramientasActaDTO(herramienta);
+        log.info("*");
+        return ResponseEntity.ok().body(herramientasactaDTO);
+
+    }
+
+    @RequestMapping("/findByAll")
+    public ResponseEntity<?> finByAll() throws Exception {
+        List<Herramientasacta> herramientaLIST = herramientasActasService.findAll();
+        List<HerramientasActaDTO> herramientaListDto = herramientasactaMapper.toherramientasActa(herramientaLIST);
+
+        return ResponseEntity.ok().body(herramientaListDto);
+    }
+
+    @RequestMapping("/save")
+    public ResponseEntity<?> save(@Valid @RequestBody HerramientasActaDTO herramientasactaDTO) throws Exception {
+        Acta acta = new Acta();
+        acta.setIdactas(herramientasactaDTO.getIdactas());
+        Herramientasacta herramienta = new Herramientasacta();
+        herramienta.setIdherramienta(0);
+        herramienta.setActas(acta);
+        herramienta.setJuicioexpertos(herramientasactaDTO.getJuicioexpertos());
+        herramienta.setRecopilaciondatos(herramientasactaDTO.getRecopilaciondatos());
+        herramienta.setHabilidades(herramientasactaDTO.getHabilidades());
+        herramienta.setHerramientareuniones(herramientasactaDTO.getHabilidades());
+
+        Herramientasacta herramientasactaNew = herramientasActasService.save(herramienta);
+
+        HerramientasActaDTO herramientaDto = herramientasactaMapper.toherramientasActaDTO(herramientasactaNew);
+
+        return ResponseEntity.ok().body(herramientaDto);
+    }
+
 }

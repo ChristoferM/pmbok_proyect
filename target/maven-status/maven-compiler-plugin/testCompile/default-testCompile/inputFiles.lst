@@ -1,18 +1,18 @@
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/HerramientasActaServicesTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/EntradaActaServiceTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/FaseProyectoServiceTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/GrupoServiceTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/RolproyectoRolTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/Pdps.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/PmbokApplicationTests.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/ReunionesProyectoTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/EntradaActaCasoNegoPlanesGesBenTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/reunionesFaseProyectoSubGrupoTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/usuarioGrupoTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/CasoNegocioServiceTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/ProyectosServiceTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/UsuarioServiceTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/ReunionesServiceTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/ActaServiceTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/actasEntradasActaHerramientasTest.java
-/home/david/Escritorio/backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/PlanGestionBeneficioServiceTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/PlanGestionBeneficioServiceTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/PmbokApplicationTests.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/reunionesFaseProyectoSubGrupoTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/usuarioGrupoTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/ReunionesProyectoTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/GrupoServiceTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/FaseProyectoServiceTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/CasoNegocioServiceTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/RolproyectoRolTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/EntradaActaCasoNegoPlanesGesBenTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/Pdps.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/ActaServiceTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/EntradaActaServiceTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/HerramientasActaServicesTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/UsuarioServiceTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/ProyectosServiceTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/test/repository/actasEntradasActaHerramientasTest.java
+/home/david/Escritorio/proyecto backend/pmbok_proyect/src/test/java/com/tesis/v1/rest/ReunionesServiceTest.java

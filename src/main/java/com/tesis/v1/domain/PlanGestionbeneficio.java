@@ -13,83 +13,83 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "planesgestionbeneficios", schema = "public")
 public class PlanGestionbeneficio {
-	private Integer id_plan_gb;
-	private String acciones;
-	private String componentes;
-	private String prodcutos;
-	private String servicios;
-	private String resultado;
-	// identrada int4 NOT NULL,
 
-	// Entidad padre
-	private Entradacta entradacta;
+    private Integer id_plan_gb;
+    private String acciones;
+    private String componentes;
+    private String prodcutos;
+    private String servicios;
+    private String resultado;
+    // identrada int4 NOT NULL,
 
-	@Id
-	@Column(name = "id_plan_gb", unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getId_plan_gb() {
-		return id_plan_gb;
-	}
+    // Entidad padre
+    private Entradacta entradacta;
 
-	public void setId_plan_gb(Integer id_plan_gb) {
-		this.id_plan_gb = id_plan_gb;
-	}
+    @Id
+    @Column(name = "id_plan_gb", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId_plan_gb() {
+        return id_plan_gb;
+    }
 
-	@Column(name = "acciones", nullable = false)
-	public String getAcciones() {
-		return acciones;
-	}
+    public void setId_plan_gb(Integer id_plan_gb) {
+        this.id_plan_gb = id_plan_gb;
+    }
 
-	public void setAcciones(String acciones) {
-		this.acciones = acciones;
-	}
+    @Column(name = "acciones", nullable = false)
+    public String getAcciones() {
+        return acciones;
+    }
 
-	@Column(name = "componentes", nullable = false)
-	public String getComponentes() {
-		return componentes;
-	}
+    public void setAcciones(String acciones) {
+        this.acciones = acciones;
+    }
 
-	public void setComponentes(String componentes) {
-		this.componentes = componentes;
-	}
+    @Column(name = "componentes", nullable = false)
+    public String getComponentes() {
+        return componentes;
+    }
 
-	@Column(name = "prodcutos", nullable = false)
-	public String getProdcutos() {
-		return prodcutos;
-	}
+    public void setComponentes(String componentes) {
+        this.componentes = componentes;
+    }
 
-	public void setProdcutos(String prodcutos) {
-		this.prodcutos = prodcutos;
-	}
+    @Column(name = "prodcutos", nullable = false)
+    public String getProdcutos() {
+        return prodcutos;
+    }
 
-	@Column(name = "servicios", nullable = false)
-	public String getServicios() {
-		return servicios;
-	}
+    public void setProdcutos(String prodcutos) {
+        this.prodcutos = prodcutos;
+    }
 
-	public void setServicios(String servicios) {
-		this.servicios = servicios;
-	}
+    @Column(name = "servicios", nullable = false)
+    public String getServicios() {
+        return servicios;
+    }
 
-	@Column(name = "resultado", nullable = false)
-	public String getResultado() {
-		return resultado;
-	}
+    public void setServicios(String servicios) {
+        this.servicios = servicios;
+    }
 
-	public void setResultado(String resultado) {
-		this.resultado = resultado;
-	}
+    @Column(name = "resultado", nullable = false)
+    public String getResultado() {
+        return resultado;
+    }
 
-	// ----------------------------------------------------- Entidad padre
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "identrada")
-	public Entradacta getEntradacta() {
-		return entradacta;
-	}
+    // ----------------------------------------------------- Entidad padre
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "identrada")
+    public Entradacta getEntradacta() {
+        return entradacta;
+    }
 
-	public void setEntradacta(Entradacta entradacta) {
-		this.entradacta = entradacta;
-	}
+    public void setEntradacta(Entradacta entradacta) {
+        this.entradacta = entradacta;
+    }
 
 }

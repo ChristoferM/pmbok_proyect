@@ -2,7 +2,6 @@ com/tesis/v1/mapper/CasoNegocioMapperImpl.class
 com/tesis/v1/dto/CasoNegocioVistaDTO.class
 com/tesis/v1/mapper/PlanGestionBeneficioMapperImpl.class
 com/tesis/v1/mapper/PdpEntradasMapper.class
-com/tesis/v1/dto/EntradactaVistaDTO.class
 com/tesis/v1/service/CasoNegocioServiceImpl.class
 com/tesis/v1/repository/HerramientasactaRepository.class
 com/tesis/v1/mapper/RolProyectoMapperImpl.class

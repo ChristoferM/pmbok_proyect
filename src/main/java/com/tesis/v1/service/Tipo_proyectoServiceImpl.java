@@ -14,14 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author david
  */
-
 @Service
 @Scope("singleton")
-public class Tipo_proyectoServiceImpl implements Tipo_proyectoService{
-    
+public class Tipo_proyectoServiceImpl implements Tipo_proyectoService {
+
     @Autowired
     tipo_proyectoRepository tipoRepository;
-    
+
     @Override
     @Transactional(readOnly = true)
     public List<Tipo_proyecto> findAll() {
@@ -33,7 +32,6 @@ public class Tipo_proyectoServiceImpl implements Tipo_proyectoService{
     public Optional<Tipo_proyecto> findById(String id) throws Exception {
         return this.tipoRepository.findById(id);
     }
-    
 
     @Override
     @Transactional(readOnly = true)
@@ -42,13 +40,13 @@ public class Tipo_proyectoServiceImpl implements Tipo_proyectoService{
     }
 
     @Override
-    @Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Tipo_proyecto save(Tipo_proyecto entity) throws Exception {
-        if(entity != null){
+        if (entity != null) {
             return this.tipoRepository.save(entity);
         }
-        
-        throw new Exception("Verificar el tipo proyecto nulo");  
+
+        throw new Exception("Verificar el tipo proyecto nulo");
     }
 
     @Override
@@ -70,5 +68,5 @@ public class Tipo_proyectoServiceImpl implements Tipo_proyectoService{
     public void validate(Tipo_proyecto entity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

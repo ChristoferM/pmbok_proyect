@@ -17,81 +17,81 @@ import com.tesis.v1.repository.ReunionRepository;
 @Scope("singleton")
 public class ReunionesServiceImpl implements ReunionesService {
 
-	@Autowired
-	ReunionRepository reunionesRepository;
+    @Autowired
+    ReunionRepository reunionesRepository;
 
-	@Autowired
-	UsuarioRepository usuariosRepository;
+    @Autowired
+    UsuarioRepository usuariosRepository;
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<Reunion> findAll() {
-		List<Reunion> poryectosList = reunionesRepository.findAll();
-		if (poryectosList == null || poryectosList.size() == 0) {
-			return null;
+    @Override
+    @Transactional(readOnly = true)
+    public List<Reunion> findAll() {
+        List<Reunion> poryectosList = reunionesRepository.findAll();
+        if (poryectosList == null || poryectosList.size() == 0) {
+            return null;
 
-		} else
-			return poryectosList;
-	}
+        } else {
+            return poryectosList;
+        }
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<Reunion> findById(Integer id) throws Exception {
-		Optional<Reunion> proyectoOpt = reunionesRepository.findById(id);
-		if (proyectoOpt.isPresent()) {
-			return proyectoOpt;
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Reunion> findById(Integer id) throws Exception {
+        Optional<Reunion> proyectoOpt = reunionesRepository.findById(id);
+        if (proyectoOpt.isPresent()) {
+            return proyectoOpt;
 
-		} else {
-			throw new Exception("El No se encontro reuniones : Posible Problemas con el identifcador ");
-		}
-	}
+        } else {
+            throw new Exception("El No se encontro reuniones : Posible Problemas con el identifcador ");
+        }
+    }
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Reunion save(Reunion entity) throws Exception {
-		// las Reunion deben cargarse con el numero ID del proyecto
-		
-		
-		return reunionesRepository.save(entity);
-	}
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Reunion save(Reunion entity) throws Exception {
+        // las Reunion deben cargarse con el numero ID del proyecto
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Reunion update(Reunion entity) throws Exception {
-		if (reunionesRepository.existsById(entity.getIdreuniones()) == false) {
-			throw new Exception("el proyecto No se encontro");
-		}
-		return reunionesRepository.save(entity);
-	}
+        return reunionesRepository.save(entity);
+    }
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void delete(Reunion entity) throws Exception {
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Reunion update(Reunion entity) throws Exception {
+        if (reunionesRepository.existsById(entity.getIdreuniones()) == false) {
+            throw new Exception("el proyecto No se encontro");
+        }
+        return reunionesRepository.save(entity);
+    }
 
-	}
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void delete(Reunion entity) throws Exception {
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void deleteById(Integer id) throws Exception {
-		if (id == null || id <= 0) {
-			throw new Exception("El Identificador es obligatoria");
-		}
-		if (reunionesRepository.existsById(id)) {
-			reunionesRepository.deleteById(id);
-		} else {
-			throw new Exception("El product con id :" + id + " no existe");
-		}
+    }
 
-	}
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void deleteById(Integer id) throws Exception {
+        if (id == null || id <= 0) {
+            throw new Exception("El Identificador es obligatoria");
+        }
+        if (reunionesRepository.existsById(id)) {
+            reunionesRepository.deleteById(id);
+        } else {
+            throw new Exception("El product con id :" + id + " no existe");
+        }
 
-	@Override
-	public void validate(Reunion entity) throws Exception {
+    }
 
-	}
+    @Override
+    public void validate(Reunion entity) throws Exception {
 
-	@Override
-	public Long count() {
+    }
 
-		return null;
-	}
+    @Override
+    public Long count() {
+
+        return null;
+    }
 }

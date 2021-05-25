@@ -19,6 +19,7 @@ import javax.persistence.Table;
 public class Entradacta {
 
     private Integer identrada;
+    private Acta actas; // PADRE
     private String acuerdos;
     private String factores;
     private String activosprocesos;
@@ -28,7 +29,6 @@ public class Entradacta {
 
     private List<PlanGestionbeneficio> planesgestionbeneficios = new ArrayList<PlanGestionbeneficio>(0);
 
-    private Acta actas; // PADRE
     // idactas int4 NOT NULL,
 
     @Id

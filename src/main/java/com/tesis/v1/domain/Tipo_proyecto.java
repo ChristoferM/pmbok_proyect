@@ -20,7 +20,7 @@ public class Tipo_proyecto implements Serializable {
     private List<Proyecto> proyectos = new ArrayList<>(0);
 
     @Id
-    @Column(name = "tipo_id", unique = true ,nullable = false)
+    @Column(name = "tipo_id", unique = true, nullable = false)
     public String getTipo_id() {
         return tipo_id;
     }
@@ -29,7 +29,7 @@ public class Tipo_proyecto implements Serializable {
         this.tipo_id = tipo_id;
     }
 
-    @Column(name = "clasificacion",nullable = false)
+    @Column(name = "clasificacion", nullable = false)
     public String getClasificacion() {
         return clasificacion;
     }

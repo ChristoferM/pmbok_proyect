@@ -5,7 +5,7 @@ package com.tesis.v1.dto;
  * @author david
  */
 public class tipo_proyectoDTO {
-    
+
     private String tipo_id;
     private String clasificacion;
 
@@ -24,7 +24,5 @@ public class tipo_proyectoDTO {
     public void setClasificacion(String clasificacion) {
         this.clasificacion = clasificacion;
     }
-    
-    
-    
+
 }

@@ -13,65 +13,61 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "entradapdp", schema = "public")
 public class Entradas {
-	private Integer identradapdp ;
-	private String otrosprocesos ;
-	private String factoresambientales ;
-	private String  activosprocesos;
-	
-	private Pdp pdp;
-	
-	
-	@Id
-	@Column(name = "identrada", unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getIdentradapdp() {
-		return identradapdp;
-	}
 
-	public void setIdentradapdp(Integer identradapdp) {
-		this.identradapdp = identradapdp;
-	}
+    private Integer identradapdp;
+    private String otrosprocesos;
+    private String factoresambientales;
+    private String activosprocesos;
 
-	@Column(name = "otrosprocesos", nullable = false)
-	public String getOtrosprocesos() {
-		return otrosprocesos;
-	}
+    private Pdp pdp;
 
-	public void setOtrosprocesos(String otrosprocesos) {
-		this.otrosprocesos = otrosprocesos;
-	}
+    @Id
+    @Column(name = "identrada", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getIdentradapdp() {
+        return identradapdp;
+    }
 
-	@Column(name = "factoresambientales", nullable = false)
-	public String getFactoresambientales() {
-		return factoresambientales;
-	}
+    public void setIdentradapdp(Integer identradapdp) {
+        this.identradapdp = identradapdp;
+    }
 
-	public void setFactoresambientales(String factoresambientales) {
-		this.factoresambientales = factoresambientales;
-	}
+    @Column(name = "otrosprocesos", nullable = false)
+    public String getOtrosprocesos() {
+        return otrosprocesos;
+    }
 
-	@Column(name = "activosprocesos", nullable = false)
-	public String getActivosprocesos() {
-		return activosprocesos;
-	}
+    public void setOtrosprocesos(String otrosprocesos) {
+        this.otrosprocesos = otrosprocesos;
+    }
 
-	public void setActivosprocesos(String activosprocesos) {
-		this.activosprocesos = activosprocesos;
-	}
-	
-	// ------------------------- ENTIDAD PADRE
+    @Column(name = "factoresambientales", nullable = false)
+    public String getFactoresambientales() {
+        return factoresambientales;
+    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn( name = "idpdp")
-	public Pdp getPdp() {
-		return pdp;
-	}
+    public void setFactoresambientales(String factoresambientales) {
+        this.factoresambientales = factoresambientales;
+    }
 
-	public void setPdp(Pdp pdp) {
-		this.pdp = pdp;
-	}
-	
-	
-	
+    @Column(name = "activosprocesos", nullable = false)
+    public String getActivosprocesos() {
+        return activosprocesos;
+    }
+
+    public void setActivosprocesos(String activosprocesos) {
+        this.activosprocesos = activosprocesos;
+    }
+
+    // ------------------------- ENTIDAD PADRE
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idpdp")
+    public Pdp getPdp() {
+        return pdp;
+    }
+
+    public void setPdp(Pdp pdp) {
+        this.pdp = pdp;
+    }
 
 }

@@ -18,75 +18,76 @@ import com.tesis.v1.repository.GrupoRepository;
 @Scope("singleton")
 public class GrupoServiceImpl implements GrupoService {
 
-	private final static Logger log = LoggerFactory.getLogger(GrupoServiceImpl.class);
+    private final static Logger log = LoggerFactory.getLogger(GrupoServiceImpl.class);
 
-	@Autowired
-	GrupoRepository grupoRepository;
+    @Autowired
+    GrupoRepository grupoRepository;
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<Grupo> findAll() {
-		return grupoRepository.findAll();
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public List<Grupo> findAll() {
+        return grupoRepository.findAll();
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<Grupo> findById(Integer id) throws Exception {
-		if (id <= 0 || id == null) {
-			throw new Exception("error en peticion");
-		} else
-			return grupoRepository.findById(id);
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Grupo> findById(Integer id) throws Exception {
+        if (id <= 0 || id == null) {
+            throw new Exception("error en peticion");
+        } else {
+            return grupoRepository.findById(id);
+        }
 
-	}
+    }
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Grupo save(Grupo entity) throws Exception {
-		log.info("save");
-		if (entity == null) {
-			throw new Exception("error en peticion");
-		} else {
-			return grupoRepository.save(entity);
-		}
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Grupo save(Grupo entity) throws Exception {
+        log.info("save");
+        if (entity == null) {
+            throw new Exception("error en peticion");
+        } else {
+            return grupoRepository.save(entity);
+        }
 
-	}
+    }
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Grupo update(Grupo entity) throws Exception {
-		if (entity == null) {
-			throw new Exception("error en peticion");
-		}
-		return grupoRepository.save(entity);
-	}
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Grupo update(Grupo entity) throws Exception {
+        if (entity == null) {
+            throw new Exception("error en peticion");
+        }
+        return grupoRepository.save(entity);
+    }
 
-	@Override
-	public void deleteById(Integer id) throws Exception {
-		if (grupoRepository.existsById(id)) {
+    @Override
+    public void deleteById(Integer id) throws Exception {
+        if (grupoRepository.existsById(id)) {
 
-			grupoRepository.deleteById(id);
+            grupoRepository.deleteById(id);
 
-		} else {
-			throw new Exception("Erro: No se reconocio el identificador de grupo");
-		}
-	}
+        } else {
+            throw new Exception("Erro: No se reconocio el identificador de grupo");
+        }
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public Long count() {
+    @Override
+    @Transactional(readOnly = true)
+    public Long count() {
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void delete(Grupo entity) throws Exception {
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void delete(Grupo entity) throws Exception {
 
-	}
+    }
 
-	@Override
-	public void validate(Grupo entity) throws Exception {
+    @Override
+    public void validate(Grupo entity) throws Exception {
 
-	}
+    }
 
 }

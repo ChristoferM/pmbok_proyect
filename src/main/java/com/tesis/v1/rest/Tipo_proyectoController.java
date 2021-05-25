@@ -69,15 +69,14 @@ public class Tipo_proyectoController {
         return ResponseEntity.ok().body(tipoDTO.getTipo_id() + " Tipo de proyecto registrado");
 
     }
-    
-    
+
     @PutMapping("/update")
-	public ResponseEntity<?> update(@Valid @RequestBody tipo_proyectoDTO tipoDTO) throws Exception {
-	 
+    public ResponseEntity<?> update(@Valid @RequestBody tipo_proyectoDTO tipoDTO) throws Exception {
+
         Tipo_proyecto tipo_proyecto = tipo_proyectoMapper1.toTipo_proyecto(tipoDTO);
         tipo_proyecto = tipo_proyectoService.save(tipo_proyecto);
         tipoDTO = tipo_proyectoMapper1.toTipo_proyectoDTO(tipo_proyecto);
         return ResponseEntity.ok().body(tipoDTO.getTipo_id() + " Tipo de proyecto actualizado");
-	
-	}
+
+    }
 }

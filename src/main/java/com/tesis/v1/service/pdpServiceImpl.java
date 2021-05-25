@@ -17,77 +17,76 @@ import com.tesis.v1.repository.ReunionRepository;
 
 @Service
 @Scope("singleton")
-public class pdpServiceImpl  implements pdpService {
-	
-	private final static Logger log = LoggerFactory.getLogger(pdpServiceImpl.class);
+public class pdpServiceImpl implements pdpService {
 
-	@Autowired
-	pdpRepository pdpRepository;
-	
-	@Autowired
-	ReunionRepository reunionesRepository;
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<Pdp> findAll() {
-		return pdpRepository.findAll();
-	}
+    private final static Logger log = LoggerFactory.getLogger(pdpServiceImpl.class);
 
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<Pdp> findById(Integer id) throws Exception {
+    @Autowired
+    pdpRepository pdpRepository;
 
-		if (id < 0 || id == null) {
-			throw new Exception("error en el identificador");
-		}
-		return pdpRepository.findById(id);
-	}
+    @Autowired
+    ReunionRepository reunionesRepository;
 
-	@Override
-	public Long count() {
-		log.info("count");
-		return null;
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public List<Pdp> findAll() {
+        return pdpRepository.findAll();
+    }
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Pdp save(Pdp entity) throws Exception {
-		if (entity == null) {
-			throw new Exception("error en peticion");
-		}
-		return pdpRepository.save(entity);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Pdp> findById(Integer id) throws Exception {
 
-	@Override
-	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public Pdp update(Pdp entity) throws Exception {
-		if (entity == null) {
-			throw new Exception("error en peticion");
-		}
-		return pdpRepository.save(entity);
-	}
+        if (id < 0 || id == null) {
+            throw new Exception("error en el identificador");
+        }
+        return pdpRepository.findById(id);
+    }
 
-	@Override
-	public void delete(Pdp entity) throws Exception {
-		if (entity == null) {
-			throw new Exception("Error Con el Plan...");
-		}
-		if (entity.getReuniones() == null || entity.getReuniones().getIdreuniones()< 0) {
-			throw new Exception("ERROR ES SERVICIOS");
-		}
-		pdpRepository.deleteById(entity.getIdpdp());
+    @Override
+    public Long count() {
+        log.info("count");
+        return null;
+    }
 
-		
-	}
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Pdp save(Pdp entity) throws Exception {
+        if (entity == null) {
+            throw new Exception("error en peticion");
+        }
+        return pdpRepository.save(entity);
+    }
 
-	@Override
-	public void deleteById(Integer id) throws Exception {
-		
-	}
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Pdp update(Pdp entity) throws Exception {
+        if (entity == null) {
+            throw new Exception("error en peticion");
+        }
+        return pdpRepository.save(entity);
+    }
 
-	@Override
-	public void validate(Pdp entity) throws Exception {
-		
-	}
+    @Override
+    public void delete(Pdp entity) throws Exception {
+        if (entity == null) {
+            throw new Exception("Error Con el Plan...");
+        }
+        if (entity.getReuniones() == null || entity.getReuniones().getIdreuniones() < 0) {
+            throw new Exception("ERROR ES SERVICIOS");
+        }
+        pdpRepository.deleteById(entity.getIdpdp());
+
+    }
+
+    @Override
+    public void deleteById(Integer id) throws Exception {
+
+    }
+
+    @Override
+    public void validate(Pdp entity) throws Exception {
+
+    }
 
 }

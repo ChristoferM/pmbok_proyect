@@ -22,46 +22,41 @@ import com.tesis.v1.mapper.ReunionMapper;
 @RequestMapping("/api/Reunion") // Forma de llamar datos
 @CrossOrigin
 public class ReunionController {
-	
-	private final static Logger log = LoggerFactory.getLogger(ReunionController.class);
 
-	@Autowired
-	ReunionesService reunionesService;
-	
-	@Autowired
-	ReunionMapper reunionesMapper;
-	
-	
-	@RequestMapping("/save")
-	public ResponseEntity<?> save(@Valid @RequestBody ReunionesDTO reunionesDTO)  throws Exception{
-		log.info("************************************ Reuniones save ");
-		FaseProyecto faseproyecto = new FaseProyecto ();
-		Proyecto proyectos = new Proyecto();
-		
-		Reunion reunion = new Reunion();
-		reunion.setDescripcionreunion(reunionesDTO.getDescripcionreunion());
-		reunion.setNombrereunion(reunionesDTO.getNombrereunion());
-		
-		faseproyecto.setIdfase(reunionesDTO.getIdfase());
-		reunion.setFaseproyecto(faseproyecto);
-		
-		proyectos.setIdproyecto(reunionesDTO.getIdproyecto());
-		reunion.setProyectos(proyectos);
-		
-		
-		
-		log.info("************************************ 2");
-		
-		Reunion reunionnew = reunionesService.save(reunion);
-		log.info("************************************ 3");
-		ReunionesDTO reunionesDTOnew = new ReunionesDTO();
-		
-		
-		reunionesDTOnew = reunionesMapper.toReunionDTO(reunionnew);
-		
-		
-		log.info("************************************ Fin Reuniones Save");
-		return ResponseEntity.ok().body(reunionesDTOnew);
-		
-	}
+    private final static Logger log = LoggerFactory.getLogger(ReunionController.class);
+
+    @Autowired
+    ReunionesService reunionesService;
+
+    @Autowired
+    ReunionMapper reunionesMapper;
+
+    @RequestMapping("/save")
+    public ResponseEntity<?> save(@Valid @RequestBody ReunionesDTO reunionesDTO) throws Exception {
+        log.info("************************************ Reuniones save ");
+        FaseProyecto faseproyecto = new FaseProyecto();
+        Proyecto proyectos = new Proyecto();
+
+        Reunion reunion = new Reunion();
+        reunion.setDescripcionreunion(reunionesDTO.getDescripcionreunion());
+        reunion.setNombrereunion(reunionesDTO.getNombrereunion());
+
+        faseproyecto.setIdfase(reunionesDTO.getIdfase());
+        reunion.setFaseproyecto(faseproyecto);
+
+        proyectos.setIdproyecto(reunionesDTO.getIdproyecto());
+        reunion.setProyectos(proyectos);
+
+        log.info("************************************ 2");
+
+        Reunion reunionnew = reunionesService.save(reunion);
+        log.info("************************************ 3");
+        ReunionesDTO reunionesDTOnew = new ReunionesDTO();
+
+        reunionesDTOnew = reunionesMapper.toReunionDTO(reunionnew);
+
+        log.info("************************************ Fin Reuniones Save");
+        return ResponseEntity.ok().body(reunionesDTOnew);
+
+    }
 }
