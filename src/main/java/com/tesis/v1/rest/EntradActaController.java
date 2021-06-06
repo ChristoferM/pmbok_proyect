@@ -29,123 +29,103 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/api/EntradasActa") // Forma de llamar datos
 @CrossOrigin
 public class EntradActaController {
+	private final static Logger log = LoggerFactory.getLogger(EntradActaController.class);
 
-    private final static Logger log = LoggerFactory.getLogger(EntradActaController.class);
+	@Autowired
+	EntradaActaService entradaActaervice;
 
-    @Autowired
-    EntradaActaService entradaActaService;
+	@Autowired
+	ActaService Actaervice;
 
-    @Autowired
-    ActaService actaService;
+	@Autowired
+	EntradactaMapper EntradactaMapper;
 
-    @Autowired
-    EntradactaMapper entradactaMapper;
+	@RequestMapping("/validarActa/{idProyecto}")
+	public ResponseEntity<?> finByAll(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
 
-    @RequestMapping("/validarActa/{idProyecto}")
-    public ResponseEntity<?> finByAll(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+		log.info("Validando Acta");
 
-        log.info("Validando Acta");
+		ValidarActaDTO validaciones = new ValidarActaDTO();
+		log.info("validaciones realizadas");
 
-        ValidarActaDTO validaciones = new ValidarActaDTO();
-        log.info("validaciones realizadas");
+		validaciones = entradaActaervice.encontrarData(idProyecto);
+		log.info("Resquest de validaciones");
 
-        validaciones = entradaActaService.encontrarData(idProyecto);
-        log.info("Resquest de validaciones");
+		return ResponseEntity.ok().body(validaciones);
+	}
 
-        return ResponseEntity.ok().body(validaciones);
-    }
+	@RequestMapping("/finById/{entradaId}")
+	public ResponseEntity<?> finById(@PathVariable("entradaId") Integer entradaId) throws Exception {
 
-    @RequestMapping("/finById/{entradaId}")
-    public ResponseEntity<?> finById(@PathVariable("entradaId") Integer entradaId) throws Exception {
+		Optional<Entradacta> Entradactaopc = entradaActaervice.findById(entradaId);
+		log.info("Cargando ...");
+		if (Entradactaopc.isEmpty()) {
+			return ResponseEntity.ok().body("Error: No se encontro La referencia");
 
-        Optional<Entradacta> entradactaopc = entradaActaService.findById(entradaId);
-        log.info("Cargando ...");
-        if (entradactaopc.isEmpty()) {
-            return ResponseEntity.ok().body("Error: No se encontro La referencia");
+		}
+		Entradacta Entradacta = Entradactaopc.get();
+		EntradactaDTO EntradactaDTO = EntradactaMapper.toEntradActaDTO(Entradacta);
+		log.info("*");
+		EntradactaDTO.setIdActa(Entradacta.getActas().getIdactas());
+		return ResponseEntity.ok().body(EntradactaDTO);
 
-        }
-        Entradacta entradActa = entradactaopc.get();
-        EntradactaDTO entradactaDTO = entradactaMapper.toEntradActaDTO(entradActa);
-        log.info("*");
-        return ResponseEntity.ok().body(entradactaDTO);
+	}
 
-    }
+	@RequestMapping("/findByAll")
+	public ResponseEntity<?> finByAll() throws Exception {
+		// Acta acta
+		List<Entradacta> EntradactaLIST = entradaActaervice.findAll();
 
-    @RequestMapping("/findByAll")
-    public ResponseEntity<?> finByAll() throws Exception {
-        //actas acta
-        List<Entradacta> entradactaLIST = entradaActaService.findAll();
+		List<EntradactaDTO> EntradactaListDto = EntradactaMapper.toEntradActaDTO(EntradactaLIST);
 
-        List<EntradactaDTO> entradactaListDto = entradactaMapper.toEntradActaDTO(entradactaLIST);
+		return ResponseEntity.ok().body(EntradactaListDto);
+	}
 
-        return ResponseEntity.ok().body(entradactaListDto);
-    }
+	@RequestMapping("/entradaDelActa/{idProyecto}")
+	public ResponseEntity<?> entradaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+		// Acta acta
+		List<Entradacta> EntradactaLIST = entradaActaervice.entradaDelActa(idProyecto);
 
-    @RequestMapping("/entradaDelActa/{idProyecto}")
-    public ResponseEntity<?> entradaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
-        //actas acta
-        List<Entradacta> entradactaLIST = entradaActaService.entradaDelActa(idProyecto);
+		List<EntradactaDTO> EntradactaListDto = EntradactaMapper.toEntradActaDTO(EntradactaLIST);
 
-        List<EntradactaDTO> entradactaListDto = entradactaMapper.toEntradActaDTO(entradactaLIST);
+		return ResponseEntity.ok().body(EntradactaListDto);
+	}
 
-        return ResponseEntity.ok().body(entradactaListDto);
-    }
+	@RequestMapping("/getIdActa/{idProyecto}")
+	public ResponseEntity<?> valorIdActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+		// Acta acta
+		Integer idActa = entradaActaervice.valorIdActa(idProyecto);
 
-    @RequestMapping("/getIdActa/{idProyecto}")
-    public ResponseEntity<?> valorIdActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
-        //actas acta
-        Integer idActa = entradaActaService.valorIdActa(idProyecto);
+		return ResponseEntity.ok().body(idActa);
+	}
 
-        return ResponseEntity.ok().body(idActa);
-    }
+	@RequestMapping("/getEntradaIdActa/{idProyecto}")
+	public ResponseEntity<?> valorIdEntraActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+		// Acta acta
+		Integer idActa = entradaActaervice.valorIdEntraActa(idProyecto);
 
-    @RequestMapping("/getEntradaIdActa/{idProyecto}")
-    public ResponseEntity<?> valorIdEntraActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
-        //actas acta
-        Integer idActa = entradaActaService.valorIdEntraActa(idProyecto);
+		return ResponseEntity.ok().body(idActa);
+	}
 
-        return ResponseEntity.ok().body(idActa);
-    }
+	@RequestMapping("/save")
+	public ResponseEntity<?> save(@Valid @RequestBody EntradactaDTO EntradactaDTO) throws Exception {
+		log.info("************************************ 1");
+		Acta acta = new Acta();
+		acta.setIdactas(EntradactaDTO.getIdActa());
+		Entradacta entradas = new Entradacta();
+		entradas.setActas(acta);
+		entradas.setAcuerdos(EntradactaDTO.getAcuerdos());
+		entradas.setFactores(EntradactaDTO.getFactores());
+		entradas.setActivosprocesos(EntradactaDTO.getActivosprocesos());
 
-    @PutMapping("/update")
-    public ResponseEntity<?> update(@Valid @RequestBody EntradactaDTO entradactaDTO) throws Exception {
-        
-           
-        Entradacta entradasnew = entradactaMapper.toEntradActa(entradactaDTO);      
-        entradasnew = entradaActaService.update(entradasnew);
-        entradactaDTO = entradactaMapper.toEntradActaDTO(entradasnew);
-   
-        return ResponseEntity.ok().body(entradactaDTO);
-    }
-    
-    
-    @PostMapping("/save")
-    public ResponseEntity<?> save(@Valid @RequestBody EntradactaDTO entradactaDTO) throws Exception {
-        log.info("************************************ 1");
-        /*
-		 * private Integer idActa;
-		private Integer identrada ;
-		private String acuerdos ;
-		private String factores;
-		private String activosprocesos ;
-         */
-        Acta acta = new Acta();
-        acta.setIdactas(entradactaDTO.getIdActa());
-        Entradacta entradas = new Entradacta();
-        entradas.setActas(acta);
-        entradas.setAcuerdos(entradactaDTO.getAcuerdos());
-        entradas.setFactores(entradactaDTO.getFactores());
-        entradas.setActivosprocesos(entradactaDTO.getActivosprocesos());
+		log.info("************************************ 2");
 
-        log.info("************************************ 2");
+		Entradacta entradasnew = entradaActaervice.save(entradas);
+		log.info("************************************ 3");
+		EntradactaDTO EntradactaDTOnew = EntradactaMapper.toEntradActaDTO(entradasnew);
 
-        Entradacta entradasnew = entradaActaService.save(entradas);
-        log.info("************************************ 3");
-        EntradactaDTO entradactaDTOnew = entradactaMapper.toEntradActaDTO(entradasnew);
-
-        log.info("************************************ 4");
-        return ResponseEntity.ok().body(entradactaDTOnew);
-    }
-
+		log.info("************************************ 4");
+		return ResponseEntity.ok().body(EntradactaDTOnew);
+	}
 
 }

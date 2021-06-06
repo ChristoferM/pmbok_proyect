@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tesis.v1.domain.pdp.Pdp;
+import com.tesis.v1.dto.pdp.PdpDTO;
+import com.tesis.v1.dto.pdp.ValidarPdpDTO;
 import com.tesis.v1.repository.pdp.pdpRepository;
 import com.tesis.v1.repository.ReunionRepository;
 
@@ -19,74 +21,103 @@ import com.tesis.v1.repository.ReunionRepository;
 @Scope("singleton")
 public class pdpServiceImpl implements pdpService {
 
-    private final static Logger log = LoggerFactory.getLogger(pdpServiceImpl.class);
+	private final static Logger log = LoggerFactory.getLogger(pdpServiceImpl.class);
 
-    @Autowired
-    pdpRepository pdpRepository;
+	@Autowired
+	pdpRepository pdpRepository;
 
-    @Autowired
-    ReunionRepository reunionesRepository;
+	@Autowired
+	ReunionRepository reunionesRepository;
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Pdp> findAll() {
-        return pdpRepository.findAll();
-    }
+	@Override
+	@Transactional(readOnly = true)
+	public List<Pdp> findAll() {
+		return pdpRepository.findAll();
+	}
 
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<Pdp> findById(Integer id) throws Exception {
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Pdp> findById(Integer id) throws Exception {
 
-        if (id < 0 || id == null) {
-            throw new Exception("error en el identificador");
-        }
-        return pdpRepository.findById(id);
-    }
+		if (id < 0 || id == null) {
+			throw new Exception("error en el identificador");
+		}
+		return pdpRepository.findById(id);
+	}
 
-    @Override
-    public Long count() {
-        log.info("count");
-        return null;
-    }
+	@Override
+	@Transactional(readOnly = true)
+	public Pdp BuscarPdpPorIdProyecto(Integer idProyecto) throws Exception {
+		if (idProyecto < 0 || idProyecto == null) {
+			throw new Exception("error en el identificador");
+		}
+		return pdpRepository.findIdPdpForIdProyecto(idProyecto);
+	}
 
-    @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public Pdp save(Pdp entity) throws Exception {
-        if (entity == null) {
-            throw new Exception("error en peticion");
-        }
-        return pdpRepository.save(entity);
-    }
+	@Override
+	public Long count() {
+		log.info("count");
+		return null;
+	}
 
-    @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public Pdp update(Pdp entity) throws Exception {
-        if (entity == null) {
-            throw new Exception("error en peticion");
-        }
-        return pdpRepository.save(entity);
-    }
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Pdp save(Pdp entity) throws Exception {
+		if (entity == null) {
+			throw new Exception("error en peticion");
+		}
+		return pdpRepository.save(entity);
+	}
 
-    @Override
-    public void delete(Pdp entity) throws Exception {
-        if (entity == null) {
-            throw new Exception("Error Con el Plan...");
-        }
-        if (entity.getReuniones() == null || entity.getReuniones().getIdreuniones() < 0) {
-            throw new Exception("ERROR ES SERVICIOS");
-        }
-        pdpRepository.deleteById(entity.getIdpdp());
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Pdp update(Pdp entity) throws Exception {
+		if (entity == null) {
+			throw new Exception("error en peticion");
+		}
+		return pdpRepository.save(entity);
+	}
 
-    }
+	@Override
+	public void delete(Pdp entity) throws Exception {
+		if (entity == null) {
+			throw new Exception("Error Con el Plan...");
+		}
+		if (entity.getReuniones() == null || entity.getReuniones().getIdreuniones() < 0) {
+			throw new Exception("ERROR ES SERVICIOS");
+		}
+		pdpRepository.deleteById(entity.getIdpdp());
 
-    @Override
-    public void deleteById(Integer id) throws Exception {
+	}
 
-    }
+	@Override
+	public void deleteById(Integer id) throws Exception {
 
-    @Override
-    public void validate(Pdp entity) throws Exception {
+	}
 
-    }
+	@Override
+	public void validate(Pdp entity) throws Exception {
+
+	}
+
+	@Override
+	public ValidarPdpDTO encontrarData(Integer idProyecto) {
+		ValidarPdpDTO validaciones = new ValidarPdpDTO();
+		validaciones.setPdp(pdpRepository.validarPdp(idProyecto));
+		validaciones.setHerramientasPdpValidate(pdpRepository.validarHerramientaPdp(idProyecto));
+		validaciones.setEntradactaPdpValidate(pdpRepository.validarEntradaPdp(idProyecto));
+
+		return validaciones;
+	}
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Pdp savePdpPorIdProyecto(Integer idProyecto) throws Exception {
+		if (idProyecto == null || idProyecto <= 0) {
+			throw new Exception("error en peticion");
+		}
+		pdpRepository.savePdpPorIdProyecto(idProyecto);
+		return pdpRepository.findIdPdpForIdProyecto(idProyecto);
+	}
 
 }
