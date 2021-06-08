@@ -2,17 +2,19 @@ package com.tesis.v1.dto.pdp;
 
 public class EntradasDTO {
 
-    private Integer idpdp;
     private Integer identradapdp;
     private String otrosprocesos;
     private String factoresambientales;
     private String activosprocesos;
+    private Integer idpdp;
+
+
 
     public EntradasDTO() {
     }
 
-    public EntradasDTO(Integer idpdp, Integer identradapdp, String otrosprocesos, String factoresambientales,
-            String activosprocesos) {
+    public EntradasDTO(Integer identradapdp, String otrosprocesos, String factoresambientales,
+            String activosprocesos,Integer idpdp) {
         this.idpdp = idpdp;
         this.identradapdp = identradapdp;
         this.otrosprocesos = otrosprocesos;
