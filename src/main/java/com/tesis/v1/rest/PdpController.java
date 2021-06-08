@@ -61,7 +61,7 @@ public class PdpController {
 		validar = pdpServices.encontrarData(idProyecto);
 		return ResponseEntity.ok().body(validar);
 	}
-
+	
 	@RequestMapping("/BuscarPdpPorIdProyecto/{idProyecto}") // pdpServices
 	public ResponseEntity<?> BuscarPdpPorIdProyecto(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
 		Pdp pdp = new Pdp();

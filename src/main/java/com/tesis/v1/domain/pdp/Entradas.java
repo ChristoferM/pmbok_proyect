@@ -22,7 +22,7 @@ public class Entradas {
     private Pdp pdp;
 
     @Id
-    @Column(name = "identrada", unique = true, nullable = false)
+    @Column(name = "identradapdp", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getIdentradapdp() {
         return identradapdp;

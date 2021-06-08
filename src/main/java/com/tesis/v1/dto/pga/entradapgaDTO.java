@@ -7,7 +7,6 @@ public class entradapgaDTO {
 	private String estandares;
 	private String objetivocalidad;
 	private String ciclo;
-	private String enfoque;
 	private String activosprocesos;
 
 	private Integer idpga;
@@ -44,13 +43,7 @@ public class entradapgaDTO {
 		this.ciclo = ciclo;
 	}
 
-	public String getEnfoque() {
-		return enfoque;
-	}
-
-	public void setEnfoque(String enfoque) {
-		this.enfoque = enfoque;
-	}
+ 
 
 	public String getActivosprocesos() {
 		return activosprocesos;
