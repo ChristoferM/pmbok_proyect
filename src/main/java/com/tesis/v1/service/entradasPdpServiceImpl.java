@@ -84,4 +84,14 @@ public class entradasPdpServiceImpl implements entradasPdpService {
 
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Entradas BuscarEntradasPdpPorIdDelProyecto(Integer id) throws Exception {
+        if (id < 0 || id == null) {
+            throw new Exception("error en el identificador");
+        }
+        return entradaPdpRepository.BuscarEntradasPdpPorIdDelProyecto(id);
+    }
+
+
 }

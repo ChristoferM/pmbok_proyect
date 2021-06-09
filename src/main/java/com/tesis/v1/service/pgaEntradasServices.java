@@ -4,6 +4,6 @@ import com.tesis.v1.domain.pga.entradapga;
 
 
 public interface pgaEntradasServices  extends GenericService<entradapga,Integer>{
-	
+	entradapga BuscarEntradasPGAPorIdDelProyecto(Integer id) throws Exception;
 
 }

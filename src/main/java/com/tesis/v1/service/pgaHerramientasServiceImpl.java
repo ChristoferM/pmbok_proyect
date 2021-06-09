@@ -81,4 +81,14 @@ public class pgaHerramientasServiceImpl implements pgaHerramientasService{
 		
 	}
 
+
+
+	// JUNIO 8  AGREGADO POR REUNION
+	@Transactional(readOnly = true)
+    public herramientaspga BuscarHerramientasPGAPorIdDelProyecto(Integer id) throws Exception {
+        if (id < 0 || id == null) {
+            throw new Exception("error en el identificador");
+        }
+        return herramientasPgaRepository.BuscarHerramientasPGAPorIdDelProyecto(id);
+    }
 }

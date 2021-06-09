@@ -81,4 +81,11 @@ public class pgaEntradaServiceImpl implements pgaEntradasServices{
 		
 	}
 
+
+	@Override
+	@Transactional(readOnly = true)
+	public entradapga BuscarEntradasPGAPorIdDelProyecto(Integer id) throws Exception {
+		return entradaPgaRepository.BuscarEntradasPGAPorIdDelProyecto(id);
+	}
+
 }

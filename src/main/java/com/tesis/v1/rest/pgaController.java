@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tesis.v1.domain.Reunion;
-import com.tesis.v1.domain.pdp.Entradas;
 import com.tesis.v1.domain.pga.entradapga;
+import com.tesis.v1.domain.pga.herramientaspga;
 import com.tesis.v1.domain.pga.pga;
 import com.tesis.v1.dto.pga.ValidarPgaDTO;
 import com.tesis.v1.dto.pga.entradapgaDTO;
-import com.tesis.v1.dto.pga.herramientaspga;
+import com.tesis.v1.dto.pga.herramientaspgaDTO;
 import com.tesis.v1.dto.pga.pgaDTO;
 import com.tesis.v1.mapper.pgaEntradaMapper;
 import com.tesis.v1.mapper.pgaMapper;
@@ -64,23 +64,23 @@ public class pgaController {
 	public ResponseEntity<?> BuscarPgaPorIdProyecto(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
 		log.info("*****************");
 		pga pga = new pga();
-		pga =pgaServices.BuscarPgaPorIdProyecto(idProyecto);
+		pga = pgaServices.BuscarPgaPorIdProyecto(idProyecto);
 		log.info("*****************");
-		pgaDTO pgaDTO = new pgaDTO() ;
+		pgaDTO pgaDTO = new pgaDTO();
 		pgaDTO.setIdpga(pga.getIdpga());
 		pgaDTO.setIdreuniones(pga.getReuniones().getIdreuniones());
 		return ResponseEntity.ok().body(pgaDTO);
 	}
-	
+
 	@RequestMapping("/savePgaPorIdProyecto/{idProyecto}")
 	public ResponseEntity<?> savePgaPorIdProyecto(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
 		pga pga = new pga();
-		pga =pgaServices.savePgaPorIdProyecto(idProyecto);
+		pga = pgaServices.savePgaPorIdProyecto(idProyecto);
 		log.info("\n \n \n");
 		log.info(pga.getIdpga().toString());
 		log.info(pga.getReuniones().getIdreuniones().toString());
 		log.info("\n \n \n");
-		pgaDTO pgaDTO = new pgaDTO() ;
+		pgaDTO pgaDTO = new pgaDTO();
 		pgaDTO.setIdpga(pga.getIdpga());
 		pgaDTO.setIdreuniones(pga.getReuniones().getIdreuniones());
 		return ResponseEntity.ok().body(pgaDTO);
@@ -102,21 +102,21 @@ public class pgaController {
 	}
 
 	@RequestMapping("/saveHerramientasPga")
-	public ResponseEntity<?> saveHerramientasPga(@Valid @RequestBody herramientaspga herramientasDTO) throws Exception {
+	public ResponseEntity<?> saveHerramientasPga(@Valid @RequestBody herramientaspgaDTO herramientasDTO) throws Exception {
 		log.info("GUARDANDADO HERRAMIENTA PGA");
 		pga pga = new pga();
 		log.info("**************************11");
 		com.tesis.v1.domain.pga.herramientaspga herramientaspga = new com.tesis.v1.domain.pga.herramientaspga();
 		log.info("**************************22");
-		
+
 		pga.setIdpga(herramientasDTO.getIdpdp());
-		herramientaspga.setPga(pga);		
+		herramientaspga.setPga(pga);
 		herramientaspga.setAnalisis(herramientasDTO.getAnalisis());
 		herramientaspga.setJuicioexpertos(herramientasDTO.getJuicioexpertos());
 		log.info("**************************33");
 		herramientaspga = pgaHerramientasService.save(herramientaspga);
 		log.info("**************************44");
-		herramientasDTO = pgaherramientasMapper.toHerramientaPGA(herramientaspga);
+		herramientasDTO = pgaherramientasMapper.toHerramientaPGADTO(herramientaspga);
 		herramientasDTO.setIdpdp(herramientaspga.getPga().getIdpga());
 		log.info("**************************44");
 		return ResponseEntity.ok().body(herramientasDTO);
@@ -139,7 +139,7 @@ public class pgaController {
 		entradapga.setEstandares(entradasDTO.getEstandares());
 		entradapga.setObjetivocalidad(entradasDTO.getObjetivocalidad());
 		entradapga.setCiclo(entradasDTO.getCiclo());
-		//entradapga.setEnfoque(entradasDTO.getEnfoque());
+		// entradapga.setEnfoque(entradasDTO.getEnfoque());
 		entradapga.setActivosprocesos(entradasDTO.getActivosprocesos());
 		// pga.setIdpga(entradasDTO.getIdpdp());
 		log.info("***********2");
@@ -186,8 +186,8 @@ public class pgaController {
 			return ResponseEntity.ok().body("Error: No se encontro Usuario");
 		}
 		com.tesis.v1.domain.pga.herramientaspga herramientaspga = pgaHerramientasOptional.get();
-		herramientaspga herramientasDTO = new herramientaspga();
-		herramientasDTO = pgaherramientasMapper.toHerramientaPGA(herramientaspga);
+		herramientaspgaDTO herramientasDTO = new herramientaspgaDTO();
+		herramientasDTO = pgaherramientasMapper.toHerramientaPGADTO(herramientaspga);
 		herramientasDTO.setIdpdp(herramientaspga.getPga().getIdpga());
 
 		return ResponseEntity.ok().body(herramientasDTO);
@@ -208,6 +208,61 @@ public class pgaController {
 		return
 
 		ResponseEntity.ok().body(entradapgaDTO);
+	}
+
+	@RequestMapping("/BuscarEntradasPGAPorIdDelProyecto/{id}") // pdpServices
+	public ResponseEntity<?> BuscarEntradasPGAPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
+		// BuscarHerramientasPdpPorIdDelProyecto
+		entradapga entradapga = pgaEntradasServices.BuscarEntradasPGAPorIdDelProyecto(id);
+		log.info("Cargando ...");
+		if (entradapga == null) {
+			return ResponseEntity.ok().body("Error: No se encontro Usuario");
+
+		}
+		entradapgaDTO dto = new entradapgaDTO();
+		log.info("*");
+		dto.setIdentradapga(entradapga.getIdentradapga());
+		dto.setEstandares(entradapga.getEstandares());
+		dto.setObjetivocalidad(entradapga.getObjetivocalidad());
+		dto.setCiclo(entradapga.getCiclo());
+		dto.setEnfoque(entradapga.getEnfoque());
+		dto.setIdentradapga(entradapga.getIdentradapga());
+		dto.setActivosprocesos(entradapga.getActivosprocesos());
+		dto.setIdpga(entradapga.getPga().getIdpga());
+		/*
+		 * private Integer identradapga; private String estandares; private String
+		 * objetivocalidad; private String ciclo; private String activosprocesos;
+		 * 
+		 * private pga pga;
+		 */
+
+		return ResponseEntity.ok().body(dto);
+	}
+	
+	
+	@RequestMapping("/BuscarHerramientasPGAPorIdDelProyecto/{id}") // pdpServices
+	public ResponseEntity<?> BuscarHerramientasPGAPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
+		// BuscarHerramientasPdpPorIdDelProyecto
+		herramientaspga herramientaspga = pgaHerramientasService.BuscarHerramientasPGAPorIdDelProyecto(id);
+		log.info("Cargando ...");
+		if (herramientaspga == null) {
+			return ResponseEntity.ok().body("Error: No se encontro Usuario");
+
+		}
+		herramientaspgaDTO dto = new herramientaspgaDTO();
+		log.info("*");
+		dto.setAnalisis(herramientaspga.getAnalisis());
+		dto.setIdherramientapga(herramientaspga.getIdherramientapga());
+		dto.setJuicioexpertos(herramientaspga.getJuicioexpertos());
+		dto.setIdpdp(herramientaspga.getPga().getIdpga());
+		/*
+		 * private Integer identradapga; private String estandares; private String
+		 * objetivocalidad; private String ciclo; private String activosprocesos;
+		 * 
+		 * private pga pga;
+		 */
+
+		return ResponseEntity.ok().body(dto);
 	}
 
 }

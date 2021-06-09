@@ -19,7 +19,17 @@ public class entradapga {
 	private String estandares;
 	private String objetivocalidad;
 	private String ciclo;
+	private String enfoque;
 	private String activosprocesos;
+
+	@Column(name = "enfoque", nullable = false)
+	public String getEnfoque() {
+		return this.enfoque;
+	}
+
+	public void setEnfoque(String enfoque) {
+		this.enfoque = enfoque;
+	}
 
 	private pga pga;
 

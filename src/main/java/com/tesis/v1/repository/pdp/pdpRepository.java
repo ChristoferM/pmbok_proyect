@@ -21,6 +21,7 @@ public interface pdpRepository  extends JpaRepository<Pdp,Integer>{
 			, nativeQuery = true)
 	public Pdp findIdPdpForIdProyecto(Integer idProyecto);
 	
+	
 	@Modifying(clearAutomatically = true)
 	@Query(value =
 			"	INSERT INTO public.pdp( " + 
@@ -29,6 +30,7 @@ public interface pdpRepository  extends JpaRepository<Pdp,Integer>{
 			"		(select reuniones.idreuniones from reuniones, proyectos  " + 
 			"				WHERE reuniones.idproyecto = proyectos.idproyecto  " + 
 			"				AND proyectos.idproyecto = ?1 ));", nativeQuery = true)
+			
 	public void savePdpPorIdProyecto(Integer idProyecto);
 	
 	@Query(value =

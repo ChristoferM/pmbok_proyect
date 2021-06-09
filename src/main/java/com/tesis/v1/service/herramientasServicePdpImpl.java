@@ -84,4 +84,13 @@ public class herramientasServicePdpImpl implements herramientasServicePdp {
 
     }
 
+
+    // JUNIO 8 AGREGADO POR REUNION
+
+    @Override
+	@Transactional(readOnly = true)
+	public Herramientas BuscarHerramientasPdpPorIdDelProyecto(Integer id) throws Exception {
+
+		return herramientasPdpRepository.BuscarHerramientasPdpPorIdDelProyecto(id);
+	}
 }

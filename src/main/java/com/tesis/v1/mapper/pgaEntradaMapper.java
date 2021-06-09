@@ -6,7 +6,6 @@ import org.mapstruct.Mapper;
 
 import com.tesis.v1.domain.pga.pga;
 import com.tesis.v1.dto.pga.entradapgaDTO;
-import com.tesis.v1.dto.pga.herramientaspga;
 import com.tesis.v1.dto.pga.pgaDTO;
 import com.tesis.v1.domain.pga.entradapga;
 

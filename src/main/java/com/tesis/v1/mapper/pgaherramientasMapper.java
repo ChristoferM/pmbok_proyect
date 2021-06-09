@@ -7,17 +7,19 @@ import org.mapstruct.Mapper;
 import com.tesis.v1.domain.pga.herramientaspga;
 import com.tesis.v1.dto.pga.*;
 
+
 @Mapper
 public interface pgaherramientasMapper {
 	
-	public herramientaspga toHerramientaPGADTO(com.tesis.v1.dto.pga.herramientaspga herramientaspgaDTO);
+	public herramientaspgaDTO toHerramientaPGADTO(herramientaspga herramientaspga);
 	
-	public com.tesis.v1.dto.pga.herramientaspga toHerramientaPGA(herramientaspga herramientaspga );
+	public  herramientaspga toHerramientaPGA(herramientaspgaDTO herramientaspga );
 	
-	public List<com.tesis.v1.dto.pga.herramientaspga> toHerramientasPGADTOs(List<herramientaspga> herramientaspgas );
+	public List<herramientaspgaDTO> toHerramientasPGADTOs(List<herramientaspga> herramientaspgas );
 	
-	public List<herramientaspga> toHeramientasPGA(List<com.tesis.v1.dto.pga.herramientaspga> herramientaspgaDTOs);
+	public List<herramientaspga> toHeramientasPGA(List<herramientaspgaDTO> herramientaspgaDTOs);
 	
 	
 
 }
+ 

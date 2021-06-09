@@ -206,4 +206,55 @@ public class PdpController {
 		entradasDTOs.setIdpdp(entradasPdp.getPdp().getIdpdp());
 		return ResponseEntity.ok().body(entradasDTOs);
 	}
+
+
+
+	// REUNION AGREGANDO ARCHIVOS 8/JUNIO
+
+
+	//  BUSCAR LOS DATOS DE ENTRADAS Y HERRAMIENTAS POR ID DEL PROYECTO
+	@RequestMapping("/BuscarEntradasPdpPorIdDelProyecto/{id}") // pdpServices
+	public ResponseEntity<?> BuscarEntradasPdpPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
+		//
+		Entradas Entradas = entradasPdpServices.BuscarEntradasPdpPorIdDelProyecto(id);
+		log.info("Cargando ...");
+		if (Entradas == null  ) {
+			return ResponseEntity.ok().body("Error: No se encontro Usuario");
+
+		} 
+		EntradasDTO dto = new EntradasDTO();
+		log.info("*");
+		dto.setActivosprocesos(Entradas.getActivosprocesos()); 
+		dto.setFactoresambientales(Entradas.getFactoresambientales());
+		dto.setOtrosprocesos(Entradas.getOtrosprocesos());
+		dto.setIdpdp(Entradas.getPdp().getIdpdp());
+		dto.setIdentradapdp(Entradas.getIdentradapdp());
+		
+		return ResponseEntity.ok().body(dto);
+	}
+
+
+	@RequestMapping("/BuscarHerramientasPdpPorIdDelProyecto/{id}") // pdpServices
+	public ResponseEntity<?> BuscarHerramientasPdpPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
+		// BuscarHerramientasPdpPorIdDelProyecto
+		Herramientas Herramientas = herramientasServicePdps.BuscarHerramientasPdpPorIdDelProyecto(id);
+		log.info("Cargando ...");
+		if (Herramientas == null  ) {
+			return ResponseEntity.ok().body("Error: No se encontro registrada la herramienta pdp");
+
+		} 
+		HerramientasDTO dto = new HerramientasDTO();
+		log.info("*");
+		dto.setIdherramienta(Herramientas.getIdherramienta());
+		dto.setJuicioexpertos(Herramientas.getJuicioexpertos());
+		dto.setRecopilaciondatos(Herramientas.getRecopilaciondatos());
+		dto.setHabilidades(Herramientas.getHabilidades());
+		dto.setHerramientareuniones(Herramientas.getHerramientareuniones());
+		dto.setIdpdp(Herramientas.getPdp().getIdpdp());
+				
+		
+		
+		return ResponseEntity.ok().body(dto);
+	}
+
 }
