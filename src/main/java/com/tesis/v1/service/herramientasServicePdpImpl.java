@@ -49,11 +49,7 @@ public class herramientasServicePdpImpl implements herramientasServicePdp {
         return herramientasPdpRepository.save(entity);
     }
 
-    @Override
-    public Herramientas update(Herramientas entity) throws Exception {
-        //  Auto-generated method stub
-        return null;
-    }
+ 
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -93,4 +89,18 @@ public class herramientasServicePdpImpl implements herramientasServicePdp {
 
 		return herramientasPdpRepository.BuscarHerramientasPdpPorIdDelProyecto(id);
 	}
+
+
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
+    public Herramientas update(Herramientas entity) throws Exception {
+    	if(entity ==null) {
+			throw new Exception("Error en los datos");
+			
+		}
+    	if(herramientasPdpRepository.existsById(entity.getIdherramienta() )==false ) {
+			throw new Exception("Erro: El Id No existe");
+		}
+    	return herramientasPdpRepository.save(entity);
+    }
 }

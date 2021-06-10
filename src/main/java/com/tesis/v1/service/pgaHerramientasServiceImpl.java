@@ -45,11 +45,7 @@ public class pgaHerramientasServiceImpl implements pgaHerramientasService{
 		return herramientasPgaRepository.save(entity);
 	}
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public herramientaspga update(herramientaspga entity) throws Exception {
-		return herramientasPgaRepository.save(entity);
-	}
+ 
 
 	@Override
 	public void delete(herramientaspga entity) throws Exception {
@@ -91,4 +87,19 @@ public class pgaHerramientasServiceImpl implements pgaHerramientasService{
         }
         return herramientasPgaRepository.BuscarHerramientasPGAPorIdDelProyecto(id);
     }
+
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public herramientaspga update(herramientaspga entity) throws Exception {
+	 	if(entity ==null) {
+			throw new Exception("Error en los datos");
+			
+		}
+    	if(herramientasPgaRepository.existsById(entity.getIdherramientapga() )==false ) {
+			throw new Exception("Erro: El Id No existe");
+		}
+		return herramientasPgaRepository.save(entity);
+	}
+
 }

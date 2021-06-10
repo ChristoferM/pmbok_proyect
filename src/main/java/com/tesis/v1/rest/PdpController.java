@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -255,6 +256,68 @@ public class PdpController {
 		
 		
 		return ResponseEntity.ok().body(dto);
+	}
+
+
+
+	///// REUNION 9 de junio
+
+
+	@PutMapping("/updateEntradaPDP")
+	public ResponseEntity<?> updateEntradaPDP(@Valid @RequestBody EntradasDTO entradasDTO) throws Exception {
+
+		Entradas entradasPdp = new Entradas();
+		entradasPdp.setIdentradapdp(entradasDTO.getIdentradapdp());
+		entradasPdp.setOtrosprocesos(entradasDTO.getOtrosprocesos());
+		entradasPdp.setFactoresambientales(entradasDTO.getFactoresambientales());
+		entradasPdp.setActivosprocesos(entradasDTO.getActivosprocesos());
+		if (entradasDTO.getIdpdp() != null || entradasDTO.getIdpdp() < 0) {
+			Pdp pdp = new Pdp();
+			pdp.setIdpdp(entradasDTO.getIdpdp());
+			entradasPdp.setPdp(pdp);
+		}
+
+		Entradas Entradas = entradasPdpServices.update(entradasPdp);
+
+		EntradasDTO dto = new EntradasDTO();
+		log.info("*");
+		dto.setActivosprocesos(Entradas.getActivosprocesos());
+		dto.setFactoresambientales(Entradas.getFactoresambientales());
+		dto.setOtrosprocesos(Entradas.getOtrosprocesos());
+		dto.setIdpdp(Entradas.getPdp().getIdpdp());
+		dto.setIdentradapdp(Entradas.getIdentradapdp());
+
+		return ResponseEntity.ok().body(dto);
+
+	}
+	@PutMapping("/updateHerramientaPDP")
+	public ResponseEntity<?> updateHerramientaPDP(@Valid @RequestBody HerramientasDTO herramientasDTO)
+			throws Exception {
+
+		// mapper a mano
+		Herramientas herramientasPdp = new Herramientas();
+		herramientasPdp.setIdherramienta(herramientasDTO.getIdherramienta());
+		herramientasPdp.setHerramientareuniones(herramientasDTO.getHerramientareuniones());
+		herramientasPdp.setJuicioexpertos(herramientasDTO.getJuicioexpertos());
+		herramientasPdp.setHabilidades(herramientasDTO.getHabilidades());
+		herramientasPdp.setRecopilaciondatos(herramientasDTO.getRecopilaciondatos());
+		if (herramientasDTO.getIdpdp() != null || herramientasDTO.getIdpdp() < 0) {
+			Pdp pdp = new Pdp();
+			pdp.setIdpdp(herramientasDTO.getIdpdp());
+			herramientasPdp.setPdp(pdp);
+		}
+
+		HerramientasDTO dto = new HerramientasDTO();
+		Herramientas Herramientas = herramientasServicePdps.update(herramientasPdp);
+		log.info("*");
+		dto.setIdherramienta(Herramientas.getIdherramienta());
+		dto.setJuicioexpertos(Herramientas.getJuicioexpertos());
+		dto.setRecopilaciondatos(Herramientas.getRecopilaciondatos());
+		dto.setHabilidades(Herramientas.getHabilidades());
+		dto.setHerramientareuniones(Herramientas.getHerramientareuniones());
+		dto.setIdpdp(Herramientas.getPdp().getIdpdp());
+		return ResponseEntity.ok().body(dto);
+
 	}
 
 }

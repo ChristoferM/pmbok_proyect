@@ -49,11 +49,7 @@ public class entradasPdpServiceImpl implements entradasPdpService {
         return entradaPdpRepository.save(entity);
     }
 
-    @Override
-    public Entradas update(Entradas entity) throws Exception {
-        //  Auto-generated method stub
-        return null;
-    }
+    
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -93,5 +89,17 @@ public class entradasPdpServiceImpl implements entradasPdpService {
         return entradaPdpRepository.BuscarEntradasPdpPorIdDelProyecto(id);
     }
 
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor =Exception.class)
+    public Entradas update(Entradas entity) throws Exception {
+    	if(entity ==null) {
+			throw new Exception("Error en los datos");
+			
+		}
+    	if(entradaPdpRepository.existsById(entity.getIdentradapdp() )==false ) {
+			throw new Exception("Error El Id No existe");
+		}
+    	return entradaPdpRepository.save(entity);
+    }
 
 }

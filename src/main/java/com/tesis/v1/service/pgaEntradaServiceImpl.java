@@ -44,11 +44,7 @@ public class pgaEntradaServiceImpl implements pgaEntradasServices{
 		return entradaPgaRepository.save(entity);
 	}
 
-	@Override
-	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public entradapga update(entradapga entity) throws Exception {
-		return entradaPgaRepository.save(entity);
-	}
+ 
 
 	@Override
 	public void delete(entradapga entity) throws Exception {
@@ -88,4 +84,17 @@ public class pgaEntradaServiceImpl implements pgaEntradasServices{
 		return entradaPgaRepository.BuscarEntradasPGAPorIdDelProyecto(id);
 	}
 
+
+	@Override
+	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	public entradapga update(entradapga entity) throws Exception {
+	 	if(entity ==null) {
+			throw new Exception("Error en los datos");
+			
+		}
+    	if(entradaPgaRepository.existsById(entity.getIdentradapga() )==false ) {
+			throw new Exception("Error  El Id No existe");
+		}
+		return entradaPgaRepository.save(entity);
+	}
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -239,6 +240,8 @@ public class pgaController {
 		return ResponseEntity.ok().body(dto);
 	}
 	
+
+	/// REUNION 8 DE JUNIO
 	
 	@RequestMapping("/BuscarHerramientasPGAPorIdDelProyecto/{id}") // pdpServices
 	public ResponseEntity<?> BuscarHerramientasPGAPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
@@ -264,5 +267,71 @@ public class pgaController {
 
 		return ResponseEntity.ok().body(dto);
 	}
+
+
+
+
+
+	@PutMapping("/updateHerramientasPGA")
+	public ResponseEntity<?> updateHerramientasPGA(@Valid @RequestBody herramientaspgaDTO herramientasDTO)
+			throws Exception {
+
+		pga pga = new pga();
+		com.tesis.v1.domain.pga.herramientaspga herramientaspga = new com.tesis.v1.domain.pga.herramientaspga();
+
+		herramientaspga.setAnalisis(herramientasDTO.getAnalisis());
+		herramientaspga.setJuicioexpertos(herramientasDTO.getJuicioexpertos());
+		herramientaspga.setIdherramientapga(herramientasDTO.getIdherramientapga());
+		if (herramientasDTO.getIdpdp() == null || herramientasDTO.getIdherramientapga() > 0) {
+			pga.setIdpga(herramientasDTO.getIdpdp());
+			herramientaspga.setPga(pga);
+
+		}
+		herramientaspga = pgaHerramientasService.update(herramientaspga);
+
+		herramientaspgaDTO dto = new herramientaspgaDTO();
+		log.info("*");
+		dto.setAnalisis(herramientaspga.getAnalisis());
+		dto.setIdherramientapga(herramientaspga.getIdherramientapga());
+		dto.setJuicioexpertos(herramientaspga.getJuicioexpertos());
+		dto.setIdpdp(herramientaspga.getPga().getIdpga());
+		return ResponseEntity.ok().body(dto);
+
+	}
+
+	@PutMapping("/updateEntradasPGA")
+	public ResponseEntity<?> updateEntradasPGA(@Valid @RequestBody entradapgaDTO entradasDTO) throws Exception {
+
+		pga pga = new pga();
+		entradapga entradapga = new entradapga();
+		entradapga.setIdentradapga(entradasDTO.getIdentradapga());
+		entradapga.setEstandares(entradasDTO.getEstandares());
+		entradapga.setObjetivocalidad(entradasDTO.getObjetivocalidad());
+		entradapga.setCiclo(entradasDTO.getCiclo());
+		entradapga.setEnfoque(entradasDTO.getEnfoque());
+		entradapga.setActivosprocesos(entradasDTO.getActivosprocesos());
+		
+		if(entradasDTO.getIdpga() != null || entradasDTO.getIdpga() >0) {
+			pga.setIdpga(entradasDTO.getIdpga());
+			entradapga.setPga(pga);
+		}
+
+		entradapga = pgaEntradasServices.update(entradapga);
+
+		entradapgaDTO dto = new entradapgaDTO();
+		log.info("*");
+		dto.setIdentradapga(entradapga.getIdentradapga());
+		dto.setEstandares(entradapga.getEstandares());
+		dto.setObjetivocalidad(entradapga.getObjetivocalidad());
+		dto.setCiclo(entradapga.getCiclo());
+		dto.setEnfoque(entradapga.getEnfoque());
+		dto.setIdentradapga(entradapga.getIdentradapga());
+		dto.setActivosprocesos(entradapga.getActivosprocesos());
+		dto.setIdpga(entradapga.getPga().getIdpga());
+		return ResponseEntity.ok().body(dto);
+
+	}
+
+
 
 }
