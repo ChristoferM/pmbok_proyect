@@ -1,5 +1,6 @@
 package com.tesis.v1.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -72,15 +74,27 @@ public class PlanGestionBeneficiosController {
         return ResponseEntity.ok().body(planesgestionbeneficiosListDto);
     }
 
-    @RequestMapping("/planGestionDelActa/{idProyecto}")
+    @RequestMapping("/findPlanGestionDelActa/{idProyecto}")
     public ResponseEntity<?> planGestionDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
-        // actas acta
-        List<PlanGestionbeneficio> planesgestionbeneficiosLIST = PlanGestionBeneficiosService.planGestionDelActa(idProyecto);
+        List<PlanGestionbeneficio> planesgestionbeneficiosLIST = PlanGestionBeneficiosService
+				.planGestionDelActa(idProyecto);
 
-        List<PlanGestionBeneficioDTO> planesgestionbeneficiosListDto = planesgestionbeneficiosMapper
-                .toplanesGestionBeneficiosDTO(planesgestionbeneficiosLIST);
+		List<PlanGestionBeneficioDTO> listDTO = new ArrayList<PlanGestionBeneficioDTO>(
+				planesgestionbeneficiosLIST.size());
+		for (PlanGestionbeneficio planGestionbeneficio : planesgestionbeneficiosLIST) {
 
-        return ResponseEntity.ok().body(planesgestionbeneficiosListDto);
+			PlanGestionBeneficioDTO planGestionBeneficioDTO = new PlanGestionBeneficioDTO();
+			planGestionBeneficioDTO.setIdEntradaActa(planGestionbeneficio.getEntradacta().getIdentrada());
+			planGestionBeneficioDTO.setId_plan_gb(planGestionbeneficio.getId_plan_gb());
+			planGestionBeneficioDTO.setAcciones(planGestionbeneficio.getAcciones());
+			planGestionBeneficioDTO.setComponentes(planGestionbeneficio.getComponentes());
+			planGestionBeneficioDTO.setProdcutos(planGestionbeneficio.getProdcutos());
+			planGestionBeneficioDTO.setServicios(planGestionbeneficio.getServicios());
+			planGestionBeneficioDTO.setResultado(planGestionbeneficio.getResultado());
+
+			listDTO.add(planGestionBeneficioDTO);
+		}
+		return ResponseEntity.ok().body(listDTO);
     }
 
     @RequestMapping("/save")
@@ -121,5 +135,46 @@ public class PlanGestionBeneficiosController {
         log.info("************************************ 4");
         return ResponseEntity.ok().body(planesgestionbeneficiosDTOnew);
     }
+
+    /// JUNIO 9 reunion
+
+
+    @PutMapping("/updatePlanGestionBeneficio")
+	public ResponseEntity<?> update(@Valid @RequestBody PlanGestionBeneficioDTO planesgestionbeneficiosDTO) throws Exception {
+
+    	 PlanGestionbeneficio planesgestionbeneficios = new PlanGestionbeneficio();
+         Entradacta entradas = new Entradacta();
+         // PlanGestionBeneficioDTO PlanGestionBeneficioDTO = new
+         // PlanGestionBeneficioDTO ();
+         planesgestionbeneficios.setId_plan_gb(planesgestionbeneficiosDTO.getId_plan_gb());
+         planesgestionbeneficios.setAcciones(planesgestionbeneficiosDTO.getAcciones());
+         planesgestionbeneficios.setComponentes(planesgestionbeneficiosDTO.getComponentes());
+         planesgestionbeneficios.setProdcutos(planesgestionbeneficiosDTO.getProdcutos());
+         planesgestionbeneficios.setServicios(planesgestionbeneficiosDTO.getServicios());
+         planesgestionbeneficios.setResultado(planesgestionbeneficiosDTO.getResultado());
+         
+         log.info("ACTA NUEMEOR: " + planesgestionbeneficiosDTO.getIdEntradaActa().toString());
+         
+         entradas.setIdentrada(planesgestionbeneficiosDTO.getIdEntradaActa());
+         log.info("ACTA NUEMEOR planes: " + entradas.getIdentrada().toString());
+
+         planesgestionbeneficios.setEntradacta(entradas);
+
+         log.info("************ 2");
+
+         PlanGestionbeneficio planesgestionbeneficiosnew = PlanGestionBeneficiosService.update(planesgestionbeneficios);
+		 
+         planesgestionbeneficiosDTO.setId_plan_gb(planesgestionbeneficiosnew.getId_plan_gb());
+         planesgestionbeneficiosDTO.setAcciones(planesgestionbeneficiosnew.getAcciones());
+         planesgestionbeneficiosDTO.setComponentes(planesgestionbeneficiosnew.getComponentes());
+         planesgestionbeneficiosDTO.setProdcutos(planesgestionbeneficiosnew.getProdcutos());
+         planesgestionbeneficiosDTO.setServicios(planesgestionbeneficiosnew.getServicios());
+         planesgestionbeneficiosDTO.setResultado(planesgestionbeneficiosnew.getResultado());
+         planesgestionbeneficiosDTO.setIdEntradaActa(planesgestionbeneficiosnew.getEntradacta().getIdentrada());
+         return ResponseEntity.ok().body(planesgestionbeneficiosDTO);
+	}
+
+    
+
 
 }

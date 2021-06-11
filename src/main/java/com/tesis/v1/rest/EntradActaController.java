@@ -1,5 +1,6 @@
 package com.tesis.v1.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,14 +82,23 @@ public class EntradActaController {
 		return ResponseEntity.ok().body(EntradactaListDto);
 	}
 
-	@RequestMapping("/entradaDelActa/{idProyecto}")
+	@RequestMapping("/findEntradaDelActa/{idProyecto}")
 	public ResponseEntity<?> entradaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
-		// Acta acta
 		List<Entradacta> EntradactaLIST = entradaActaervice.entradaDelActa(idProyecto);
 
-		List<EntradactaDTO> EntradactaListDto = EntradactaMapper.toEntradActaDTO(EntradactaLIST);
+		List<EntradactaDTO> listDTO = new ArrayList<EntradactaDTO>( EntradactaLIST.size() );
+		
+		   for ( Entradacta entradacta : EntradactaLIST ) {
+				EntradactaDTO entradactaDTO = new EntradactaDTO();
+				entradactaDTO.setIdActa( entradacta.getActas().getIdactas() );
+				entradactaDTO.setIdentrada( entradacta.getIdentrada() );
+				entradactaDTO.setAcuerdos( entradacta.getAcuerdos() );
+				entradactaDTO.setFactores( entradacta.getFactores() );
+				entradactaDTO.setActivosprocesos( entradacta.getActivosprocesos() );
+				listDTO.add(entradactaDTO );
+		   }
 
-		return ResponseEntity.ok().body(EntradactaListDto);
+	   return ResponseEntity.ok().body(listDTO);
 	}
 
 	@RequestMapping("/getIdActa/{idProyecto}")
@@ -126,6 +136,33 @@ public class EntradActaController {
 
 		log.info("************************************ 4");
 		return ResponseEntity.ok().body(EntradactaDTOnew);
+	}
+
+
+	/// REUNION 9 reunion
+
+	@PutMapping("/updateEntradaActa")
+	public ResponseEntity<?> update(@Valid @RequestBody EntradactaDTO EntradactaDTO) throws Exception {
+    	Acta acta = new Acta();
+		acta.setIdactas(EntradactaDTO.getIdActa());
+		Entradacta entradas = new Entradacta();
+		entradas.setActas(acta);
+		entradas.setIdentrada(EntradactaDTO.getIdentrada());
+		entradas.setAcuerdos(EntradactaDTO.getAcuerdos());
+		entradas.setFactores(EntradactaDTO.getFactores());
+		entradas.setActivosprocesos(EntradactaDTO.getActivosprocesos());
+
+		log.info("************ 2");
+
+		Entradacta entradasnew = entradaActaervice.update(entradas);
+		
+		EntradactaDTO.setIdActa(entradasnew.getActas().getIdactas());
+		EntradactaDTO.setIdentrada(entradasnew.getIdentrada());
+		EntradactaDTO.setAcuerdos(entradasnew.getAcuerdos());
+		EntradactaDTO.setFactores(entradasnew.getFactores());
+		EntradactaDTO.setActivosprocesos(entradasnew.getActivosprocesos());
+		
+		return ResponseEntity.ok().body(EntradactaDTO);  
 	}
 
 }

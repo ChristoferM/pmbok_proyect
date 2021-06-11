@@ -1,5 +1,6 @@
 package com.tesis.v1.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,12 +40,25 @@ public class HerramientasActaController {
     @Autowired
     ActaService actaService;
 
-    @RequestMapping("/herramientaDelActa/{idProyecto}")
+    @RequestMapping("/findHerramientaDelActa/{idProyecto}")
     public ResponseEntity<?> herramientaDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
         List<Herramientasacta> herramientaLIST = herramientasActasService.herramientaDelActa(idProyecto);
-        List<HerramientasActaDTO> herramientaListDto = herramientasactaMapper.toherramientasActa(herramientaLIST);
 
-        return ResponseEntity.ok().body(herramientaListDto);
+		List<HerramientasActaDTO> listDTO = new ArrayList<HerramientasActaDTO>(herramientaLIST.size());
+		for (Herramientasacta herramientasActa : herramientaLIST) {
+
+			HerramientasActaDTO herramientasActaDTO = new HerramientasActaDTO();
+			
+			herramientasActaDTO.setIdactas(herramientasActa.getActas().getIdactas() );
+			herramientasActaDTO.setIdherramienta(herramientasActa.getIdherramienta());
+			herramientasActaDTO.setJuicioexpertos(herramientasActa.getJuicioexpertos());
+			herramientasActaDTO.setRecopilaciondatos(herramientasActa.getRecopilaciondatos());
+			herramientasActaDTO.setHabilidades(herramientasActa.getHabilidades());
+			herramientasActaDTO.setHerramientareuniones(herramientasActa.getHerramientareuniones());
+			listDTO.add(herramientasActaDTO);
+		}
+
+		return ResponseEntity.ok().body(listDTO);
     }
 
     @RequestMapping("/finById/{herramientaId}")
@@ -89,5 +104,33 @@ public class HerramientasActaController {
 
         return ResponseEntity.ok().body(herramientaDto);
     }
+
+
+    /// JUNIO 9 reunion
+
+    @PutMapping("/updateHerramientasAcata")
+	public ResponseEntity<?> update(@Valid @RequestBody HerramientasActaDTO herramientasactaDTO) throws Exception {
+    	 Acta acta = new Acta();
+         acta.setIdactas(herramientasactaDTO.getIdactas());
+         Herramientasacta herramienta = new Herramientasacta();
+         herramienta.setIdherramienta(herramientasactaDTO.getIdherramienta());
+         
+         herramienta.setActas(acta);
+         herramienta.setJuicioexpertos(herramientasactaDTO.getJuicioexpertos());
+         herramienta.setRecopilaciondatos(herramientasactaDTO.getRecopilaciondatos());
+         herramienta.setHabilidades(herramientasactaDTO.getHabilidades());
+         herramienta.setHerramientareuniones(herramientasactaDTO.getHabilidades());
+
+         Herramientasacta herramientasactaNew = herramientasActasService.update(herramienta);
+         
+         herramientasactaDTO.setIdherramienta(herramientasactaNew.getIdherramienta());
+         herramientasactaDTO.setJuicioexpertos(herramientasactaNew.getJuicioexpertos());
+         herramientasactaDTO.setRecopilaciondatos(herramientasactaNew.getRecopilaciondatos());
+         herramientasactaDTO.setHabilidades(herramientasactaNew.getHabilidades());
+         herramientasactaDTO.setHerramientareuniones(herramientasactaNew.getHerramientareuniones());
+         herramientasactaDTO.setIdactas(herramientasactaNew.getActas().getIdactas());
+         return ResponseEntity.ok().body(herramientasactaDTO);
+
+	}
 
 }

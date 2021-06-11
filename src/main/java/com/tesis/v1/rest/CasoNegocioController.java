@@ -1,5 +1,6 @@
 package com.tesis.v1.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,14 +56,26 @@ public class CasoNegocioController {
 
     }
 
-    @RequestMapping("/casoNegocioDelActa/{idProyecto}")
+    @RequestMapping("/findCasoNegocioDelActa/{idProyecto}")
     public ResponseEntity<?> casoNegocioDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
-
         List<CasoNegocio> casonegocioLIST = CasoNegocioService.casoNegocioDelActa(idProyecto);
 
-        List<CasoNegocioDTO> casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocioLIST);
+		List<CasoNegocioDTO> listDTO = new ArrayList<CasoNegocioDTO>(casonegocioLIST.size());
+		
+		for (CasoNegocio casoNegocio1 : casonegocioLIST) {
 
-        return ResponseEntity.ok().body(casonegocioDTO);
+			CasoNegocioDTO casoNegocioDTO = new CasoNegocioDTO();
+
+			casoNegocioDTO.setIdEntradaActa(casoNegocio1.getEntradacta().getIdentrada());
+			casoNegocioDTO.setId_caso_negocio(casoNegocio1.getId_caso_negocio());
+			casoNegocioDTO.setMetas(casoNegocio1.getMetas());
+			casoNegocioDTO.setObjetivos(casoNegocio1.getObjetivos());
+			casoNegocioDTO.setIncidentes(casoNegocio1.getIncidentes());
+			casoNegocioDTO.setOportunidades(casoNegocio1.getOportunidades());
+			listDTO.add(casoNegocioDTO);
+		}
+
+		return ResponseEntity.ok().body(listDTO);
     }
 
     @RequestMapping("/findByAll")
@@ -107,18 +120,36 @@ public class CasoNegocioController {
         return ResponseEntity.ok().body(casonegocioDTOnew);
     }
     
-    
-      @PutMapping("/update")
+    /// JUNIO 9 reunion
+  
+    @PutMapping("/updateCasoNegocio")
     public ResponseEntity<?> update(@Valid @RequestBody CasoNegocioDTO casonegocioDTO) throws Exception {
         
            
-        CasoNegocio casonegocio = casonegocioMapper.tocasoNegocio(casonegocioDTO);
-        casonegocio = CasoNegocioService.update(casonegocio);
-        casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocio);
+    	  CasoNegocio casonegocio = new CasoNegocio();
+          Entradacta entradas = new Entradacta();
+          casonegocio.setId_caso_negocio(casonegocioDTO.getId_caso_negocio());
+          casonegocio.setMetas(casonegocioDTO.getMetas());
+          casonegocio.setObjetivos(casonegocioDTO.getObjetivos());
+          casonegocio.setIncidentes(casonegocioDTO.getIncidentes());
+          casonegocio.setOportunidades(casonegocioDTO.getOportunidades());
+          entradas.setIdentrada(casonegocioDTO.getIdEntradaActa());
+          casonegocio.setEntradacta(entradas);
+
+          log.info("************ 2");
+
+          CasoNegocio casonegocionew = CasoNegocioService.update(casonegocio);
+
+          casonegocioDTO.setId_caso_negocio(casonegocionew.getId_caso_negocio());
+          casonegocioDTO.setMetas(casonegocionew.getMetas());
+          casonegocioDTO.setObjetivos(casonegocionew.getObjetivos());
+          casonegocioDTO.setIncidentes(casonegocionew.getIncidentes());
+          casonegocioDTO.setOportunidades(casonegocionew.getOportunidades());
+          
+          casonegocioDTO.setIdEntradaActa(casonegocionew.getEntradacta().getIdentrada());
 
       
         return ResponseEntity.ok().body(casonegocioDTO);
     }
-    
 
 }
