@@ -140,7 +140,7 @@ public class pgaController {
 		entradapga.setEstandares(entradasDTO.getEstandares());
 		entradapga.setObjetivocalidad(entradasDTO.getObjetivocalidad());
 		entradapga.setCiclo(entradasDTO.getCiclo());
-		// entradapga.setEnfoque(entradasDTO.getEnfoque());
+		entradapga.setEnfoque(entradasDTO.getEnfoque());
 		entradapga.setActivosprocesos(entradasDTO.getActivosprocesos());
 		// pga.setIdpga(entradasDTO.getIdpdp());
 		log.info("***********2");

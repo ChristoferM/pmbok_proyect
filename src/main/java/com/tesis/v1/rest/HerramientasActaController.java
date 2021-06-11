@@ -119,8 +119,7 @@ public class HerramientasActaController {
          herramienta.setJuicioexpertos(herramientasactaDTO.getJuicioexpertos());
          herramienta.setRecopilaciondatos(herramientasactaDTO.getRecopilaciondatos());
          herramienta.setHabilidades(herramientasactaDTO.getHabilidades());
-         herramienta.setHerramientareuniones(herramientasactaDTO.getHabilidades());
-
+         herramienta.setHerramientareuniones(herramientasactaDTO.getHerramientareuniones());
          Herramientasacta herramientasactaNew = herramientasActasService.update(herramienta);
          
          herramientasactaDTO.setIdherramienta(herramientasactaNew.getIdherramienta());
