@@ -2,6 +2,7 @@ package com.tesis.v1.dto;
 
 
 public class RolesDTO {
+	
 	private Integer idrol ;
 	private String nombrerol ;
 	

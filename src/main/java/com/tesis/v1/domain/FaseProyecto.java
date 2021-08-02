@@ -1,5 +1,7 @@
 package com.tesis.v1.domain;
 
+
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name = "faseproyecto", schema = "public")
 public class FaseProyecto {
 
     private Integer idfase;
-    private String nombrefase;
+    
+    private Integer idtipofase;
+    
+	private  Date  tiempoinicio;
+    
+	private  Date  tiempofin;
+    
     private String descripcionfase;
 
     private List<Reunion> reuniones = new ArrayList<Reunion>(0);
@@ -35,13 +45,13 @@ public class FaseProyecto {
         this.idfase = idfase;
     }
 
-    @Column(name = "nombrefase")
-    public String getNombrefase() {
-        return nombrefase;
+    @Column(name = "idtipofase")
+    public Integer getIdtipofase() {
+        return idtipofase;
     }
 
-    public void setNombrefase(String nombrefase) {
-        this.nombrefase = nombrefase;
+    public void setIdtipofase(Integer idtipofase) {
+        this.idtipofase = idtipofase;
     }
 
     @Column(name = "descripcionfase")
@@ -52,8 +62,26 @@ public class FaseProyecto {
     public void setDescripcionfase(String descripcionfase) {
         this.descripcionfase = descripcionfase;
     }
+    
+    @Column(name = "tiempoinicio")
+    public Date getTiempoinicio() {
+		return tiempoinicio;
+	}
 
-    //-- ---------------------------  CLASES CON LAS QUE SE CONECTA
+	public void setTiempoinicio(Date tiempoinicio) {
+		this.tiempoinicio = tiempoinicio;
+	}
+	
+	@Column(name = "tiempofin")
+	public Date getTiempofin() {
+		return tiempofin;
+	}
+
+	public void setTiempofin(Date tiempofin) {
+		this.tiempofin = tiempofin;
+	}
+
+	//-- ---------------------------  CLASES CON LAS QUE SE CONECTA
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "faseproyecto")
     public List<Reunion> getReuniones() {
         return reuniones;

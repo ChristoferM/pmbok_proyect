@@ -52,13 +52,13 @@ public class ProyectoContoller {
 
     @RequestMapping("/save")
     public ResponseEntity<?> save(@Valid @RequestBody ProyectoDTO proyectosDto) throws Exception {
-
+    	log.info("1111111");
         Proyecto proyecto = proyectosMapper.toproyectos(proyectosDto);
-
+        log.info("222");
         proyecto = proyectoService.save(proyecto);
-
+        log.info("333333");
         proyectosDto = proyectosMapper.toproyectosDTO(proyecto);
-
+        log.info("4444");
         return ResponseEntity.ok().body(proyectosDto);
     }
 

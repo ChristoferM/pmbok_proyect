@@ -3,6 +3,8 @@ package com.tesis.v1.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,7 @@ public class RolProyecto {
 
     @Id
     @Column(name = "id_rol_proyecto", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId_rol_proyecto() {
         return id_rol_proyecto;
     }
@@ -32,6 +35,7 @@ public class RolProyecto {
     // ----
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idgrupo")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Grupo getGrupo() {
         return grupo;
     }

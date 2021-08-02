@@ -98,7 +98,7 @@ class reunionesFaseProyectoSubGrupoTest {
 
 		FaseProyecto faseproyecto = faseproyectoOptional.get();
 		log.info("id Fase proyecto : " + faseproyecto.getIdfase().toString());
-		log.info("nombre : " + faseproyecto.getNombrefase());
+		//log.info("nombre : " + faseproyecto.getNombrefase());
 		log.info("descripcion : " + faseproyecto.getDescripcionfase());
 
 	}	
@@ -113,7 +113,7 @@ class reunionesFaseProyectoSubGrupoTest {
 
 		for (FaseProyecto faseproyecto : faseproyectos) {
 			log.info("id Fase proyecto : " + faseproyecto.getIdfase().toString());
-			log.info("nombre : " + faseproyecto.getNombrefase());
+			//log.info("nombre : " + faseproyecto.getNombrefase());
 			log.info("descripcion : " + faseproyecto.getDescripcionfase());
 
 		}

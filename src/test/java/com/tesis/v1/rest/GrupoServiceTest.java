@@ -1,5 +1,7 @@
 package com.tesis.v1.rest;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Order;
@@ -13,6 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.tesis.v1.domain.Grupo;
+import com.tesis.v1.domain.Proyecto;
+import com.tesis.v1.domain.Usuario;
+import com.tesis.v1.dto.GrupoDTO;
 import com.tesis.v1.service.GrupoService;
 
 @SpringBootTest
@@ -28,12 +33,26 @@ class GrupoServiceTest {
 	@Test
 	@Order(1)
 	void save() throws Exception {
-		// PARA CREAR UN GRUPO DEBE DE TENERSE LA INFORMACION DE
-		// 1. PROYECTO QUE SE CREA
-		// 2. USUARIOS
-
+		
+		GrupoDTO api = new GrupoDTO();
+		
+		// api.setIdgrupo(0);
+		// api.setId_sub_grupo(0);
+		api.setIdproyecto(21);
+		api.setIdrol(4);
+		api.setEmail("usuarioTest@test.com.co");
+		// api.setIdrol(3);
+		api.setIdNombrerol("supervisor  ");
+		if(api.getIdrol() == null || api.getIdrol() ==0) {
+			
+			api.setIdrol(0);
+			
+		}else {
+			Grupo ap = grupoService.saveAndrol(api, api.getIdrol(), api.getIdNombrerol());
+		}
+		
+		Grupo ap = grupoService.saveAndrol(api, api.getIdrol(), api.getIdNombrerol());
 	}
-
 	@Test
 	@Order(2)
 	void findById() throws Exception {
@@ -65,6 +84,12 @@ class GrupoServiceTest {
 	@Test
 	@Order(5)
 	void delete() throws Exception {
+
+	}
+	
+	@Test
+	@Order(6)
+	void CrearfaseConResponsables() throws Exception {
 
 	}
 

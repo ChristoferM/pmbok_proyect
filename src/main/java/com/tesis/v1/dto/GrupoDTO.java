@@ -7,6 +7,9 @@ public class GrupoDTO {
     private Integer id_sub_grupo;
     private Integer idproyecto;
     private String email;
+    
+    private Integer idrol ;
+    private String idNombrerol;
 
     public Integer getIdgrupo() {
         return idgrupo;
@@ -39,5 +42,21 @@ public class GrupoDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	public Integer getIdrol() {
+		return idrol;
+	}
+
+	public void setIdrol(Integer idrol) {
+		this.idrol = idrol;
+	}
+
+	public String getIdNombrerol() {
+		return idNombrerol;
+	}
+
+	public void setIdNombrerol(String idNombrerol) {
+		this.idNombrerol = idNombrerol;
+	}
 
 }
