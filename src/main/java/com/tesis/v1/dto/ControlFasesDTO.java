@@ -13,15 +13,16 @@ public class ControlFasesDTO {
 	private String fin;
 	private String estado;
 	private String nombre;
-	
-	
-	
+	private Integer idFase;
+
 	
 	public ControlFasesDTO() {
 		super();
 	}
+	
 	public ControlFasesDTO(String nombreProyecto, String descripcionProyecto, String nombreReunion,
-			String descripcionReunion, String descripcionFase, String inicio, String fin, String estado, String nombre) {
+			String descripcionReunion, String descripcionFase, String inicio, String fin, String estado, String nombre,
+			Integer idFase) {
 		super();
 		this.nombreProyecto = nombreProyecto;
 		this.descripcionProyecto = descripcionProyecto;
@@ -32,66 +33,94 @@ public class ControlFasesDTO {
 		this.fin = fin;
 		this.estado = estado;
 		this.nombre = nombre;
+		this.idFase = idFase;
 	}
+
 	public String getNombreProyecto() {
 		return nombreProyecto;
 	}
+
 	public void setNombreProyecto(String nombreProyecto) {
 		this.nombreProyecto = nombreProyecto;
 	}
+
 	public String getDescripcionProyecto() {
 		return descripcionProyecto;
 	}
+
 	public void setDescripcionProyecto(String descripcionProyecto) {
 		this.descripcionProyecto = descripcionProyecto;
 	}
+
 	public String getNombreReunion() {
 		return nombreReunion;
 	}
+
 	public void setNombreReunion(String nombreReunion) {
 		this.nombreReunion = nombreReunion;
 	}
+
 	public String getDescripcionReunion() {
 		return descripcionReunion;
 	}
+
 	public void setDescripcionReunion(String descripcionReunion) {
 		this.descripcionReunion = descripcionReunion;
 	}
+
 	public String getDescripcionFase() {
 		return descripcionFase;
 	}
+
 	public void setDescripcionFase(String descripcionFase) {
 		this.descripcionFase = descripcionFase;
 	}
+
 	public String getInicio() {
 		return inicio;
 	}
+
 	public void setInicio(String inicio) {
 		this.inicio = inicio;
 	}
+
 	public String getFin() {
 		return fin;
 	}
+
 	public void setFin(String fin) {
 		this.fin = fin;
 	}
+
 	public String getEstado() {
 		return estado;
 	}
+
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
+
+	public Integer getIdFase() {
+		return idFase;
+	}
+
+	public void setIdFase(Integer idFase) {
+		this.idFase = idFase;
+	}
 
 }
-/*
+	
+	
+	
+	/*
  SELECT 
 proyectos.nombre as nombreProyecto,
 proyectos.descripcion as descripcionProyecto,

@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.time.*;
 
 import org.slf4j.Logger;
@@ -30,6 +32,7 @@ import com.tesis.v1.domain.tipofases;
 import com.tesis.v1.dto.ControlFasesDTO;
 import com.tesis.v1.dto.CrearfaseConResponsablesDTO;
 import com.tesis.v1.dto.GrupoDTO;
+import com.tesis.v1.dto.ResponsablesDTO;
 import com.tesis.v1.dto.RolesDTO;
 import com.tesis.v1.dto.RolproyectoDTO;
 import com.tesis.v1.dto.UsuariosDTO;
@@ -328,33 +331,9 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<UsuariosDTO> consultarIdsUser(List<UsuariosDTO> Usuarios) throws Exception {
-		List<UsuariosDTO> DTOList = new ArrayList<UsuariosDTO>();
-
-		for (UsuariosDTO usuario : Usuarios) {
-			Optional<Usuario> user = usuarioRepository.findById(usuario.getEmail());
-			log.info("Optional<Usuario> user");
-			if (user.isPresent()) {
-				log.info("if (user.isPresent()) {");
-				UsuariosDTO dtoUser = new UsuariosDTO();
-				dtoUser.setActivo("");
-				dtoUser.setEmail(user.get().getEmail());
-				dtoUser.setNombre(user.get().getNombre());
-				dtoUser.setPassword("");
-				dtoUser.setToken("");
-				DTOList.add(dtoUser);
-			}
-
-		}
-
-		return DTOList;
-	}
-
-	@Override
-	@Transactional(readOnly = true)
 	public List<GrupoDTO> grupoDeTrabajo(Integer idProyecto) throws Exception {
 		List<GrupoDTO> DTOList = new ArrayList<GrupoDTO>();
-
+		log.info("-> -> " + idProyecto.toString());
 		for (Grupo grupo : grupoRepository.grupoDeTrabajo(idProyecto)) {
 			GrupoDTO DTO = new GrupoDTO();
 			// Optional<RolProyecto> rol =
@@ -420,40 +399,42 @@ public class GrupoServiceImpl implements GrupoService {
 
 								if (fase.get().getDescripcionfase().compareTo(dateFormat.format(date)) > 0) {
 									DTO.setEstado("Terminado");
-									
+
 								} else {
 									DTO.setEstado("En proceso");
 
 								}
-								log.info("\n \n ");
-								
-								String date_s = fase.get().getTiempoinicio().toString(); 
-								SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-								Date date2 = dt.parse(date_s); 
+								// log.info("\n \n ");
+
+								String date_s = fase.get().getTiempoinicio().toString();
+								SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+								Date date2 = dt.parse(date_s);
 								SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd");
-								log.info("->-> Aca _-> "+dt1.format(date2));
+
 								/*
-								// log.info("-> tipo ->"+((Object)fase.get().getTiempoinicio()).getClass().getSimpleName());
-								// log.info("Convertido ->"+fase.get().getTiempoinicio() );
-								// Date dateConverte = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(fase.get().getTiempoinicio().toString());
-								// log.info("Convertido ->"+dateConverte.toString());
-								// log.info("Tipo Convertido ->"+((Object)dateConverte ).getClass().getSimpleName());
-								// dateConverte = new SimpleDateFormat("yyyy-MM-dd").parse(fase.get().getTiempofin().toString());
-								*/
-								log.info("\n \n ");
-								
+								 * // log.info("-> tipo ->"+((Object)fase.get().getTiempoinicio()).getClass().
+								 * getSimpleName()); // log.info("Convertido ->"+fase.get().getTiempoinicio() );
+								 * // Date dateConverte = new
+								 * SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(fase.get().getTiempoinicio().
+								 * toString()); // log.info("Convertido ->"+dateConverte.toString()); //
+								 * log.info("Tipo Convertido ->"+((Object)dateConverte
+								 * ).getClass().getSimpleName()); // dateConverte = new
+								 * SimpleDateFormat("yyyy-MM-dd").parse(fase.get().getTiempofin().toString());
+								 */
+
 								DTO.setInicio((String) dt1.format(date2));
-								
-								//String date_s = fase.get().getTiempoinicio().toString(); 
-								 date_s = fase.get().getTiempofin().toString(); 
-								 dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-								 date2 = dt.parse(date_s); 
-								 dt1 = new SimpleDateFormat("yyyy/MM/dd");
-								log.info("->-> Aca _-> "+dt1.format(date2));
-								
+
+								// String date_s = fase.get().getTiempoinicio().toString();
+								date_s = fase.get().getTiempofin().toString();
+								dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+								date2 = dt.parse(date_s);
+								dt1 = new SimpleDateFormat("yyyy/MM/dd");
+								// log.info("->-> Aca _-> " + dt1.format(date2));
+
 								DTO.setFin((String) dt1.format(date2));
 
 								DTO.setNombre(tipoFases.get().getNombrefase());
+								DTO.setIdFase(fase.get().getIdfase());
 
 								DTOList.add(DTO);
 
@@ -490,6 +471,119 @@ public class GrupoServiceImpl implements GrupoService {
 		return DTOList;
 	}
 
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String elimiarUsuarioMatriculado(String Usuario, Integer idProyecto) throws Exception {
+		Boolean IS_EMAIL = false;
+		if (Usuario != null || Usuario != "") {
+			Pattern p = Pattern.compile("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
+
+			Matcher m = p.matcher(Usuario);
+
+			IS_EMAIL = m.find();
+		}
+		if (IS_EMAIL) {
+			// 1. Buscar en subGrupos
+			// 2. Borrar RolProyecto (Es el rol o reoles que desempeña el usuario durante un
+			// proyecto
+			try {
+				grupoRepository.elimiarUsuarioRol(Usuario, idProyecto);
+
+				grupoRepository.elimiarUsuarioSubGrupo(Usuario, idProyecto);
+
+				// 2. Buscar en Grupos
+				grupoRepository.elimiarUsuarioMatriculado(Usuario, idProyecto);
+
+			} catch (Exception e) {
+				throw new IllegalArgumentException("{\"success\":fasle,\"status\":Error, \"message\":" + e + " }");
+			}
+			return "{\"success\":true,\"status\":Ok, \"message\": Se elimino por completo el usuario " + Usuario
+					+ " del proyecto }";
+		}
+
+		return "{\"success\":fasle,\"status\":Error, \"message\": No se encontro el ususario }";
+
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<UsuariosDTO> verGrupoDeTrabajoPorReunion() throws Exception {
+		return null;
+	}
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String elimiarUsuarioPorRolenProyecto(String Usuario, Integer idProyecto, String Rol) throws Exception {
+		try {
+			Boolean IS_EMAIL = false;
+			if (Usuario != null || Usuario != "") {
+				Pattern p = Pattern.compile("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
+
+				Matcher m = p.matcher(Usuario);
+
+				IS_EMAIL = m.find();
+			}
+			if (IS_EMAIL) {
+				if (Rol != null || Rol != "" && idProyecto != null || idProyecto > 0) {
+
+					grupoRepository.elimiarUsuarioMatriculado(Usuario, idProyecto);// , Rol);
+
+					return "{\"success\":OK,\"status\":true, \"message\": Se elimino el usuario " + Usuario
+							+ " del proyecto }";
+				}
+				return "{\"success\":false,\"status\":Error, \"message\": Error en datos }";
+
+			}
+			return "{\"success\":false,\"status\":Error, \"message\": No se encontro el ususario }";
+
+		} catch (Exception e) {
+			throw new IllegalArgumentException("{\"success\":fasle,\"status\":Error, \"message\":" + e + " }");
+		}
+
+	}
+
+	@Override
+	public List<ResponsablesDTO> responsablesEnFaseoReunion(Integer idProyecto) throws Exception {
+		if (idProyecto != null || idProyecto > 0) {
+			List<ResponsablesDTO> DTO = new ArrayList<ResponsablesDTO>();
+			try {
+				for(Grupo grupo :grupoRepository.responsablesEnFaseoReunion(idProyecto)) {
+					ResponsablesDTO dto = new ResponsablesDTO();
+					
+					
+					for (Integer i = 0 ; i <= grupo.getRolProyectos().size()-1;i ++) {
+						dto.setNombrerol(grupo.getRolProyectos().get(i).getRoles().getNombrerol() );
+					}
+					
+					for (Integer i = 0 ; i <= grupo.getSubGrupos().size()-1;i ++) {
+						dto.setIdfase(grupo.getSubGrupos().get(i).getFaseproyecto().getIdfase());
+					}
+					//dto.setIdfase(grupo.getProyectos().getReuniones().get);
+					for (Integer i = 0 ; i <= grupo.getSubGrupos().size()-1;i ++) {
+						dto.setId_sub_grupo(grupo.getSubGrupos().get(i).getId_sub_grupo());
+					}
+					//dto.setId_sub_grupo(grupo.getSubGrupos().);
+					dto.setIdgrupo(grupo.getIdgrupo());
+					 dto.setEmail(grupo.getUsuarios().getEmail());
+					DTO.add(dto);
+				} 
+			} catch (Exception e) {
+				
+				throw new IllegalArgumentException(e);
+
+			}
+			
+			if (DTO.isEmpty()) {
+				throw new IllegalArgumentException(
+						"{\"success\":false,\"status\":Error, \"message\": No se encontro el Identificador de la Fase }");
+			} else {
+				return DTO;
+			}
+
+		}
+		throw new IllegalArgumentException(
+				"{\"success\":false,\"status\":Error, \"message\": No se encontro el Identificador de la Fase }");
+	}
 }
 /*
  * DTO.setIdgrupo(grupo.getIdgrupo());

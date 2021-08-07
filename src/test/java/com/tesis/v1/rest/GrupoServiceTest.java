@@ -92,5 +92,20 @@ class GrupoServiceTest {
 	void CrearfaseConResponsables() throws Exception {
 
 	}
+	
+
+	@Test
+	@Order(7)
+	void elimiarUsuarioMatriculado() throws Exception {
+		// 1. Rectificar el formato correo
+		// 2. rectificar que este matriculado a un proyecto
+		// 3. Rectificar que si esta o no en un grupo de trabajo.
+		// 4. eliminar registro:
+			// Si esta en grupos de trbajo, primero eliminar el grupo de trabajo y luego 
+			// eliminar del grupo matriculado
+		String Usuario = "userNew2@test.com.co";
+		Integer idProyecto =21;
+		grupoService.elimiarUsuarioMatriculado(Usuario,idProyecto);
+	}
 
 }

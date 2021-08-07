@@ -12,5 +12,7 @@ public interface ReunionRepository extends JpaRepository<Reunion, Integer> {
 
 	@Query(value ="SELECT * FROM reuniones WHERE reuniones.idproyecto = ?1 ;", nativeQuery = true)
 	public  List<Reunion>reunionPorIdProyecto(Integer idProyecto);
+	
 
+	
 }

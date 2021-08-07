@@ -6,6 +6,7 @@ import com.tesis.v1.domain.Grupo;
 import com.tesis.v1.dto.ControlFasesDTO;
 import com.tesis.v1.dto.CrearfaseConResponsablesDTO;
 import com.tesis.v1.dto.GrupoDTO;
+import com.tesis.v1.dto.ResponsablesDTO;
 import com.tesis.v1.dto.RolesDTO;
 import com.tesis.v1.dto.UsuariosDTO;
 
@@ -18,8 +19,15 @@ public interface GrupoService  extends GenericService<Grupo,Integer>{
 	 public List<RolesDTO> rolesDisponibles() throws Exception;
 	 
 	 public List<GrupoDTO> grupoDeTrabajo(Integer idProyecto) throws Exception;
-	 
-	 public List<UsuariosDTO> consultarIdsUser(List<UsuariosDTO> Usuarios) throws Exception;
-	 
+	 	 
 	 public List<ControlFasesDTO> controlPorFases(String Usuario) throws Exception;
+	 
+	 public String elimiarUsuarioMatriculado(String Usuario,Integer idProyecto) throws Exception ;
+	 
+	 public String elimiarUsuarioPorRolenProyecto(String Usuario,Integer idProyecto,String Rol) throws Exception ;
+	 
+	 public List<UsuariosDTO> verGrupoDeTrabajoPorReunion() throws Exception;
+	 
+	 public List<ResponsablesDTO>  responsablesEnFaseoReunion(Integer idProyecto) throws Exception;
+	 
 }

@@ -114,19 +114,25 @@ public class GrupoController {
     	
     }
     
-    @RequestMapping("/consultarIdsUser")
-    @ResponseBody
-    public ResponseEntity<?> consultarIdsUser(@Valid @RequestBody List<UsuariosDTO> Usuarios) throws Exception {
-
-    	return ResponseEntity.ok(grupoService.consultarIdsUser(Usuarios));
-    }
+  
     
     @RequestMapping("/consultarIdsUser/{Usuario}")
     public ResponseEntity<?> controlPorFases(@PathVariable("Usuario") String Usuario) throws Exception {
     	
     	return ResponseEntity.ok(grupoService.controlPorFases(Usuario));
-    }
+    };
     
-	 ;
+    @RequestMapping("/eliminarUsuario/{Usuario}")
+    public ResponseEntity<?> eliminarUsuario(@PathVariable("Usuario") String Usuario) throws Exception {
+    	
+    	return ResponseEntity.ok(grupoService.controlPorFases(Usuario));
+    };
+    
+    @RequestMapping("/responsablesEnFaseoReunion/{idFase}")
+    public ResponseEntity<?> responsablesEnFaseoReunion(@PathVariable("idFase") Integer idFase) throws Exception {
+    	
+    	return ResponseEntity.ok(grupoService.responsablesEnFaseoReunion(idFase));
+    };
+    
 	
 }
