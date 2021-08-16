@@ -155,7 +155,7 @@ public class GrupoServiceImpl implements GrupoService {
 		// 2. Validar que el rol -> implica las tablas roles; rolproyecto
 		// rolesRepository
 		// rolProyectoRepository
-		log.info(idrol.toString());
+		log.info("saveAndrol(): GrupoServiceImpl.java");
 		if (idrol != 0) {
 			// rol redefinido
 			// log.info(idrol.toString());
@@ -333,7 +333,7 @@ public class GrupoServiceImpl implements GrupoService {
 	@Transactional(readOnly = true)
 	public List<GrupoDTO> grupoDeTrabajo(Integer idProyecto) throws Exception {
 		List<GrupoDTO> DTOList = new ArrayList<GrupoDTO>();
-		log.info("-> -> " + idProyecto.toString());
+		log.info("grupoDeTrabajo() : Services ");
 		for (Grupo grupo : grupoRepository.grupoDeTrabajo(idProyecto)) {
 			GrupoDTO DTO = new GrupoDTO();
 			// Optional<RolProyecto> rol =

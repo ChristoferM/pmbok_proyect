@@ -21,6 +21,10 @@ public class SubGrupo {
 
     private FaseProyecto faseproyecto;
     // idfase int4 NOT NULL,
+    
+    /*
+     * 15 de agosto: Se agrega la variable estado con sus respectivos Getter y setter*/
+    private Boolean estado;
 
     @Id
     @Column(name = "id_sub_grupo", unique = true, nullable = false)
@@ -54,5 +58,13 @@ public class SubGrupo {
     public void setFaseproyecto(FaseProyecto faseproyecto) {
         this.faseproyecto = faseproyecto;
     }
+    
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 
 }

@@ -10,10 +10,10 @@ import com.tesis.v1.domain.notificaciones;
 
 public interface NotificacionesRepository extends JpaRepository<notificaciones, Integer> {
 	
-	@Query(value ="SELECT * FROM notificaciones WHERE notificaciones.receptor = ?1", nativeQuery = true)
+	@Query(value ="SELECT * FROM notificaciones WHERE notificaciones.emisor = ?1", nativeQuery = true)
 	public List<notificaciones> BuscarEnviados(String email);
 	
-	@Query(value ="SELECT * FROM notificaciones WHERE notificaciones.emisor = ?1 ", nativeQuery = true)
+	@Query(value ="SELECT * FROM notificaciones WHERE notificaciones.receptor = ?1 ", nativeQuery = true)
 	public List<notificaciones> BuscarRecibidos(String email);
 
 }

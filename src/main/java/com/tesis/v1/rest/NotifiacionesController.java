@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tesis.v1.domain.notificaciones;
+import com.tesis.v1.dto.GrupoDTO;
 import com.tesis.v1.dto.NotificacionesDTO;
 import com.tesis.v1.repository.NotificacionesRepository;
 import com.tesis.v1.service.NotificacionesService;
@@ -65,4 +66,10 @@ public class NotifiacionesController {
 		 
 		 return ResponseEntity.ok().body(notificacionesService.update(entity));
 	 }
+	 @RequestMapping("/CrearNotificacionMatricula")
+	    public ResponseEntity<?> CrearNotificacionMatricula(@Valid @RequestBody GrupoDTO DTO) throws Exception { 
+		 
+		 return ResponseEntity.ok().body(notificacionesService.CrearNotificacionMatricula(DTO));
+	 }
+	 
 }

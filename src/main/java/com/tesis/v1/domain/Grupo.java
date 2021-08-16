@@ -29,6 +29,9 @@ public class Grupo {
     private List<RolProyecto> rolProyectos = new ArrayList<RolProyecto>(0);
 
     private Proyecto proyectos;
+    /*
+     * 15 de agosto: Se agrega la variable estado con sus respectivos Getter y setter*/
+    private Boolean estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "email")
@@ -81,4 +84,13 @@ public class Grupo {
         this.proyectos = proyectos;
     }
 
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+    
 }

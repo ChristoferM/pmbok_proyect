@@ -21,12 +21,14 @@ import com.tesis.v1.domain.Grupo;
 import com.tesis.v1.domain.Reunion;
 import com.tesis.v1.domain.RolProyecto;
 import com.tesis.v1.domain.SubGrupo;
+import com.tesis.v1.domain.notificaciones;
 import com.tesis.v1.dto.ActasDTO;
 import com.tesis.v1.dto.GrupoDTO;
 import com.tesis.v1.dto.RolesDTO;
 import com.tesis.v1.dto.UsuariosDTO;
 import com.tesis.v1.dto.CrearfaseConResponsablesDTO; 
 import com.tesis.v1.service.GrupoService;
+import com.tesis.v1.service.NotificacionesService;
 import com.tesis.v1.service.tipofasesService;
 
 @RestController // Servicio
@@ -39,6 +41,8 @@ public class GrupoController {
 	@Autowired
 	GrupoService grupoService;
 	
+	@Autowired
+	NotificacionesService notificacionesService ;
 	
 	@Autowired
 	tipofasesService ttipofasesService;
@@ -78,7 +82,7 @@ public class GrupoController {
 			log.info("vrol.getId_rol_proyecto().toString()");
 			dto.setIdrol(rol.getId_rol_proyecto());	
 		}
-		
+		notificacionesService.CrearNotificacionMatricula(dto);
 		
         return ResponseEntity.ok(dto);
     }

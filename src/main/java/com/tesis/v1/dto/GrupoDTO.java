@@ -10,6 +10,9 @@ public class GrupoDTO {
     
     private Integer idrol ;
     private String idNombrerol;
+    /*
+     * 15 de agosto: Se agrega la variable estado con sus respectivos Getter y setter*/
+    private Boolean estado;
 
     public Integer getIdgrupo() {
         return idgrupo;
@@ -57,6 +60,14 @@ public class GrupoDTO {
 
 	public void setIdNombrerol(String idNombrerol) {
 		this.idNombrerol = idNombrerol;
+	}
+	
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
 	}
 
 }

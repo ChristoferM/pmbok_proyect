@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tesis.v1.domain.Proyecto;
 import com.tesis.v1.domain.notificaciones;
+import com.tesis.v1.dto.GrupoDTO;
 import com.tesis.v1.repository.NotificacionesRepository;
+import com.tesis.v1.repository.ProyectoRepository;
 import com.tesis.v1.repository.UsuarioRepository;
 
 @Service
@@ -21,6 +24,9 @@ public class NotificacionesServiceImpl implements NotificacionesService {
 	NotificacionesRepository notificacionesRepository;
 	@Autowired
 	UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	ProyectoRepository proyectoRepository ; 
 
 	@Override
 	@Transactional(readOnly = true)
@@ -41,6 +47,7 @@ public class NotificacionesServiceImpl implements NotificacionesService {
 
 		return notificacionesRepository.count();
 	}
+	
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -132,6 +139,27 @@ public class NotificacionesServiceImpl implements NotificacionesService {
 		} else {
 			throw new Exception("{\"success\":false,\"status\":error, \"message\": Error en los datos }");
 		}
+	}
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public notificaciones CrearNotificacionMatricula(GrupoDTO dto) throws Exception {
+		Optional<Proyecto> proyecto = proyectoRepository.findById(dto.getIdproyecto());
+		notificaciones noti = new notificaciones();
+		
+		noti.setReceptor(dto.getEmail());
+		noti.setEmisor(proyecto.get().getAdmin());
+		noti.setMensaje("Usted ha sido agregado al proyecto: "+proyecto.get().getNombre()+ "\n Descripcion: "+proyecto.get().getDescripcion());
+		noti.setEstado(false);
+		
+		return notificacionesRepository.save(noti);
+	}
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public notificaciones CrearNotificacionResponsable(GrupoDTO dto) throws Exception {
+		
+		return null;
 	}
 
 }
