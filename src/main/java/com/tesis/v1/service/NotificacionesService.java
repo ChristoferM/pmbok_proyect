@@ -16,4 +16,5 @@ public interface NotificacionesService extends GenericService<notificaciones,Int
 	
 	public notificaciones CrearNotificacionResponsable(GrupoDTO dto) throws Exception;
 	
+	public Long count(String email)throws Exception;
 }

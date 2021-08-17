@@ -43,9 +43,9 @@ public class NotificacionesServiceImpl implements NotificacionesService {
 	}
 
 	@Override
-	public Long count() {
-
-		return notificacionesRepository.count();
+	@Transactional(readOnly = true)
+	public Long count(String email) {
+		return notificacionesRepository.ContarMensajes(email);
 	}
 	
 
@@ -70,18 +70,18 @@ public class NotificacionesServiceImpl implements NotificacionesService {
 			throw new Exception("{\"success\":false,\"status\":error, \"message\": No existe la notificacion  }");
 		}
 
-		if (entity2.get().getEstado() != true && entity2.get().getEmisor() == entity.getEmisor()
-				&& entity2.get().getReceptor() == entity.getReceptor()) {
+		if (entity2.get().getEstado() != true ){// && entity2.get().getEmisor() == entity.getEmisor()) {
+				//&& entity2.get().getReceptor() == entity.getReceptor()) {
 			if (notificacionesRepository.existsById(entity.getIdnotificaciones())) {
 				// Se validan que los 2 usuarios Existan
 				entity.setEstado(true); // se Quema el set por si existe algun error con el servicio
 				return notificacionesRepository.save(entity);
 			} else {
-				throw new Exception("{\"success\":false,\"status\":error, \"message\": Error en los datos }");
+				throw new Exception("{\"success\":false,\"status\":error, \"message\": \"Error en los datos\" }");
 			}
 
 		} else {
-			throw new Exception("{ \"success\":false,\"status\":error, \"message\": Estado Ya modificado }");
+			throw new Exception("{ \"success\":false,\"status\":error, \"message\": \"Estado Ya modificado\" }");
 		}
 	}
 
@@ -160,6 +160,11 @@ public class NotificacionesServiceImpl implements NotificacionesService {
 	public notificaciones CrearNotificacionResponsable(GrupoDTO dto) throws Exception {
 		
 		return null;
+	}
+
+	@Override
+	public Long count() {
+		return notificacionesRepository.count();
 	}
 
 }

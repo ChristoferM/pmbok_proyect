@@ -28,6 +28,7 @@ import com.tesis.v1.domain.Reunion;
 import com.tesis.v1.domain.Roles;
 import com.tesis.v1.domain.SubGrupo;
 import com.tesis.v1.domain.Usuario;
+import com.tesis.v1.domain.notificaciones;
 import com.tesis.v1.domain.tipofases;
 import com.tesis.v1.dto.ControlFasesDTO;
 import com.tesis.v1.dto.CrearfaseConResponsablesDTO;
@@ -79,6 +80,9 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Autowired
 	RolProyectoRepository rolProyectoRepository;
+	
+	@Autowired
+	NotificacionesService notificacionesService;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -255,8 +259,10 @@ public class GrupoServiceImpl implements GrupoService {
 
 		fecha = new SimpleDateFormat("yyyy/MM/dd").parse(crearfaseConResponsablesDTO.getTiempofin());
 		faseObjeto.setTiempofin(fecha);
-		// GUARDAR LA FASE PARA EXTRAER EL ID Y GRABAR LOS SUBGRUPOS Y LAS REUNIONES
 		try {
+			// *****************************************************************
+			// GUARDAR LA FASE PARA EXTRAER EL ID Y GRABAR LOS SUBGRUPOS Y LAS REUNIONES
+			// *****************************************************************
 			faseObjeto = faseProyectoRepository.save(faseObjeto);
 
 		} catch (InvalidResultSetAccessException e) {
@@ -264,9 +270,16 @@ public class GrupoServiceImpl implements GrupoService {
 		} catch (DataAccessException e) {
 			throw new RuntimeException(e);
 		}
-
-		// funcion para crear los subGrupos de trabajo
-		CrearSubgrupo(crearfaseConResponsablesDTO.getIdresponsable(), faseObjeto);
+		
+		
+		//***************************************************************************
+		//  ************** funcion para crear los subGrupos de trabajo **************
+		//***************************************************************************
+		CrearSubgrupo(crearfaseConResponsablesDTO.getIdresponsable(),
+				faseObjeto,
+				crearfaseConResponsablesDTO.getIdproyecto(),
+				crearfaseConResponsablesDTO.getIdtipofase()
+				);
 
 		Proyecto proyectoObjeto = new Proyecto();
 
@@ -286,9 +299,11 @@ public class GrupoServiceImpl implements GrupoService {
 	}
 
 	@SuppressWarnings("unused")
-	private void CrearSubgrupo(List<idresponsable> idUsuarioGrupo, FaseProyecto fase) throws Exception {
+	private void CrearSubgrupo(List<idresponsable> idUsuarioGrupo, FaseProyecto fase, Integer IdProyecto,Integer idtipofase) throws Exception {
 		SubGrupo subgrupo = new SubGrupo();
 		Grupo grupoObjeto = new Grupo();
+		// *****************************************************************
+		// Iterar lista de Identificadores de usuario en grupo
 
 		for (idresponsable id : idUsuarioGrupo) {
 
@@ -299,15 +314,44 @@ public class GrupoServiceImpl implements GrupoService {
 			subgrupo.setGrupo(grupoObjeto);
 
 			try {
-				subGrupoRepository.save(subgrupo);
-				subgrupo = new SubGrupo();
-				grupoObjeto = new Grupo();
+				// con el id de grupo en cual 
+				subgrupo=subGrupoRepository.save(subgrupo);
+
 
 			} catch (InvalidResultSetAccessException e) {
 				throw new RuntimeException(e);
 			} catch (DataAccessException e) {
 				throw new RuntimeException(e);
 			}
+			try {
+				
+				// *****************************************************************
+				// Buscar a los usuario agregados para crar la notificacio
+				Optional<Grupo> tmpGrupo = grupoRepository.findById(subgrupo.getGrupo().getIdgrupo());
+				Optional<Proyecto> tmpProyecto = proyectoRepository.findById(IdProyecto);
+				Optional<tipofases> tmpTipoFase = tipoFasesRepository.findById(idtipofase);
+				
+				notificaciones Notificacion = new notificaciones();
+				Notificacion.setEmisor(tmpProyecto.get().getAdmin());
+				Notificacion.setReceptor(tmpGrupo.get().getUsuarios().getEmail());
+				Notificacion.setMensaje("Usted  ha sido agregado por el usuario: "+ tmpProyecto.get().getAdmin() + " a la fase del proyecto: "
+						+tmpProyecto.get().getNombre()+",  llamada:  "+ tmpTipoFase.get().getNombrefase()
+						);
+				Notificacion.setEstado(false);
+				notificacionesService.save(Notificacion);
+				
+				subgrupo = new SubGrupo();
+				grupoObjeto = new Grupo();
+				
+			} catch (InvalidResultSetAccessException e) {
+				throw new RuntimeException(e);
+			}catch (DataAccessException e) {
+				throw new RuntimeException(e);
+			}catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+
+			
 
 		}
 

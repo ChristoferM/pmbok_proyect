@@ -15,5 +15,9 @@ public interface NotificacionesRepository extends JpaRepository<notificaciones, 
 	
 	@Query(value ="SELECT * FROM notificaciones WHERE notificaciones.receptor = ?1 ", nativeQuery = true)
 	public List<notificaciones> BuscarRecibidos(String email);
+	
+
+	@Query(value ="SELECT count(*) FROM notificaciones  WHERE notificaciones.receptor = ?1 AND notificaciones.estado = false ;", nativeQuery = true)
+	public Long ContarMensajes(String email);
 
 }

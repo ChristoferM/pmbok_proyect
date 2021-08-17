@@ -39,6 +39,13 @@ public class NotifiacionesController {
 		
 		return ResponseEntity.ok().body(notificacionesService.BuscarRecibidos(user));
 	}
+	
+	
+	@RequestMapping("/contarMensajes/{user}")
+    public ResponseEntity<?> contarMensajes(@PathVariable("user") String user) throws Exception {
+		
+		return ResponseEntity.ok().body(notificacionesService.count(user));
+	}
 
 	 @RequestMapping("/nuevaNotificacion")
 	    public ResponseEntity<?> save(@Valid @RequestBody NotificacionesDTO DTO) throws Exception {
