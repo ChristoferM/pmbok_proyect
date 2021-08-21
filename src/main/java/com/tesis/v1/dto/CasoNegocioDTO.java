@@ -8,6 +8,7 @@ public class CasoNegocioDTO {
     private String incidentes;
     private String oportunidades;
     private Integer idEntradaActa;
+    private Boolean estado;
 
     // identrada int4 NOT NULL,
     public Integer getIdEntradaActa() {
@@ -57,5 +58,11 @@ public class CasoNegocioDTO {
     public void setOportunidades(String oportunidades) {
         this.oportunidades = oportunidades;
     }
+    public Boolean getEstado() {
+		return estado;
+	}
 
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 }

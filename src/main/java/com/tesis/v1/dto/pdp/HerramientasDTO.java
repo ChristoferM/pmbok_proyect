@@ -8,22 +8,35 @@ public class HerramientasDTO {
     private String recopilaciondatos;
     private String habilidades;
     private String herramientareuniones;
+    private Boolean estado;
+    
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 
     public HerramientasDTO() {
 
     }
 
-    public HerramientasDTO(Integer idpdp, Integer idherramienta, String juicioexpertos, String recopilaciondatos,
-            String habilidades, String herramientareuniones) {
-        this.idpdp = idpdp;
-        this.idherramienta = idherramienta;
-        this.juicioexpertos = juicioexpertos;
-        this.recopilaciondatos = recopilaciondatos;
-        this.habilidades = habilidades;
-        this.herramientareuniones = herramientareuniones;
-    }
+ 
 
-    public Integer getIdpdp() {
+    public HerramientasDTO(Integer idpdp, Integer idherramienta, String juicioexpertos, String recopilaciondatos,
+			String habilidades, String herramientareuniones, Boolean estado) {
+		super();
+		this.idpdp = idpdp;
+		this.idherramienta = idherramienta;
+		this.juicioexpertos = juicioexpertos;
+		this.recopilaciondatos = recopilaciondatos;
+		this.habilidades = habilidades;
+		this.herramientareuniones = herramientareuniones;
+		this.estado = estado;
+	}
+
+	public Integer getIdpdp() {
         return idpdp;
     }
 

@@ -22,8 +22,8 @@ public class GrupoMapperImpl implements GrupoMapper {
 
         GrupoDTO grupoDTO = new GrupoDTO();
 
-        grupoDTO.setEstado( grupo.getEstado() );
         grupoDTO.setIdgrupo( grupo.getIdgrupo() );
+        grupoDTO.setEstado( grupo.getEstado() );
 
         return grupoDTO;
     }
@@ -36,8 +36,8 @@ public class GrupoMapperImpl implements GrupoMapper {
 
         Grupo grupo = new Grupo();
 
-        grupo.setEstado( grupoDTO.getEstado() );
         grupo.setIdgrupo( grupoDTO.getIdgrupo() );
+        grupo.setEstado( grupoDTO.getEstado() );
 
         return grupo;
     }

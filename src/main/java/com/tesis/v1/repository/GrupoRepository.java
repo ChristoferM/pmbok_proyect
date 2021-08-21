@@ -67,6 +67,14 @@ public interface GrupoRepository extends JpaRepository<Grupo,Integer>{
 			"			AND faseproyecto.idfase = subgrupo.idfase  " + 
 			"			AND grupo.idgrupo = subgrupo.idgrupo ", nativeQuery = true)
 	public List<Grupo>  responsablesEnFaseoReunion(Integer idProyecto);
+	
+	
+	
+	
+	@Query(value =	"SELECT * FROM grupo WHERE grupo.email = ?1 ORDER BY  grupo.idproyecto;", nativeQuery = true)
+	public List<Grupo>  buscarParticipaciones(String Usuario);
+	
+
 	/*@Query(value ="SELECT   " + 
 			"			faseproyecto.idfase as idfase, " + 
 			"			subgrupo.id_sub_grupo as id_sub_grupo,  " + 

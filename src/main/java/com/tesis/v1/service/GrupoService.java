@@ -22,6 +22,8 @@ public interface GrupoService  extends GenericService<Grupo,Integer>{
 	 	 
 	 public List<ControlFasesDTO> controlPorFases(String Usuario) throws Exception;
 	 
+	 public List<GrupoDTO> buscarParticipaciones(String Usuario) throws Exception;
+	 
 	 public String elimiarUsuarioMatriculado(String Usuario,Integer idProyecto) throws Exception ;
 	 
 	 public String elimiarUsuarioPorRolenProyecto(String Usuario,Integer idProyecto,String Rol) throws Exception ;

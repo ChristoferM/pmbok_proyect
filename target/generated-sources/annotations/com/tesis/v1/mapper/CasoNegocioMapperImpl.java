@@ -27,6 +27,7 @@ public class CasoNegocioMapperImpl implements CasoNegocioMapper {
         casoNegocioDTO.setObjetivos( casoNegocio.getObjetivos() );
         casoNegocioDTO.setIncidentes( casoNegocio.getIncidentes() );
         casoNegocioDTO.setOportunidades( casoNegocio.getOportunidades() );
+        casoNegocioDTO.setEstado( casoNegocio.getEstado() );
 
         return casoNegocioDTO;
     }
@@ -44,6 +45,7 @@ public class CasoNegocioMapperImpl implements CasoNegocioMapper {
         casoNegocio.setObjetivos( casoNegocioDTO.getObjetivos() );
         casoNegocio.setIncidentes( casoNegocioDTO.getIncidentes() );
         casoNegocio.setOportunidades( casoNegocioDTO.getOportunidades() );
+        casoNegocio.setEstado( casoNegocioDTO.getEstado() );
 
         return casoNegocio;
     }

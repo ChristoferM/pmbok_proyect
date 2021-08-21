@@ -7,6 +7,15 @@ public class EntradactaDTO {
     private String acuerdos;
     private String factores;
     private String activosprocesos;
+    private Boolean estado;
+    
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 
     //idactas int4 NOT NULL,
     public Integer getIdActa() {

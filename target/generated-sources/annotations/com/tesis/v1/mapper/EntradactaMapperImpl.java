@@ -22,6 +22,7 @@ public class EntradactaMapperImpl implements EntradactaMapper {
 
         EntradactaDTO entradactaDTO = new EntradactaDTO();
 
+        entradactaDTO.setEstado( entradActa.getEstado() );
         entradactaDTO.setIdentrada( entradActa.getIdentrada() );
         entradactaDTO.setAcuerdos( entradActa.getAcuerdos() );
         entradactaDTO.setFactores( entradActa.getFactores() );
@@ -42,6 +43,7 @@ public class EntradactaMapperImpl implements EntradactaMapper {
         entradacta.setAcuerdos( entradActaDTO.getAcuerdos() );
         entradacta.setFactores( entradActaDTO.getFactores() );
         entradacta.setActivosprocesos( entradActaDTO.getActivosprocesos() );
+        entradacta.setEstado( entradActaDTO.getEstado() );
 
         return entradacta;
     }

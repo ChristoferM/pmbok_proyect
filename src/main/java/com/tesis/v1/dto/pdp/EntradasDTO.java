@@ -7,22 +7,35 @@ public class EntradasDTO {
     private String factoresambientales;
     private String activosprocesos;
     private Integer idpdp;
+    private Boolean estado;
+    
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 
 
 
     public EntradasDTO() {
     }
 
-    public EntradasDTO(Integer identradapdp, String otrosprocesos, String factoresambientales,
-            String activosprocesos,Integer idpdp) {
-        this.idpdp = idpdp;
-        this.identradapdp = identradapdp;
-        this.otrosprocesos = otrosprocesos;
-        this.factoresambientales = factoresambientales;
-        this.activosprocesos = activosprocesos;
-    }
+   
 
-    public Integer getIdpdp() {
+    public EntradasDTO(Integer identradapdp, String otrosprocesos, String factoresambientales, String activosprocesos,
+			Integer idpdp, Boolean estado) {
+		super();
+		this.identradapdp = identradapdp;
+		this.otrosprocesos = otrosprocesos;
+		this.factoresambientales = factoresambientales;
+		this.activosprocesos = activosprocesos;
+		this.idpdp = idpdp;
+		this.estado = estado;
+	}
+
+	public Integer getIdpdp() {
         return idpdp;
     }
 

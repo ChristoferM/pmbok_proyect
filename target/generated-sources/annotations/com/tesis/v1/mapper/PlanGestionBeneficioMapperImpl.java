@@ -28,6 +28,7 @@ public class PlanGestionBeneficioMapperImpl implements PlanGestionBeneficioMappe
         planGestionBeneficioDTO.setProdcutos( planesGestionBeneficios.getProdcutos() );
         planGestionBeneficioDTO.setServicios( planesGestionBeneficios.getServicios() );
         planGestionBeneficioDTO.setResultado( planesGestionBeneficios.getResultado() );
+        planGestionBeneficioDTO.setEstado( planesGestionBeneficios.getEstado() );
 
         return planGestionBeneficioDTO;
     }
@@ -46,6 +47,7 @@ public class PlanGestionBeneficioMapperImpl implements PlanGestionBeneficioMappe
         planGestionbeneficio.setProdcutos( planesGestionBeneficiosDTO.getProdcutos() );
         planGestionbeneficio.setServicios( planesGestionBeneficiosDTO.getServicios() );
         planGestionbeneficio.setResultado( planesGestionBeneficiosDTO.getResultado() );
+        planGestionbeneficio.setEstado( planesGestionBeneficiosDTO.getEstado() );
 
         return planGestionbeneficio;
     }

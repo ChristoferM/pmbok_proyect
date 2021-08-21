@@ -20,6 +20,7 @@ public class PlanGestionbeneficio {
     private String prodcutos;
     private String servicios;
     private String resultado;
+    private Boolean estado;
     // identrada int4 NOT NULL,
 
     // Entidad padre
@@ -81,6 +82,14 @@ public class PlanGestionbeneficio {
         this.resultado = resultado;
     }
 
+    @Column(name = "estado", nullable = false)
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
     // ----------------------------------------------------- Entidad padre
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "identrada")

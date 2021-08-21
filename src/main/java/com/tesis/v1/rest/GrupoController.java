@@ -58,6 +58,8 @@ public class GrupoController {
 	 
 		  return ResponseEntity.ok().body(grupoService.rolesDisponibles());
 	 }
+	 
+	 
     @RequestMapping("/matricular")
     public ResponseEntity<?> save(@Valid @RequestBody GrupoDTO dto) throws Exception {
         // log.info("************************************ 1");
@@ -138,5 +140,12 @@ public class GrupoController {
     	return ResponseEntity.ok(grupoService.responsablesEnFaseoReunion(idFase));
     };
     
+    
+
+    @RequestMapping("/buscarParticipaciones/{Usuario}")
+    public ResponseEntity<?> buscarParticipaciones(@PathVariable("Usuario") String Usuario) throws Exception {
+    	
+    	return ResponseEntity.ok(grupoService.buscarParticipaciones(Usuario));
+    };
 	
 }

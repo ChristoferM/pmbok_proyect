@@ -6,7 +6,7 @@ public class HerramientasActaVistaDTO {
     private String recopilaciondatos;
     private String habilidades;
     private String herramientareuniones;
-
+    private Boolean estado;
     //idactas int4 NOT NULL,
     public String getJuicioexpertos() {
         return juicioexpertos;
@@ -40,4 +40,11 @@ public class HerramientasActaVistaDTO {
         this.herramientareuniones = herramientareuniones;
     }
 
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 }

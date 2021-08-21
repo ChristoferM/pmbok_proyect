@@ -7,6 +7,16 @@ public class herramientaspgaDTO {
 	private String analisis ;
 	
 	private Integer idpga;
+    private Boolean estado;
+    
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
 
 	public Integer getIdherramientapga() {
 		return idherramientapga;

@@ -32,8 +32,11 @@ import com.tesis.v1.domain.notificaciones;
 import com.tesis.v1.domain.tipofases;
 import com.tesis.v1.dto.ControlFasesDTO;
 import com.tesis.v1.dto.CrearfaseConResponsablesDTO;
+import com.tesis.v1.dto.FaseProyectoDTO;
 import com.tesis.v1.dto.GrupoDTO;
+import com.tesis.v1.dto.ProyectoDTO;
 import com.tesis.v1.dto.ResponsablesDTO;
+import com.tesis.v1.dto.ReunionesDTO;
 import com.tesis.v1.dto.RolesDTO;
 import com.tesis.v1.dto.RolproyectoDTO;
 import com.tesis.v1.dto.UsuariosDTO;
@@ -80,7 +83,7 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Autowired
 	RolProyectoRepository rolProyectoRepository;
-	
+
 	@Autowired
 	NotificacionesService notificacionesService;
 
@@ -225,6 +228,7 @@ public class GrupoServiceImpl implements GrupoService {
 			// agregar Al grupo de Trabajo x Proyecto
 			matricula.setProyectos(proyecto);
 			matricula.setUsuarios(usuario);
+			matricula.setEstado(false);
 
 			matricula = grupoRepository.save(matricula);
 			// agregar el rol que cumple la persona en el grupo de trabajo
@@ -270,16 +274,12 @@ public class GrupoServiceImpl implements GrupoService {
 		} catch (DataAccessException e) {
 			throw new RuntimeException(e);
 		}
-		
-		
-		//***************************************************************************
-		//  ************** funcion para crear los subGrupos de trabajo **************
-		//***************************************************************************
-		CrearSubgrupo(crearfaseConResponsablesDTO.getIdresponsable(),
-				faseObjeto,
-				crearfaseConResponsablesDTO.getIdproyecto(),
-				crearfaseConResponsablesDTO.getIdtipofase()
-				);
+
+		// ***************************************************************************
+		// ************** funcion para crear los subGrupos de trabajo **************
+		// ***************************************************************************
+		CrearSubgrupo(crearfaseConResponsablesDTO.getIdresponsable(), faseObjeto,
+				crearfaseConResponsablesDTO.getIdproyecto(), crearfaseConResponsablesDTO.getIdtipofase());
 
 		Proyecto proyectoObjeto = new Proyecto();
 
@@ -299,7 +299,8 @@ public class GrupoServiceImpl implements GrupoService {
 	}
 
 	@SuppressWarnings("unused")
-	private void CrearSubgrupo(List<idresponsable> idUsuarioGrupo, FaseProyecto fase, Integer IdProyecto,Integer idtipofase) throws Exception {
+	private void CrearSubgrupo(List<idresponsable> idUsuarioGrupo, FaseProyecto fase, Integer IdProyecto,
+			Integer idtipofase) throws Exception {
 		SubGrupo subgrupo = new SubGrupo();
 		Grupo grupoObjeto = new Grupo();
 		// *****************************************************************
@@ -312,11 +313,11 @@ public class GrupoServiceImpl implements GrupoService {
 			grupoObjeto.setIdgrupo(id.getId());
 
 			subgrupo.setGrupo(grupoObjeto);
+			subgrupo.setEstado(false);
 
 			try {
-				// con el id de grupo en cual 
-				subgrupo=subGrupoRepository.save(subgrupo);
-
+				// con el id de grupo en cual
+				subgrupo = subGrupoRepository.save(subgrupo);
 
 			} catch (InvalidResultSetAccessException e) {
 				throw new RuntimeException(e);
@@ -324,34 +325,32 @@ public class GrupoServiceImpl implements GrupoService {
 				throw new RuntimeException(e);
 			}
 			try {
-				
+
 				// *****************************************************************
 				// Buscar a los usuario agregados para crar la notificacio
 				Optional<Grupo> tmpGrupo = grupoRepository.findById(subgrupo.getGrupo().getIdgrupo());
 				Optional<Proyecto> tmpProyecto = proyectoRepository.findById(IdProyecto);
 				Optional<tipofases> tmpTipoFase = tipoFasesRepository.findById(idtipofase);
-				
+
 				notificaciones Notificacion = new notificaciones();
 				Notificacion.setEmisor(tmpProyecto.get().getAdmin());
 				Notificacion.setReceptor(tmpGrupo.get().getUsuarios().getEmail());
-				Notificacion.setMensaje("Usted  ha sido agregado por el usuario: "+ tmpProyecto.get().getAdmin() + " a la fase del proyecto: "
-						+tmpProyecto.get().getNombre()+",  llamada:  "+ tmpTipoFase.get().getNombrefase()
-						);
+				Notificacion.setMensaje("Usted  ha sido agregado por el usuario: " + tmpProyecto.get().getAdmin()
+						+ " a la fase del proyecto: " + tmpProyecto.get().getNombre() + ",  llamada:  "
+						+ tmpTipoFase.get().getNombrefase());
 				Notificacion.setEstado(false);
 				notificacionesService.save(Notificacion);
-				
+
 				subgrupo = new SubGrupo();
 				grupoObjeto = new Grupo();
-				
+
 			} catch (InvalidResultSetAccessException e) {
 				throw new RuntimeException(e);
-			}catch (DataAccessException e) {
+			} catch (DataAccessException e) {
 				throw new RuntimeException(e);
-			}catch (Exception e) {
+			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
-
-			
 
 		}
 
@@ -399,104 +398,69 @@ public class GrupoServiceImpl implements GrupoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<ControlFasesDTO> controlPorFases(String Usuario) throws Exception {
+		// Se crea la lista que va a retornarse
 		List<ControlFasesDTO> DTOList = new ArrayList<ControlFasesDTO>();
-		// Entidades necesarias
-
-		// List<Reunion> ListaReuniones = new ArrayList<>();
+		
 
 		try {
 			// grupoRepository.ControlFasesQuery(Usuario);
 
 			List<Proyecto> proyecto = proyectoRepository.finByEmail(Usuario);
-			Date date = new Date();
 
+			Date date = new Date();
 			Proyecto proyectoData = new Proyecto();
-			if (proyecto.size() != 0 || proyecto != null) {
-				Integer id = 0;
-				for (Proyecto xxx : proyecto) {
-					proyectoData = xxx;
-					id = xxx.getIdproyecto();
-				}
+
+			Integer id = 0;
+			for (Proyecto xxx : proyecto) {
+				// Proyectos
+				List<ProyectoDTO> proyectosList =  new ArrayList<ProyectoDTO>();;
+				// Reuniones
+				List<ReunionesDTO> reunionesList =  new ArrayList<ReunionesDTO>();;
+				// Faseproyecto
+				List<FaseProyectoDTO> fasesList =  new ArrayList<FaseProyectoDTO>();;
+				
+				ControlFasesDTO DTOMaestro = new ControlFasesDTO();
+				proyectoData = xxx;
+				id = proyectoData.getIdproyecto();
+
+				// Logica Pesada
 				if (id == 0 || id < 1 || id == null) {
 					throw new IllegalArgumentException("No se encontro el proyecto");
-				} else {
-					// Reuniones
-					for (Reunion reunion : reunionRepository.reunionPorIdProyecto(id)) {
-						// fases del proyecto
-						Optional<FaseProyecto> fase = faseProyectoRepository
-								.findById(reunion.getFaseproyecto().getIdfase());
-						if (fase.isPresent()) {
-							// Tipo de la fase
-							Optional<tipofases> tipoFases = tipoFasesRepository.findById(fase.get().getIdtipofase());
-							if (tipoFases.isPresent()) {
-								ControlFasesDTO DTO = new ControlFasesDTO();
-								DTO.setNombreProyecto(proyectoData.getNombre());
-								DTO.setDescripcionProyecto(proyectoData.getDescripcion());
-								DTO.setNombreReunion(reunion.getNombrereunion());
-								DTO.setDescripcionReunion(reunion.getDescripcionreunion());
-								DTO.setDescripcionFase(fase.get().getDescripcionfase());
-								// Date fecha = new
-								// SimpleDateFormat("yyyy/MM/dd").parse(fase.get().getTiempoinicio());
-								// faseObjeto.setTiempoinicio(fecha);
+				}
+				// Proyectos
+				ProyectoDTO proyectosDto = new ProyectoDTO();
+				proyectosDto.setNombre(proyectoData.getNombre());
+				proyectosDto.setDescripcion(proyectoData.getDescripcion());
+				proyectosDto.setIdproyecto(proyectoData.getIdproyecto());
+				
+				proyectosList.add(proyectosDto);
 
-								DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				
 
-								if (fase.get().getDescripcionfase().compareTo(dateFormat.format(date)) > 0) {
-									DTO.setEstado("Terminado");
+				for (Reunion reunion : proyectoData.getReuniones()) {
+					ReunionesDTO dto = new ReunionesDTO();
+					FaseProyectoDTO dto_2 = new FaseProyectoDTO();
+					dto.setNombrereunion(reunion.getNombrereunion());
+					dto.setDescripcionreunion(reunion.getDescripcionreunion());
+					dto.setIdreuniones(reunion.getIdreuniones());
 
-								} else {
-									DTO.setEstado("En proceso");
-
-								}
-								// log.info("\n \n ");
-
-								String date_s = fase.get().getTiempoinicio().toString();
-								SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-								Date date2 = dt.parse(date_s);
-								SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd");
-
-								/*
-								 * // log.info("-> tipo ->"+((Object)fase.get().getTiempoinicio()).getClass().
-								 * getSimpleName()); // log.info("Convertido ->"+fase.get().getTiempoinicio() );
-								 * // Date dateConverte = new
-								 * SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(fase.get().getTiempoinicio().
-								 * toString()); // log.info("Convertido ->"+dateConverte.toString()); //
-								 * log.info("Tipo Convertido ->"+((Object)dateConverte
-								 * ).getClass().getSimpleName()); // dateConverte = new
-								 * SimpleDateFormat("yyyy-MM-dd").parse(fase.get().getTiempofin().toString());
-								 */
-
-								DTO.setInicio((String) dt1.format(date2));
-
-								// String date_s = fase.get().getTiempoinicio().toString();
-								date_s = fase.get().getTiempofin().toString();
-								dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-								date2 = dt.parse(date_s);
-								dt1 = new SimpleDateFormat("yyyy/MM/dd");
-								// log.info("->-> Aca _-> " + dt1.format(date2));
-
-								DTO.setFin((String) dt1.format(date2));
-
-								DTO.setNombre(tipoFases.get().getNombrefase());
-								DTO.setIdFase(fase.get().getIdfase());
-
-								DTOList.add(DTO);
-
-							}
-
-						}
-					}
+					
+					dto_2.setDescripcionfase(reunion.getFaseproyecto().getDescripcionfase());
+					dto_2.setIdfase(reunion.getFaseproyecto().getIdfase());
+					// dto_2.setNombrefase(reunion.getFaseproyecto().gett);
+					dto_2.setTiempoinicio(reunion.getFaseproyecto().getTiempoinicio());
+					dto_2.setTiempofin(reunion.getFaseproyecto().getTiempofin());
+					reunionesList.add(dto);
+					fasesList.add(dto_2);
 
 				}
-
-				// fase
-				//// tipoFases
-
-			} else {
-				throw new IllegalArgumentException("No se encontro el proyecto");
+				DTOMaestro.setFases(fasesList);
+				DTOMaestro.setProyectos(proyectosList);
+				DTOMaestro.setReuniones(reunionesList);
+				DTOList.add(DTOMaestro);
 
 			}
-			//
+
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e);
 		}
@@ -591,32 +555,31 @@ public class GrupoServiceImpl implements GrupoService {
 		if (idProyecto != null || idProyecto > 0) {
 			List<ResponsablesDTO> DTO = new ArrayList<ResponsablesDTO>();
 			try {
-				for(Grupo grupo :grupoRepository.responsablesEnFaseoReunion(idProyecto)) {
+				for (Grupo grupo : grupoRepository.responsablesEnFaseoReunion(idProyecto)) {
 					ResponsablesDTO dto = new ResponsablesDTO();
-					
-					
-					for (Integer i = 0 ; i <= grupo.getRolProyectos().size()-1;i ++) {
-						dto.setNombrerol(grupo.getRolProyectos().get(i).getRoles().getNombrerol() );
+
+					for (Integer i = 0; i <= grupo.getRolProyectos().size() - 1; i++) {
+						dto.setNombrerol(grupo.getRolProyectos().get(i).getRoles().getNombrerol());
 					}
-					
-					for (Integer i = 0 ; i <= grupo.getSubGrupos().size()-1;i ++) {
+
+					for (Integer i = 0; i <= grupo.getSubGrupos().size() - 1; i++) {
 						dto.setIdfase(grupo.getSubGrupos().get(i).getFaseproyecto().getIdfase());
 					}
-					//dto.setIdfase(grupo.getProyectos().getReuniones().get);
-					for (Integer i = 0 ; i <= grupo.getSubGrupos().size()-1;i ++) {
+					// dto.setIdfase(grupo.getProyectos().getReuniones().get);
+					for (Integer i = 0; i <= grupo.getSubGrupos().size() - 1; i++) {
 						dto.setId_sub_grupo(grupo.getSubGrupos().get(i).getId_sub_grupo());
 					}
-					//dto.setId_sub_grupo(grupo.getSubGrupos().);
+					// dto.setId_sub_grupo(grupo.getSubGrupos().);
 					dto.setIdgrupo(grupo.getIdgrupo());
-					 dto.setEmail(grupo.getUsuarios().getEmail());
+					dto.setEmail(grupo.getUsuarios().getEmail());
 					DTO.add(dto);
-				} 
+				}
 			} catch (Exception e) {
-				
+
 				throw new IllegalArgumentException(e);
 
 			}
-			
+
 			if (DTO.isEmpty()) {
 				throw new IllegalArgumentException(
 						"{\"success\":false,\"status\":Error, \"message\": No se encontro el Identificador de la Fase }");
@@ -627,6 +590,24 @@ public class GrupoServiceImpl implements GrupoService {
 		}
 		throw new IllegalArgumentException(
 				"{\"success\":false,\"status\":Error, \"message\": No se encontro el Identificador de la Fase }");
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<GrupoDTO> buscarParticipaciones(String Usuario) throws Exception {
+		List<GrupoDTO> DTOList = new ArrayList<>();
+		for (Grupo grupo : grupoRepository.buscarParticipaciones(Usuario)) {
+			GrupoDTO DTO = new GrupoDTO();
+			DTO.setId_sub_grupo(0);
+			DTO.setIdgrupo(grupo.getIdgrupo());
+			DTO.setIdproyecto(grupo.getProyectos().getIdproyecto());
+			DTO.setEmail(grupo.getUsuarios().getEmail()); // Se puede sacar el nombre del ususario más no el correo,
+															// puede ser mas util el nombre que el correo
+			DTO.setEstado(grupo.getEstado());
+			DTOList.add(DTO);
+		}
+
+		return DTOList;
 	}
 }
 /*

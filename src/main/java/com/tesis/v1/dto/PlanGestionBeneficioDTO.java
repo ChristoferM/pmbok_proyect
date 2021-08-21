@@ -9,6 +9,7 @@ public class PlanGestionBeneficioDTO {
     private String prodcutos;
     private String servicios;
     private String resultado;
+    private Boolean estado;
 
     // identrada int4 NOT NULL,
     public Integer getIdEntradaActa() {
@@ -66,5 +67,11 @@ public class PlanGestionBeneficioDTO {
     public void setResultado(String resultado) {
         this.resultado = resultado;
     }
+    public Boolean getEstado() {
+		return estado;
+	}
 
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 }

@@ -19,6 +19,7 @@ public class Herramientasacta {
     private String recopilaciondatos;
     private String habilidades;
     private String herramientareuniones;
+    private Boolean estado;
 
     private Acta actas; // PADRE
 
@@ -69,9 +70,21 @@ public class Herramientasacta {
     public void setHerramientareuniones(String herramientareuniones) {
         this.herramientareuniones = herramientareuniones;
     }
+ 
+    @Column(name = "estado", nullable = false)
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+    
     // ------------------------- ENTIDAD PADRE
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idactas")
     public Acta getActas() {
         return actas;

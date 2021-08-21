@@ -22,8 +22,8 @@ public class SubGrupoMapperImpl implements SubGrupoMapper {
 
         SubGrupoDTO subGrupoDTO = new SubGrupoDTO();
 
-        subGrupoDTO.setEstado( subGrupo.getEstado() );
         subGrupoDTO.setId_sub_grupo( subGrupo.getId_sub_grupo() );
+        subGrupoDTO.setEstado( subGrupo.getEstado() );
 
         return subGrupoDTO;
     }
@@ -36,8 +36,8 @@ public class SubGrupoMapperImpl implements SubGrupoMapper {
 
         SubGrupo subGrupo = new SubGrupo();
 
-        subGrupo.setEstado( subGrupoDTO.getEstado() );
         subGrupo.setId_sub_grupo( subGrupoDTO.getId_sub_grupo() );
+        subGrupo.setEstado( subGrupoDTO.getEstado() );
 
         return subGrupo;
     }

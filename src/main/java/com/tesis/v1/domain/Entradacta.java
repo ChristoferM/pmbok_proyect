@@ -23,6 +23,7 @@ public class Entradacta {
     private String acuerdos;
     private String factores;
     private String activosprocesos;
+    private Boolean estado;
 
     // Entidades hijas
     private List<CasoNegocio> casonegocio = new ArrayList<CasoNegocio>(0);
@@ -68,8 +69,18 @@ public class Entradacta {
     public void setActivosprocesos(String activosprocesos) {
         this.activosprocesos = activosprocesos;
     }
+    
+    
+    @Column(name = "estado", nullable = false)
+    public Boolean getEstado() {
+		return estado;
+	}
 
-    // ------------------------- ENTIDAD PADRE
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+	// ------------------------- ENTIDAD PADRE
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idactas")
     public Acta getActas() {

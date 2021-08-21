@@ -8,7 +8,17 @@ public class entradapgaDTO {
 	private String objetivocalidad;
 	private String ciclo;
 	private String enfoque;
-	private String activosprocesos;
+	private String activosprocesos;    
+	private Boolean estado;
+    
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
 
 	private Integer idpga;
 

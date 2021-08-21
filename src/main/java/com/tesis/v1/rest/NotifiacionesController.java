@@ -27,7 +27,7 @@ public class NotifiacionesController {
 	@Autowired
 	NotificacionesService notificacionesService;
 	
-	
+		
 	@RequestMapping("/BuscarEnviados/{user}")
     public ResponseEntity<?> BuscarEnviados(@PathVariable("user") String user) throws Exception {
 		
