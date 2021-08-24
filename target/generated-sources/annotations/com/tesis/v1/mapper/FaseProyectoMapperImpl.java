@@ -22,10 +22,10 @@ public class FaseProyectoMapperImpl implements FaseProyectoMapper {
 
         FaseProyectoDTO faseProyectoDTO = new FaseProyectoDTO();
 
-        faseProyectoDTO.setDescripcionfase( faseProyecto.getDescripcionfase() );
         faseProyectoDTO.setIdfase( faseProyecto.getIdfase() );
-        faseProyectoDTO.setTiempofin( faseProyecto.getTiempofin() );
+        faseProyectoDTO.setDescripcionfase( faseProyecto.getDescripcionfase() );
         faseProyectoDTO.setTiempoinicio( faseProyecto.getTiempoinicio() );
+        faseProyectoDTO.setTiempofin( faseProyecto.getTiempofin() );
 
         return faseProyectoDTO;
     }
@@ -38,10 +38,10 @@ public class FaseProyectoMapperImpl implements FaseProyectoMapper {
 
         FaseProyecto faseProyecto = new FaseProyecto();
 
-        faseProyecto.setDescripcionfase( faseproyectoDTO.getDescripcionfase() );
         faseProyecto.setIdfase( faseproyectoDTO.getIdfase() );
-        faseProyecto.setTiempofin( faseproyectoDTO.getTiempofin() );
+        faseProyecto.setDescripcionfase( faseproyectoDTO.getDescripcionfase() );
         faseProyecto.setTiempoinicio( faseproyectoDTO.getTiempoinicio() );
+        faseProyecto.setTiempofin( faseproyectoDTO.getTiempofin() );
 
         return faseProyecto;
     }

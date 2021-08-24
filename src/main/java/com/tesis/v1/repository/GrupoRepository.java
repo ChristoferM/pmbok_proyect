@@ -57,10 +57,11 @@ public interface GrupoRepository extends JpaRepository<Grupo,Integer>{
 	
 	
 	@Query(value ="SELECT   " + 
-			"		grupo.email," + 
-			"		grupo.id_sub_grupo," + 
-			"		grupo.idgrupo,"+
-			"		grupo.idproyecto" + 
+			"		grupo.idgrupo, " + 
+			"        grupo.id_sub_grupo, " + 
+			"		grupo.idproyecto, " + 
+			"		grupo.email, " + 
+			"		grupo.estado" + 
 			"			FROM  " + 
 			"			faseproyecto , subgrupo, grupo  " + 
 			"			WHERE faseproyecto.idfase = ?1 " + 
