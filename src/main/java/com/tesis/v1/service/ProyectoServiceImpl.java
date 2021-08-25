@@ -30,7 +30,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Proyecto> findByEmail(String email) throws Exception {
-		log.info("EL CORREO ES -> " + email);
+		// log.info("EL CORREO ES -> " + email);
 
 		// Optional<proyectos> proyectoOpt = ProyectoRepository.finByEmail(email);
 		List<Proyecto> poryectosList = proyectosRepository.finByEmail(email);
@@ -116,6 +116,19 @@ public class ProyectoServiceImpl implements ProyectoService {
 	public Long count() {
 
 		return null;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Proyecto> BuscarParticipaciones(String email) throws Exception {
+
+		List<Proyecto> poryectosList = proyectosRepository.BuscarParticipaciones(email);
+		if (poryectosList == null || poryectosList.size() == 0) {
+			return null;
+
+		} else
+			return poryectosList;
+	
 	}
 
 }

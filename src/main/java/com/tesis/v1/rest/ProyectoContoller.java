@@ -41,6 +41,14 @@ public class ProyectoContoller {
         return ResponseEntity.ok().body(usuarioListDto);
 
     }
+    @RequestMapping("/BuscarParticipaciones/{email}")
+    public ResponseEntity<?> BuscarParticipaciones(@PathVariable("email") String email) throws Exception {
+        List<Proyecto> proyectosLIST = proyectoService.BuscarParticipaciones(email);
+        List<ProyectoDTO> usuarioListDto = proyectosMapper.toproyectosDTOs(proyectosLIST);
+
+        return ResponseEntity.ok().body(usuarioListDto);
+
+    }
 
     @RequestMapping("/findByAll")
     public ResponseEntity<?> finByAll() throws Exception {

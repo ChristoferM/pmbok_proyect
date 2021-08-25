@@ -450,6 +450,8 @@ public class GrupoServiceImpl implements GrupoService {
 					// dto_2.setNombrefase(reunion.getFaseproyecto().gett);
 					dto_2.setTiempoinicio(reunion.getFaseproyecto().getTiempoinicio());
 					dto_2.setTiempofin(reunion.getFaseproyecto().getTiempofin());
+					Optional<tipofases> tipoTmp = tipoFasesRepository.findById(reunion.getFaseproyecto().getIdtipofase());
+					dto_2.setNombrefase(tipoTmp.get().getNombrefase());
 					reunionesList.add(dto);
 					fasesList.add(dto_2);
 
@@ -478,7 +480,19 @@ public class GrupoServiceImpl implements GrupoService {
 		// throw new IllegalArgumentException("Proyecto no identificado");
 		return DTOList;
 	}
-
+	@Override
+	@Transactional(readOnly = true,noRollbackFor = Exception.class)
+	public List<?> controlParticipacionesPorFases(Integer idProyecto,String Usuario) throws Exception {
+		
+		try {
+			List<?> proyecto = grupoRepository.obtenerDatosDeParticipaicon(idProyecto,Usuario);
+			return proyecto;
+		} catch (Exception e) {
+			log.info(e.toString());
+		}
+		
+		return null;
+	}
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String elimiarUsuarioMatriculado(String Usuario, Integer idProyecto) throws Exception {
@@ -609,6 +623,8 @@ public class GrupoServiceImpl implements GrupoService {
 
 		return DTOList;
 	}
+
+	
 }
 /*
  * DTO.setIdgrupo(grupo.getIdgrupo());

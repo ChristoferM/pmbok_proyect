@@ -127,6 +127,11 @@ public class GrupoController {
     	
     	return ResponseEntity.ok(grupoService.controlPorFases(Usuario));
     };
+    @RequestMapping("/consultarParticipaciones/{Usuario}/{idProyecto}")
+    public ResponseEntity<?> controlParticipacionesPorFases(@PathVariable("Usuario") String Usuario,@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+    	
+    	return ResponseEntity.ok(grupoService.controlParticipacionesPorFases(idProyecto, Usuario));
+    };
     
     @RequestMapping("/eliminarUsuario/{Usuario}")
     public ResponseEntity<?> eliminarUsuario(@PathVariable("Usuario") String Usuario) throws Exception {
