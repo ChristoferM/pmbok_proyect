@@ -52,21 +52,8 @@ public interface GrupoRepository extends JpaRepository<Grupo,Integer>{
 	@Query(value ="SELECT  * FROM grupo WHERE  grupo.idproyecto = ?1 ;", nativeQuery = true)
 	public List<Grupo>  grupoDeTrabajo(Integer idProyecto);
 	
-	@Query(value ="select * from proyectos, grupo, faseproyecto,subgrupo,reuniones,tipofases, " + 
-			"	roles,rolproyecto " + 
-			"WHERE  " + 
-			"	proyectos.idproyecto=  grupo.idproyecto AND  " + 
-			"	reuniones.idproyecto = proyectos.idproyecto AND " + 
-			"	grupo.idgrupo = subgrupo.idgrupo AND  " + 
-			"	reuniones.idfase =  faseproyecto.idfase AND " + 
-			"	faseproyecto.idfase  = subgrupo.idfase AND " + 
-			"	grupo.idgrupo= subgrupo.idgrupo AND  " + 
-			"	rolproyecto.idrol  =roles.idrol AND " + 
-			"	rolproyecto.idgrupo = grupo.idgrupo AND " + 
-			"	faseproyecto.idtipofase = tipofases.idtipofase AND " + 
-			"	proyectos.idproyecto = ?1 AND " + 
-			"	grupo.email = ?2 ;", nativeQuery = true)
-	public List<Object[]>  obtenerDatosDeParticipaicon(Integer idProyecto,String email);
+	@Query(value ="select * from  grupo where grupo.idproyecto = ?1  AND grupo.email = ?2 ;", nativeQuery = true)
+	public List<Grupo>  obtenerDatosDeParticipaicon(Integer idProyecto,String email);
 	
 	
 	

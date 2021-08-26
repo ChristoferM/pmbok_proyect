@@ -10,7 +10,14 @@ public class PlanGestionBeneficioDTO {
     private String servicios;
     private String resultado;
     private Boolean estado;
+	private String participa ;
 
+	public String getParticipa() {
+		return participa;
+	}
+	public void setParticipa(String participa) {
+		this.participa = participa;
+	}
     // identrada int4 NOT NULL,
     public Integer getIdEntradaActa() {
         return idEntradaActa;

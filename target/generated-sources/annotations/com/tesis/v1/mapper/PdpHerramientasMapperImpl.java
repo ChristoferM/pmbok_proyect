@@ -22,11 +22,13 @@ public class PdpHerramientasMapperImpl implements PdpHerramientasMapper {
 
         HerramientasDTO herramientasDTO = new HerramientasDTO();
 
-        herramientasDTO.setIdherramienta( herramientas.getIdherramienta() );
-        herramientasDTO.setJuicioexpertos( herramientas.getJuicioexpertos() );
-        herramientasDTO.setRecopilaciondatos( herramientas.getRecopilaciondatos() );
+        herramientasDTO.setEstado( herramientas.getEstado() );
         herramientasDTO.setHabilidades( herramientas.getHabilidades() );
         herramientasDTO.setHerramientareuniones( herramientas.getHerramientareuniones() );
+        herramientasDTO.setIdherramienta( herramientas.getIdherramienta() );
+        herramientasDTO.setJuicioexpertos( herramientas.getJuicioexpertos() );
+        herramientasDTO.setParticipa( herramientas.getParticipa() );
+        herramientasDTO.setRecopilaciondatos( herramientas.getRecopilaciondatos() );
 
         return herramientasDTO;
     }
@@ -39,11 +41,13 @@ public class PdpHerramientasMapperImpl implements PdpHerramientasMapper {
 
         Herramientas herramientas = new Herramientas();
 
-        herramientas.setIdherramienta( herramientasPdpDTO.getIdherramienta() );
-        herramientas.setJuicioexpertos( herramientasPdpDTO.getJuicioexpertos() );
-        herramientas.setRecopilaciondatos( herramientasPdpDTO.getRecopilaciondatos() );
+        herramientas.setEstado( herramientasPdpDTO.getEstado() );
         herramientas.setHabilidades( herramientasPdpDTO.getHabilidades() );
         herramientas.setHerramientareuniones( herramientasPdpDTO.getHerramientareuniones() );
+        herramientas.setIdherramienta( herramientasPdpDTO.getIdherramienta() );
+        herramientas.setJuicioexpertos( herramientasPdpDTO.getJuicioexpertos() );
+        herramientas.setParticipa( herramientasPdpDTO.getParticipa() );
+        herramientas.setRecopilaciondatos( herramientasPdpDTO.getRecopilaciondatos() );
 
         return herramientas;
     }

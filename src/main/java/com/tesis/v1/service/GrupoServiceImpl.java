@@ -3,6 +3,7 @@ package com.tesis.v1.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -400,7 +401,6 @@ public class GrupoServiceImpl implements GrupoService {
 	public List<ControlFasesDTO> controlPorFases(String Usuario) throws Exception {
 		// Se crea la lista que va a retornarse
 		List<ControlFasesDTO> DTOList = new ArrayList<ControlFasesDTO>();
-		
 
 		try {
 			// grupoRepository.ControlFasesQuery(Usuario);
@@ -413,12 +413,15 @@ public class GrupoServiceImpl implements GrupoService {
 			Integer id = 0;
 			for (Proyecto xxx : proyecto) {
 				// Proyectos
-				List<ProyectoDTO> proyectosList =  new ArrayList<ProyectoDTO>();;
+				List<ProyectoDTO> proyectosList = new ArrayList<ProyectoDTO>();
+				;
 				// Reuniones
-				List<ReunionesDTO> reunionesList =  new ArrayList<ReunionesDTO>();;
+				List<ReunionesDTO> reunionesList = new ArrayList<ReunionesDTO>();
+				;
 				// Faseproyecto
-				List<FaseProyectoDTO> fasesList =  new ArrayList<FaseProyectoDTO>();;
-				
+				List<FaseProyectoDTO> fasesList = new ArrayList<FaseProyectoDTO>();
+				;
+
 				ControlFasesDTO DTOMaestro = new ControlFasesDTO();
 				proyectoData = xxx;
 				id = proyectoData.getIdproyecto();
@@ -432,10 +435,8 @@ public class GrupoServiceImpl implements GrupoService {
 				proyectosDto.setNombre(proyectoData.getNombre());
 				proyectosDto.setDescripcion(proyectoData.getDescripcion());
 				proyectosDto.setIdproyecto(proyectoData.getIdproyecto());
-				
-				proyectosList.add(proyectosDto);
 
-				
+				proyectosList.add(proyectosDto);
 
 				for (Reunion reunion : proyectoData.getReuniones()) {
 					ReunionesDTO dto = new ReunionesDTO();
@@ -444,13 +445,13 @@ public class GrupoServiceImpl implements GrupoService {
 					dto.setDescripcionreunion(reunion.getDescripcionreunion());
 					dto.setIdreuniones(reunion.getIdreuniones());
 
-					
 					dto_2.setDescripcionfase(reunion.getFaseproyecto().getDescripcionfase());
 					dto_2.setIdfase(reunion.getFaseproyecto().getIdfase());
 					// dto_2.setNombrefase(reunion.getFaseproyecto().gett);
 					dto_2.setTiempoinicio(reunion.getFaseproyecto().getTiempoinicio());
 					dto_2.setTiempofin(reunion.getFaseproyecto().getTiempofin());
-					Optional<tipofases> tipoTmp = tipoFasesRepository.findById(reunion.getFaseproyecto().getIdtipofase());
+					Optional<tipofases> tipoTmp = tipoFasesRepository
+							.findById(reunion.getFaseproyecto().getIdtipofase());
 					dto_2.setNombrefase(tipoTmp.get().getNombrefase());
 					reunionesList.add(dto);
 					fasesList.add(dto_2);
@@ -480,19 +481,77 @@ public class GrupoServiceImpl implements GrupoService {
 		// throw new IllegalArgumentException("Proyecto no identificado");
 		return DTOList;
 	}
+
 	@Override
-	@Transactional(readOnly = true,noRollbackFor = Exception.class)
-	public List<?> controlParticipacionesPorFases(Integer idProyecto,String Usuario) throws Exception {
-		
+	@Transactional(readOnly = true, noRollbackFor = Exception.class)
+	public List<?> controlParticipacionesPorFases(Integer idProyecto, String Usuario) throws Exception {
+		List<ControlFasesDTO> DTOList = new ArrayList<ControlFasesDTO>();
 		try {
-			List<?> proyecto = grupoRepository.obtenerDatosDeParticipaicon(idProyecto,Usuario);
-			return proyecto;
+			List<Grupo> grupoList = grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario);
+
+			if (grupoList.size() == 0 || grupoList.isEmpty()) {
+
+			} else {
+				for (Grupo grupo : grupoList) {
+					ControlFasesDTO DTOMaestro = new ControlFasesDTO();
+					// Proyectos
+					List<ProyectoDTO> proyectosList = new ArrayList<ProyectoDTO>();
+					ProyectoDTO proyectosTMP = new ProyectoDTO();
+					// Reuniones
+					List<ReunionesDTO> reunionesList = new ArrayList<ReunionesDTO>();
+					ReunionesDTO reunionesTMP = new ReunionesDTO();
+					// Faseproyecto
+					List<FaseProyectoDTO> fasesList = new ArrayList<FaseProyectoDTO>();
+					FaseProyectoDTO fasesTMP = new FaseProyectoDTO();
+					Proyecto Proyecto = grupo.getProyectos();
+					
+					SubGrupo subgrupoTMP = subGrupoRepository.obtenerDatosDeParticipaiconSubgrupo(grupo.getIdgrupo());
+					
+					proyectosTMP.setIdproyecto(grupo.getProyectos().getIdproyecto());
+					proyectosTMP.setNombre(grupo.getProyectos().getNombre());
+					proyectosTMP.setDescripcion(grupo.getProyectos().getDescripcion());
+					proyectosTMP.setAdmin(grupo.getProyectos().getAdmin());
+					proyectosTMP.setTipo_id(grupo.getProyectos().getTipoProyecto().getTipo_id());
+					proyectosList.add(proyectosTMP);
+					DTOMaestro.setProyectos(proyectosList);
+					for(Reunion reunion : Proyecto.getReuniones() ) {
+						reunionesTMP.setIdreuniones(reunion.getIdreuniones());
+						reunionesTMP.setNombrereunion(reunion.getNombrereunion());
+						reunionesTMP.setDescripcionreunion(reunion.getDescripcionreunion());
+						reunionesTMP.setIdproyecto(reunion.getProyectos().getIdproyecto());
+						reunionesTMP.setIdfase(reunion.getFaseproyecto().getIdfase());
+						reunionesList.add(reunionesTMP);
+						
+						fasesTMP.setIdfase(reunion.getFaseproyecto().getIdfase());
+						Optional<tipofases> tipoTmp = tipoFasesRepository
+								.findById(reunion.getFaseproyecto().getIdtipofase());
+						fasesTMP.setNombrefase(tipoTmp.get().getNombrefase());
+						fasesTMP.setDescripcionfase(reunion.getFaseproyecto().getDescripcionfase());
+						fasesTMP.setTiempoinicio(reunion.getFaseproyecto().getTiempoinicio());
+						fasesTMP.setTiempofin(reunion.getFaseproyecto().getTiempofin());
+						
+						fasesList.add(fasesTMP);
+						
+						DTOMaestro.setFases(fasesList);
+						DTOMaestro.setReuniones(reunionesList);
+						
+						
+					}
+					DTOList.add(DTOMaestro);
+				// Final For
+				}
+
+				return DTOList;
+			// final Else
+			}
+
 		} catch (Exception e) {
 			log.info(e.toString());
 		}
-		
+
 		return null;
 	}
+
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String elimiarUsuarioMatriculado(String Usuario, Integer idProyecto) throws Exception {
@@ -624,7 +683,6 @@ public class GrupoServiceImpl implements GrupoService {
 		return DTOList;
 	}
 
-	
 }
 /*
  * DTO.setIdgrupo(grupo.getIdgrupo());

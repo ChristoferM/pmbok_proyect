@@ -1,5 +1,7 @@
 package com.tesis.v1.dto.pga;
 
+import javax.persistence.Column;
+
 public class herramientaspgaDTO {
 	
 	private Integer idherramientapga;
@@ -49,7 +51,15 @@ public class herramientaspgaDTO {
 	public void setIdpdp(Integer idpga) {
 		this.idpga = idpga;
 	}
+	private String participa ;
 	
+	public String getParticipa() {
+		return participa;
+	}
+	public void setParticipa(String participa) {
+		this.participa = participa;
+	}
+
 	
 	
 

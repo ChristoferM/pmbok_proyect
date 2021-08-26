@@ -22,11 +22,13 @@ public class HerramientasactaMapperImpl implements HerramientasactaMapper {
 
         HerramientasActaDTO herramientasActaDTO = new HerramientasActaDTO();
 
-        herramientasActaDTO.setIdherramienta( herramientasActa.getIdherramienta() );
-        herramientasActaDTO.setJuicioexpertos( herramientasActa.getJuicioexpertos() );
-        herramientasActaDTO.setRecopilaciondatos( herramientasActa.getRecopilaciondatos() );
+        herramientasActaDTO.setEstado( herramientasActa.getEstado() );
         herramientasActaDTO.setHabilidades( herramientasActa.getHabilidades() );
         herramientasActaDTO.setHerramientareuniones( herramientasActa.getHerramientareuniones() );
+        herramientasActaDTO.setIdherramienta( herramientasActa.getIdherramienta() );
+        herramientasActaDTO.setJuicioexpertos( herramientasActa.getJuicioexpertos() );
+        herramientasActaDTO.setParticipa( herramientasActa.getParticipa() );
+        herramientasActaDTO.setRecopilaciondatos( herramientasActa.getRecopilaciondatos() );
 
         return herramientasActaDTO;
     }
@@ -39,11 +41,13 @@ public class HerramientasactaMapperImpl implements HerramientasactaMapper {
 
         Herramientasacta herramientasacta = new Herramientasacta();
 
-        herramientasacta.setIdherramienta( herramientasActaDTO.getIdherramienta() );
-        herramientasacta.setJuicioexpertos( herramientasActaDTO.getJuicioexpertos() );
-        herramientasacta.setRecopilaciondatos( herramientasActaDTO.getRecopilaciondatos() );
+        herramientasacta.setEstado( herramientasActaDTO.getEstado() );
         herramientasacta.setHabilidades( herramientasActaDTO.getHabilidades() );
         herramientasacta.setHerramientareuniones( herramientasActaDTO.getHerramientareuniones() );
+        herramientasacta.setIdherramienta( herramientasActaDTO.getIdherramienta() );
+        herramientasacta.setJuicioexpertos( herramientasActaDTO.getJuicioexpertos() );
+        herramientasacta.setParticipa( herramientasActaDTO.getParticipa() );
+        herramientasacta.setRecopilaciondatos( herramientasActaDTO.getRecopilaciondatos() );
 
         return herramientasacta;
     }

@@ -90,6 +90,17 @@ public class PlanGestionbeneficio {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+	
+	private String participa ;
+	@Column(name = "participa", nullable = false)
+	public String getParticipa() {
+		return participa;
+	}
+	public void setParticipa(String participa) {
+		this.participa = participa;
+	}
+
+    
     // ----------------------------------------------------- Entidad padre
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "identrada")

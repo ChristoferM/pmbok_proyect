@@ -8,7 +8,22 @@ public class HerramientasActaDTO {
     private String recopilaciondatos;
     private String habilidades;
     private String herramientareuniones;
+	private String participa ;
+	
+	public String getParticipa() {
+		return participa;
+	}
+	public void setParticipa(String participa) {
+		this.participa = participa;
+	}
+	   private Boolean estado;
+    public Boolean getEstado() {
+		return estado;
+	}
 
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
     //idactas int4 NOT NULL,
     public Integer getIdherramienta() {
         return idherramienta;

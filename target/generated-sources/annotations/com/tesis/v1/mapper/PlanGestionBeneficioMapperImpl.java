@@ -22,13 +22,14 @@ public class PlanGestionBeneficioMapperImpl implements PlanGestionBeneficioMappe
 
         PlanGestionBeneficioDTO planGestionBeneficioDTO = new PlanGestionBeneficioDTO();
 
-        planGestionBeneficioDTO.setId_plan_gb( planesGestionBeneficios.getId_plan_gb() );
         planGestionBeneficioDTO.setAcciones( planesGestionBeneficios.getAcciones() );
         planGestionBeneficioDTO.setComponentes( planesGestionBeneficios.getComponentes() );
-        planGestionBeneficioDTO.setProdcutos( planesGestionBeneficios.getProdcutos() );
-        planGestionBeneficioDTO.setServicios( planesGestionBeneficios.getServicios() );
-        planGestionBeneficioDTO.setResultado( planesGestionBeneficios.getResultado() );
         planGestionBeneficioDTO.setEstado( planesGestionBeneficios.getEstado() );
+        planGestionBeneficioDTO.setId_plan_gb( planesGestionBeneficios.getId_plan_gb() );
+        planGestionBeneficioDTO.setParticipa( planesGestionBeneficios.getParticipa() );
+        planGestionBeneficioDTO.setProdcutos( planesGestionBeneficios.getProdcutos() );
+        planGestionBeneficioDTO.setResultado( planesGestionBeneficios.getResultado() );
+        planGestionBeneficioDTO.setServicios( planesGestionBeneficios.getServicios() );
 
         return planGestionBeneficioDTO;
     }
@@ -41,13 +42,14 @@ public class PlanGestionBeneficioMapperImpl implements PlanGestionBeneficioMappe
 
         PlanGestionbeneficio planGestionbeneficio = new PlanGestionbeneficio();
 
-        planGestionbeneficio.setId_plan_gb( planesGestionBeneficiosDTO.getId_plan_gb() );
         planGestionbeneficio.setAcciones( planesGestionBeneficiosDTO.getAcciones() );
         planGestionbeneficio.setComponentes( planesGestionBeneficiosDTO.getComponentes() );
-        planGestionbeneficio.setProdcutos( planesGestionBeneficiosDTO.getProdcutos() );
-        planGestionbeneficio.setServicios( planesGestionBeneficiosDTO.getServicios() );
-        planGestionbeneficio.setResultado( planesGestionBeneficiosDTO.getResultado() );
         planGestionbeneficio.setEstado( planesGestionBeneficiosDTO.getEstado() );
+        planGestionbeneficio.setId_plan_gb( planesGestionBeneficiosDTO.getId_plan_gb() );
+        planGestionbeneficio.setParticipa( planesGestionBeneficiosDTO.getParticipa() );
+        planGestionbeneficio.setProdcutos( planesGestionBeneficiosDTO.getProdcutos() );
+        planGestionbeneficio.setResultado( planesGestionBeneficiosDTO.getResultado() );
+        planGestionbeneficio.setServicios( planesGestionBeneficiosDTO.getServicios() );
 
         return planGestionbeneficio;
     }

@@ -18,6 +18,7 @@ public class herramientaspga {
 	private String juicioexpertos ;
 	private String analisis ;
 	
+	
 	private pga pga;
 	
 	
@@ -46,6 +47,24 @@ public class herramientaspga {
 		this.analisis = analisis;
 	}
 	
+	private String participa ;
+	@Column(name = "participa", nullable = false)
+	public String getParticipa() {
+		return participa;
+	}
+	public void setParticipa(String participa) {
+		this.participa = participa;
+	}
+	private Boolean estado;
+    @Column(name = "estado", nullable = false)
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+    
 	// --------------- entidad padre PGA
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn( name = "idpga")

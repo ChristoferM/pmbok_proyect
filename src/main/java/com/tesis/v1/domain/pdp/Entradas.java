@@ -58,6 +58,25 @@ public class Entradas {
     public void setActivosprocesos(String activosprocesos) {
         this.activosprocesos = activosprocesos;
     }
+	
+	private String participa ;
+	@Column(name = "participa", nullable = false)
+	public String getParticipa() {
+		return participa;
+	}
+	public void setParticipa(String participa) {
+		this.participa = participa;
+	}
+	private Boolean estado;
+    @Column(name = "estado", nullable = false)
+    public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+    
 
     // ------------------------- ENTIDAD PADRE
     @ManyToOne(fetch = FetchType.LAZY)
