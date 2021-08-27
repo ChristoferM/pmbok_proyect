@@ -22,13 +22,13 @@ public class CasoNegocioMapperImpl implements CasoNegocioMapper {
 
         CasoNegocioDTO casoNegocioDTO = new CasoNegocioDTO();
 
-        casoNegocioDTO.setEstado( casoNegocio.getEstado() );
+        casoNegocioDTO.setParticipa( casoNegocio.getParticipa() );
         casoNegocioDTO.setId_caso_negocio( casoNegocio.getId_caso_negocio() );
-        casoNegocioDTO.setIncidentes( casoNegocio.getIncidentes() );
         casoNegocioDTO.setMetas( casoNegocio.getMetas() );
         casoNegocioDTO.setObjetivos( casoNegocio.getObjetivos() );
+        casoNegocioDTO.setIncidentes( casoNegocio.getIncidentes() );
         casoNegocioDTO.setOportunidades( casoNegocio.getOportunidades() );
-        casoNegocioDTO.setParticipa( casoNegocio.getParticipa() );
+        casoNegocioDTO.setEstado( casoNegocio.getEstado() );
 
         return casoNegocioDTO;
     }
@@ -41,12 +41,12 @@ public class CasoNegocioMapperImpl implements CasoNegocioMapper {
 
         CasoNegocio casoNegocio = new CasoNegocio();
 
-        casoNegocio.setEstado( casoNegocioDTO.getEstado() );
         casoNegocio.setId_caso_negocio( casoNegocioDTO.getId_caso_negocio() );
-        casoNegocio.setIncidentes( casoNegocioDTO.getIncidentes() );
         casoNegocio.setMetas( casoNegocioDTO.getMetas() );
         casoNegocio.setObjetivos( casoNegocioDTO.getObjetivos() );
+        casoNegocio.setIncidentes( casoNegocioDTO.getIncidentes() );
         casoNegocio.setOportunidades( casoNegocioDTO.getOportunidades() );
+        casoNegocio.setEstado( casoNegocioDTO.getEstado() );
         casoNegocio.setParticipa( casoNegocioDTO.getParticipa() );
 
         return casoNegocio;

@@ -22,12 +22,12 @@ public class EntradactaMapperImpl implements EntradactaMapper {
 
         EntradactaDTO entradactaDTO = new EntradactaDTO();
 
-        entradactaDTO.setActivosprocesos( entradActa.getActivosprocesos() );
-        entradactaDTO.setAcuerdos( entradActa.getAcuerdos() );
-        entradactaDTO.setEstado( entradActa.getEstado() );
-        entradactaDTO.setFactores( entradActa.getFactores() );
-        entradactaDTO.setIdentrada( entradActa.getIdentrada() );
         entradactaDTO.setParticipa( entradActa.getParticipa() );
+        entradactaDTO.setEstado( entradActa.getEstado() );
+        entradactaDTO.setIdentrada( entradActa.getIdentrada() );
+        entradactaDTO.setAcuerdos( entradActa.getAcuerdos() );
+        entradactaDTO.setFactores( entradActa.getFactores() );
+        entradactaDTO.setActivosprocesos( entradActa.getActivosprocesos() );
 
         return entradactaDTO;
     }
@@ -40,11 +40,11 @@ public class EntradactaMapperImpl implements EntradactaMapper {
 
         Entradacta entradacta = new Entradacta();
 
-        entradacta.setActivosprocesos( entradActaDTO.getActivosprocesos() );
-        entradacta.setAcuerdos( entradActaDTO.getAcuerdos() );
-        entradacta.setEstado( entradActaDTO.getEstado() );
-        entradacta.setFactores( entradActaDTO.getFactores() );
         entradacta.setIdentrada( entradActaDTO.getIdentrada() );
+        entradacta.setAcuerdos( entradActaDTO.getAcuerdos() );
+        entradacta.setFactores( entradActaDTO.getFactores() );
+        entradacta.setActivosprocesos( entradActaDTO.getActivosprocesos() );
+        entradacta.setEstado( entradActaDTO.getEstado() );
         entradacta.setParticipa( entradActaDTO.getParticipa() );
 
         return entradacta;

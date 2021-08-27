@@ -484,28 +484,28 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Override
 	@Transactional(readOnly = true, noRollbackFor = Exception.class)
-	public List<?> controlParticipacionesPorFases(Integer idProyecto, String Usuario) throws Exception {
+	public List<ControlFasesDTO> controlParticipacionesPorFases(Integer idProyecto, String Usuario) throws Exception {
 		List<ControlFasesDTO> DTOList = new ArrayList<ControlFasesDTO>();
 		try {
-			List<Grupo> grupoList = grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario);
-
-			if (grupoList.size() == 0 || grupoList.isEmpty()) {
+			grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario);
+			List<Grupo> grupoList  = new ArrayList<Grupo>();
+			if (grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario).size() == 0 || grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario).isEmpty()) {
 
 			} else {
-				for (Grupo grupo : grupoList) {
+				for (Grupo grupo : grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario)) {
 					ControlFasesDTO DTOMaestro = new ControlFasesDTO();
 					// Proyectos
 					List<ProyectoDTO> proyectosList = new ArrayList<ProyectoDTO>();
 					ProyectoDTO proyectosTMP = new ProyectoDTO();
 					// Reuniones
 					List<ReunionesDTO> reunionesList = new ArrayList<ReunionesDTO>();
-					ReunionesDTO reunionesTMP = new ReunionesDTO();
+					
 					// Faseproyecto
 					List<FaseProyectoDTO> fasesList = new ArrayList<FaseProyectoDTO>();
-					FaseProyectoDTO fasesTMP = new FaseProyectoDTO();
+					
 					Proyecto Proyecto = grupo.getProyectos();
 					
-					SubGrupo subgrupoTMP = subGrupoRepository.obtenerDatosDeParticipaiconSubgrupo(grupo.getIdgrupo());
+					//SubGrupo subgrupoTMP = subGrupoRepository.obtenerDatosDeParticipaiconSubgrupo(grupo.getIdgrupo());
 					
 					proyectosTMP.setIdproyecto(grupo.getProyectos().getIdproyecto());
 					proyectosTMP.setNombre(grupo.getProyectos().getNombre());
@@ -515,6 +515,9 @@ public class GrupoServiceImpl implements GrupoService {
 					proyectosList.add(proyectosTMP);
 					DTOMaestro.setProyectos(proyectosList);
 					for(Reunion reunion : Proyecto.getReuniones() ) {
+						ReunionesDTO reunionesTMP = new ReunionesDTO();
+						FaseProyectoDTO fasesTMP = new FaseProyectoDTO();
+						
 						reunionesTMP.setIdreuniones(reunion.getIdreuniones());
 						reunionesTMP.setNombrereunion(reunion.getNombrereunion());
 						reunionesTMP.setDescripcionreunion(reunion.getDescripcionreunion());

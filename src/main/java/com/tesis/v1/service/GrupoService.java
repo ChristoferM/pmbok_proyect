@@ -22,7 +22,7 @@ public interface GrupoService  extends GenericService<Grupo,Integer>{
 	 	 
 	 public List<ControlFasesDTO> controlPorFases(String Usuario) throws Exception;
 	 
-	 public List<?> controlParticipacionesPorFases(Integer idProyecto,String Usuario) throws Exception;
+	 public List<ControlFasesDTO> controlParticipacionesPorFases(Integer idProyecto,String Usuario) throws Exception;
 	 
 	 
 	 public List<GrupoDTO> buscarParticipaciones(String Usuario) throws Exception;

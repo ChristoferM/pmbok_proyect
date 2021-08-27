@@ -22,13 +22,13 @@ public class HerramientasactaMapperImpl implements HerramientasactaMapper {
 
         HerramientasActaDTO herramientasActaDTO = new HerramientasActaDTO();
 
+        herramientasActaDTO.setParticipa( herramientasActa.getParticipa() );
         herramientasActaDTO.setEstado( herramientasActa.getEstado() );
-        herramientasActaDTO.setHabilidades( herramientasActa.getHabilidades() );
-        herramientasActaDTO.setHerramientareuniones( herramientasActa.getHerramientareuniones() );
         herramientasActaDTO.setIdherramienta( herramientasActa.getIdherramienta() );
         herramientasActaDTO.setJuicioexpertos( herramientasActa.getJuicioexpertos() );
-        herramientasActaDTO.setParticipa( herramientasActa.getParticipa() );
         herramientasActaDTO.setRecopilaciondatos( herramientasActa.getRecopilaciondatos() );
+        herramientasActaDTO.setHabilidades( herramientasActa.getHabilidades() );
+        herramientasActaDTO.setHerramientareuniones( herramientasActa.getHerramientareuniones() );
 
         return herramientasActaDTO;
     }
@@ -41,13 +41,13 @@ public class HerramientasactaMapperImpl implements HerramientasactaMapper {
 
         Herramientasacta herramientasacta = new Herramientasacta();
 
-        herramientasacta.setEstado( herramientasActaDTO.getEstado() );
-        herramientasacta.setHabilidades( herramientasActaDTO.getHabilidades() );
-        herramientasacta.setHerramientareuniones( herramientasActaDTO.getHerramientareuniones() );
         herramientasacta.setIdherramienta( herramientasActaDTO.getIdherramienta() );
         herramientasacta.setJuicioexpertos( herramientasActaDTO.getJuicioexpertos() );
-        herramientasacta.setParticipa( herramientasActaDTO.getParticipa() );
         herramientasacta.setRecopilaciondatos( herramientasActaDTO.getRecopilaciondatos() );
+        herramientasacta.setHabilidades( herramientasActaDTO.getHabilidades() );
+        herramientasacta.setHerramientareuniones( herramientasActaDTO.getHerramientareuniones() );
+        herramientasacta.setEstado( herramientasActaDTO.getEstado() );
+        herramientasacta.setParticipa( herramientasActaDTO.getParticipa() );
 
         return herramientasacta;
     }

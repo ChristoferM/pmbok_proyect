@@ -22,12 +22,12 @@ public class PdpEntradasMapperImpl implements PdpEntradasMapper {
 
         EntradasDTO entradasDTO = new EntradasDTO();
 
-        entradasDTO.setActivosprocesos( entradaPdp.getActivosprocesos() );
+        entradasDTO.setParticipa( entradaPdp.getParticipa() );
         entradasDTO.setEstado( entradaPdp.getEstado() );
-        entradasDTO.setFactoresambientales( entradaPdp.getFactoresambientales() );
         entradasDTO.setIdentradapdp( entradaPdp.getIdentradapdp() );
         entradasDTO.setOtrosprocesos( entradaPdp.getOtrosprocesos() );
-        entradasDTO.setParticipa( entradaPdp.getParticipa() );
+        entradasDTO.setFactoresambientales( entradaPdp.getFactoresambientales() );
+        entradasDTO.setActivosprocesos( entradaPdp.getActivosprocesos() );
 
         return entradasDTO;
     }
@@ -40,12 +40,12 @@ public class PdpEntradasMapperImpl implements PdpEntradasMapper {
 
         Entradas entradas = new Entradas();
 
-        entradas.setActivosprocesos( entradasDTO.getActivosprocesos() );
-        entradas.setEstado( entradasDTO.getEstado() );
-        entradas.setFactoresambientales( entradasDTO.getFactoresambientales() );
         entradas.setIdentradapdp( entradasDTO.getIdentradapdp() );
         entradas.setOtrosprocesos( entradasDTO.getOtrosprocesos() );
+        entradas.setFactoresambientales( entradasDTO.getFactoresambientales() );
+        entradas.setActivosprocesos( entradasDTO.getActivosprocesos() );
         entradas.setParticipa( entradasDTO.getParticipa() );
+        entradas.setEstado( entradasDTO.getEstado() );
 
         return entradas;
     }
