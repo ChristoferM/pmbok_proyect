@@ -21,7 +21,7 @@ public class EntradactaMapperImpl implements EntradactaMapper {
         }
 
         EntradactaDTO entradactaDTO = new EntradactaDTO();
-
+        entradactaDTO.setIdentrada(entradActa.getIdentrada() );
         entradactaDTO.setParticipa( entradActa.getParticipa() );
         entradactaDTO.setEstado( entradActa.getEstado() );
         entradactaDTO.setIdentrada( entradActa.getIdentrada() );

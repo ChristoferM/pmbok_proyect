@@ -9,9 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tesis.v1.domain.Acta;
 import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.domain.Reunion;
+import com.tesis.v1.dto.EntradaDelActaDTO;
 import com.tesis.v1.dto.ValidarActaDTO;
+import com.tesis.v1.dto.idresponsable;
+import com.tesis.v1.repository.ActaRepository;
 import com.tesis.v1.repository.EntradactaRepository;
+import com.tesis.v1.repository.ReunionRepository;
 
 @Service
 @Scope("singleton")
@@ -19,6 +25,12 @@ public class EntradaActaServiceImpl implements EntradaActaService {
 
     @Autowired
     EntradactaRepository entradActaRepository;
+    
+    @Autowired
+    ActaRepository actaRepository ;
+    
+    @Autowired
+    ReunionRepository reunionRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -38,6 +50,59 @@ public class EntradaActaServiceImpl implements EntradaActaService {
     public Long count() {
         return entradActaRepository.count();
     }
+    
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Entradacta guardarEntradaDelActa(EntradaDelActaDTO EntradactaDTO) {
+    	Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdfase(),EntradactaDTO.getIdproyecto());
+    	
+    	// --------------------------------------------------
+    	Acta acta  = actaRepository.buscarPorIdReunion(idreuniones);
+    	if(acta == null) {
+    		Reunion reunion = new Reunion();
+        	reunion.setIdreuniones(idreuniones);
+    		acta = new Acta();
+        	acta.setReuniones(reunion);
+        	acta = actaRepository.save(acta);
+    	}    	
+    	Entradacta entity =  new Entradacta();
+    	
+    	entity.setAcuerdos(EntradactaDTO.getAcuerdos());
+    	entity.setFactores(EntradactaDTO.getFactores());
+    	entity.setActivosprocesos(EntradactaDTO.getActivosprocesos());
+    	entity.setActas(acta);
+    	entity.setEstado(true);
+    	entity.setParticipa(EntradactaDTO.getParticipa());
+    	
+        return entradActaRepository.save(entity);
+	}
+
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Entradacta actualiazrEntradaDelActa(EntradaDelActaDTO EntradactaDTO) {
+    	Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdfase(),EntradactaDTO.getIdproyecto());
+    	
+    	// --------------------------------------------------
+    	Acta acta  = actaRepository.buscarPorIdReunion(idreuniones);
+    	if(acta == null) {
+    		Reunion reunion = new Reunion();
+        	reunion.setIdreuniones(idreuniones);
+    		acta = new Acta();
+        	acta.setReuniones(reunion);
+        	acta = actaRepository.save(acta);
+    	}    	
+    	Entradacta entity =  new Entradacta();
+    	
+    	entity.setAcuerdos(EntradactaDTO.getAcuerdos());
+    	entity.setFactores(EntradactaDTO.getFactores());
+    	entity.setActivosprocesos(EntradactaDTO.getActivosprocesos());
+    	entity.setActas(acta);
+    	entity.setEstado(true);
+    	entity.setParticipa(EntradactaDTO.getParticipa());
+    	
+        return entradActaRepository.save(entity);
+	}
+
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -63,6 +128,12 @@ public class EntradaActaServiceImpl implements EntradaActaService {
         return entradActaRepository.findById(id);
 
     }
+	@Override
+	@Transactional(readOnly = true)
+	public List<Entradacta> BuscarDatosDeEntradas(EntradaDelActaDTO EntradactaDTO) {
+		return entradActaRepository.BuscarDatosDeEntradas(EntradactaDTO.getIdfase(),EntradactaDTO.getIdproyecto());
+	}
+
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -134,4 +205,6 @@ public class EntradaActaServiceImpl implements EntradaActaService {
         }
     }
 
+
+	
 }

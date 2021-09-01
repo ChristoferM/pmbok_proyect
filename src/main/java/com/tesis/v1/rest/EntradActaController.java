@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tesis.v1.domain.Acta;
 import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.dto.EntradaDelActaDTO;
 import com.tesis.v1.dto.EntradactaDTO;
 import com.tesis.v1.dto.ValidarActaDTO;
 import com.tesis.v1.service.ActaService;
@@ -71,6 +72,28 @@ public class EntradActaController {
 		return ResponseEntity.ok().body(EntradactaDTO);
 
 	}
+	
+	@RequestMapping("/BuscarDatosDeEntradas")
+	public ResponseEntity<?> BuscarDatosDeEntradas(@Valid @RequestBody EntradaDelActaDTO EntradactaDTO) throws Exception {
+		
+		List<Entradacta> EntradactaLIST = entradaActaervice.BuscarDatosDeEntradas(EntradactaDTO);
+		List<EntradactaDTO> EntradactaListDto = new ArrayList<>();
+		for(Entradacta entrada :EntradactaLIST) {
+			
+			EntradactaDTO dto = new EntradactaDTO();
+			dto.setIdentrada(entrada.getIdentrada());
+			dto.setIdActa(entrada.getActas().getIdactas());
+			dto.setAcuerdos(entrada.getAcuerdos());
+			dto.setActivosprocesos(entrada.getActivosprocesos());
+			dto.setEstado(entrada.getEstado());
+			dto.setFactores(entrada.getFactores());
+
+			EntradactaListDto.add(dto);
+			
+		}
+		return ResponseEntity.ok().body(EntradactaListDto);
+	}
+	
 
 	@RequestMapping("/findByAll")
 	public ResponseEntity<?> finByAll() throws Exception {
@@ -116,6 +139,30 @@ public class EntradActaController {
 
 		return ResponseEntity.ok().body(idActa);
 	}
+	
+	@RequestMapping("/guardarEntradaDelActa")
+	public ResponseEntity<?> guardarEntradaDelActa(@Valid @RequestBody EntradaDelActaDTO EntradactaDTO) throws Exception {
+		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarEntradaDelActa\n ");
+
+		return ResponseEntity.ok().body(EntradactaMapper.toEntradActaDTO(entradaActaervice.guardarEntradaDelActa(EntradactaDTO)));
+	}
+	
+	@RequestMapping("/actualiazrEntradaDelActa")
+	public ResponseEntity<?> actualiazrEntradaDelActa(@Valid @RequestBody EntradaDelActaDTO EntradactaDTO) throws Exception {
+		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> actualiazrEntradaDelActa\n ");
+		Entradacta domine =entradaActaervice.actualiazrEntradaDelActa(EntradactaDTO);
+		EntradactaDTO EntradactaDTOnew  = new EntradactaDTO();
+		EntradactaDTOnew.setAcuerdos(domine.getAcuerdos());
+		EntradactaDTOnew.setActivosprocesos(domine.getActivosprocesos());
+		EntradactaDTOnew.setEstado(domine.getEstado());
+		EntradactaDTOnew.setFactores(domine.getFactores());
+		EntradactaDTOnew.setIdActa(domine.getActas().getIdactas());
+		EntradactaDTOnew.setIdentrada(domine.getIdentrada());
+		EntradactaDTOnew.setParticipa(domine.getParticipa());
+		
+			
+		return ResponseEntity.ok().body(EntradactaDTOnew);
+	}
 
 	@RequestMapping("/save")
 	public ResponseEntity<?> save(@Valid @RequestBody EntradactaDTO EntradactaDTO) throws Exception {
@@ -128,13 +175,9 @@ public class EntradActaController {
 		entradas.setFactores(EntradactaDTO.getFactores());
 		entradas.setActivosprocesos(EntradactaDTO.getActivosprocesos());
 
-		log.info("************************************ 2");
-
 		Entradacta entradasnew = entradaActaervice.save(entradas);
-		log.info("************************************ 3");
+		
 		EntradactaDTO EntradactaDTOnew = EntradactaMapper.toEntradActaDTO(entradasnew);
-
-		log.info("************************************ 4");
 		return ResponseEntity.ok().body(EntradactaDTOnew);
 	}
 
