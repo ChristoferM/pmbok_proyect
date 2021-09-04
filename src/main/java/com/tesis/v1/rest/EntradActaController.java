@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tesis.v1.domain.Acta;
 import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.dto.CasoDeNegocioDelActaDTO;
 import com.tesis.v1.dto.EntradaDelActaDTO;
 import com.tesis.v1.dto.EntradactaDTO;
+import com.tesis.v1.dto.HerramientasDelActaDTO;
+import com.tesis.v1.dto.PlanDeGestionDeBeneficiosDelActaDTO;
 import com.tesis.v1.dto.ValidarActaDTO;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.EntradaActaService;
@@ -87,6 +90,7 @@ public class EntradActaController {
 			dto.setActivosprocesos(entrada.getActivosprocesos());
 			dto.setEstado(entrada.getEstado());
 			dto.setFactores(entrada.getFactores());
+			dto.setParticipa(entrada.getParticipa());
 
 			EntradactaListDto.add(dto);
 			
@@ -140,12 +144,18 @@ public class EntradActaController {
 		return ResponseEntity.ok().body(idActa);
 	}
 	
+	// *************************** Métodos para guardar la información de manera colaborativa
 	@RequestMapping("/guardarEntradaDelActa")
 	public ResponseEntity<?> guardarEntradaDelActa(@Valid @RequestBody EntradaDelActaDTO EntradactaDTO) throws Exception {
 		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarEntradaDelActa\n ");
 
 		return ResponseEntity.ok().body(EntradactaMapper.toEntradActaDTO(entradaActaervice.guardarEntradaDelActa(EntradactaDTO)));
 	}
+	
+
+
+
+	// *************************** Métodos para guardar la información de manera colaborativa
 	
 	@RequestMapping("/actualiazrEntradaDelActa")
 	public ResponseEntity<?> actualiazrEntradaDelActa(@Valid @RequestBody EntradaDelActaDTO EntradactaDTO) throws Exception {

@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tesis.v1.domain.Herramientasacta;
+import com.tesis.v1.dto.HerramientasDelActaDTO;
+import com.tesis.v1.repository.EntradactaRepository;
 import com.tesis.v1.repository.HerramientasactaRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
 
     @Autowired
     HerramientasactaRepository herramientasActaRepository;
+    @Autowired
+    EntradactaRepository entradActaRepository;
+    
 
     @Override
     @Transactional(readOnly = true)
@@ -99,4 +104,57 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
         return herramientasActaRepository.herramientaDelActa(idProyecto);
     }
 
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Herramientasacta guardarHerramientasDelActa(HerramientasDelActaDTO herramientasDelActaDTO) throws Exception {
+
+		Integer idreuniones = entradActaRepository.buscarIdReunion(herramientasDelActaDTO.getIdfase(),herramientasDelActaDTO.getIdproyecto());
+		
+		return null;
+		
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

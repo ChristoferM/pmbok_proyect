@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tesis.v1.domain.CasoNegocio;
 import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.dto.CasoDeNegocioDelActaDTO;
 import com.tesis.v1.dto.CasoNegocioDTO;
 import com.tesis.v1.service.CasoNegocioService;
 import com.tesis.v1.service.EntradaActaService;
@@ -151,5 +152,11 @@ public class CasoNegocioController {
       
         return ResponseEntity.ok().body(casonegocioDTO);
     }
+    
+	@RequestMapping("/guardarCaso-NegociDelActa")
+	public ResponseEntity<?> guardarCasoNegociDelActa(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception {
+		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarEntradaDelActa\n ");
 
+		return ResponseEntity.ok().body("");
+	}
 }

@@ -92,7 +92,7 @@ public class EntradaActaServiceImpl implements EntradaActaService {
         	acta = actaRepository.save(acta);
     	}    	
     	Entradacta entity =  new Entradacta();
-    	
+    	entity.setIdentrada(EntradactaDTO.getIdentrada());
     	entity.setAcuerdos(EntradactaDTO.getAcuerdos());
     	entity.setFactores(EntradactaDTO.getFactores());
     	entity.setActivosprocesos(EntradactaDTO.getActivosprocesos());

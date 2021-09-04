@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tesis.v1.domain.Entradacta;
 import com.tesis.v1.domain.PlanGestionbeneficio;
+import com.tesis.v1.dto.PlanDeGestionDeBeneficiosDelActaDTO;
 import com.tesis.v1.dto.PlanGestionBeneficioDTO;
 import com.tesis.v1.service.EntradaActaService;
 import com.tesis.v1.service.PlanGestionBeneficiosService;
@@ -175,6 +176,12 @@ public class PlanGestionBeneficiosController {
 	}
 
     
+	@RequestMapping("/guardarPlan-gestion-beneficioDelActa")
+	public ResponseEntity<?> guardarPlanGestionB5eneficioDelActa(@Valid @RequestBody PlanDeGestionDeBeneficiosDelActaDTO planDeGestionDeBeneficiosDelActaDTO) throws Exception {
+		// Para guardar las guardarPlanGestionB5eneficioDelActa, 1 debemos obtener el primer registro de las entradas que correspondan al cata de la reunion 
+		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarEntradaDelActa\n ");
 
+		return ResponseEntity.ok().body("");
+	}
 
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tesis.v1.domain.Acta;
 import com.tesis.v1.domain.Herramientasacta;
 import com.tesis.v1.dto.HerramientasActaDTO;
+import com.tesis.v1.dto.HerramientasDelActaDTO;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.HerramientasActasService;
 import com.tesis.v1.mapper.HerramientasactaMapper;
@@ -130,6 +131,12 @@ public class HerramientasActaController {
          herramientasactaDTO.setIdactas(herramientasactaNew.getActas().getIdactas());
          return ResponseEntity.ok().body(herramientasactaDTO);
 
+	}
+	@RequestMapping("/guardarHerramientasDelActa")
+	public ResponseEntity<?> guardarHerramientasDelActa(@Valid @RequestBody HerramientasDelActaDTO herramientasDelActaDTO) throws Exception {
+		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarEntradaDelActa\n ");
+
+		return ResponseEntity.ok().body("");
 	}
 
 }
