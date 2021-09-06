@@ -487,12 +487,13 @@ public class GrupoServiceImpl implements GrupoService {
 	public List<ControlFasesDTO> controlParticipacionesPorFases(Integer idProyecto, String Usuario) throws Exception {
 		List<ControlFasesDTO> DTOList = new ArrayList<ControlFasesDTO>();
 		try {
-			grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario);
+			//grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario);
 			List<Grupo> grupoList  = new ArrayList<Grupo>();
 			if (grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario).size() == 0 || grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario).isEmpty()) {
 
 			} else {
 				for (Grupo grupo : grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario)) {
+					// Variables
 					ControlFasesDTO DTOMaestro = new ControlFasesDTO();
 					// Proyectos
 					List<ProyectoDTO> proyectosList = new ArrayList<ProyectoDTO>();
@@ -503,10 +504,11 @@ public class GrupoServiceImpl implements GrupoService {
 					// Faseproyecto
 					List<FaseProyectoDTO> fasesList = new ArrayList<FaseProyectoDTO>();
 					
-					Proyecto Proyecto = grupo.getProyectos();
+					
 					
 					//SubGrupo subgrupoTMP = subGrupoRepository.obtenerDatosDeParticipaiconSubgrupo(grupo.getIdgrupo());
 					
+					// Set #1
 					proyectosTMP.setIdproyecto(grupo.getProyectos().getIdproyecto());
 					proyectosTMP.setNombre(grupo.getProyectos().getNombre());
 					proyectosTMP.setDescripcion(grupo.getProyectos().getDescripcion());
@@ -514,27 +516,34 @@ public class GrupoServiceImpl implements GrupoService {
 					proyectosTMP.setTipo_id(grupo.getProyectos().getTipoProyecto().getTipo_id());
 					proyectosList.add(proyectosTMP);
 					DTOMaestro.setProyectos(proyectosList);
+					
+					// Reuniones por proyecto
+					Proyecto Proyecto = grupo.getProyectos();
 					for(Reunion reunion : Proyecto.getReuniones() ) {
 						ReunionesDTO reunionesTMP = new ReunionesDTO();
 						FaseProyectoDTO fasesTMP = new FaseProyectoDTO();
+				
 						
-						reunionesTMP.setIdreuniones(reunion.getIdreuniones());
-						reunionesTMP.setNombrereunion(reunion.getNombrereunion());
-						reunionesTMP.setDescripcionreunion(reunion.getDescripcionreunion());
-						reunionesTMP.setIdproyecto(reunion.getProyectos().getIdproyecto());
-						reunionesTMP.setIdfase(reunion.getFaseproyecto().getIdfase());
-						reunionesList.add(reunionesTMP);
-						
-						fasesTMP.setIdfase(reunion.getFaseproyecto().getIdfase());
-						Optional<tipofases> tipoTmp = tipoFasesRepository
-								.findById(reunion.getFaseproyecto().getIdtipofase());
-						fasesTMP.setNombrefase(tipoTmp.get().getNombrefase());
-						fasesTMP.setDescripcionfase(reunion.getFaseproyecto().getDescripcionfase());
-						fasesTMP.setTiempoinicio(reunion.getFaseproyecto().getTiempoinicio());
-						fasesTMP.setTiempofin(reunion.getFaseproyecto().getTiempofin());
-						
-						fasesList.add(fasesTMP);
-						
+						if(grupoRepository.responsablesEnFaseoReunionValidacion(reunion.getFaseproyecto().getIdfase(),
+								Usuario)) {
+							
+							reunionesTMP.setIdreuniones(reunion.getIdreuniones());
+							reunionesTMP.setNombrereunion(reunion.getNombrereunion());
+							reunionesTMP.setDescripcionreunion(reunion.getDescripcionreunion());
+							reunionesTMP.setIdproyecto(reunion.getProyectos().getIdproyecto());
+							reunionesTMP.setIdfase(reunion.getFaseproyecto().getIdfase());
+							reunionesList.add(reunionesTMP);
+							
+							fasesTMP.setIdfase(reunion.getFaseproyecto().getIdfase());
+							Optional<tipofases> tipoTmp = tipoFasesRepository
+									.findById(reunion.getFaseproyecto().getIdtipofase());
+							fasesTMP.setNombrefase(tipoTmp.get().getNombrefase());
+							fasesTMP.setDescripcionfase(reunion.getFaseproyecto().getDescripcionfase());
+							fasesTMP.setTiempoinicio(reunion.getFaseproyecto().getTiempoinicio());
+							fasesTMP.setTiempofin(reunion.getFaseproyecto().getTiempofin());
+							
+							fasesList.add(fasesTMP);
+						}			
 						DTOMaestro.setFases(fasesList);
 						DTOMaestro.setReuniones(reunionesList);
 						

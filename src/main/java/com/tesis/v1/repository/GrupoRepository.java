@@ -57,6 +57,22 @@ public interface GrupoRepository extends JpaRepository<Grupo,Integer>{
 	
 	
 	
+	@Query(value ="SELECT " + 
+			"  CASE WHEN " + 
+			"    EXISTS ( " + 
+			"		SELECT grupo.* FROM  faseproyecto , subgrupo, grupo  " + 
+			"			WHERE faseproyecto.idfase = ?1 " + 
+			"		AND faseproyecto.idfase = subgrupo.idfase  " + 
+			"		AND grupo.idgrupo = subgrupo.idgrupo  AND grupo.email= ?2 )"+
+			//"      AND grupo.email= ?2 )  " + 
+			" THEN " + 
+			"    TRUE " + 
+			" ELSE " + 
+			"    FALSE " + 
+			" END;", nativeQuery = true)
+	public Boolean  responsablesEnFaseoReunionValidacion(Integer idfase,String email);
+	
+	
 	@Query(value ="SELECT   " + 
 			"		grupo.idgrupo, " + 
 			"        grupo.id_sub_grupo, " + 

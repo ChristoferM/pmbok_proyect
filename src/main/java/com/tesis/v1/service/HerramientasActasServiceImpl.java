@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tesis.v1.domain.Acta;
 import com.tesis.v1.domain.Herramientasacta;
 import com.tesis.v1.dto.HerramientasDelActaDTO;
+import com.tesis.v1.repository.ActaRepository;
 import com.tesis.v1.repository.EntradactaRepository;
 import com.tesis.v1.repository.HerramientasactaRepository;
 
@@ -22,6 +24,8 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
     HerramientasactaRepository herramientasActaRepository;
     @Autowired
     EntradactaRepository entradActaRepository;
+    @Autowired
+    ActaRepository actaRepository ;
     
 
     @Override
@@ -110,7 +114,19 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
 
 		Integer idreuniones = entradActaRepository.buscarIdReunion(herramientasDelActaDTO.getIdfase(),herramientasDelActaDTO.getIdproyecto());
 		
-		return null;
+		Acta acta  = actaRepository.buscarPorIdReunion(idreuniones);
+		
+		Herramientasacta herramienta = new Herramientasacta();
+		
+		herramienta.setEstado(true);
+		herramienta.setActas(acta);
+		herramienta.setHabilidades(herramientasDelActaDTO.getHabilidades());
+		herramienta.setHerramientareuniones(herramientasDelActaDTO.getHerramientareuniones());
+		herramienta.setJuicioexpertos(herramientasDelActaDTO.getJuicioexpertos());
+		herramienta.setParticipa(herramientasDelActaDTO.getParticipa());
+		herramienta.setRecopilaciondatos(herramientasDelActaDTO.getRecopilaciondatos());
+		
+		return herramientasActaRepository.save(herramienta);
 		
 		
 	}
