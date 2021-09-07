@@ -114,7 +114,9 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
 
 		Integer idreuniones = entradActaRepository.buscarIdReunion(herramientasDelActaDTO.getIdfase(),herramientasDelActaDTO.getIdproyecto());
 		
-		Acta acta  = actaRepository.buscarPorIdReunion(idreuniones);
+		// Problema detectado, la acta corresponde a un unico valor
+		// y ese unico valor va ligado a la primera reunion por ende, es necesario ubicar ese id unico
+		Acta acta  = actaRepository.buscarIdActaPorProyecto(herramientasDelActaDTO.getIdproyecto());
 		
 		Herramientasacta herramienta = new Herramientasacta();
 		

@@ -134,9 +134,9 @@ public class HerramientasActaController {
 	}
 	@RequestMapping("/guardarHerramientasDelActa")
 	public ResponseEntity<?> guardarHerramientasDelActa(@Valid @RequestBody HerramientasDelActaDTO herramientasDelActaDTO) throws Exception {
-		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarEntradaDelActa\n ");
-
-		return ResponseEntity.ok().body("");
+		log.info("********* Guardando HERRAMIENTAS del acta \n public  ResponseEntity<?> guardarHerramientasDelActa\n ");
+		
+		return ResponseEntity.ok().body(herramientasActasService.guardarHerramientasDelActa(herramientasDelActaDTO));
 	}
 
 }
