@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tesis.v1.domain.Acta;
 import com.tesis.v1.domain.Herramientasacta;
+import com.tesis.v1.dto.EntradaDelActaDTO;
 import com.tesis.v1.dto.HerramientasActaDTO;
 import com.tesis.v1.dto.HerramientasDelActaDTO;
 import com.tesis.v1.service.ActaService;
@@ -137,6 +138,36 @@ public class HerramientasActaController {
 		log.info("********* Guardando HERRAMIENTAS del acta \n public  ResponseEntity<?> guardarHerramientasDelActa\n ");
 		
 		return ResponseEntity.ok().body(herramientasActasService.guardarHerramientasDelActa(herramientasDelActaDTO));
+	}
+	
+	@RequestMapping("/BuscarDatosDeHerramietasPrevias")
+	public ResponseEntity<?> BuscarDatosDeHerramietasPrevias(@Valid @RequestBody HerramientasDelActaDTO herramientasDelActaDTO) throws Exception {
+		
+		List<Herramientasacta> herrmientasList = herramientasActasService.BuscarDatosDeHerramietasPrevias(herramientasDelActaDTO);
+		List<HerramientasActaDTO> herrmientasListDTO = new ArrayList<>();
+		
+		/*
+		   private Integer idherramienta;
+		    private Integer idactas;
+		    private String juicioexpertos;
+		    private String recopilaciondatos;
+		    private String habilidades;
+		    private String herramientareuniones;
+			private String participa ;*/
+		
+		for( Herramientasacta herramienta  :herrmientasList) {
+			HerramientasActaDTO DTO = new HerramientasActaDTO();
+			
+			DTO.setIdactas(herramienta.getActas().getIdactas());
+			DTO.setIdherramienta(herramienta.getIdherramienta());
+			DTO.setJuicioexpertos(herramienta.getJuicioexpertos());
+			DTO.setHabilidades(herramienta.getHabilidades());
+			DTO.setHerramientareuniones(herramienta.getHerramientareuniones());
+			DTO.setParticipa(herramienta.getParticipa());
+			
+			herrmientasListDTO.add(DTO);
+		}
+		  return ResponseEntity.ok().body(herrmientasListDTO);
 	}
 
 }

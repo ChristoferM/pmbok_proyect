@@ -3,6 +3,8 @@ package com.tesis.v1.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -131,6 +133,15 @@ public class HerramientasActasServiceImpl implements HerramientasActasService {
 		return herramientasActaRepository.save(herramienta);
 		
 		
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Herramientasacta> BuscarDatosDeHerramietasPrevias(HerramientasDelActaDTO herramientasDelActaDTO)
+			throws Exception {
+		// return herramientasActaRepository.BuscarDatosDeHerramietasPrevias(herramientasDelActaDTO.getIdfase(),herramientasDelActaDTO.getIdproyecto());
+		return herramientasActaRepository.BuscarDatosDeHerramietasPrevias(herramientasDelActaDTO.getIdproyecto());
+		// return null;
 	}
 
 	

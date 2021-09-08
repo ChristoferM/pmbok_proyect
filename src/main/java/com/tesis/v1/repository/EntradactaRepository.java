@@ -117,11 +117,11 @@ public interface EntradactaRepository extends JpaRepository<Entradacta,Integer>{
 	@Query(value ="SELECT * FROM reuniones WHERE reuniones.idfase = ?1 AND reuniones.idproyecto = ?2 ; ", nativeQuery = true)
 	public Integer buscarIdReunion(Integer idfase, Integer idproyecto);
 	
-	@Query(value ="SELECT * FROM entradacta WHERE entradacta.idactas = ( " + 
-			"	SELECT actas.idactas FROM actas WHERE actas.idreuniones =( " + 
-			"		SELECT reuniones.idreuniones FROM reuniones  " + 
-			"		WHERE reuniones.idfase = ?1 AND reuniones.idproyecto = ?2 " + 
-			"	) );", nativeQuery = true)
+	@Query(value ="SELECT * FROM entradacta WHERE entradacta.idactas = ( \r\n" + 
+			"	SELECT actas.idactas FROM actas WHERE actas.idreuniones =(  \r\n" + 
+			"		SELECT reuniones.idreuniones FROM reuniones, proyectos  \r\n" + 
+			"			WHERE reuniones.idproyecto = proyectos.idproyecto   \r\n" + 
+			"			AND proyectos.idproyecto= ?2 limit 1 ) );", nativeQuery = true)
 	public List<Entradacta> BuscarDatosDeEntradas(Integer idfase, Integer idproyecto);
 	
 	
