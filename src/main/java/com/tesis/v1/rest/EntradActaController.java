@@ -149,7 +149,11 @@ public class EntradActaController {
 	public ResponseEntity<?> guardarEntradaDelActa(@Valid @RequestBody EntradaDelActaDTO EntradactaDTO) throws Exception {
 		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarEntradaDelActa\n ");
 
-		return ResponseEntity.ok().body(EntradactaMapper.toEntradActaDTO(entradaActaervice.guardarEntradaDelActa(EntradactaDTO)));
+		return ResponseEntity.ok().body(
+				EntradactaMapper.toEntradActaDTO(
+						entradaActaervice.guardarEntradaDelActa(EntradactaDTO)
+						)
+				);
 	}
 	
 
@@ -159,7 +163,7 @@ public class EntradActaController {
 	
 	@RequestMapping("/actualiazrEntradaDelActa")
 	public ResponseEntity<?> actualiazrEntradaDelActa(@Valid @RequestBody EntradaDelActaDTO EntradactaDTO) throws Exception {
-		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> actualiazrEntradaDelActa\n ");
+		log.info("********* Actualizar Entradas del acta \n public ResponseEntity<?> actualiazrEntradaDelActa\n ");
 		Entradacta domine =entradaActaervice.actualiazrEntradaDelActa(EntradactaDTO);
 		EntradactaDTO EntradactaDTOnew  = new EntradactaDTO();
 		EntradactaDTOnew.setAcuerdos(domine.getAcuerdos());

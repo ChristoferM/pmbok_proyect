@@ -12,7 +12,9 @@ public interface HerramientasActasService extends GenericService<Herramientasact
 	public List<Herramientasacta> herramientaDelActa(Integer idProyecto);
 	
 	public Herramientasacta guardarHerramientasDelActa(HerramientasDelActaDTO herramientasDelActaDTO)  throws Exception;
-
+	
+	public Herramientasacta actualiazrHerramientasDelActa(HerramientasDelActaDTO herramientasDelActaDTO)  throws Exception;
+	
 	public List<Herramientasacta> BuscarDatosDeHerramietasPrevias( HerramientasDelActaDTO herramientasDelActaDTO) throws Exception;
     
 }

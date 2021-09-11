@@ -22,6 +22,7 @@ import com.tesis.v1.domain.Herramientasacta;
 import com.tesis.v1.dto.EntradaDelActaDTO;
 import com.tesis.v1.dto.HerramientasActaDTO;
 import com.tesis.v1.dto.HerramientasDelActaDTO;
+import com.tesis.v1.dto.pdp.HerramientasDTO;
 import com.tesis.v1.service.ActaService;
 import com.tesis.v1.service.HerramientasActasService;
 import com.tesis.v1.mapper.HerramientasactaMapper;
@@ -133,6 +134,26 @@ public class HerramientasActaController {
          return ResponseEntity.ok().body(herramientasactaDTO);
 
 	}
+    
+    @RequestMapping("/actualiazrHerramientasDelActa")
+	public ResponseEntity<?> actualiazrHerramientasDelActa(@Valid @RequestBody HerramientasDelActaDTO herramientasDelActaDTO) throws Exception {
+		log.info("********* Actualizar HERRAMIENTAS del acta \n public  ResponseEntity<?> guardarHerramientasDelActa\n ");
+		Herramientasacta domine = herramientasActasService.actualiazrHerramientasDelActa(herramientasDelActaDTO);
+		
+		HerramientasDTO dto = new HerramientasDTO();
+		dto.setEstado(domine.getEstado());
+		dto.setHabilidades(domine.getHabilidades());
+		dto.setHerramientareuniones(domine.getHerramientareuniones());
+		dto.setIdherramienta(domine.getIdherramienta());
+		dto.setIdpdp(null);
+		dto.setJuicioexpertos(domine.getJuicioexpertos());
+		dto.setParticipa(domine.getParticipa());
+		dto.setRecopilaciondatos(domine.getRecopilaciondatos());
+		
+		return ResponseEntity.ok().body(dto);
+	}
+	
+    
 	@RequestMapping("/guardarHerramientasDelActa")
 	public ResponseEntity<?> guardarHerramientasDelActa(@Valid @RequestBody HerramientasDelActaDTO herramientasDelActaDTO) throws Exception {
 		log.info("********* Guardando HERRAMIENTAS del acta \n public  ResponseEntity<?> guardarHerramientasDelActa\n ");

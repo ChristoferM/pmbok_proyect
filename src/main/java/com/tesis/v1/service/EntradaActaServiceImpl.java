@@ -54,7 +54,8 @@ public class EntradaActaServiceImpl implements EntradaActaService {
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Entradacta guardarEntradaDelActa(EntradaDelActaDTO EntradactaDTO) {
-    	Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdfase(),EntradactaDTO.getIdproyecto());
+    	//Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdfase(),EntradactaDTO.getIdproyecto());
+    	Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdproyecto());
     	
     	// --------------------------------------------------
     	Acta acta  = actaRepository.buscarPorIdReunion(idreuniones);
@@ -80,7 +81,8 @@ public class EntradaActaServiceImpl implements EntradaActaService {
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Entradacta actualiazrEntradaDelActa(EntradaDelActaDTO EntradactaDTO) {
-    	Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdfase(),EntradactaDTO.getIdproyecto());
+    	//Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdfase(),EntradactaDTO.getIdproyecto());
+    	Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdproyecto());
     	
     	// --------------------------------------------------
     	Acta acta  = actaRepository.buscarPorIdReunion(idreuniones);
@@ -131,7 +133,7 @@ public class EntradaActaServiceImpl implements EntradaActaService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Entradacta> BuscarDatosDeEntradas(EntradaDelActaDTO EntradactaDTO) {
-		return entradActaRepository.BuscarDatosDeEntradas(EntradactaDTO.getIdfase(),EntradactaDTO.getIdproyecto());
+		return entradActaRepository.BuscarDatosDeEntradas(EntradactaDTO.getIdproyecto());
 	}
 
 
