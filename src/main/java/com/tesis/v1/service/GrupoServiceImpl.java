@@ -42,6 +42,9 @@ import com.tesis.v1.dto.RolesDTO;
 import com.tesis.v1.dto.RolproyectoDTO;
 import com.tesis.v1.dto.UsuariosDTO;
 import com.tesis.v1.dto.idresponsable;
+import com.tesis.v1.dto.controlFasesDTOs.ControlFase_01DTO;
+import com.tesis.v1.dto.controlFasesDTOs.ControlFase_02DTO;
+import com.tesis.v1.dto.controlFasesDTOs.ControlFase_03DTO;
 import com.tesis.v1.domain.RolProyecto;
 import com.tesis.v1.repository.FaseProyectoRepository;
 import com.tesis.v1.repository.GrupoRepository;
@@ -484,7 +487,7 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Override
 	@Transactional(readOnly = true, noRollbackFor = Exception.class)
-	public List<ControlFasesDTO> controlParticipacionesPorFases(Integer idProyecto, String Usuario) throws Exception {
+	public List<ControlFasesDTO> controlParticipacionesPorFasesNOHABILITADO(Integer idProyecto, String Usuario) throws Exception {
 		List<ControlFasesDTO> DTOList = new ArrayList<ControlFasesDTO>();
 		try {
 			//grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario);
@@ -563,7 +566,109 @@ public class GrupoServiceImpl implements GrupoService {
 
 		return null;
 	}
+	
+	// ControlFase_01DTO
+	
 
+	@Override
+	@Transactional(readOnly = true, noRollbackFor = Exception.class)
+	public List<ControlFase_01DTO> controlParticipacionesPorFases(Integer idProyecto, String Usuario) throws Exception {
+		List<ControlFase_01DTO> DTOList = new ArrayList<ControlFase_01DTO>();
+		try {
+			//grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario);
+			List<Grupo> grupoList  = new ArrayList<Grupo>();
+			if (grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario).size() == 0 || grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario).isEmpty()) {
+
+			} else {
+				for (Grupo grupo : grupoRepository.obtenerDatosDeParticipaicon(idProyecto, Usuario)) {
+					// 
+					ControlFase_01DTO DTOMaestro = new ControlFase_01DTO();
+					// Proyectos
+					// List<ProyectoDTO> proyectosList = new ArrayList<ProyectoDTO>();
+					// ProyectoDTO proyectosTMP = new ProyectoDTO();
+					// Reuniones
+					List<ControlFase_02DTO> reunionesList = new ArrayList<ControlFase_02DTO>();
+					
+					// Faseproyecto -> Control de Fases
+					List<ControlFase_03DTO> fasesList = new ArrayList<ControlFase_03DTO>();
+					
+					
+					
+					//Guardamos la info del proyecto 
+					
+					// Set #1
+					DTOMaestro.setIdproyecto(grupo.getProyectos().getIdproyecto());
+					DTOMaestro.setNombre(grupo.getProyectos().getNombre());
+					DTOMaestro.setDescripcion(grupo.getProyectos().getDescripcion());
+					DTOMaestro.setAdmin(grupo.getProyectos().getAdmin());
+					DTOMaestro.setTipo_id(grupo.getProyectos().getTipoProyecto().getTipo_id());
+					// proyectosList.add(proyectosTMP);
+					// DTOMaestro.setProyectos(proyectosList);
+					
+					// Reuniones por proyecto -> extraemos la info bien mela
+					Proyecto Proyecto = grupo.getProyectos();
+					List<Reunion>  reunionLista = Proyecto.getReuniones();
+					for(Reunion reunion :  reunionLista) {
+						log.info("");
+						log.info("Entramos a ITERAR EN TODAS LAS REUNIONES, BUSCANDO EN CUAL HACE MATCH");
+						// tmporales pora cada iteración
+						ControlFase_02DTO reunionesTMP = new ControlFase_02DTO();
+						ControlFase_03DTO fasesTMP = new ControlFase_03DTO();
+						
+						// Condidion para saber si el ususario tiene actividades asignadas es decir si fase del proyecto esta includi el usuario
+						if(grupoRepository.responsablesEnFaseoReunionValidacion(reunion.getFaseproyecto().getIdfase(),
+								Usuario)) {
+						log.info("SI MACTH");
+							
+							log.info("CONDICION PARA GRABAR LAS FASER Y REUNION");
+							fasesTMP.setIdfase(reunion.getFaseproyecto().getIdfase());
+							
+							Optional<tipofases> tipoTmp = tipoFasesRepository.findById(reunion.getFaseproyecto().getIdtipofase());
+							log.info(tipoTmp.get().getNombrefase().toString());
+							
+														
+							log.info("condion: EL ID DE LA FASE, DEBE REFLEJARSE EN GRUPO Y FASEPROYECTO");
+							
+						
+							
+							fasesTMP.setNombrefase(tipoTmp.get().getNombrefase());
+							fasesTMP.setDescripcionfase(reunion.getFaseproyecto().getDescripcionfase());
+							fasesTMP.setTiempoinicio(reunion.getFaseproyecto().getTiempoinicio());
+							fasesTMP.setTiempofin(reunion.getFaseproyecto().getTiempofin());
+							
+							fasesList.add(fasesTMP);
+							
+							reunionesTMP.setIdreuniones(reunion.getIdreuniones());
+							reunionesTMP.setNombrereunion(reunion.getNombrereunion());
+							reunionesTMP.setDescripcionreunion(reunion.getDescripcionreunion());
+							reunionesTMP.setIdproyecto(reunion.getProyectos().getIdproyecto());
+							reunionesTMP.setIdfase(reunion.getFaseproyecto().getIdfase());
+							
+							
+							reunionesTMP.setFases(fasesList);
+							fasesList = new ArrayList<ControlFase_03DTO>();
+							reunionesList.add(reunionesTMP);
+							
+						
+						}			
+						DTOMaestro.setReuniones(reunionesList);
+						
+						
+					}
+					DTOList.add(DTOMaestro);
+				// Final For
+				}
+
+				return DTOList;
+			// final Else
+			}
+
+		} catch (Exception e) {
+			log.info(e.toString());
+		}
+
+		return null;
+	}
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String elimiarUsuarioMatriculado(String Usuario, Integer idProyecto) throws Exception {

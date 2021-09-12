@@ -5,6 +5,7 @@ import java.util.List;
 import com.tesis.v1.domain.FaseProyecto;
 
 public class ControlFasesDTO {
+	// Su uso se reemplaza por las 3 clases de CONTROLFASESDTOs
 
 	
 	// Proyectos

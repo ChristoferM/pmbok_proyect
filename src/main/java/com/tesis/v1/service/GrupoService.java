@@ -9,6 +9,7 @@ import com.tesis.v1.dto.GrupoDTO;
 import com.tesis.v1.dto.ResponsablesDTO;
 import com.tesis.v1.dto.RolesDTO;
 import com.tesis.v1.dto.UsuariosDTO;
+import com.tesis.v1.dto.controlFasesDTOs.ControlFase_01DTO;
 
 public interface GrupoService  extends GenericService<Grupo,Integer>{
 	
@@ -22,8 +23,9 @@ public interface GrupoService  extends GenericService<Grupo,Integer>{
 	 	 
 	 public List<ControlFasesDTO> controlPorFases(String Usuario) throws Exception;
 	 
-	 public List<ControlFasesDTO> controlParticipacionesPorFases(Integer idProyecto,String Usuario) throws Exception;
+	 public List<ControlFase_01DTO> controlParticipacionesPorFases(Integer idProyecto,String Usuario) throws Exception;
 	 
+	 public List<ControlFasesDTO> controlParticipacionesPorFasesNOHABILITADO(Integer idProyecto,String Usuario) throws Exception;
 	 
 	 public List<GrupoDTO> buscarParticipaciones(String Usuario) throws Exception;
 	 
