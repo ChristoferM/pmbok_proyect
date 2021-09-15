@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tesis.v1.domain.CasoNegocio;
 import com.tesis.v1.domain.Entradacta;
+import com.tesis.v1.dto.CasoDeNegocioDelActaDTO;
 import com.tesis.v1.repository.CasoNegocioRepository;
+import com.tesis.v1.repository.EntradactaRepository;
 
 @Service
 @Scope("singleton")
@@ -24,6 +26,8 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
     @Autowired
     EntradaActaService EntradaActaService;
 
+    @Autowired
+    EntradactaRepository entradActaRepository;
     private final static Logger log = LoggerFactory.getLogger(CasoNegocioServiceImpl.class);
 
     @Override
@@ -120,5 +124,36 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
     public List<CasoNegocio> casoNegocioDelActa(Integer idProyecto) {
         return casoNegocioRepository.casoNegocioDelActa(idProyecto);
     }
+
+	@Override
+	public List<CasoNegocio> BuscarDatosDeCasonegocio(CasoDeNegocioDelActaDTO cCasoDeNegocioDelActaDTO)
+			throws Exception {
+		return casoNegocioRepository.casoNegocioDelActa(cCasoDeNegocioDelActaDTO.getIdproyecto());
+	}
+
+	@Override
+	public CasoNegocio guardarCasoNegocio(CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception {
+		
+		Integer idreuniones = casoNegocioRepository.BuscarDatosDeCasonegocio(casoDeNegocioDelActaDTO.getIdproyecto());
+
+		CasoNegocio entity = new CasoNegocio();
+		Entradacta entity_01 =  new Entradacta();
+		if(idreuniones== null || idreuniones == 0 ) {
+			 throw new Exception("guardarCasoNegocio De IMplementacion Error en idEntradaDel Acta");
+			
+		}
+		entity_01.setIdentrada(idreuniones);
+		
+		
+		entity.setEstado(true);
+		entity.setEntradacta(entity_01);
+		entity.setIncidentes(casoDeNegocioDelActaDTO.getIncidentes());
+		entity.setMetas(casoDeNegocioDelActaDTO.getMetas());
+		entity.setObjetivos(casoDeNegocioDelActaDTO.getObjetivos());
+		entity.setOportunidades(casoDeNegocioDelActaDTO.getOportunidades());
+		entity.setParticipa(casoDeNegocioDelActaDTO.getParticipa());	
+		
+		return casoNegocioRepository.save(entity);
+	}
 
 }

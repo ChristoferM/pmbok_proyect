@@ -20,6 +20,7 @@ import com.tesis.v1.domain.CasoNegocio;
 import com.tesis.v1.domain.Entradacta;
 import com.tesis.v1.dto.CasoDeNegocioDelActaDTO;
 import com.tesis.v1.dto.CasoNegocioDTO;
+import com.tesis.v1.dto.EntradactaDTO;
 import com.tesis.v1.service.CasoNegocioService;
 import com.tesis.v1.service.EntradaActaService;
 import com.tesis.v1.mapper.CasoNegocioMapper;
@@ -159,4 +160,74 @@ public class CasoNegocioController {
 
 		return ResponseEntity.ok().body("");
 	}
+	
+	//_--------------------
+	
+	@RequestMapping("/BuscarDatosDeCasonegocio")
+	public ResponseEntity<?> BuscarDatosDeCasonegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception{
+		log.info("BuscarDatosDeCasonegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO){");
+		
+		// Metodo, que puede ser succetible a errores a futuro, dependerá de la forma en como se grabe la entrada del acta
+		List<CasoNegocio> casoNegocioList = CasoNegocioService.BuscarDatosDeCasonegocio(casoDeNegocioDelActaDTO);
+		
+		List<CasoNegocioDTO> CasoNegocioaListDto = new ArrayList<>();
+		
+		for(CasoNegocio caso :casoNegocioList) {
+			
+			CasoNegocioDTO dto = new CasoNegocioDTO();
+			
+			dto.setEstado(caso.getEstado());
+			dto.setId_caso_negocio(caso.getId_caso_negocio());
+			dto.setIdEntradaActa(caso.getEntradacta().getIdentrada());
+			dto.setIncidentes(caso.getIncidentes());
+			dto.setMetas(caso.getMetas());
+			dto.setObjetivos(caso.getObjetivos());
+			dto.setOportunidades(caso.getOportunidades());
+			dto.setParticipa(caso.getParticipa());			
+			CasoNegocioaListDto.add(dto);
+		}
+		return ResponseEntity.ok().body(CasoNegocioaListDto);		
+	}
+	
+	@RequestMapping("/guardarCasoNegocio")
+	public ResponseEntity<?> guardarCasoNegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception{
+		log.info("ResponseEntity<?> guardarCasoNegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception{");
+
+		if(casoDeNegocioDelActaDTO.getParticipa() == null || casoDeNegocioDelActaDTO.getParticipa() == "" ) {
+			throw new Exception("No se encontro datos de Usuario");
+			
+		}
+		return ResponseEntity.ok().body(casonegocioMapper.tocasoNegocioDTO(
+				CasoNegocioService.guardarCasoNegocio(
+						casoDeNegocioDelActaDTO)
+				)
+				);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
