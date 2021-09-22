@@ -17,5 +17,7 @@ public interface CasoNegocioService  extends GenericService<CasoNegocio,Integer>
 	public List<CasoNegocio> casoNegocioDelActa(Integer idProyecto);
 	
 	public CasoNegocio guardarCasoNegocio(CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception;
+	
+	public CasoNegocio actualizarCasoNegocio(CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception;
     
 }

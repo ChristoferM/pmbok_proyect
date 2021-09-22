@@ -23,4 +23,13 @@ public interface PlanGestionBeneficioRepository extends JpaRepository<PlanGestio
                         "	public.actas.idactas = public.entradacta.idactas and " + 
                         "	public.entradacta.identrada= public.planesgestionbeneficios.identrada; " , nativeQuery = true)
 	public List<PlanGestionbeneficio> planGestionDelActa(Integer idProyecto);
+        
+        
+
+    	@Query(value = "	SELECT entradacta.identrada FROM entradacta WHERE entradacta.idactas IN  ( "
+    			+ "	SELECT actas.idactas FROM actas WHERE actas.idreuniones IN ( "
+    			+ "		SELECT reuniones.idreuniones FROM reuniones, proyectos "
+    			+ "			WHERE reuniones.idproyecto = proyectos.idproyecto  "
+    			+ "			AND proyectos.idproyecto= ?1)) limit 1;", nativeQuery = true)
+    	public Integer BuscarIdDeEntradaParaPlanDeBeneficios(Integer idproyecto);
 }

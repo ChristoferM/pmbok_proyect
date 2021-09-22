@@ -23,6 +23,8 @@ public interface GrupoService  extends GenericService<Grupo,Integer>{
 	 	 
 	 // public List<ControlFasesDTO> controlPorFases(String Usuario) throws Exception;
 	 public List<ControlFase_01DTO> controlPorFases(String Usuario) throws Exception;
+	 public List<ControlFase_01DTO> controlPorFasesParaAdmin(String Usuario) throws Exception;
+	 
 	 	 
 	 public List<ControlFase_01DTO> controlParticipacionesPorFases(Integer idProyecto,String Usuario) throws Exception;
 	 

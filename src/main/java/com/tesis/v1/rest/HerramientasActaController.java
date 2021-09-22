@@ -182,6 +182,7 @@ public class HerramientasActaController {
 			DTO.setIdactas(herramienta.getActas().getIdactas());
 			DTO.setIdherramienta(herramienta.getIdherramienta());
 			DTO.setJuicioexpertos(herramienta.getJuicioexpertos());
+			DTO.setRecopilaciondatos(herramienta.getRecopilaciondatos());
 			DTO.setHabilidades(herramienta.getHabilidades());
 			DTO.setHerramientareuniones(herramienta.getHerramientareuniones());
 			DTO.setParticipa(herramienta.getParticipa());

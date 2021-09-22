@@ -24,6 +24,6 @@ public interface CasoNegocioRepository extends JpaRepository<CasoNegocio, Intege
 			+ "	SELECT actas.idactas FROM actas WHERE actas.idreuniones IN ( "
 			+ "		SELECT reuniones.idreuniones FROM reuniones, proyectos "
 			+ "			WHERE reuniones.idproyecto = proyectos.idproyecto  "
-			+ "			AND proyectos.idproyecto= 26)) limit 1;", nativeQuery = true)
+			+ "			AND proyectos.idproyecto= ?1)) limit 1;", nativeQuery = true)
 	public Integer BuscarDatosDeCasonegocio(Integer idproyecto);
 }

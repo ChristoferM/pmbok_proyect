@@ -506,6 +506,116 @@ public class GrupoServiceImpl implements GrupoService {
 		return DTOList;
 	}
 
+	/* Este método se copia de controlPorFases con el fin de obtener la lista total de reuniones
+	 * que tiene un proyecto -> diferencia del otro que buscará solo el que corresponda AL usuario 
+	 * en su respectiva participacion 
+	*/
+	@Override
+	@Transactional(readOnly = true)
+	public List<ControlFase_01DTO> controlPorFasesParaAdmin(String Usuario) throws Exception {
+		// Se crea la lista que va a retornarse
+		// List<ControlFasesDTO> DTOList = new ArrayList<ControlFasesDTO>();
+		List<ControlFase_01DTO> DTOList = new ArrayList<ControlFase_01DTO>();
+		
+
+		try {
+			// grupoRepository.ControlFasesQuery(Usuario);
+
+			List<Proyecto> proyecto = proyectoRepository.finByEmail(Usuario);
+
+			Date date = new Date();
+			Proyecto proyectoData = new Proyecto();
+
+			Integer id = 0;
+			for (Proyecto xxx : proyecto) {
+				// Proyectos
+				List<ProyectoDTO> proyectosList = new ArrayList<ProyectoDTO>();
+				;
+				// Reuniones
+				// List<ReunionesDTO> reunionesList = new ArrayList<ReunionesDTO>();
+				List<ControlFase_02DTO> reunionesList = new ArrayList<ControlFase_02DTO>();
+				
+				// Faseproyecto
+				// List<FaseProyectoDTO> fasesList = new ArrayList<FaseProyectoDTO>();
+				List<ControlFase_03DTO> fasesList = new ArrayList<ControlFase_03DTO>();
+				
+
+				//ControlFasesDTO DTOMaestro = new ControlFasesDTO();
+				ControlFase_01DTO DTOMaestro = new ControlFase_01DTO();
+				proyectoData = xxx;
+				id = proyectoData.getIdproyecto();
+
+				// Logica Pesada
+				if (id == 0 || id < 1 || id == null) {
+					throw new IllegalArgumentException("No se encontro el proyecto");
+				}
+				// Proyectos
+				// ProyectoDTO proyectosDto = new ProyectoDTO();
+				// 				proyectosDto.setNombre(proyectoData.getNombre());
+				// proyectosDto.setDescripcion(proyectoData.getDescripcion());
+				// proyectosDto.setIdproyecto(proyectoData.getIdproyecto());
+
+				// proyectosList.add(proyectosDto);
+				DTOMaestro.setNombre(proyectoData.getNombre());
+				DTOMaestro.setDescripcion(proyectoData.getDescripcion());
+				DTOMaestro.setIdproyecto(proyectoData.getIdproyecto());
+				DTOMaestro.setAdmin(proyectoData.getAdmin());
+				DTOMaestro.setTipo_id(proyectoData.getTipoProyecto().getTipo_id());
+
+
+				for (Reunion reunion : proyectoData.getReuniones()) {
+					// reunionesList = new ArrayList<ControlFase_02DTO>();
+					fasesList = new ArrayList<ControlFase_03DTO>();
+					ControlFase_02DTO dto = new ControlFase_02DTO(); // REUNION
+					ControlFase_03DTO dto_2 = new ControlFase_03DTO(); // FASE
+
+					// fases
+					dto_2.setDescripcionfase(reunion.getFaseproyecto().getDescripcionfase());
+					dto_2.setIdfase(reunion.getFaseproyecto().getIdfase());
+					// dto_2.setNombrefase(reunion.getFaseproyecto().gett);
+					dto_2.setTiempoinicio(reunion.getFaseproyecto().getTiempoinicio());
+					dto_2.setTiempofin(reunion.getFaseproyecto().getTiempofin());
+					Optional<tipofases> tipoTmp = tipoFasesRepository.findById(reunion.getFaseproyecto().getIdtipofase());
+					
+					dto_2.setNombrefase(tipoTmp.get().getNombrefase());
+					fasesList.add(dto_2);
+					
+					// reuniones
+					dto.setNombrereunion(reunion.getNombrereunion());
+					dto.setDescripcionreunion(reunion.getDescripcionreunion());
+					dto.setIdreuniones(reunion.getIdreuniones());
+					dto.setIdproyecto(reunion.getProyectos().getIdproyecto());
+					dto.setIdfase(reunion.getFaseproyecto().getIdfase());
+					dto.setFases(fasesList);
+					
+					
+					reunionesList.add(dto);
+
+				}
+				//DTOMaestro.setFases(fasesList);
+				//DTOMaestro.setProyectos(proyectosList);
+				DTOMaestro.setReuniones(reunionesList);
+				DTOList.add(DTOMaestro);
+
+			}
+
+		} catch (Exception e) {
+			throw new IllegalArgumentException(e);
+		}
+
+		if (DTOList.isEmpty()) {
+			throw new IllegalArgumentException("Error en Listado ");
+		}
+		/*
+		 * for (ControlFasesDTO DTO : grupoRepository.ControlFasesQuery(Usuario)) {
+		 * log.info(DTO.getDescripcionProyecto());
+		 * 
+		 * 
+		 * }
+		 */
+		// throw new IllegalArgumentException("Proyecto no identificado");
+		return DTOList;
+	}
 	@Override
 	@Transactional(readOnly = true, noRollbackFor = Exception.class)
 	public List<ControlFasesDTO> controlParticipacionesPorFasesNOHABILITADO(Integer idProyecto, String Usuario) throws Exception {

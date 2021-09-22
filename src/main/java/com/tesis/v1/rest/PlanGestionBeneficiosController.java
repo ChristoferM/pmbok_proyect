@@ -175,11 +175,25 @@ public class PlanGestionBeneficiosController {
          return ResponseEntity.ok().body(planesgestionbeneficiosDTO);
 	}
 
+
+	
+	// MÉTODOS PARA GUARDAR LOS DATOS CON NUEVA ESTRUCTURA 21/09/2021
     
 	@RequestMapping("/guardarPlan-gestion-beneficioDelActa")
-	public ResponseEntity<?> guardarPlanGestionB5eneficioDelActa(@Valid @RequestBody PlanDeGestionDeBeneficiosDelActaDTO planDeGestionDeBeneficiosDelActaDTO) throws Exception {
+	public ResponseEntity<?> guardarPlanDeBeneficiosNuevo(@Valid @RequestBody PlanDeGestionDeBeneficiosDelActaDTO planDeGestionDeBeneficiosDelActaDTO) throws Exception {
 		// Para guardar las guardarPlanGestionB5eneficioDelActa, 1 debemos obtener el primer registro de las entradas que correspondan al cata de la reunion 
-		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarEntradaDelActa\n ");
+		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarPlanDeBeneficiosNuevo\n ");
+
+		return ResponseEntity.ok().body("");
+	}
+	
+	
+	
+    
+	@RequestMapping("/actualizarPlan-gestion-beneficioDelActa")
+	public ResponseEntity<?> updatePlanNuevo(@Valid @RequestBody PlanDeGestionDeBeneficiosDelActaDTO planDeGestionDeBeneficiosDelActaDTO) throws Exception {
+		// Para guardar las guardarPlanGestionB5eneficioDelActa, 1 debemos obtener el primer registro de las entradas que correspondan al cata de la reunion 
+		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> updatePlanNuevo\n ");
 
 		return ResponseEntity.ok().body("");
 	}

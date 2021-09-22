@@ -31,39 +31,39 @@ import org.springframework.web.bind.annotation.PutMapping;
 @CrossOrigin
 public class CasoNegocioController {
 
-    private final static Logger log = LoggerFactory.getLogger(CasoNegocioController.class);
+	private final static Logger log = LoggerFactory.getLogger(CasoNegocioController.class);
 
-    @Autowired
-    EntradaActaService entradaActaService;
+	@Autowired
+	EntradaActaService entradaActaService;
 
-    @Autowired
-    CasoNegocioService CasoNegocioService;
+	@Autowired
+	CasoNegocioService CasoNegocioService;
 
-    @Autowired
-    CasoNegocioMapper casonegocioMapper;
+	@Autowired
+	CasoNegocioMapper casonegocioMapper;
 
-    @RequestMapping("/finById/{casoId}")
-    public ResponseEntity<?> finById(@PathVariable("casoId") Integer casoId) throws Exception {
-        //casonegocio casonegocio0 = new CasoNegocio (); 
-        Optional<CasoNegocio> casonegocioopc = CasoNegocioService.findById(casoId);
+	@RequestMapping("/finById/{casoId}")
+	public ResponseEntity<?> finById(@PathVariable("casoId") Integer casoId) throws Exception {
+		// casonegocio casonegocio0 = new CasoNegocio ();
+		Optional<CasoNegocio> casonegocioopc = CasoNegocioService.findById(casoId);
 
-        log.info("Cargando ...");
-      
-        CasoNegocio casonegocio = casonegocioopc.get();
+		log.info("Cargando ...");
 
-        CasoNegocioDTO casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocio);
-        casonegocioDTO.setIdEntradaActa(casonegocio.getEntradacta().getIdentrada());
-        log.info("*");
-        return ResponseEntity.ok().body(casonegocioDTO);
+		CasoNegocio casonegocio = casonegocioopc.get();
 
-    }
+		CasoNegocioDTO casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocio);
+		casonegocioDTO.setIdEntradaActa(casonegocio.getEntradacta().getIdentrada());
+		log.info("*");
+		return ResponseEntity.ok().body(casonegocioDTO);
 
-    @RequestMapping("/findCasoNegocioDelActa/{idProyecto}")
-    public ResponseEntity<?> casoNegocioDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
-        List<CasoNegocio> casonegocioLIST = CasoNegocioService.casoNegocioDelActa(idProyecto);
+	}
+
+	@RequestMapping("/findCasoNegocioDelActa/{idProyecto}")
+	public ResponseEntity<?> casoNegocioDelActa(@PathVariable("idProyecto") Integer idProyecto) throws Exception {
+		List<CasoNegocio> casonegocioLIST = CasoNegocioService.casoNegocioDelActa(idProyecto);
 
 		List<CasoNegocioDTO> listDTO = new ArrayList<CasoNegocioDTO>(casonegocioLIST.size());
-		
+
 		for (CasoNegocio casoNegocio1 : casonegocioLIST) {
 
 			CasoNegocioDTO casoNegocioDTO = new CasoNegocioDTO();
@@ -78,104 +78,102 @@ public class CasoNegocioController {
 		}
 
 		return ResponseEntity.ok().body(listDTO);
-    }
+	}
 
-    @RequestMapping("/findByAll")
-    public ResponseEntity<?> finByAll() throws Exception {
+	@RequestMapping("/findByAll")
+	public ResponseEntity<?> finByAll() throws Exception {
 
-        List<CasoNegocio> casonegocioLIST = CasoNegocioService.findAll();
+		List<CasoNegocio> casonegocioLIST = CasoNegocioService.findAll();
 
-        List<CasoNegocioDTO> casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocioLIST);
+		List<CasoNegocioDTO> casonegocioDTO = casonegocioMapper.tocasoNegocioDTO(casonegocioLIST);
 
-        return ResponseEntity.ok().body(casonegocioDTO);
-    }
+		return ResponseEntity.ok().body(casonegocioDTO);
+	}
 
-    @RequestMapping("/save")
-    public ResponseEntity<?> save(@Valid @RequestBody CasoNegocioDTO casonegocioDTO) throws Exception {
-        log.info("************************************ 1");
-        /*
-		private Integer idEntradaActa;
-		private Integer id_caso_negocio;
-		private String metas;
-		private String objetivos;
-		private String incidentes;
-		private String oportunidades;
-         */
-        CasoNegocio casonegocio = new CasoNegocio();
-        Entradacta entradas = new Entradacta();
-        casonegocio.setId_caso_negocio(casonegocioDTO.getId_caso_negocio());
-        casonegocio.setMetas(casonegocioDTO.getMetas());
-        casonegocio.setObjetivos(casonegocioDTO.getObjetivos());
-        casonegocio.setIncidentes(casonegocioDTO.getIncidentes());
-        casonegocio.setOportunidades(casonegocioDTO.getOportunidades());
-        entradas.setIdentrada(casonegocioDTO.getIdEntradaActa());
-        casonegocio.setEntradacta(entradas);
+	@RequestMapping("/save")
+	public ResponseEntity<?> save(@Valid @RequestBody CasoNegocioDTO casonegocioDTO) throws Exception {
+		log.info("************************************ 1");
+		/*
+		 * private Integer idEntradaActa; private Integer id_caso_negocio; private
+		 * String metas; private String objetivos; private String incidentes; private
+		 * String oportunidades;
+		 */
+		CasoNegocio casonegocio = new CasoNegocio();
+		Entradacta entradas = new Entradacta();
+		casonegocio.setId_caso_negocio(casonegocioDTO.getId_caso_negocio());
+		casonegocio.setMetas(casonegocioDTO.getMetas());
+		casonegocio.setObjetivos(casonegocioDTO.getObjetivos());
+		casonegocio.setIncidentes(casonegocioDTO.getIncidentes());
+		casonegocio.setOportunidades(casonegocioDTO.getOportunidades());
+		entradas.setIdentrada(casonegocioDTO.getIdEntradaActa());
+		casonegocio.setEntradacta(entradas);
 
-        log.info("************************************ 2");
+		log.info("************************************ 2");
 
-        CasoNegocio casonegocionew = CasoNegocioService.save(casonegocio);
+		CasoNegocio casonegocionew = CasoNegocioService.save(casonegocio);
 
-        log.info("************************************ 3");
-        CasoNegocioDTO casonegocioDTOnew = casonegocioMapper.tocasoNegocioDTO(casonegocionew);
+		log.info("************************************ 3");
+		CasoNegocioDTO casonegocioDTOnew = casonegocioMapper.tocasoNegocioDTO(casonegocionew);
 
-        log.info("************************************ 4");
-        return ResponseEntity.ok().body(casonegocioDTOnew);
-    }
-    
-    /// JUNIO 9 reunion
-  
-    @PutMapping("/updateCasoNegocio")
-    public ResponseEntity<?> update(@Valid @RequestBody CasoNegocioDTO casonegocioDTO) throws Exception {
-        
-           
-    	  CasoNegocio casonegocio = new CasoNegocio();
-          Entradacta entradas = new Entradacta();
-          casonegocio.setId_caso_negocio(casonegocioDTO.getId_caso_negocio());
-          casonegocio.setMetas(casonegocioDTO.getMetas());
-          casonegocio.setObjetivos(casonegocioDTO.getObjetivos());
-          casonegocio.setIncidentes(casonegocioDTO.getIncidentes());
-          casonegocio.setOportunidades(casonegocioDTO.getOportunidades());
-          entradas.setIdentrada(casonegocioDTO.getIdEntradaActa());
-          casonegocio.setEntradacta(entradas);
+		log.info("************************************ 4");
+		return ResponseEntity.ok().body(casonegocioDTOnew);
+	}
 
-          log.info("************ 2");
+	/// JUNIO 9 reunion
 
-          CasoNegocio casonegocionew = CasoNegocioService.update(casonegocio);
+	@PutMapping("/updateCasoNegocio")
+	public ResponseEntity<?> update(@Valid @RequestBody CasoNegocioDTO casonegocioDTO) throws Exception {
 
-          casonegocioDTO.setId_caso_negocio(casonegocionew.getId_caso_negocio());
-          casonegocioDTO.setMetas(casonegocionew.getMetas());
-          casonegocioDTO.setObjetivos(casonegocionew.getObjetivos());
-          casonegocioDTO.setIncidentes(casonegocionew.getIncidentes());
-          casonegocioDTO.setOportunidades(casonegocionew.getOportunidades());
-          
-          casonegocioDTO.setIdEntradaActa(casonegocionew.getEntradacta().getIdentrada());
+		CasoNegocio casonegocio = new CasoNegocio();
+		Entradacta entradas = new Entradacta();
+		casonegocio.setId_caso_negocio(casonegocioDTO.getId_caso_negocio());
+		casonegocio.setMetas(casonegocioDTO.getMetas());
+		casonegocio.setObjetivos(casonegocioDTO.getObjetivos());
+		casonegocio.setIncidentes(casonegocioDTO.getIncidentes());
+		casonegocio.setOportunidades(casonegocioDTO.getOportunidades());
+		entradas.setIdentrada(casonegocioDTO.getIdEntradaActa());
+		casonegocio.setEntradacta(entradas);
 
-      
-        return ResponseEntity.ok().body(casonegocioDTO);
-    }
-    
+		log.info("************ 2");
+
+		CasoNegocio casonegocionew = CasoNegocioService.update(casonegocio);
+
+		casonegocioDTO.setId_caso_negocio(casonegocionew.getId_caso_negocio());
+		casonegocioDTO.setMetas(casonegocionew.getMetas());
+		casonegocioDTO.setObjetivos(casonegocionew.getObjetivos());
+		casonegocioDTO.setIncidentes(casonegocionew.getIncidentes());
+		casonegocioDTO.setOportunidades(casonegocionew.getOportunidades());
+
+		casonegocioDTO.setIdEntradaActa(casonegocionew.getEntradacta().getIdentrada());
+
+		return ResponseEntity.ok().body(casonegocioDTO);
+	}
+
 	@RequestMapping("/guardarCaso-NegociDelActa")
-	public ResponseEntity<?> guardarCasoNegociDelActa(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception {
+	public ResponseEntity<?> guardarCasoNegociDelActa(
+			@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception {
 		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarEntradaDelActa\n ");
 
 		return ResponseEntity.ok().body("");
 	}
-	
-	//_--------------------
-	
+
+	// _--------------------
+
 	@RequestMapping("/BuscarDatosDeCasonegocio")
-	public ResponseEntity<?> BuscarDatosDeCasonegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception{
+	public ResponseEntity<?> BuscarDatosDeCasonegocio(
+			@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception {
 		log.info("BuscarDatosDeCasonegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO){");
-		
-		// Metodo, que puede ser succetible a errores a futuro, dependerá de la forma en como se grabe la entrada del acta
+
+		// Metodo, que puede ser succetible a errores a futuro, dependerá de la forma en
+		// como se grabe la entrada del acta
 		List<CasoNegocio> casoNegocioList = CasoNegocioService.BuscarDatosDeCasonegocio(casoDeNegocioDelActaDTO);
-		
+
 		List<CasoNegocioDTO> CasoNegocioaListDto = new ArrayList<>();
-		
-		for(CasoNegocio caso :casoNegocioList) {
-			
+
+		for (CasoNegocio caso : casoNegocioList) {
+
 			CasoNegocioDTO dto = new CasoNegocioDTO();
-			
+
 			dto.setEstado(caso.getEstado());
 			dto.setId_caso_negocio(caso.getId_caso_negocio());
 			dto.setIdEntradaActa(caso.getEntradacta().getIdentrada());
@@ -183,51 +181,65 @@ public class CasoNegocioController {
 			dto.setMetas(caso.getMetas());
 			dto.setObjetivos(caso.getObjetivos());
 			dto.setOportunidades(caso.getOportunidades());
-			dto.setParticipa(caso.getParticipa());			
+			dto.setParticipa(caso.getParticipa());
 			CasoNegocioaListDto.add(dto);
 		}
-		return ResponseEntity.ok().body(CasoNegocioaListDto);		
+		return ResponseEntity.ok().body(CasoNegocioaListDto);
 	}
-	
-	@RequestMapping("/guardarCasoNegocio")
-	public ResponseEntity<?> guardarCasoNegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception{
-		log.info("ResponseEntity<?> guardarCasoNegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception{");
 
-		if(casoDeNegocioDelActaDTO.getParticipa() == null || casoDeNegocioDelActaDTO.getParticipa() == "" ) {
+	@RequestMapping("/guardarCasoNegocio")
+	public ResponseEntity<?> guardarCasoNegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO)
+			throws Exception {
+		log.info(
+				"ResponseEntity<?> guardarCasoNegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception{");
+
+		if (casoDeNegocioDelActaDTO.getParticipa() == null || casoDeNegocioDelActaDTO.getParticipa() == "") {
 			throw new Exception("No se encontro datos de Usuario");
-			
+
 		}
-		return ResponseEntity.ok().body(casonegocioMapper.tocasoNegocioDTO(
-				CasoNegocioService.guardarCasoNegocio(
-						casoDeNegocioDelActaDTO)
-				)
-				);
+		return ResponseEntity.ok().body(
+				casonegocioMapper.tocasoNegocioDTO(CasoNegocioService.guardarCasoNegocio(casoDeNegocioDelActaDTO)));
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// actualizarCasoNegocio
+
+	@RequestMapping("/actualizarCasoNegocio")
+	public ResponseEntity<?> actualizarCasoNegocio(@Valid @RequestBody CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception{
+		log.info("********* Actualizar CASO negocio del acta \n public ResponseEntity<?> actualizarCasoNegocio\n ");
+		CasoNegocio domine = CasoNegocioService.actualizarCasoNegocio(casoDeNegocioDelActaDTO);
+
+		// CasoNegocioDTO
+		
+		
+		return null;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -132,6 +132,7 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public CasoNegocio guardarCasoNegocio(CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception {
 		
 		Integer idreuniones = casoNegocioRepository.BuscarDatosDeCasonegocio(casoDeNegocioDelActaDTO.getIdproyecto());
@@ -155,5 +156,52 @@ public class CasoNegocioServiceImpl implements CasoNegocioService {
 		
 		return casoNegocioRepository.save(entity);
 	}
+	
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public CasoNegocio actualizarCasoNegocio(CasoDeNegocioDelActaDTO casoDeNegocioDelActaDTO) throws Exception {
+		// OJO CON EL MÉTODO DE ACTUALIZAS
+		Integer idreuniones = casoNegocioRepository.BuscarDatosDeCasonegocio(casoDeNegocioDelActaDTO.getIdproyecto());
 
+		CasoNegocio entity = new CasoNegocio();
+		Entradacta entity_01 =  new Entradacta();
+		if(idreuniones== null || idreuniones == 0 ) {
+			 throw new Exception("guardarCasoNegocio De IMplementacion Error en idEntradaDel Acta");
+			
+		}
+		entity_01.setIdentrada(idreuniones);
+		
+		
+		entity.setEstado(true);
+		entity.setEntradacta(entity_01);
+		entity.setIncidentes(casoDeNegocioDelActaDTO.getIncidentes());
+		entity.setMetas(casoDeNegocioDelActaDTO.getMetas());
+		entity.setObjetivos(casoDeNegocioDelActaDTO.getObjetivos());
+		entity.setOportunidades(casoDeNegocioDelActaDTO.getOportunidades());
+		entity.setParticipa(casoDeNegocioDelActaDTO.getParticipa());	
+		
+		return casoNegocioRepository.save(entity);
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
