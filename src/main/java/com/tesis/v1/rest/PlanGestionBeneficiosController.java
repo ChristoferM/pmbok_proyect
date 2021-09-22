@@ -184,7 +184,7 @@ public class PlanGestionBeneficiosController {
 		// Para guardar las guardarPlanGestionB5eneficioDelActa, 1 debemos obtener el primer registro de las entradas que correspondan al cata de la reunion 
 		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> guardarPlanDeBeneficiosNuevo\n ");
 
-		return ResponseEntity.ok().body("");
+		return ResponseEntity.ok().body(PlanGestionBeneficiosService.guardarPlanDeBeneficiosNuevo(planDeGestionDeBeneficiosDelActaDTO));
 	}
 	
 	
@@ -197,5 +197,15 @@ public class PlanGestionBeneficiosController {
 
 		return ResponseEntity.ok().body("");
 	}
+	
+	@RequestMapping("/BuscarDatosDePlanBeneficiosPrevias")
+	public ResponseEntity<?> BuscarDatosDePlanBeneficiosPrevias(@Valid @RequestBody PlanDeGestionDeBeneficiosDelActaDTO planDeGestionDeBeneficiosDelActaDTO) throws Exception {
+		// Para guardar las guardarPlanGestionB5eneficioDelActa, 1 debemos obtener el primer registro de las entradas que correspondan al cata de la reunion 
+		log.info("********* Guardando Entradas del acta \n public ResponseEntity<?> updatePlanNuevo\n ");
+
+		return ResponseEntity.ok().body(PlanGestionBeneficiosService.BuscarDatosDePlanBeneficiosPrevias(planDeGestionDeBeneficiosDelActaDTO));
+	}
+	
+	
 
 }

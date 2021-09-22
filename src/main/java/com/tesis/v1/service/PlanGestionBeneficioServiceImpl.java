@@ -1,5 +1,6 @@
 package com.tesis.v1.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,7 +147,7 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
 			entity.setEstado(true);
 			
 			entity.setParticipa(planDeGestionDeBeneficiosDelActaDTO.getParticipa());
-						
+			entity = 		planGestionBeneficiosRepository.save(entity);
 			PlanGestionBeneficioDTO dto = this.planesgestionbeneficiosMapper.toplanesGestionBeneficiosDTO(entity);
 			
 			dto.setIdEntradaActa(identrada);
@@ -197,6 +198,42 @@ public class PlanGestionBeneficioServiceImpl implements PlanGestionBeneficiosSer
 			throw new Exception(e);
 		}
 
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<PlanGestionBeneficioDTO> BuscarDatosDePlanBeneficiosPrevias(
+			PlanDeGestionDeBeneficiosDelActaDTO planDeGestionDeBeneficiosDelActaDTO) throws Exception {
+		
+		
+		List<PlanGestionbeneficio> listDomine = new ArrayList<>();
+		List<PlanGestionBeneficioDTO> dtoList = new ArrayList<>();
+		
+		try {
+			listDomine = this.planGestionBeneficiosRepository.planGestionDelActa(planDeGestionDeBeneficiosDelActaDTO.getIdproyecto());
+		} catch (Exception e) {
+			throw new Exception(e); 
+		}
+		
+		for(PlanGestionbeneficio domine:listDomine) {
+			PlanGestionBeneficioDTO dto = new PlanGestionBeneficioDTO();
+			
+			dto.setAcciones(domine.getAcciones());
+			
+			
+			dto.setComponentes(domine.getComponentes());
+			dto.setParticipa(domine.getParticipa());
+			dto.setProdcutos(domine.getProdcutos());
+			dto.setResultado(domine.getResultado());
+			dto.setServicios(domine.getServicios());
+			dto.setIdEntradaActa(domine.getEntradacta().getIdentrada());
+			dto.setEstado(domine.getEstado());
+			dto.setId_plan_gb(domine.getId_plan_gb());
+			dtoList.add(dto);
+			
+			
+		}
+		return dtoList;
 	}
 
 }
