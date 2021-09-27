@@ -11,6 +11,16 @@ public class HerramientasDTO {
     private Boolean estado;
 	private String participa ;
 	
+    private Integer idproyecto;
+    
+
+	
+	public Integer getIdproyecto() {
+		return idproyecto;
+	}
+	public void setIdproyecto(Integer idproyecto) {
+		this.idproyecto = idproyecto;
+	}
 	public String getParticipa() {
 		return participa;
 	}

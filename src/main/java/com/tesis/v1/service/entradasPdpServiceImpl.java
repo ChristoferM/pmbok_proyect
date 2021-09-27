@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tesis.v1.domain.Reunion;
 import com.tesis.v1.domain.pdp.Entradas;
+import com.tesis.v1.domain.pdp.Pdp;
+import com.tesis.v1.dto.pdp.EntradasDTO;
 import com.tesis.v1.repository.pdp.entradaPdpRepository;
+import com.tesis.v1.repository.pdp.pdpRepository;
 
 @Service
 @Scope("singleton")
@@ -20,6 +24,9 @@ public class entradasPdpServiceImpl implements entradasPdpService {
     @Autowired
     entradaPdpRepository entradaPdpRepository;
 
+    @Autowired
+	pdpRepository PDPrepositorio;
+    
     @Override
     @Transactional(readOnly = true)
     public List<Entradas> findAll() {
@@ -101,5 +108,59 @@ public class entradasPdpServiceImpl implements entradasPdpService {
 		}
     	return entradaPdpRepository.save(entity);
     }
+    
+    /*
+     * NUEVOS MÉTODOS PARA GUARDAR ACTUALIZAR Y BUSCAR DATOS PREVIOS
+     * 25/9/2021
+     * */
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public EntradasDTO guardarEntradaDelpdp(EntradasDTO entradasDTO) throws Exception {
+		
+	Integer idreuniones = entradaPdpRepository.buscarIdReunion(entradasDTO.getIdproyecto());
+		
+		// primero se crea un PDP para crear la instancia en base de datos
+		// o verificar si YA existe la instancia
+		// ambas deben ir ligado al id de proyecto
+		Pdp pdp = PDPrepositorio.buscarPorIdReunion(idreuniones);
+	
+
+		if(pdp == null  ) {
+			Reunion reunion = new Reunion();
+        	reunion.setIdreuniones(idreuniones);
+        	
+        	reunion.setIdreuniones(idreuniones);
+        	pdp = new Pdp();
+    		pdp.setReuniones(reunion);
+    		pdp = PDPrepositorio.save(pdp);
+			
+		}
+	
+		Entradas entity = new Entradas();
+		
+		entity.setActivosprocesos(entradasDTO.getActivosprocesos());
+		entity.setEstado(true);
+		entity.setFactoresambientales(entradasDTO.getFactoresambientales());
+		entity.setOtrosprocesos(entradasDTO.getOtrosprocesos());
+		entity.setParticipa(entradasDTO.getParticipa());
+		entity.setPdp(pdp);
+		try {
+			entity = entradaPdpRepository.save(entity);
+		} catch (Exception e) {
+			throw new Exception("Error SQL: No se grabo los datos de Entradas Del PDP "
+					+ "\n DETALLE:"+e);
+		}
+		EntradasDTO dto = new EntradasDTO();
+		
+		dto.setActivosprocesos(entity.getActivosprocesos());
+		dto.setEstado(entity.getEstado());
+		dto.setFactoresambientales(entity.getFactoresambientales());
+		dto.setOtrosprocesos(entity.getOtrosprocesos());
+		dto.setParticipa(entity.getParticipa());
+		dto.setIdpdp(entity.getPdp().getIdpdp());
+		
+		return dto;
+	}
 
 }

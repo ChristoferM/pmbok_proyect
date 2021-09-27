@@ -9,7 +9,22 @@ public class EntradasDTO {
     private Integer idpdp;
     private Boolean estado;
 	private String participa ;
+	private Integer idfase;
+	private Integer idproyecto;
 	
+	
+	public Integer getIdproyecto() {
+		return idproyecto;
+	}
+	public void setIdproyecto(Integer idproyecto) {
+		this.idproyecto = idproyecto;
+	}
+	public Integer getIdfase() {
+		return idfase;
+	}
+	public void setIdfase(Integer idfase) {
+		this.idfase = idfase;
+	}
 	public String getParticipa() {
 		return participa;
 	}

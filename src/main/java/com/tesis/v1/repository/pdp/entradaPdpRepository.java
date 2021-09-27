@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.tesis.v1.domain.pdp.Entradas;
+import com.tesis.v1.domain.pdp.Pdp;
 
 public interface entradaPdpRepository extends JpaRepository<Entradas,Integer> {
 
@@ -23,5 +24,15 @@ public interface entradaPdpRepository extends JpaRepository<Entradas,Integer> {
 			"	proyectos.idproyecto = ?1  "
 			, nativeQuery = true)
 	public Entradas BuscarEntradasPdpPorIdDelProyecto(Integer idProyecto);
+ 
+	// -------------------- NUEVOS METODOS DE REPOSITORIO
     
+	@Query(value ="select actas.idreuniones from actas where actas.idreuniones in ("
+			+ "SELECT reuniones.idreuniones FROM reuniones WHERE  reuniones.idproyecto = ?1 "
+			+ ");", nativeQuery = true)
+	public Integer buscarIdReunion( Integer idproyecto);
+	
+	@Query(value ="select * from pdp where pdp.idreuniones = ?1 ; ", nativeQuery = true)
+	public Pdp buscarPorIdReunion(Integer idreuniones);
+
 }

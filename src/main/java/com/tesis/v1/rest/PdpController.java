@@ -320,4 +320,21 @@ public class PdpController {
 
 	}
 
+	
+	/*
+	 * Métodos nuevos para guardar, actualizar y buscar los datos previos
+	 * 25/9/2021
+	 * */
+	
+	
+	@RequestMapping("/guardarEntradaDelpdp")
+	public  ResponseEntity<?>  guardarEntradaDelpdp(@Valid @RequestBody EntradasDTO entradasDTO) throws Exception {
+		return ResponseEntity.ok().body(entradasPdpServices.guardarEntradaDelpdp(entradasDTO));
+	}
+	
+	@RequestMapping("/guardarHerramientasDelpdp")
+	public ResponseEntity<?> guardarHerramientasDelpdp(@Valid @RequestBody HerramientasDTO herramientasDTO) throws Exception {
+
+		return ResponseEntity.ok().body(herramientasServicePdps.guardarHerramientasDelpdp(herramientasDTO));
+	}
 }

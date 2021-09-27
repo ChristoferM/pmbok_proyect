@@ -80,4 +80,7 @@ public interface pdpRepository  extends JpaRepository<Pdp,Integer>{
 			" END;", nativeQuery = true)
 	public Boolean validarHerramientaPdp(Integer idProyecto);
 	
+	// -------------------- NUEVOS METODOS DE REPOSITORIO
+	@Query(value ="select * from pdp where pdp.idreuniones = ?1 ; ", nativeQuery = true)
+	public Pdp buscarPorIdReunion(Integer idreuniones);
 }

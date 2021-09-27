@@ -25,4 +25,9 @@ public interface herramientasPdpRepository extends JpaRepository<Herramientas,In
 			, nativeQuery = true)
 	public Herramientas BuscarHerramientasPdpPorIdDelProyecto(Integer idProyecto);
     
+    
+	@Query(value ="select actas.idreuniones from actas where actas.idreuniones in ("
+			+ "SELECT reuniones.idreuniones FROM reuniones WHERE  reuniones.idproyecto = ?1 "
+			+ ");", nativeQuery = true)
+	public Integer buscarIdReunion( Integer idproyecto);
 }
