@@ -327,14 +327,32 @@ public class PdpController {
 	 * */
 	
 	
+	// ****************************************** ENTRADAS PDP
 	@RequestMapping("/guardarEntradaDelpdp")
 	public  ResponseEntity<?>  guardarEntradaDelpdp(@Valid @RequestBody EntradasDTO entradasDTO) throws Exception {
 		return ResponseEntity.ok().body(entradasPdpServices.guardarEntradaDelpdp(entradasDTO));
 	}
 	
-	@RequestMapping("/guardarHerramientasDelpdp")
+	// ****************************************** HERRAMIENTAS PDP
+	@RequestMapping("/guardarHerramientaDelpdp")
 	public ResponseEntity<?> guardarHerramientasDelpdp(@Valid @RequestBody HerramientasDTO herramientasDTO) throws Exception {
 
 		return ResponseEntity.ok().body(herramientasServicePdps.guardarHerramientasDelpdp(herramientasDTO));
 	}
+	
+	// Buscar datos previos
+	
+	// ******************************************ENTRADAS PDP
+	@RequestMapping("/BuscarDatosDeEntradasDePDP")
+	public ResponseEntity<?> BuscarDatosDeEntradasDePDP(@Valid @RequestBody HerramientasDTO herramientasDTO) throws Exception {
+		return ResponseEntity.ok().body(entradasPdpServices.BuscarDatosDeEntradasDePDP(herramientasDTO));
+	}
+	
+	
+	// ****************************************** HERRAMIENTAS PDP
+	@RequestMapping("/BuscarDatosDeHerrmientaDePDP")
+	public ResponseEntity<?> BuscarDatosDeHerrmientaDePDP(@Valid @RequestBody HerramientasDTO herramientasDTO) throws Exception {
+		return ResponseEntity.ok().body(herramientasServicePdps.BuscarDatosDeHerramientasDePDP(herramientasDTO));
+	}
+	
 }

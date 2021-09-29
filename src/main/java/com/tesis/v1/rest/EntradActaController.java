@@ -76,6 +76,7 @@ public class EntradActaController {
 
 	}
 	
+	// Métodos para buscar los datos previos de la entrada del Acta
 	@RequestMapping("/BuscarDatosDeEntradas")
 	public ResponseEntity<?> BuscarDatosDeEntradas(@Valid @RequestBody EntradaDelActaDTO EntradactaDTO) throws Exception {
 		

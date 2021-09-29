@@ -1,5 +1,6 @@
 package com.tesis.v1.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Optional;
@@ -14,6 +15,7 @@ import com.tesis.v1.domain.Reunion;
 import com.tesis.v1.domain.pdp.Entradas;
 import com.tesis.v1.domain.pdp.Pdp;
 import com.tesis.v1.dto.pdp.EntradasDTO;
+import com.tesis.v1.dto.pdp.HerramientasDTO;
 import com.tesis.v1.repository.pdp.entradaPdpRepository;
 import com.tesis.v1.repository.pdp.pdpRepository;
 
@@ -161,6 +163,36 @@ public class entradasPdpServiceImpl implements entradasPdpService {
 		dto.setIdpdp(entity.getPdp().getIdpdp());
 		
 		return dto;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<EntradasDTO> BuscarDatosDeEntradasDePDP(HerramientasDTO herramientasDTO) throws Exception {
+		List<EntradasDTO> EntradaPDPListDTO = new ArrayList<>();
+		try {
+			List<Entradas> entradaPdpList = entradaPdpRepository.BuscarDatosDeEntradasPdp(herramientasDTO.getIdproyecto());
+			//List<EntradasDTO> EntradaPDPListDTO = new ArrayList<>();
+			for(Entradas entrada:entradaPdpList ) {
+				EntradasDTO dto = new EntradasDTO();
+				// entrada.get
+				dto.setActivosprocesos(entrada.getActivosprocesos());
+				dto.setEstado(entrada.getEstado());
+				dto.setFactoresambientales(entrada.getFactoresambientales());
+				dto.setIdentradapdp(entrada.getIdentradapdp());
+				dto.setOtrosprocesos(entrada.getOtrosprocesos());
+				dto.setParticipa(entrada.getParticipa());
+				dto.setIdpdp(entrada.getPdp().getIdpdp());
+				EntradaPDPListDTO.add(dto);		
+			}
+			
+		} catch (Exception e) {
+			throw new Exception("Error SQL: No se obtuvieron los datosPrevios de Entradas Del PDP "
+					+ "\n DETALLE:"+e);
+		}
+		
+		
+		
+		return EntradaPDPListDTO;
 	}
 
 }
