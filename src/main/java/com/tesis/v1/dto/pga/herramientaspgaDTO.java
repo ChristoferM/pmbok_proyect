@@ -5,13 +5,45 @@ import javax.persistence.Column;
 public class herramientaspgaDTO {
 	
 	private Integer idherramientapga;
+	
 	private String juicioexpertos ;
 	private String analisis ;
-	
 	private Integer idpga;
+	
     private Boolean estado;
+    private String participa ;
+	private Integer idfase;
+	private Integer idproyecto;
+	
+	
     
-    public Boolean getEstado() {
+    
+    
+    public Integer getIdpga() {
+		return idpga;
+	}
+
+	public void setIdpga(Integer idpga) {
+		this.idpga = idpga;
+	}
+
+	public Integer getIdfase() {
+		return idfase;
+	}
+
+	public void setIdfase(Integer idfase) {
+		this.idfase = idfase;
+	}
+
+	public Integer getIdproyecto() {
+		return idproyecto;
+	}
+
+	public void setIdproyecto(Integer idproyecto) {
+		this.idproyecto = idproyecto;
+	}
+
+	public Boolean getEstado() {
 		return estado;
 	}
 
@@ -51,7 +83,6 @@ public class herramientaspgaDTO {
 	public void setIdpdp(Integer idpga) {
 		this.idpga = idpga;
 	}
-	private String participa ;
 	
 	public String getParticipa() {
 		return participa;

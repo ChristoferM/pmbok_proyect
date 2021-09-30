@@ -12,6 +12,23 @@ public class entradapgaDTO {
 	private Boolean estado;
 	private String participa ;
 	
+	
+	private Integer idfase;
+	private Integer idproyecto;
+	
+	
+	public Integer getIdfase() {
+		return idfase;
+	}
+	public void setIdfase(Integer idfase) {
+		this.idfase = idfase;
+	}
+	public Integer getIdproyecto() {
+		return idproyecto;
+	}
+	public void setIdproyecto(Integer idproyecto) {
+		this.idproyecto = idproyecto;
+	}
 	public String getParticipa() {
 		return participa;
 	}

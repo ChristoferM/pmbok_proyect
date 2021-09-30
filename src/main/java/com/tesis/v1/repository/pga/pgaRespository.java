@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import com.tesis.v1.domain.pdp.Pdp;
 import com.tesis.v1.domain.pga.pga;
 
 public interface pgaRespository  extends JpaRepository<pga, Integer> {
@@ -72,5 +71,15 @@ public interface pgaRespository  extends JpaRepository<pga, Integer> {
 			"    FALSE " + 
 			" END;", nativeQuery = true)
 	public Boolean validarHerramientasPga(Integer idProyecto);
+	
+	
+	// Nuevos metodos
+	
+	@Query(value ="select actas.idreuniones from actas where actas.idreuniones in ("
+			+ "SELECT reuniones.idreuniones FROM reuniones WHERE  reuniones.idproyecto = ?1 "
+			+ ");", nativeQuery = true)
+	public Integer buscarIdReunion( Integer idproyecto);
+	@Query(value ="select * from pga where pga.idreuniones = ?1 ; ", nativeQuery = true)
+	public pga buscarPorIdReunion(Integer idreuniones);
 
 }

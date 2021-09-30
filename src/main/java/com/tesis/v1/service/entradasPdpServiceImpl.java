@@ -189,9 +189,6 @@ public class entradasPdpServiceImpl implements entradasPdpService {
 			throw new Exception("Error SQL: No se obtuvieron los datosPrevios de Entradas Del PDP "
 					+ "\n DETALLE:"+e);
 		}
-		
-		
-		
 		return EntradaPDPListDTO;
 	}
 

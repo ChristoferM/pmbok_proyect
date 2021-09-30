@@ -1,7 +1,16 @@
 package com.tesis.v1.service;
 
-import com.tesis.v1.domain.pga.herramientaspga;
+import java.util.List;
 
-public interface pgaHerramientasService extends GenericService<herramientaspga,Integer>{
-    public herramientaspga BuscarHerramientasPGAPorIdDelProyecto(Integer id) throws Exception;
+import com.tesis.v1.domain.pga.herramientaspga;
+import com.tesis.v1.dto.pga.herramientaspgaDTO;
+
+public interface pgaHerramientasService extends GenericService<herramientaspga, Integer> {
+
+	public herramientaspga BuscarHerramientasPGAPorIdDelProyecto(Integer id) throws Exception;
+
+	herramientaspgaDTO guardarHerramientasDelPga(herramientaspgaDTO herramientasDTO) throws Exception;
+
+	List<herramientaspgaDTO> BuscarDatosDeHerramientasDePga(herramientaspgaDTO herramientasDTO) throws Exception;
+
 }

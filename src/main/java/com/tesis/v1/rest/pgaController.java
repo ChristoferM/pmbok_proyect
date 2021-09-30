@@ -103,7 +103,8 @@ public class pgaController {
 	}
 
 	@RequestMapping("/saveHerramientasPga")
-	public ResponseEntity<?> saveHerramientasPga(@Valid @RequestBody herramientaspgaDTO herramientasDTO) throws Exception {
+	public ResponseEntity<?> saveHerramientasPga(@Valid @RequestBody herramientaspgaDTO herramientasDTO)
+			throws Exception {
 		log.info("GUARDANDADO HERRAMIENTA PGA");
 		pga pga = new pga();
 		log.info("**************************11");
@@ -239,10 +240,9 @@ public class pgaController {
 
 		return ResponseEntity.ok().body(dto);
 	}
-	
 
 	/// REUNION 8 DE JUNIO
-	
+
 	@RequestMapping("/BuscarHerramientasPGAPorIdDelProyecto/{id}") // pdpServices
 	public ResponseEntity<?> BuscarHerramientasPGAPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
 		// BuscarHerramientasPdpPorIdDelProyecto
@@ -267,10 +267,6 @@ public class pgaController {
 
 		return ResponseEntity.ok().body(dto);
 	}
-
-
-
-
 
 	@PutMapping("/updateHerramientasPGA")
 	public ResponseEntity<?> updateHerramientasPGA(@Valid @RequestBody herramientaspgaDTO herramientasDTO)
@@ -310,8 +306,8 @@ public class pgaController {
 		entradapga.setCiclo(entradasDTO.getCiclo());
 		entradapga.setEnfoque(entradasDTO.getEnfoque());
 		entradapga.setActivosprocesos(entradasDTO.getActivosprocesos());
-		
-		if(entradasDTO.getIdpga() != null || entradasDTO.getIdpga() >0) {
+
+		if (entradasDTO.getIdpga() != null || entradasDTO.getIdpga() > 0) {
 			pga.setIdpga(entradasDTO.getIdpga());
 			entradapga.setPga(pga);
 		}
@@ -332,6 +328,41 @@ public class pgaController {
 
 	}
 
+	/*
+	 * Métodos nuevos para guardar, actualizar y buscar los datos previos 29/9/2021
+	 */
 
+	// ****************************************** ENTRADAS PDP
+	@RequestMapping("/guardarEntradaDelpga")
+	public ResponseEntity<?> guardarEntradaDelpdp(@Valid @RequestBody entradapgaDTO entradasDTO) throws Exception {
+		// pgaEntradasServices.guardarEntradaDelPga
+		return ResponseEntity.ok().body(pgaEntradasServices.guardarEntradaDelPga(entradasDTO));
+	}
+
+	// ****************************************** HERRAMIENTAS PDP
+	@RequestMapping("/guardarHerramientaDelpga")
+	public ResponseEntity<?> guardarHerramientasDelpdp(@Valid @RequestBody herramientaspgaDTO herramientasDTO)
+			throws Exception {
+		// pgaHerramientasService
+		return ResponseEntity.ok().body(pgaHerramientasService.guardarHerramientasDelPga(herramientasDTO));
+	}
+
+	// Buscar datos previos
+
+	// ******************************************ENTRADAS PDP
+	@RequestMapping("/BuscarDatosDeEntradasDePGA")
+	public ResponseEntity<?> BuscarDatosDeEntradasDePDP(@Valid @RequestBody entradapgaDTO entradasDTO)
+			throws Exception {
+		// pgaEntradasServices.BuscarDatosDeEntradasDePga
+		return ResponseEntity.ok().body(pgaEntradasServices.BuscarDatosDeEntradasDePga(entradasDTO));
+	}
+
+	// ****************************************** HERRAMIENTAS PDP
+	@RequestMapping("/BuscarDatosDeHerrmientaDePGA")
+	public ResponseEntity<?> BuscarDatosDeHerrmientaDePDP(@Valid @RequestBody herramientaspgaDTO herramientasDTO)
+			throws Exception {
+		// pgaHerramientasService
+		return ResponseEntity.ok().body(pgaHerramientasService.BuscarDatosDeHerramientasDePga(herramientasDTO));
+	}
 
 }
