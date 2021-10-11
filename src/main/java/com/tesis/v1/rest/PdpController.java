@@ -216,7 +216,7 @@ public class PdpController {
 	//  BUSCAR LOS DATOS DE ENTRADAS Y HERRAMIENTAS POR ID DEL PROYECTO
 	@RequestMapping("/BuscarEntradasPdpPorIdDelProyecto/{id}") // pdpServices
 	public ResponseEntity<?> BuscarEntradasPdpPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
-		//
+		/*
 		Entradas Entradas = entradasPdpServices.BuscarEntradasPdpPorIdDelProyecto(id);
 		log.info("Cargando ...");
 		if (Entradas == null  ) {
@@ -229,16 +229,16 @@ public class PdpController {
 		dto.setFactoresambientales(Entradas.getFactoresambientales());
 		dto.setOtrosprocesos(Entradas.getOtrosprocesos());
 		dto.setIdpdp(Entradas.getPdp().getIdpdp());
-		dto.setIdentradapdp(Entradas.getIdentradapdp());
+		dto.setIdentradapdp(Entradas.getIdentradapdp());*/
 		
-		return ResponseEntity.ok().body(dto);
+		return ResponseEntity.ok().body(entradasPdpServices.BuscarEntradasPdpPorIdDelProyecto(id));
 	}
 
 
 	@RequestMapping("/BuscarHerramientasPdpPorIdDelProyecto/{id}") // pdpServices
 	public ResponseEntity<?> BuscarHerramientasPdpPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
 		// BuscarHerramientasPdpPorIdDelProyecto
-		Herramientas Herramientas = herramientasServicePdps.BuscarHerramientasPdpPorIdDelProyecto(id);
+		/*Herramientas Herramientas = herramientasServicePdps.BuscarHerramientasPdpPorIdDelProyecto(id);
 		log.info("Cargando ...");
 		if (Herramientas == null  ) {
 			return ResponseEntity.ok().body("Error: No se encontro registrada la herramienta pdp");
@@ -253,9 +253,9 @@ public class PdpController {
 		dto.setHerramientareuniones(Herramientas.getHerramientareuniones());
 		dto.setIdpdp(Herramientas.getPdp().getIdpdp());
 				
+		*/
 		
-		
-		return ResponseEntity.ok().body(dto);
+		return ResponseEntity.ok().body(herramientasServicePdps.BuscarHerramientasPdpPorIdDelProyecto(id));
 	}
 
 

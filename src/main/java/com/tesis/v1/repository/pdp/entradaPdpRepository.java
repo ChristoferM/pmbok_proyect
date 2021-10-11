@@ -12,12 +12,7 @@ import com.tesis.v1.domain.pdp.Pdp;
 public interface entradaPdpRepository extends JpaRepository<Entradas,Integer> {
 
 
-    @Query(value ="SELECT  " + 
-			"entradapdp.identradapdp , " + 
-			"entradapdp.otrosprocesos , " + 
-			"entradapdp.factoresambientales, " + 
-			"entradapdp.activosprocesos, " + 
-			"entradapdp.idpdp " + 
+    @Query(value ="SELECT entradapdp.* "+
 			"FROM " + 
 			"	proyectos, reuniones, pdp, entradapdp" + 
 			"	where " + 
@@ -26,7 +21,7 @@ public interface entradaPdpRepository extends JpaRepository<Entradas,Integer> {
 			"	 pdp.idpdp = entradapdp.idpdp  AND " + 
 			"	proyectos.idproyecto = ?1  "
 			, nativeQuery = true)
-	public Entradas BuscarEntradasPdpPorIdDelProyecto(Integer idProyecto);
+	public List<Entradas> BuscarEntradasPdpPorIdDelProyecto(Integer idProyecto);
  
 	// -------------------- NUEVOS METODOS DE REPOSITORIO
     

@@ -7,7 +7,7 @@ import com.tesis.v1.dto.pdp.EntradasDTO;
 import com.tesis.v1.dto.pdp.HerramientasDTO;
 
 public interface entradasPdpService extends GenericService<Entradas, Integer> {
-	Entradas BuscarEntradasPdpPorIdDelProyecto(Integer id) throws Exception;
+	 List<EntradasDTO>  BuscarEntradasPdpPorIdDelProyecto(Integer id) throws Exception;
 
 	EntradasDTO guardarEntradaDelpdp(EntradasDTO entradasDTO) throws Exception;
 	

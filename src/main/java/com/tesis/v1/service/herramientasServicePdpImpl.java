@@ -91,9 +91,31 @@ public class herramientasServicePdpImpl implements herramientasServicePdp {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Herramientas BuscarHerramientasPdpPorIdDelProyecto(Integer id) throws Exception {
+	public List<HerramientasDTO> BuscarHerramientasPdpPorIdDelProyecto(Integer id) throws Exception {
+		List<HerramientasDTO> HerramientaPDPListDTO = new ArrayList<>();
+		try {
+			List <Herramientas> domain =herramientasPdpRepository.BuscarHerramientasPdpPorIdDelProyecto(id);
+			
+			
+			for (Herramientas herramienta : domain) {
+				HerramientasDTO dto = new HerramientasDTO();
+				dto.setEstado(herramienta.getEstado());
+				dto.setHabilidades(herramienta.getHabilidades());
+				dto.setHerramientareuniones(herramienta.getHerramientareuniones());
+				dto.setIdherramienta(herramienta.getIdherramienta());
+				dto.setIdpdp(herramienta.getPdp().getIdpdp());
+				dto.setJuicioexpertos(herramienta.getJuicioexpertos());
+				dto.setParticipa(herramienta.getParticipa());
+				dto.setRecopilaciondatos(herramienta.getRecopilaciondatos());
 
-		return herramientasPdpRepository.BuscarHerramientasPdpPorIdDelProyecto(id);
+				HerramientaPDPListDTO.add(dto);
+			}
+		} catch (Exception e) {
+			throw new Exception(
+					"Error SQL: No se obtuvieron los datosPrevios de Herramientas Del PDP " + "\n DETALLE:" + e);
+		}
+		return HerramientaPDPListDTO;
+		//return herramientasPdpRepository.BuscarHerramientasPdpPorIdDelProyecto(id);
 	}
 
 	@Override

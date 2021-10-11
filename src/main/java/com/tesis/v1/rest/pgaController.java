@@ -215,7 +215,7 @@ public class pgaController {
 	@RequestMapping("/BuscarEntradasPGAPorIdDelProyecto/{id}") // pdpServices
 	public ResponseEntity<?> BuscarEntradasPGAPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
 		// BuscarHerramientasPdpPorIdDelProyecto
-		entradapga entradapga = pgaEntradasServices.BuscarEntradasPGAPorIdDelProyecto(id);
+		/*entradapga entradapga = pgaEntradasServices.BuscarEntradasPGAPorIdDelProyecto(id);
 		log.info("Cargando ...");
 		if (entradapga == null) {
 			return ResponseEntity.ok().body("Error: No se encontro Usuario");
@@ -230,7 +230,7 @@ public class pgaController {
 		dto.setEnfoque(entradapga.getEnfoque());
 		dto.setIdentradapga(entradapga.getIdentradapga());
 		dto.setActivosprocesos(entradapga.getActivosprocesos());
-		dto.setIdpga(entradapga.getPga().getIdpga());
+		dto.setIdpga(entradapga.getPga().getIdpga());*/
 		/*
 		 * private Integer identradapga; private String estandares; private String
 		 * objetivocalidad; private String ciclo; private String activosprocesos;
@@ -238,7 +238,7 @@ public class pgaController {
 		 * private pga pga;
 		 */
 
-		return ResponseEntity.ok().body(dto);
+		return ResponseEntity.ok().body(pgaEntradasServices.BuscarEntradasPGAPorIdDelProyecto(id));
 	}
 
 	/// REUNION 8 DE JUNIO
@@ -246,7 +246,7 @@ public class pgaController {
 	@RequestMapping("/BuscarHerramientasPGAPorIdDelProyecto/{id}") // pdpServices
 	public ResponseEntity<?> BuscarHerramientasPGAPorIdDelProyecto(@PathVariable("id") Integer id) throws Exception {
 		// BuscarHerramientasPdpPorIdDelProyecto
-		herramientaspga herramientaspga = pgaHerramientasService.BuscarHerramientasPGAPorIdDelProyecto(id);
+		/*herramientaspga herramientaspga = pgaHerramientasService.BuscarHerramientasPGAPorIdDelProyecto(id);
 		log.info("Cargando ...");
 		if (herramientaspga == null) {
 			return ResponseEntity.ok().body("Error: No se encontro Usuario");
@@ -265,7 +265,7 @@ public class pgaController {
 		 * private pga pga;
 		 */
 
-		return ResponseEntity.ok().body(dto);
+		return ResponseEntity.ok().body(pgaHerramientasService.BuscarHerramientasPGAPorIdDelProyecto(id));
 	}
 
 	@PutMapping("/updateHerramientasPGA")

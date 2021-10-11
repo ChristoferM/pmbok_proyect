@@ -7,7 +7,7 @@ import com.tesis.v1.dto.pga.herramientaspgaDTO;
 
 public interface pgaHerramientasService extends GenericService<herramientaspga, Integer> {
 
-	public herramientaspga BuscarHerramientasPGAPorIdDelProyecto(Integer id) throws Exception;
+	public List<herramientaspgaDTO> BuscarHerramientasPGAPorIdDelProyecto(Integer id) throws Exception;
 
 	herramientaspgaDTO guardarHerramientasDelPga(herramientaspgaDTO herramientasDTO) throws Exception;
 

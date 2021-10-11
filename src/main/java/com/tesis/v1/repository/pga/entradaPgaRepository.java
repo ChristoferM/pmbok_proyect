@@ -11,13 +11,7 @@ public interface entradaPgaRepository  extends JpaRepository<entradapga,Integer>
 
 
     @Query(value ="SELECT  " + 
-			"entradapga.identradapga, " + 
-			"entradapga.estandares, " + 
-			"entradapga.objetivocalidad, " + 
-			"entradapga.ciclo, " + 
-			"entradapga.enfoque," +
-			"entradapga.activosprocesos, " + 
-			"entradapga.idpga " + 
+			"entradapga.*" + 
 			"FROM proyectos, reuniones, pga, entradapga " + 
 			"	where " + 
 			"	proyectos.idproyecto = reuniones.idproyecto AND " + 
@@ -25,7 +19,7 @@ public interface entradaPgaRepository  extends JpaRepository<entradapga,Integer>
 			"	 pga.idpga = entradapga.idpga  AND " + 
 			"	proyectos.idproyecto =  ?1 "
 			, nativeQuery = true)
-	public entradapga BuscarEntradasPGAPorIdDelProyecto(Integer idProyecto);
+	public 	List<entradapga> BuscarEntradasPGAPorIdDelProyecto(Integer idProyecto);
     
     
     

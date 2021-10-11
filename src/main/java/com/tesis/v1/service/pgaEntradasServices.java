@@ -6,7 +6,7 @@ import com.tesis.v1.domain.pga.entradapga;
 import com.tesis.v1.dto.pga.entradapgaDTO;
 
 public interface pgaEntradasServices  extends GenericService<entradapga,Integer>{
-	entradapga BuscarEntradasPGAPorIdDelProyecto(Integer id) throws Exception;
+	List<entradapgaDTO>  BuscarEntradasPGAPorIdDelProyecto(Integer id) throws Exception;
 	
 	entradapgaDTO guardarEntradaDelPga(entradapgaDTO entradasDTO) throws Exception;
 	

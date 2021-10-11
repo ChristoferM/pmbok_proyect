@@ -18,7 +18,7 @@ public interface herramientasPgaRepository  extends JpaRepository<herramientaspg
 			"				reuniones.idreuniones = pga.idreuniones AND  " + 
 			"				 pga.idpga = herramientaspga.idpga  AND  " + 
 			"				proyectos.idproyecto =  ?1 ", nativeQuery = true)
-	public herramientaspga BuscarHerramientasPGAPorIdDelProyecto(Integer idProyecto);
+	public List<herramientaspga> BuscarHerramientasPGAPorIdDelProyecto(Integer idProyecto);
 
     
     

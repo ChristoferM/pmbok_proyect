@@ -91,11 +91,26 @@ public class entradasPdpServiceImpl implements entradasPdpService {
 
     @Override
     @Transactional(readOnly = true)
-    public Entradas BuscarEntradasPdpPorIdDelProyecto(Integer id) throws Exception {
+    public List<EntradasDTO> BuscarEntradasPdpPorIdDelProyecto(Integer id) throws Exception {
         if (id < 0 || id == null) {
             throw new Exception("error en el identificador");
         }
-        return entradaPdpRepository.BuscarEntradasPdpPorIdDelProyecto(id);
+        List<Entradas> entrdasPDP =  entradaPdpRepository.BuscarEntradasPdpPorIdDelProyecto(id);
+        List<EntradasDTO> entrdasdto = new ArrayList<>(); 
+        for(Entradas entity: entrdasPDP) {
+        	EntradasDTO dto = new EntradasDTO();
+        	
+    		dto.setActivosprocesos(entity.getActivosprocesos());
+    		dto.setEstado(entity.getEstado());
+    		dto.setFactoresambientales(entity.getFactoresambientales());
+    		dto.setOtrosprocesos(entity.getOtrosprocesos());
+    		dto.setParticipa(entity.getParticipa());
+    		dto.setIdpdp(entity.getPdp().getIdpdp());
+    		
+    		entrdasdto.add(dto);
+        }
+        
+        return entrdasdto;
     }
 
     @Override

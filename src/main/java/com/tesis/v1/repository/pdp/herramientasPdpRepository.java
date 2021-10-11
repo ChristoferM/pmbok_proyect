@@ -11,12 +11,7 @@ public interface herramientasPdpRepository extends JpaRepository<Herramientas,In
 
 
     @Query(value ="SELECT  " + 
-			"herramientaspdp.idherramienta , " + 
-			"herramientaspdp.juicioexpertos , " + 
-			"herramientaspdp.recopilaciondatos, " + 
-			"herramientaspdp.habilidades, " + 
-			"herramientaspdp.herramientareuniones, " + 
-			"herramientaspdp.idpdp " + 
+			"herramientaspdp.*"+ 
 			"FROM " + 
 			"	proyectos, reuniones, pdp, herramientaspdp" + 
 			"	where " + 
@@ -25,7 +20,7 @@ public interface herramientasPdpRepository extends JpaRepository<Herramientas,In
 			"	 pdp.idpdp =  herramientaspdp.idpdp AND " + 
 			"	proyectos.idproyecto = ?1  "
 			, nativeQuery = true)
-	public Herramientas BuscarHerramientasPdpPorIdDelProyecto(Integer idProyecto);
+	public List <Herramientas> BuscarHerramientasPdpPorIdDelProyecto(Integer idProyecto);
     
     
 	@Query(value ="select actas.idreuniones from actas where actas.idreuniones in ("

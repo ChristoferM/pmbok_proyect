@@ -81,8 +81,31 @@ public class pgaEntradaServiceImpl implements pgaEntradasServices {
 
 	@Override
 	@Transactional(readOnly = true)
-	public entradapga BuscarEntradasPGAPorIdDelProyecto(Integer id) throws Exception {
-		return entradaPgaRepository.BuscarEntradasPGAPorIdDelProyecto(id);
+	public List<entradapgaDTO>  BuscarEntradasPGAPorIdDelProyecto(Integer id) throws Exception {
+		List<entradapgaDTO> EntradaPGAListDTO = new ArrayList<>();
+		
+		try {
+			List<entradapga>  entradaPGALIST = entradaPgaRepository.BuscarEntradasPGAPorIdDelProyecto(id);
+			
+			for(entradapga entity:entradaPGALIST ) {
+				entradapgaDTO dto = new entradapgaDTO();
+				dto.setActivosprocesos(entity.getActivosprocesos());
+				dto.setCiclo(entity.getCiclo());
+				dto.setEnfoque(entity.getEnfoque());
+				dto.setEstado(entity.getEstado());
+				dto.setEstandares(entity.getEstandares());
+				dto.setIdentradapga(entity.getIdentradapga());
+				dto.setObjetivocalidad(entity.getObjetivocalidad());
+				dto.setParticipa(entity.getParticipa());
+				dto.setIdpga(entity.getPga().getIdpga());
+				EntradaPGAListDTO.add(dto);
+				
+			}
+			
+		} catch (Exception e) {
+			throw new Exception("Error SQL: No se grabo los datos de Entradas Del PGA " + "\n DETALLE:" + e);
+		}
+		return EntradaPGAListDTO; //entradaPgaRepository.BuscarEntradasPGAPorIdDelProyecto(id);
 	}
 
 	@Override

@@ -82,11 +82,31 @@ public class pgaHerramientasServiceImpl implements pgaHerramientasService {
 
 	// JUNIO 8 AGREGADO POR REUNION
 	@Transactional(readOnly = true)
-	public herramientaspga BuscarHerramientasPGAPorIdDelProyecto(Integer id) throws Exception {
+	public List<herramientaspgaDTO> BuscarHerramientasPGAPorIdDelProyecto(Integer id) throws Exception {
 		if (id < 0 || id == null) {
 			throw new Exception("error en el identificador");
 		}
-		return herramientasPgaRepository.BuscarHerramientasPGAPorIdDelProyecto(id);
+		
+		List<herramientaspgaDTO> EntradaPGAListDTO = new ArrayList<>();
+		try {
+			List<herramientaspga> herramientasPGALIST = herramientasPgaRepository.BuscarHerramientasPGAPorIdDelProyecto(id);
+			for (herramientaspga entity : herramientasPGALIST) {
+				herramientaspgaDTO dto = new herramientaspgaDTO();
+				dto.setAnalisis(entity.getAnalisis());
+				dto.setEstado(entity.getEstado());
+				dto.setIdherramientapga(entity.getIdherramientapga());
+				dto.setJuicioexpertos(entity.getJuicioexpertos());
+				dto.setParticipa(entity.getParticipa());
+				dto.setIdpdp(entity.getPga().getIdpga());
+				EntradaPGAListDTO.add(dto);
+
+			}
+		} catch (Exception e) {
+			throw new Exception(
+					"Error SQL: No se obtuvieron los datosPrevios de HERRAMIENTAS Del PGA " + "\n DETALLE:" + e);
+		}
+
+		return EntradaPGAListDTO ;
 	}
 
 	@Override
