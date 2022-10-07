@@ -120,6 +120,13 @@ public interface EntradactaRepository extends JpaRepository<Entradacta,Integer>{
 			+ ");", nativeQuery = true)
 	public Integer buscarIdReunion( Integer idproyecto);
 	
+	@Query(value ="SELECT reuniones.idreuniones FROM reuniones"
+			+ " WHERE  reuniones.idproyecto = ?1 "
+			+ "ORDER BY reuniones.idreuniones desc limit 1 ;", nativeQuery = true)
+	public Integer buscarExisteReunion( Integer idproyecto);
+	
+	
+	
 	@Query(value ="SELECT * FROM entradacta WHERE entradacta.idactas IN  (  " + 
 			"	SELECT actas.idactas FROM actas WHERE actas.idreuniones IN (   " + 
 			"		SELECT reuniones.idreuniones FROM reuniones, proyectos   " + 

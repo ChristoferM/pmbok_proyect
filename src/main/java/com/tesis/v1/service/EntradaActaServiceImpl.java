@@ -55,7 +55,7 @@ public class EntradaActaServiceImpl implements EntradaActaService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Entradacta guardarEntradaDelActa(EntradaDelActaDTO EntradactaDTO) {
     	//Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdfase(),EntradactaDTO.getIdproyecto());
-    	Integer idreuniones = entradActaRepository.buscarIdReunion(EntradactaDTO.getIdproyecto());
+    	Integer idreuniones = entradActaRepository.buscarExisteReunion(EntradactaDTO.getIdproyecto());
     	
     	// --------------------------------------------------
     	Acta acta  = actaRepository.buscarPorIdReunion(idreuniones);
