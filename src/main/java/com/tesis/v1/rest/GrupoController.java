@@ -24,6 +24,7 @@ import com.tesis.v1.domain.SubGrupo;
 import com.tesis.v1.domain.notificaciones;
 import com.tesis.v1.dto.ActasDTO;
 import com.tesis.v1.dto.GrupoDTO;
+import com.tesis.v1.dto.ReunionesDTO;
 import com.tesis.v1.dto.RolesDTO;
 import com.tesis.v1.dto.UsuariosDTO;
 import com.tesis.v1.dto.CrearfaseConResponsablesDTO; 
@@ -93,9 +94,19 @@ public class GrupoController {
     @ResponseBody
     public ResponseEntity<?> CrearfaseConResponsables(@Valid @RequestBody CrearfaseConResponsablesDTO crearfaseConResponsablesDTO) throws Exception {
     	
-    	String salida =grupoService.CrearfaseConResponsables(crearfaseConResponsablesDTO);
-    	
-    	return ResponseEntity.ok(salida);
+    	Reunion reunionObjeto =grupoService.CrearfaseConResponsables(crearfaseConResponsablesDTO);
+    	if (reunionObjeto == null ) {
+            return new ResponseEntity<>(
+              "Error guardadno la reunion ", 
+              HttpStatus.BAD_REQUEST);
+        }
+    	ReunionesDTO dto = new ReunionesDTO();
+    	dto.setIdreuniones(reunionObjeto.getIdreuniones());
+    	dto.setNombrereunion(reunionObjeto.getNombrereunion());
+    	dto.setDescripcionreunion(reunionObjeto.getDescripcionreunion());
+    	dto.setIdproyecto(reunionObjeto.getProyectos().getIdproyecto());
+    	dto.setIdfase(reunionObjeto.getFaseproyecto().getIdfase());
+    	  return ResponseEntity.ok(dto);
     	//return new  ResponseEntity<>(HttpStatus.OK);
     }
     

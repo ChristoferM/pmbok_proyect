@@ -3,6 +3,7 @@ package com.tesis.v1.service;
 import java.util.List;
 
 import com.tesis.v1.domain.Grupo;
+import com.tesis.v1.domain.Reunion;
 import com.tesis.v1.dto.ControlFasesDTO;
 import com.tesis.v1.dto.CrearfaseConResponsablesDTO;
 import com.tesis.v1.dto.GrupoDTO;
@@ -15,7 +16,7 @@ public interface GrupoService  extends GenericService<Grupo,Integer>{
 	
 	 public Grupo saveAndrol(GrupoDTO entity,Integer idrol,String idNombrerol ) throws Exception;
 	 
-	 public String CrearfaseConResponsables (CrearfaseConResponsablesDTO crearfaseConResponsablesDTO) throws Exception;
+	 public Reunion CrearfaseConResponsables (CrearfaseConResponsablesDTO crearfaseConResponsablesDTO) throws Exception;
 	 
 	 public List<RolesDTO> rolesDisponibles() throws Exception;
 	 

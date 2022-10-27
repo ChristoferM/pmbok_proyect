@@ -249,7 +249,7 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public String CrearfaseConResponsables(CrearfaseConResponsablesDTO crearfaseConResponsablesDTO) throws Exception {
+	public Reunion CrearfaseConResponsables(CrearfaseConResponsablesDTO crearfaseConResponsablesDTO) throws Exception {
 		// Pasos para el metodo
 		// 1. crerar la fase
 		// 2. crear el subGrupo con los usuarios llamados
@@ -299,7 +299,7 @@ public class GrupoServiceImpl implements GrupoService {
 
 		log.info("SE GRABO LA NUEVA REUNION Y SU ID ES: " + reunionObjeto.getIdreuniones().toString());
 
-		return "{\"success\":true,\"status\":ok, \"message\": Datos Guardados }";
+		return reunionObjeto;
 	}
 
 	@SuppressWarnings("unused")
