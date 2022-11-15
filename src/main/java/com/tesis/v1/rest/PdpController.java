@@ -101,7 +101,7 @@ public class PdpController {
 	@RequestMapping("/saveHerramientasPdp")
 	public ResponseEntity<?> saveHerramientasPdp(@Valid @RequestBody HerramientasDTO herramientasDTO) throws Exception {
 		log.info("GUARDANDADO ");
-		Pdp pdp = new Pdp();
+		/*Pdp pdp = new Pdp();
 		Herramientas herramientasPdp = new Herramientas();
 		pdp.setIdpdp(herramientasDTO.getIdpdp());
 		herramientasPdp.setPdp(pdp);
@@ -112,15 +112,15 @@ public class PdpController {
 
 		herramientasPdp.setHabilidades(herramientasDTO.getHabilidades());
 
-		herramientasPdp.setHerramientareuniones(herramientasDTO.getHerramientareuniones());
+		herramientasPdp.setHerramientareuniones(herramientasDTO.getHerramientareuniones());*/
 		// herramientasacta herramientasactaNew =
 		// herramientasActasService.save(herramienta);
 
-		herramientasPdp = herramientasServicePdps.save(herramientasPdp);
+		herramientasDTO = herramientasServicePdps.guardarHerramientasDelpdp(herramientasDTO);
 
-		HerramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
+		//HerramientasDTO herramientasDTOs = pdpHerramientasMapper.toherramientaDTO(herramientasPdp);
 
-		return ResponseEntity.ok().body(herramientasDTOs);
+		return ResponseEntity.ok().body(herramientasDTO);
 	}
 
 	@RequestMapping("/saveEntradasPdp")

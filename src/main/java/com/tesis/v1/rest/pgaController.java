@@ -106,7 +106,8 @@ public class pgaController {
 	public ResponseEntity<?> saveHerramientasPga(@Valid @RequestBody herramientaspgaDTO herramientasDTO)
 			throws Exception {
 		log.info("GUARDANDADO HERRAMIENTA PGA");
-		pga pga = new pga();
+		com.tesis.v1.domain.pga.herramientaspga herramientaspga = new com.tesis.v1.domain.pga.herramientaspga();
+		/*pga pga = new pga();
 		log.info("**************************11");
 		com.tesis.v1.domain.pga.herramientaspga herramientaspga = new com.tesis.v1.domain.pga.herramientaspga();
 		log.info("**************************22");
@@ -116,12 +117,12 @@ public class pgaController {
 		herramientaspga.setAnalisis(herramientasDTO.getAnalisis());
 		herramientaspga.setJuicioexpertos(herramientasDTO.getJuicioexpertos());
 		log.info("**************************33");
-		herramientaspga = pgaHerramientasService.save(herramientaspga);
+
 		log.info("**************************44");
 		herramientasDTO = pgaherramientasMapper.toHerramientaPGADTO(herramientaspga);
 		herramientasDTO.setIdpdp(herramientaspga.getPga().getIdpga());
-		log.info("**************************44");
-		return ResponseEntity.ok().body(herramientasDTO);
+		log.info("**************************44");*/
+		return ResponseEntity.ok().body(pgaHerramientasService.guardarHerramientasDelPga(herramientasDTO));
 	}
 
 	@RequestMapping("/saveEntradasPga")
@@ -133,9 +134,10 @@ public class pgaController {
 		 * log.info(entradasDTO.getObjetivocalidad()); log.info(entradasDTO.getCiclo());
 		 * log.info(entradasDTO.getEnfoque());
 		 * log.info(entradasDTO.getActivosprocesos());
-		 */
-
-		pga pga = new pga();
+		 * 
+		 * 
+		 * 
+		 * 		pga pga = new pga();
 		entradapga entradapga = new entradapga();
 		log.info("***********1");
 		entradapga.setEstandares(entradasDTO.getEstandares());
@@ -148,17 +150,22 @@ public class pgaController {
 		pga.setIdpga(entradasDTO.getIdpga());
 		entradapga.setPga(pga);
 		log.info("***********2");
+		 */
+
+
 
 		/*
 		 * log.info(entradapga.getActivosprocesos()); log.info(entradapga.getEnfoque());
 		 * log.info(entradapga.getCiclo()); log.info(entradapga.getObjetivocalidad());
 		 * log.info(entradapga.getEstandares());
 		 * log.info(entradapga.getPga().getIdpga().toString());
-		 */
+		 
 		entradapga = pgaEntradasServices.save(entradapga);
 		entradasDTO = pgaEntradaMapper.toHerramientasPGADTO(entradapga);
-		entradasDTO.setIdpga(entradapga.getPga().getIdpga());
-		return ResponseEntity.ok().body(entradasDTO);
+		entradasDTO.setIdpga(entradapga.getPga().getIdpga());*/
+		
+		
+		return ResponseEntity.ok().body(pgaEntradasServices.guardarEntradaDelPga(entradasDTO));
 	}
 
 	// --- Controllers de buscar
