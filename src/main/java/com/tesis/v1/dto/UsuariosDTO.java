@@ -12,6 +12,7 @@ public class UsuariosDTO {
     private String token;
 
     private String activo;
+    private String documento;
 
     public String getEmail() {
         return email;
@@ -52,5 +53,13 @@ public class UsuariosDTO {
     public void setActivo(String activo) {
         this.activo = activo;
     }
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
 
 }

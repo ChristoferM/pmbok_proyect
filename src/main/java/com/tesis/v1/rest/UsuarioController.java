@@ -61,7 +61,7 @@ public class UsuarioController {
     public ResponseEntity<?> save(@Valid @RequestBody UsuariosDTO usuariosDto) throws Exception {
 
         Usuario usuario = usuarioMapper.toUsuarios(usuariosDto);
-
+        usuario.setDocumento(usuariosDto.getDocumento().toString());
         usuario = usuarioService.save(usuario);
 
         usuariosDto = usuarioMapper.toUsuariosDTO(usuario);

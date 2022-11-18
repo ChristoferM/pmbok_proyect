@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import com.tesis.v1.domain.Usuario;
 import com.tesis.v1.repository.UsuarioRepository;
@@ -36,15 +37,21 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuariosRepository.count();
     }
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public Usuario save(Usuario entity) throws Exception {
+        entity.setPassword(DigestUtils.md5DigestAsHex(entity.getPassword().getBytes()));
+        entity.setDocumento(DigestUtils.md5DigestAsHex(entity.getDocumento().getBytes()));
         if (entity == null) {
-
             throw new Exception("Error con los datos");
         }
         if (usuariosRepository.existsById(entity.getEmail())) {
             throw new Exception("Correo ya registrado");
         }
+        if (usuariosRepository.existsByDocument(entity.getDocumento())) {
+            throw new Exception("Documento ya registrado");
+        }
+  
         return usuariosRepository.save(entity);
 
     }

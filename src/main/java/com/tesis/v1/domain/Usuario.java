@@ -25,8 +25,19 @@ public class Usuario {
     private String token;
 
     private String activo;
+    
+    private String documento;
 
-    // lista de grupos donde puede estar el usuario
+    @Column(name = "documento", nullable = false)
+    public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+
+	// lista de grupos donde puede estar el usuario
     private List<Grupo> grupos = new ArrayList<Grupo>(0);
 
     public Usuario() {
@@ -48,6 +59,24 @@ public class Usuario {
         this.token = token;
         this.activo = activo;
         this.grupos = grupos;
+    }
+    public Usuario(//Integer idusuario, 
+            String email,
+            String nombre,
+            String password,
+            String token,
+            String activo,
+            String documento,
+            List<Grupo> grupos) {
+        super();
+        //this.idusuario = idusuario;
+        this.email = email;
+        this.nombre = nombre;
+        this.password = password;
+        this.token = token;
+        this.activo = activo;
+        this.grupos = grupos;
+        this.documento = documento;
     }
     //----------------
 
