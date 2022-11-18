@@ -25,9 +25,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override  // warning Null pointer access ==> || id.isBlank() == false || id.isEmpty() != true
-    public Optional<Usuario> findById(String id) throws Exception {
+    public Optional<Usuario> findByIdLogin(String id,String pass) throws Exception {
         if (id != null) {
-            return usuariosRepository.findById(id);
+        	Optional<Usuario> optional = usuariosRepository.findById(id);
+        	String data = optional.get().getPassword();
+
+        	if(data.equals(DigestUtils.md5DigestAsHex(pass.getBytes()) )) {
+        		return optional;	
+        	}
+        	throw new Exception("Error con el identificador");	
+            
         }
         throw new Exception("Error con el identificador");
     }
@@ -93,5 +100,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void validate(Usuario entity) throws Exception {
 
     }
+
+	@Override
+	public Optional<Usuario> findById(String id) throws Exception {
+		return null;
+	}
 
 }

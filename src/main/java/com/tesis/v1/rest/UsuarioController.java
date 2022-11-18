@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.DigestUtils;
 
 import com.tesis.v1.domain.Usuario;
 import com.tesis.v1.dto.UsuariosDTO;
@@ -41,10 +42,11 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuarioListDto);
     }
 
-    @RequestMapping("/finById/{usuarioId}")
-    public ResponseEntity<?> finById(@PathVariable("usuarioId") String userId) throws Exception {
+    @RequestMapping("/finById/{usuarioId}/{pass}")
+    public ResponseEntity<?> finById(@PathVariable("usuarioId") String userId,
+    		@PathVariable("pass") String pass) throws Exception {
         log.info("Reconociendo usuario :  " + userId);
-        Optional<Usuario> usuarioOpt = usuarioService.findById(userId);
+        Optional<Usuario> usuarioOpt = usuarioService.findByIdLogin(userId,pass);
         log.info("Cargando ...");
         if (usuarioOpt.isEmpty()) {
             return ResponseEntity.ok().body("Error: No se encontro Usuario");
