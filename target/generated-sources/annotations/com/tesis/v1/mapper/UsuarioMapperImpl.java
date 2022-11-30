@@ -22,12 +22,12 @@ public class UsuarioMapperImpl implements UsuarioMapper {
 
         UsuariosDTO usuariosDTO = new UsuariosDTO();
 
-        usuariosDTO.setActivo( usuarios.getActivo() );
-        usuariosDTO.setDocumento( usuarios.getDocumento() );
         usuariosDTO.setEmail( usuarios.getEmail() );
         usuariosDTO.setNombre( usuarios.getNombre() );
         usuariosDTO.setPassword( usuarios.getPassword() );
         usuariosDTO.setToken( usuarios.getToken() );
+        usuariosDTO.setActivo( usuarios.getActivo() );
+        usuariosDTO.setDocumento( usuarios.getDocumento() );
 
         return usuariosDTO;
     }
@@ -40,12 +40,12 @@ public class UsuarioMapperImpl implements UsuarioMapper {
 
         Usuario usuario = new Usuario();
 
-        usuario.setActivo( usuariosDTO.getActivo() );
         usuario.setDocumento( usuariosDTO.getDocumento() );
         usuario.setEmail( usuariosDTO.getEmail() );
         usuario.setNombre( usuariosDTO.getNombre() );
         usuario.setPassword( usuariosDTO.getPassword() );
         usuario.setToken( usuariosDTO.getToken() );
+        usuario.setActivo( usuariosDTO.getActivo() );
 
         return usuario;
     }
