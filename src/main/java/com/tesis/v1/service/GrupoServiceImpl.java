@@ -262,11 +262,17 @@ public class GrupoServiceImpl implements GrupoService {
 
 		faseObjeto.setDescripcionfase(crearfaseConResponsablesDTO.getDescripcionfase());
 
-		Date fecha = new SimpleDateFormat("yyyy/MM/dd").parse(crearfaseConResponsablesDTO.getTiempoinicio());
+		log.info("Fecha inicio : " + crearfaseConResponsablesDTO.getTiempoinicio());
+		Date fecha = new SimpleDateFormat("dd/MM/yyyy").parse(crearfaseConResponsablesDTO.getTiempoinicio());
+		
 		faseObjeto.setTiempoinicio(fecha);
+		log.info("Fecha inicio : " + faseObjeto.getTiempoinicio().toString());
 
-		fecha = new SimpleDateFormat("yyyy/MM/dd").parse(crearfaseConResponsablesDTO.getTiempofin());
+		
+		log.info("Fecha inicio : " + crearfaseConResponsablesDTO.getTiempofin());
+		fecha = new SimpleDateFormat("dd/MM/yyyy").parse(crearfaseConResponsablesDTO.getTiempofin());
 		faseObjeto.setTiempofin(fecha);
+		log.info("Fecha inicio : " + faseObjeto.getTiempofin().toString());
 		try {
 			// *****************************************************************
 			// GUARDAR LA FASE PARA EXTRAER EL ID Y GRABAR LOS SUBGRUPOS Y LAS REUNIONES
