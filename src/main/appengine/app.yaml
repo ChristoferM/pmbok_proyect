@@ -1,0 +1,5 @@
+runtime: java15
+env: flex
+handlers:
+- url: /.*
+  script: java -jar pmbok-0.0.1-SNAPSHOT.jar 
